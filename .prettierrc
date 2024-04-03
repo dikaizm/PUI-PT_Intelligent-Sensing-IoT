@@ -1,0 +1,30 @@
+{
+    "trailingComma": "all",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "overrides": [
+        {
+            "files": "*.php",
+            "options": {
+                "parser": "php",
+                "plugins": ["@prettier/plugin-php"]
+            }
+        },
+        {
+            "files": "*.blade.php",
+            "options": {
+                "parser": "blade",
+                "plugins": ["@shufo/prettier-plugin-blade"]
+            }
+        },
+        {
+            "files": "*.jsx",
+            "options": {
+                "parser": "babel"
+            }
+        }
+    ]
+}
