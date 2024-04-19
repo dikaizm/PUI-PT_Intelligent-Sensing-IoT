@@ -3,13 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\JurnalArticle;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +22,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'telp',
+        'keahlian',
+        'link_google_scholar',
+        'link_sinta',
         'password',
+        'nip',
     ];
 
     /**
@@ -27,10 +35,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * Get the attributes that should be cast.
@@ -43,5 +48,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function jurnalArticles(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            JurnalArticle::class,
+            'author',
+            'user_id',
+            'jurnal_article_id'
+        )
+            ->withPivot('is_corresponding', 'is_ketua')
+            ->withDefault(['is_corresponding' => false, 'is_ketua' => false]);
     }
 }
