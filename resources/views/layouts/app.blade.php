@@ -42,39 +42,38 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-7 col-md-7 col-6">
-                    <div class="header-right">
-                        <!-- profile start -->
-                        <div class="profile-box ml-15">
-                            <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <div class="profile-info">
-                                    <div class="info">
-                                        <h6>{{ Auth::user()->name }}</h6>
-                                    </div>
-                                    <i class="lni lni-chevron-down"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('profile.show') }}"> <i
-                                            class="lni lni-user"></i>
-                                        {{ __('My profile') }}</a>
-                                </li>
-                                <li>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); this.closest('form').submit();"> <i
-                                                class="lni lni-exit"></i> {{ __('Logout') }}</a>
-                                    </form>
-                                </li>
-                            </ul>
+                    <div class="col-lg-7 col-md-7 col-6">
+                        <div class="header-right">
+                            <!-- profile start -->
+                            <div class="profile-box ml-15">
+                                <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="profile-info">
+                                        <div class="info">
+                                            <h6 class="mr-5">{{ __('Hello, ') }}{{ Auth::user()->name }}</h6> <i
+                                                class="lni lni-chevron-down"></i>
+                                        </div>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('profile.show') }}"> <i
+                                                class="lni lni-user"></i>
+                                            {{ __('My profile') }}</a>
+                                    </li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault(); this.closest('form').submit();"> <i
+                                                    class="lni lni-exit"></i> {{ __('Logout') }}</a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- profile end -->
                         </div>
-                        <!-- profile end -->
                     </div>
                 </div>
-            </div>
             </div>
         </header>
         <!-- ========== header end ========== -->
