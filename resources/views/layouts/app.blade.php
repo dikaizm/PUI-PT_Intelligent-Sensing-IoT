@@ -56,7 +56,7 @@
                             >
                                 <div class="profile-info">
                                     <div class="info">
-                                        <h6>{{ Auth::user()->name }}</h6>
+                                        <h6>Hello, {{ Auth::user()->name }}</h6>
                                     </div>
                                 </div>
                                 <i class="lni lni-chevron-down"></i>
