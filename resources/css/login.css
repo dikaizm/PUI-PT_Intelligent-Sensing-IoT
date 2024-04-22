@@ -1,0 +1,315 @@
+.logo-icon {
+    position: absolute;
+    top: 532px;
+    left: 210.9px;
+    width: 0;
+    height: 0;
+  }
+  .unsplash5ym26luicfu-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    height: 1024px;
+    object-fit: cover;
+  }
+  .group-child {
+    border-radius: var(--br-6xl);
+    background-color: #9b0b0b;
+  }
+  .group-child,
+  .group-item,
+  .rectangle-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 610px;
+    height: 415px;
+  }
+  .group-item {
+    border-radius: var(--br-6xl);
+    background-color: var(--color-white);
+    width: 544.7px;
+    height: 337px;
+  }
+  .component-1-child {
+    position: absolute;
+    height: 40.94%;
+    width: 95.67%;
+    top: -1.04%;
+    right: -0.24%;
+    bottom: 60.1%;
+    left: 4.57%;
+    background-color: var(--color-gainsboro);
+    border: 1px solid var(--color-black);
+    box-sizing: border-box;
+  }
+  .component-1-inner,
+  .component-1-item {
+    position: absolute;
+    box-sizing: border-box;
+    display: none;
+  }
+  .component-1-item {
+    height: 40.94%;
+    width: 95.67%;
+    top: -1.04%;
+    right: -0.24%;
+    bottom: 60.1%;
+    left: 4.57%;
+    background-color: var(--color-gainsboro);
+    border: 1px solid var(--color-black);
+  }
+  .component-1-inner {
+    height: 39.9%;
+    width: 95.19%;
+    top: 61.15%;
+    right: 0;
+    bottom: -1.04%;
+    left: 4.81%;
+    background-color: var(--color-whitesmoke);
+    border-bottom: 1px solid var(--color-black);
+  }
+  .teks,
+  .teks1 {
+    position: absolute;
+    width: 44.38%;
+    top: 7.81%;
+    left: 13.36%;
+    display: none;
+  }
+  .teks1 {
+    top: 68.96%;
+    left: 0;
+    color: var(--color-gray-200);
+    text-align: center;
+  }
+  .component-1,
+  .group-18319default-child {
+    position: absolute;
+    height: 60.38%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 39.62%;
+    left: 0;
+    display: none;
+  }
+  .group-18319default-child {
+    height: 24.72%;
+    width: 95.67%;
+    top: 75.91%;
+    right: -0.24%;
+    bottom: -0.63%;
+    left: 4.57%;
+    background-color: var(--color-whitesmoke);
+    border: 1px dashed var(--color-black);
+    box-sizing: border-box;
+  }
+  .teks2 {
+    position: absolute;
+    top: 81.19%;
+    left: 18.36%;
+    color: var(--color-gray-200);
+    text-align: center;
+    display: none;
+  }
+  .group-18319default {
+    position: absolute;
+    top: 128px;
+    left: 52px;
+    width: 420px;
+    height: 159px;
+  }
+  .rectangle-parent {
+    position: absolute;
+    top: 39px;
+    left: 33px;
+    width: 544.7px;
+    height: 337px;
+  }
+  .large-button-child {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #b30e0e, #350404);
+  }
+  .text-button {
+    position: absolute;
+    height: 31.25%;
+    width: 71.89%;
+    top: 33.33%;
+    left: 13.47%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .large-button {
+    position: absolute;
+    top: 294px;
+    left: 220px;
+    width: 190px;
+    height: 48px;
+    cursor: pointer;
+    text-align: center;
+    color: var(--color-white);
+  }
+  .group-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 610px;
+    height: 415px;
+    text-align: left;
+    font-size: var(--font-size-base);
+    color: #494949;
+  }
+  .rectangle-div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 20px;
+    background-color: var(--color-ghostwhite);
+  }
+  .form-text {
+    position: absolute;
+    top: 30.54%;
+    left: 5%;
+  }
+  .component-11,
+  .component-2-child {
+    position: absolute;
+    border-radius: var(--br-8xs);
+    border: 1px solid var(--color-black);
+    box-sizing: border-box;
+  }
+  .component-11 {
+    top: 163px;
+    left: 219px;
+    width: 192px;
+    height: 39px;
+    font-family: var(--font-inter);
+  }
+  .component-2-child {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-ghostwhite);
+  }
+  .component-2,
+  .form-text1 {
+    position: absolute;
+    top: 30.54%;
+    left: 5.53%;
+  }
+  .component-2 {
+    top: 222px;
+    left: 220px;
+    border-radius: var(--br-8xs);
+    width: 190px;
+    height: 37px;
+    font-family: var(--font-inter);
+  }
+  .welcome-back,
+  .welcome-back-wrapper {
+    position: absolute;
+    width: 189px;
+    height: 22.5px;
+  }
+  .welcome-back {
+    top: 0;
+    left: 0;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .welcome-back-wrapper {
+    top: 103px;
+    left: 221px;
+    font-size: var(--font-size-5xl);
+    color: var(--color-maroon);
+  }
+  .login-to-your {
+    position: absolute;
+    top: 0;
+    left: 0;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 189px;
+    height: 20px;
+  }
+  .login-to-your-account-wrapper {
+    position: absolute;
+    top: 124px;
+    left: 221px;
+    width: 189px;
+    height: 20px;
+    font-size: 14px;
+    color: var(--color-maroon);
+  }
+  .group-parent {
+    position: absolute;
+    top: 300px;
+    left: 720px;
+    width: 610px;
+    height: 415px;
+    color: var(--color-gray-100);
+    font-family: var(--font-dm-sans);
+  }
+  .login-page-child {
+    position: absolute;
+    top: -40px;
+    left: -406px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #d80606, #350404);
+    width: 1041px;
+    height: 1078px;
+  }
+  .pusat-unggulan-iptek,
+  .sensing-iot {
+    position: absolute;
+    line-height: 100%;
+    display: inline-block;
+  }
+  .sensing-iot {
+    top: 529px;
+    left: 161.9px;
+    font-size: 64px;
+    text-align: left;
+    width: 423.6px;
+    height: 59px;
+  }
+  .pusat-unggulan-iptek {
+    top: 484px;
+    left: 51px;
+    font-size: var(--font-size-5xl);
+    width: 610px;
+  }
+  .login-page {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    height: 1024px;
+    overflow: hidden;
+    text-align: center;
+    font-size: var(--font-size-xs);
+    color: var(--color-whitesmoke);
+    font-family: var(--font-poppins);
+  }
+  

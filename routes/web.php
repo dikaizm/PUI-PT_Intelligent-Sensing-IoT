@@ -21,7 +21,6 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\UserController::class,
         'index',
     ])->name('users.index');
-
     Route::get('profile', [
         \App\Http\Controllers\ProfileController::class,
         'show',
