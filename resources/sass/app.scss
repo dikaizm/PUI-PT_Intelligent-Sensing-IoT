@@ -1,31 +1,31 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
-@import "variables";
-@import "mixin";
-@import "common";
+@import 'variables';
+@import 'mixin';
+@import 'common';
 
-@import "./typography/typography";
+@import './typography/typography';
 
-@import "./buttons/buttons";
+@import './buttons/buttons';
 
-@import "./alerts/alerts";
+@import './alerts/alerts';
 
-@import "./cards/cards";
+@import './cards/cards';
 
-@import "./tables/tables";
+@import './tables/tables';
 
-@import "./forms/form-elements";
+@import './forms/form-elements';
 
-@import "./notification/notification";
+@import './notification/notification';
 
-@import "./header/header";
+@import './header/header';
 
 // ======= auth css
-@import "./auth/signin";
-@import "./auth/signup";
+@import './auth/signin';
+@import './auth/signup';
 
-@import "./icons/icons";
+@import './icons/icons';
 
-@import "sidebar";
+@import 'sidebar';
 
-@import "default";
+@import 'default';
