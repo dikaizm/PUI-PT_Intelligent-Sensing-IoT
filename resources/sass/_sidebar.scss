@@ -150,7 +150,7 @@
             top: 0;
             height: 100%;
             width: 4px;
-            background: $primary;
+            background: $yellow;
             border-radius: 0 3px 3px 0px;
             opacity: 0;
             visibility: hidden;
@@ -186,7 +186,7 @@
         &:hover {
           & > a,
           & > a.collapsed {
-            color: $dark;
+            color: $yellow;
 
             &::before {
               opacity: 1;

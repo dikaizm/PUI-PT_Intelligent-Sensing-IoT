@@ -29,4 +29,8 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\ProfileController::class,
         'update',
     ])->name('profile.update');
+    Route::get('laporan-kinerja', [
+        \App\Http\Controllers\LaporanKinerjaController::class,
+        'index',
+    ])->name('laporan-kinerja.index');
 });

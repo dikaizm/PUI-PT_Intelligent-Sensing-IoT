@@ -10,14 +10,17 @@
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="{{ asset('css/lineicons.css') }}" />
     @vite('resources/sass/app.scss')
+
+    {{-- Fonts --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap">
 </head>
 
 <body>
     <!-- ======== sidebar-nav start =========== -->
-    <aside class="sidebar-nav-wrapper">
-        <div class="navbar-logo">
+    <aside class="sidebar-nav-wrapper" style="background: linear-gradient(180deg, #620707 0%, #C80E0E 100%); overflow-y: auto;">
+        <div class="navbar-logo" style="width: 140px;height: 59px;top: 28px;left: 24px;gap: 0px;opacity: 0px;">
             <a href="{{ route('home') }}">
-                <img src="{{ asset('images/logo/logo.svg') }}" alt="logo" />
+                <img src="{{ asset('images/logo/logo.png') }}" alt="logo" style="width: 140px;height: 59px;top: 28px;left: 24px;gap: 0px;opacity: 0px;" />
             </a>
         </div>
         <nav class="sidebar-nav">
@@ -30,13 +33,13 @@
     <!-- ======== main-wrapper start =========== -->
     <main class="main-wrapper">
         <!-- ========== header start ========== -->
-        <header class="header">
+        <header class="header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/beranda.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-6">
                         <div class="header-left d-flex align-items-center">
                             <div class="menu-toggle-btn mr-20">
-                                <button id="menu-toggle" class="main-btn primary-btn btn-hover">
+                                <button id="menu-toggle" class="main-btn btn-hover" style="background: linear-gradient(180deg, #620707 0%, #C80E0E 100%); color: white;">
                                     <i class="lni lni-chevron-left me-2"></i> {{ __('Menu') }}
                                 </button>
                             </div>
@@ -50,9 +53,15 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="profile-info">
                                         <div class="info">
-                                            <h6 class="mr-5">{{ __('Hello, ') }}{{ Auth::user()->name }}</h6> <i
-                                                class="lni lni-chevron-down"></i>
+                                            <h6 class="mr-5" style="//styleName: Body Text/Small/Body Medium (Bold);font-family: DM Sans;font-size: 16px;font-weight: 700;line-height: 24px;letter-spacing: -0.02em;text-align: left;color:white; letter-spacing: 1px;">
+                                                {{ __('Hi  ') }}{{ Auth::user()->name }},</h6>
                                         </div>
+                                        <div>
+                                            <h6 class="mr-5" style="//styleName: Display Text/Small/Display Small (Bold);font-family: DM Sans;font-size: 27px;font-weight: 700;line-height: 42px;letter-spacing: -0.02em;text-align: left; color: #DE0F0F;">
+                                            Welcome Back!
+                                            </h6>
+                                        </div>
+                                    </div>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                     <li>
@@ -94,10 +103,7 @@
                     <div class="col-md-6 order-last order-md-first">
                         <div class="copyright text-md-start">
                             <p class="text-sm">
-                                Designed and Developed by
-                                <a href="https://plainadmin.com" rel="nofollow" target="_blank">
-                                    PlainAdmin
-                                </a>
+
                             </p>
                         </div>
                     </div>
