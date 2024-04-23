@@ -6,7 +6,9 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-30">
-                    <h2>{{ __('Dashboard') }}</h2>
+                    <h1 style="font-family: DM Sans; font-size: 40px; font-weight: 700; line-height: 52.08px; text-align: left;">
+                        {{ __('Selamat Datang di,') }}
+                    </h1>
                 </div>
             </div>
             <!-- end col -->
@@ -15,163 +17,86 @@
     </div>
     <!-- ========== title-wrapper end ========== -->
 
+    <h2 style="font-family: DM Sans; font-size: 20px; font-weight: 500; line-height: 26.04px; text-align: left;">
+        Aplikasi Monitoring Kolaborasi dan Penelitian Pusat Unggulan IPTEK Perguruan Tinggi Intelligence Sensing IoT.
+    </h2>
+    <h3 style="font-family: DM Sans; font-size: 24px; font-weight: 700; line-height: 31.25px; text-align: center; color: #6A0808; line-height: 3;">
+        About PUI-PT
+    </h3>
+    <h4 style="font-size: 12px; text-align: center;">
+        <span style="font-family: DM Sans; font-size: 16px; font-weight: 500; line-height: 20.83px; letter-spacing: 0.02em; text-align: center;">
+            Teknologi Penginderaan Cerdas, Membentuk Masa Depan!
+        </span>
+        <span style="font-family: DM Sans;font-size: 14px;font-weight: 400;line-height: 18.23px;letter-spacing: 0.02em;text-align: center;">
+            PUI-PT Intelligent Sensing-IoT Universitas Telkom merupakan pusat unggulan inovasi dan IPTEK di bidang Intelligent Sensing, yaitu teknologi yang mengumpulkan data dari berbagai fenomena fisik dan mengolahnya menjadi informasi yang penting dan akurat. Teknologi ini melibatkan sensor, pengumpul data seperti Wireless Sensor Network (WSN) dan Internet of Things (IoT), serta teknologi pengolah cerdas seperti Artificial Intelligence (AI).  Sistem informasi seperti aplikasi dashboard monitoring dan Decision Support System (DSS) juga turut mendukung proses ini.
+            <br>Kami memiliki empat basis kompetensi, termasuk pengembangan perangkat sensor, platform pengumpul data, pengolah cerdas, dan sistem informasi yang bertujuan untuk berkontribusi pada  dimensi keberlanjutan: ekonomi, lingkungan, sosial dan manusia.
+        </span>
+    </h4>
+    <h3 style="font-family: DM Sans; font-size: 24px; font-weight: 700; line-height: 31.25px; text-align: center; color: #6A0808; line-height: 3;">
+        Our Activity
+    </h3>
+    <h4 style="font-family: DM Sans;font-size: 13px;font-weight: 500;line-height: 16.93px;letter-spacing: 0.02em;text-align: center;">
+        Dari riset inovatif hingga kolaborasi industri, setiap aktivitas yang kami lakukan diarahkan untuk mendorong kemajuan dalam teknologi Intelligent Sensing dan IoT. Kami mengundang Anda untuk mengeksplorasi dan menemukan bagaimana kami, melalui upaya berkelanjutan dan dedikasi, berkontribusi dalam membentuk sebuah masa depan yang lebih terhubung, cerdas, dan berkelanjutan.
+    </h4>
+    <span style="white-space:normal;"></span>
+
     <div class="row">
         <div class="col-xl-3 col-lg-4 col-sm-6">
-          <div class="icon-card mb-30">
-            <div class="icon purple">
-              <i class="lni lni-users"></i>
-            </div>
-            <div class="content">
-              <h6 class="mb-10">Users</h6>
-              <h3 class="text-bold mb-10">6453</h3>
-              <p class="text-sm text-success">
-                <i class="lni lni-arrow-up"></i> +23.4%
-              </p>
+            <div class="icon-card mb-30" style="background: linear-gradient(180deg, #620707 0%, #C80E0E 100%); height: 100%; width: 100%;">
+                <div class="content" style="height: 80%; width: 100%;">
+              <h4 class="mb-10" style="color: white; font-family: DM Sans;font-size: 20px;font-weight: 500;line-height: 26.04px;text-align: center;">
+                Riset dan Publikasi
+              </h4>
+              <h5 class="text-bold mb-10" style="color: white; font-family: DM Sans;font-size: 13px;font-weight: 400;line-height: 16.93px;text-align: center;">
+                PUI-PT IS-IoT berfokus pada riset di IoT dan Intelligent Sensing, mendorong inovasi melalui publikasi di jurnal dan konferensi terkemuka, memperkuat visi kami untuk masa depan berkelanjutan.
+              </h5>
             </div>
           </div>
           <!-- End Icon Cart -->
         </div>
         <!-- End Col -->
         <div class="col-xl-3 col-lg-4 col-sm-6">
-          <div class="icon-card mb-30">
-            <div class="icon success">
-              <i class="lni lni-eye"></i>
-            </div>
-            <div class="content">
-              <h6 class="mb-10">Page views</h6>
-              <h3 class="text-bold mb-10">876</h3>
-              <p class="text-sm text-danger">
-                <i class="lni lni-arrow-down"></i> -12.00%
-              </p>
-            </div>
-          </div>
-          <!-- End Icon Cart -->
-        </div>
-        <!-- End Col -->
-        <div class="col-xl-3 col-lg-4 col-sm-6">
-          <div class="icon-card mb-30">
-            <div class="icon primary">
-              <i class="lni lni-thumbs-up"></i>
-            </div>
-            <div class="content">
-              <h6 class="mb-10">Impressions</h6>
-              <h3 class="text-bold mb-10">976</h3>
-              <p class="text-sm text-danger">
-                <i class="lni lni-arrow-down"></i> -2.00%
-              </p>
-            </div>
-          </div>
-          <!-- End Icon Cart -->
-        </div>
-        <!-- End Col -->
-        <div class="col-xl-3 col-lg-4 col-sm-6">
-          <div class="icon-card mb-30">
-            <div class="icon orange">
-              <i class="lni lni-pie-chart"></i>
-            </div>
-            <div class="content">
-              <h6 class="mb-10">Bounce Rate</h6>
-              <h3 class="text-bold mb-10">346</h3>
-              <p class="text-sm text-success">
-                <i class="lni lni-arrow-up"></i> +23.4%
-              </p>
-            </div>
-          </div>
-          <!-- End Icon Cart -->
-        </div>
-        <!-- End Col -->
-      </div>
-
-      <div class="row">
-        <div class="col-lg-5">
-          <div class="card-style mb-30">
-            <div class="title d-flex justify-content-between">
-              <div class="left">
-                <h6 class="text-medium mb-2">Audience Overview</h6>
-              </div>
-            </div>
-            <!-- End Title -->
-            <div class="chart">
-              <div id="legend4">
-                <ul class="legend3 d-flex flex-wrap align-items-center mb-30">
-                  <li>
-                    <div class="d-flex">
-                      <span class="bg-color primary-bg"> </span>
-                      <div class="text">
-                        <p class="text-sm text-success">
-                          <span class="text-dark">New Visitor</span>
-                          +25.55%
-                          <i class="lni lni-arrow-up"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="d-flex">
-                      <span class="bg-color danger-bg"></span>
-                      <div class="text">
-                        <p class="text-sm text-success">
-                          <span class="text-dark">Unique Visitor</span>
-                          -2.05%
-                          <i class="lni lni-arrow-up"></i>
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <canvas id="Chart4" style="width: 355px; height: 426px; margin-left: -35px; display: block; box-sizing: border-box;" width="710" height="852"></canvas>
-            </div>
-            <!-- End Chart -->
-          </div>
-        </div>
-        <!-- End Col -->
-        <div class="col-lg-7">
-          <div class="card-style mb-30">
-            <div class="title d-flex flex-wrap align-items-center justify-content-between">
-              <div class="left">
-                <h6 class="text-medium mb-2">Web Traffic</h6>
-              </div>
-              <div class="right">
-                <div class="select-style-1 mb-2">
-                  <div class="select-position select-sm">
-                    <select class="light-bg">
-                      <option value="">Last Month</option>
-                      <option value="">Last 3 Months</option>
-                      <option value="">Last Year</option>
-                    </select>
-                  </div>
+            <div class="icon-card mb-30" style="background: linear-gradient(180deg, #620707 0%, #C80E0E 100%); height: 100%; width: 100%;">
+                <div class="content" style="height: 80%; width: 100%;">
+                    <h4 class="mb-10" style="color: white; font-family: DM Sans;font-size: 20px;font-weight: 500;line-height: 26.04px;text-align: center;">
+                        MBKM dan Magang
+                    </h4>
+                    <h5 class="text-bold mb-10" style="color: white; font-family: DM Sans;font-size: 13px;font-weight: 400;line-height: 16.93px;text-align: center;">
+                        PUI-PT IS-IoT menawarkan program MBKM dan magang yang kaya pengalaman, menghubungkan mahasiswa dengan proyek nyata di IoT, memperkaya pembelajaran mereka melalui praktik industri dan penelitian terapan.
+                    </h5>
                 </div>
-                <!-- end select -->
-              </div>
             </div>
-            <!-- End Title -->
-            <div class="chart">
-              <div id="legend3">
-                <ul class="legend3 d-flex align-items-center mb-30">
-                  <li>
-                    <div class="d-flex">
-                      <span class="bg-color primary-bg"> </span>
-                      <div class="text">
-                        <p class="text-sm text-dark">Store Visits</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="d-flex">
-                      <span class="bg-color purple-bg"></span>
-                      <div class="text">
-                        <p class="text-sm text-dark">Visitors</p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <canvas id="Chart3" style="width: 355px; height: 271px; margin-left: -35px; display: block; box-sizing: border-box;" width="710" height="542"></canvas>
-            </div>
-          </div>
+            <!-- End Icon Cart -->
         </div>
         <!-- End Col -->
-      </div>
-      
+        <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="icon-card mb-30" style="background: linear-gradient(180deg, #620707 0%, #C80E0E 100%); height: 100%; width: 100%;">
+                <div class="content" style="height: 80%; width: 100%;">
+                    <h4 class="mb-10" style="color: white; font-family: DM Sans;font-size: 20px;font-weight: 500;line-height: 26.04px;text-align: center;">
+                        Hilirisasi dan Komersialisasi
+                    </h4>
+                    <h5 class="text-bold mb-10" style="color: white; font-family: DM Sans;font-size: 13px;font-weight: 400;line-height: 16.93px;text-align: center;">
+                        PUI-PT IS-IoT aktif dalam hilirisasi dan komersialisasi, mengubah riset menjadi produk inovatif IoT, mendukung pertumbuhan industri danm perusahaan rintisan dan mendorong pertumbuhan ekonomi melalui kemitraan strategis.
+                    </h5>
+                </div>
+            </div>
+            <!-- End Icon Cart -->
+        </div>
+          <!-- End Col -->
+          <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="icon-card mb-30" style="background: linear-gradient(180deg, #620707 0%, #C80E0E 100%); height: 100%; width: 100%;">
+                <div class="content" style="height: 80%; width: 100%;">
+                <h4 class="mb-10" style="color: white; font-family: DM Sans;font-size: 20px;font-weight: 500;line-height: 26.04px;text-align: center;">
+                    Workshop dan Pelatihan
+                </h4>
+                <h5 class="text-bold mb-10" style="color: white; font-family: DM Sans;font-size: 13px;font-weight: 400;line-height: 16.93px;text-align: center;">
+                    PUI-PT IS-IoT menyelenggarakan workshop dan pelatihan yang memberikan pengetahuan praktis tentang teknologi IoT terbaru untuk meningkatkan keterampilan dan mendorong inovasi di kalangan profesional dan akademisi.
+                </h5>
+              </div>
+            </div>
+            <!-- End Icon Cart -->
+          </div>
+          <!-- End Col -->
+    </div>
+
 @endsection
