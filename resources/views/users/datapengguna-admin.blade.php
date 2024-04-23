@@ -11,33 +11,38 @@
             </div>
 
             <div class="table-wrapper table-responsive">
-                <table class="table striped-table">
+                <table class="table striped-table" id="dataTables">
                     <thead>
-                    <tr>
-                        <th><h6>Name</h6></th>
-                        <th><h6>Email</h6></th>
-                    </tr>
-                    <!-- end table row-->
+                        <tr>
+                            <th>
+                                <h6>Name</h6>
+                            </th>
+                            <th>
+                                <h6>Email</h6>
+                            </th>
+                        </tr>
+                        <!-- end table row-->
                     </thead>
                     <tbody>
-                    @foreach($users as $user)
-                        <tr>
-                            <td>
-                                <p>{{ $user->name }}</p>
-                            </td>
-                            <td>
-                                <p>{{ $user->email }}</p>
-                            </td>
-                        </tr>
-                    @endforeach
-                    <!-- end table row -->
+                        @foreach ($users as $user)
+                            <tr>
+                                <td>
+                                    <p>{{ $user->name }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ $user->email }}</p>
+                                </td>
+                            </tr>
+                        @endforeach
+                        <!-- end table row -->
                     </tbody>
                 </table>
                 <!-- end table -->
 
-                {{ $users->links() }}
+                {{-- {{ $users->links() }} --}}
             </div>
 
         </div>
     </div>
 </div>
+
