@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Publikasi;
 use Illuminate\Http\Request;
+use App\Models\JurnalArticle;
 
 class LaporanKinerjaController extends Controller
 {
@@ -11,7 +15,46 @@ class LaporanKinerjaController extends Controller
      */
     public function index()
     {
-        return view("admin.laporan-kinerja");
+        $today = Carbon::today();
+        $yesterday = Carbon::yesterday();
+
+        //Penelitian
+        $penelitianToday = JurnalArticle::whereDate(
+            'created_at',
+            $today
+        )->count();
+        $penelitianYesterday = JurnalArticle::whereDate(
+            'created_at',
+            $yesterday
+        )->count();
+
+        //Publikasi
+        $publikasiToday = Publikasi::whereDate('created_at', $today)->count();
+        $publikasiYesterday = Publikasi::whereDate(
+            'created_at',
+            $yesterday
+        )->count();
+
+        //user
+        $userToday = User::whereDate('created_at', $today)->count();
+        $userYesterday = User::whereDate('created_at', $yesterday)->count();
+
+        return view('admin.laporan-kinerja', [
+            'jumlah_penelitian' => JurnalArticle::count(),
+            'jumlah_publikasi' => Publikasi::count(),
+            'jumlah_user' => User::count(),
+            'jumlah_penelitian_aktif' => JurnalArticle::whereHas(
+                'statuslaporan',
+                function ($query) {
+                    $query->where('status_laporan_key_id', 2);
+                }
+            )->count(),
+            'difference_jumlah_penelitian' =>
+                $penelitianToday - $penelitianYesterday,
+            'difference_jumlah_publikasi' =>
+                $publikasiToday - $publikasiYesterday,
+            'difference_jumlah_user' => $userToday - $userYesterday,
+        ]);
     }
 
     /**
