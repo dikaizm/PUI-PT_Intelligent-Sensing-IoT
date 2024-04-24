@@ -14,7 +14,7 @@
             @endsession
 
             <div class="menu-toggle-btn mr-20" style="text-align: right;" >
-                <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit" style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
+                <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah" style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                     {{ __('Tambahkan Data') }}
                 </button>
             </div>
@@ -80,7 +80,7 @@
 </div>
 
 <!-- ========== modal edit =========== -->
-<div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
     <div class="modal-dialog" style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
             <div class="modal-header px-0 border-0">
@@ -164,8 +164,8 @@
 </div>
 <!-- ========== modal end =========== -->
 
-<!-- ========== modal edit =========== -->
-<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
+<!-- ========== modal tambah =========== -->
+<div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
     <div class="modal-dialog" style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
             <div class="modal-header px-0 border-0">
@@ -293,7 +293,7 @@
                             <!-- end col -->
                             <div class="col-12">
                                 <div class="input-style-1">
-                                    <label for="password_confirmation">{{ __('Konfirmasi Password') }}</label>
+                                    <label for="password_confirmation">{{ __('Password') }}</label>
                                     <input type="password"
                                         @error('password') class="form-control is-invalid"
                                             @enderror
