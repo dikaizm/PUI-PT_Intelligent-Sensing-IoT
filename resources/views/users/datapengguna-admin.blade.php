@@ -3,18 +3,20 @@
         <div class="card-content">
 
             @session('success')
-            <div class="alert-box success-alert">
-                <div class="alert">
-                    <h4 class="alert-heading">Success</h4>
-                    <p class="text-medium">
-                        {{ $value }}
-                    </p>
+                <div class="alert-box success-alert">
+                    <div class="alert">
+                        <h4 class="alert-heading">Success</h4>
+                        <p class="text-medium">
+                            {{ $value }}
+                        </p>
+                    </div>
                 </div>
-            </div>
             @endsession
 
-            <div class="menu-toggle-btn mr-20" style="text-align: right;" >
-                <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal" data-bs-target="#modalEdit" style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
+            <div class="menu-toggle-btn mr-20" style="text-align: right;">
+                <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#modalEdit"
+                    style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                     {{ __('Tambahkan Data') }}
                 </button>
             </div>
@@ -53,7 +55,7 @@
                                     <p>{{ $user->nip }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ $user->nip }}</p>
+                                    <p>{{ $user->getRoleNames()->implode(', ') }}</p>
                                 </td>
                                 <td>
                                     <a type="button" data-bs-toggle="modal" data-bs-target="#modalEdit">
@@ -81,7 +83,8 @@
 
 <!-- ========== modal edit =========== -->
 <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
-    <div class="modal-dialog" style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
+    <div class="modal-dialog"
+        style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
             <div class="modal-header px-0 border-0">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -148,10 +151,14 @@
                             </div>
                             <!-- end col -->
                             <div class="action d-flex flex-wrap justify-content-end">
-                                <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1" style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);" data-bs-dismiss="modal">
+                                <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"
+                                    style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);"
+                                    data-bs-dismiss="modal">
                                     {{ __('Add') }}
                                 </button>
-                                <button type="button" class="main-btn btn-sm danger-btn btn-hover m-1" style="background: linear-gradient(180deg, #DE0F0F 0%, #780808 100%);" data-bs-dismiss="modal">
+                                <button type="button" class="main-btn btn-sm danger-btn btn-hover m-1"
+                                    style="background: linear-gradient(180deg, #DE0F0F 0%, #780808 100%);"
+                                    data-bs-dismiss="modal">
                                     {{ __('Cancel') }}
                                 </button>
                             </div>
@@ -166,7 +173,8 @@
 
 <!-- ========== modal edit =========== -->
 <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
-    <div class="modal-dialog" style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
+    <div class="modal-dialog"
+        style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
             <div class="modal-header px-0 border-0">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -251,9 +259,11 @@
                             <div class="col-12">
                                 <div class="input-style-1">
                                     <label for="link_google_cholar">{{ __('Google Scholar') }}</label>
-                                    <input @error('link_google_cholar') class="form-control is-invalid" @enderror type="link_google_cholar"
-                                        name="link_google_cholar" id="link_google_cholar" placeholder="{{ __('Link Google Scholar') }}"
-                                        value="{{ old('link_google_cholar', auth()->user()->link_google_cholar) }}" required>
+                                    <input @error('link_google_cholar') class="form-control is-invalid" @enderror
+                                        type="link_google_cholar" name="link_google_cholar" id="link_google_cholar"
+                                        placeholder="{{ __('Link Google Scholar') }}"
+                                        value="{{ old('link_google_cholar', auth()->user()->link_google_cholar) }}"
+                                        required>
                                     @error('link_google_cholar')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -265,8 +275,9 @@
                             <div class="col-12">
                                 <div class="input-style-1">
                                     <label for="link_sinta">{{ __('Sinta') }}</label>
-                                    <input @error('link_sinta') class="form-control is-invalid" @enderror type="link_sinta"
-                                        name="link_sinta" id="link_sinta" placeholder="{{ __('Link Sinta') }}"
+                                    <input @error('link_sinta') class="form-control is-invalid" @enderror
+                                        type="link_sinta" name="link_sinta" id="link_sinta"
+                                        placeholder="{{ __('Link Sinta') }}"
                                         value="{{ old('link_sinta', auth()->user()->link_sinta) }}" required>
                                     @error('link_sinta')
                                         <span class="invalid-feedback" role="alert">
@@ -303,10 +314,14 @@
                             </div>
                             <!-- end col -->
                             <div class="action d-flex flex-wrap justify-content-end">
-                                <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1" style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);" data-bs-dismiss="modal">
+                                <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"
+                                    style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);"
+                                    data-bs-dismiss="modal">
                                     {{ __('Save') }}
                                 </button>
-                                <button type="button" class="main-btn btn-sm danger-btn btn-hover m-1" style="background: linear-gradient(180deg, #DE0F0F 0%, #780808 100%);" data-bs-dismiss="modal">
+                                <button type="button" class="main-btn btn-sm danger-btn btn-hover m-1"
+                                    style="background: linear-gradient(180deg, #DE0F0F 0%, #780808 100%);"
+                                    data-bs-dismiss="modal">
                                     {{ __('Cancel') }}
                                 </button>
                             </div>
@@ -321,7 +336,8 @@
 
 <!-- ========== modal delete =========== -->
 <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
-    <div class="modal-dialog" style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
+    <div class="modal-dialog"
+        style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
             <div class="modal-header px-0 border-0">
                 <h5 class="modal-title" id="ModalFourLabel">
@@ -339,7 +355,8 @@
                     <button type="button" class="main-btn btn-sm primary-btn btn-hover m-1" data-bs-dismiss="modal">
                         Delete
                     </button>
-                    <button type="button" class="main-btn btn-sm danger-btn-outline btn-hover m-1" data-bs-dismiss="modal">
+                    <button type="button" class="main-btn btn-sm danger-btn-outline btn-hover m-1"
+                        data-bs-dismiss="modal">
                         Cancel
                     </button>
                 </div>
@@ -348,3 +365,4 @@
     </div>
 </div>
 <!-- ========== modal end =========== -->
+
