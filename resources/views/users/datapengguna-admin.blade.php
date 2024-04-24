@@ -13,76 +13,82 @@
                 </div>
             @endsession
 
-            <div class="menu-toggle-btn mr-20" style="text-align: right;">
+            <<<<<<< HEAD <div class="menu-toggle-btn mr-20" style="text-align: right;">
                 <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
                     data-bs-target="#modalEdit"
                     style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
-                    {{ __('Tambahkan Data') }}
-                </button>
-            </div>
-            <div class="table-wrapper table-responsive" style="font-family: DM Sans">
-                <table class="table striped-table" id="dataTables">
-                    <thead>
-                        <tr>
-                            <th>
-                                <h6>Name</h6>
-                            </th>
-                            <th>
-                                <h6>Email</h6>
-                            </th>
-                            <th>
-                                <h6>Nip</h6>
-                            </th>
-                            <th>
-                                <h6>Tipe Pengguna</h6>
-                            </th>
-                            <th>
-                                <h6>Action</h6>
-                            </th>
-                        </tr>
-                        <!-- end table row-->
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
-                            <tr>
-                                <td>
-                                    <p>{{ $user->name }}</p>
-                                </td>
-                                <td>
-                                    <p>{{ $user->email }}</p>
-                                </td>
-                                <td>
-                                    <p>{{ $user->nip }}</p>
-                                </td>
-                                <td>
-                                    <p>{{ $user->getRoleNames()->implode(', ') }}</p>
-                                </td>
-                                <td>
-                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalEdit">
-                                        <i class="lni lni-pencil" style="color: black;"></i>
-                                    </a>
-                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
-                                        <i class="lni lni-trash-can" style="color: red;"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        <!-- end table row -->
-                    </tbody>
-                </table>
-                <!-- end table -->
+                    =======
+                    <div class="menu-toggle-btn mr-20" style="text-align: right;">
+                        <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#modalTambah"
+                            style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
+                            >>>>>>> aa1fb513e7c2f9a3346e9ea9029921eeaa2b35a0
+                            {{ __('Tambahkan Data') }}
+                        </button>
+                    </div>
+                    <div class="table-wrapper table-responsive" style="font-family: DM Sans">
+                        <table class="table striped-table" id="dataTables">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h6>Name</h6>
+                                    </th>
+                                    <th>
+                                        <h6>Email</h6>
+                                    </th>
+                                    <th>
+                                        <h6>Nip</h6>
+                                    </th>
+                                    <th>
+                                        <h6>Tipe Pengguna</h6>
+                                    </th>
+                                    <th>
+                                        <h6>Action</h6>
+                                    </th>
+                                </tr>
+                                <!-- end table row-->
+                            </thead>
+                            <tbody>
+                                @foreach ($users as $user)
+                                    <tr>
+                                        <td>
+                                            <p>{{ $user->name }}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{ $user->email }}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{ $user->nip }}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{ $user->getRoleNames()->implode(', ') }}</p>
+                                        </td>
+                                        <td>
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#modalEdit">
+                                                <i class="lni lni-pencil" style="color: black;"></i>
+                                            </a>
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                                                <i class="lni lni-trash-can" style="color: red;"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                <!-- end table row -->
+                            </tbody>
+                        </table>
+                        <!-- end table -->
 
-                {{-- Modal --}}
+                        {{-- Modal --}}
 
-                {{-- {{ $users->links() }} --}}
-            </div>
+                        {{-- {{ $users->links() }} --}}
+                    </div>
 
         </div>
     </div>
 </div>
 
 <!-- ========== modal edit =========== -->
-<div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
     <div class="modal-dialog"
         style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
@@ -171,8 +177,8 @@
 </div>
 <!-- ========== modal end =========== -->
 
-<!-- ========== modal edit =========== -->
-<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
+<!-- ========== modal tambah =========== -->
+<div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
     <div class="modal-dialog"
         style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
@@ -304,7 +310,7 @@
                             <!-- end col -->
                             <div class="col-12">
                                 <div class="input-style-1">
-                                    <label for="password_confirmation">{{ __('Konfirmasi Password') }}</label>
+                                    <label for="password_confirmation">{{ __('Password') }}</label>
                                     <input type="password"
                                         @error('password') class="form-control is-invalid"
                                             @enderror
