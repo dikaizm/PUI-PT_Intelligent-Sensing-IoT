@@ -13,6 +13,7 @@
 
     {{-- Fonts --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap">
+    
 </head>
 
 <body>
@@ -31,7 +32,7 @@
     <!-- ======== sidebar-nav end =========== -->
 
     <!-- ======== main-wrapper start =========== -->
-    <main class="main-wrapper">
+    <main class="main-wrapper" style="background-color: #F4F7FE;">
         <!-- ========== header start ========== -->
         <header class="header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/beranda.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <div class="container-fluid">
@@ -88,7 +89,7 @@
         <!-- ========== header end ========== -->
 
         <!-- ========== section start ========== -->
-        <section class="section">
+        <section class="section" style="background-color: #F4F7FE;">
             <div class="container-fluid">
                 @yield('content')
             </div>
@@ -97,13 +98,13 @@
         <!-- ========== section end ========== -->
 
         <!-- ========== footer start =========== -->
-        <footer class="footer">
-            <div class="container-fluid">
+        <footer class="footer" style="background-color: #F4F7FE;">
+            <div class="container-fluid" >
                 <div class="row">
                     <div class="col-md-6 order-last order-md-first">
                         <div class="copyright text-md-start">
                             <p class="text-sm">
-
+                                PUI-PT Sensing-Iot by Tino n David
                             </p>
                         </div>
                     </div>

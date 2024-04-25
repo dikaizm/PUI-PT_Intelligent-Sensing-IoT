@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-lg-7">
-        <div style="height: 100vh; background-image: url('images/auth/bg-login.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative;">
+        <div style="height: 100vh; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/auth/bg-login.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative;">
             <svg class="shape-image" width="60%" height="100%" viewBox="90 60 100 100" style="position: absolute; top: 0; left: 0;">
                 <circle cx="100" cy="100" r="90" fill="url(#gradient)" />
                 <image xlink:href="images/logo/login.png" x="110" y="75" width="70%" height="70%" />
@@ -17,7 +17,7 @@
     </div>
     <!-- end col -->
     <div class="col-lg-5" style="font-family: DM Sans;">
-        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-image: url('images/auth/bg-login.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/auth/bg-login.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
             <div class="outer-card" style="background-color:#9B0B0B; padding: 30px; border-radius: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); width: 90%; height: 400px;">
                 <div class="inner-card" style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); height:100%;display: flex; flex-direction: column; justify-content: center; padding: 20px;">
                     <form action="{{ route('login') }}" method="POST" style="max-width: 200px; margin:auto;">

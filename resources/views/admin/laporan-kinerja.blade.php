@@ -5,7 +5,7 @@
         <div class="col-xl-3 col-lg-4 col-sm-6">
             <div class="icon-card mb-30">
                 <div class="icon purple">
-                    <i class="lni lni-users"></i>
+                    <i class="lni lni-book"></i>
                 </div>
                 <div class="content">
                     <h6 class="mb-10">Jumlah Penelitian</h6>
@@ -49,7 +49,7 @@
         <div class="col-xl-3 col-lg-4 col-sm-6">
             <div class="icon-card mb-30">
                 <div class="icon primary">
-                    <i class="lni lni-thumbs-up"></i>
+                    <i class="lni lni-users"></i>
                 </div>
                 <div class="content">
                     <h6 class="mb-10">Jumlah Anggota</h6>
@@ -71,7 +71,7 @@
         <div class="col-xl-3 col-lg-4 col-sm-6">
             <div class="icon-card mb-30">
                 <div class="icon orange">
-                    <i class="lni lni-pie-chart"></i>
+                    <i class="lni lni-files"></i>
                 </div>
                 <div class="content">
                     <h6 class="mb-10">Penelitian Aktif</h6>

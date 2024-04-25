@@ -1,4 +1,4 @@
-<div class="card-styles">
+<div class="card-styles"  style="font-family: DM Sans">
     <div class="card-style-3 mb-30" style="border-radius: 20px;border: 2px solid #000;">
         <div class="card-content">
 
@@ -13,12 +13,12 @@
             </div>
             @endsession
 
-            <div class="menu-toggle-btn mr-20" style="text-align: right;" >
+            <div class="menu-toggle-btn mr-20 mb-3" style="text-align: right;" >
                 <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah" style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                     {{ __('Tambahkan Data') }}
                 </button>
             </div>
-            <div class="table-wrapper table-responsive" style="font-family: DM Sans">
+            <div class="table-wrapper table-responsive">
                 <table class="table striped-table" id="dataTables">
                     <thead>
                         <tr>
@@ -39,6 +39,8 @@
                             </th>
                         </tr>
                         <!-- end table row-->
+
+<!-- end table row-->
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
