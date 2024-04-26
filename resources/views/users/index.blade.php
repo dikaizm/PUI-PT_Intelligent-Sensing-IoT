@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-30">
-                    <h2>{{ __('Users') }}</h2>
+                    <h2>{{ __('Pengguna') }}</h2>
                 </div>
             </div>
             <!-- end col -->
@@ -16,9 +16,9 @@
     <!-- ========== title-wrapper end ========== -->
 
     @role('Admin')
-        @include('users.datapengguna-admin')
+        @include('admin.datapengguna')
     @else
-        @include('users.datapengguna-user')
+        @include('users.datapengguna')
     @endrole
 @endsection
 
