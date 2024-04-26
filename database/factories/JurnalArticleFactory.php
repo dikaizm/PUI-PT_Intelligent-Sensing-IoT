@@ -23,7 +23,7 @@ class JurnalArticleFactory extends Factory
             'pendanaan' => fake()->numerify('##000000'),
             'jangka_waktu' => fake()->numerify('## Bulan'),
             'poster' => fake()->image(
-                'C:\xamppp\htdocs\laravel\PUI-PT_Intelligent-Sensing-IoT\storage\app\public\temp',
+                'C:\xampp\htdocs\laravel\PUI-PT_Intelligent-Sensing-IoT\storage\app\public\temp',
                 100,
                 100
             ),
