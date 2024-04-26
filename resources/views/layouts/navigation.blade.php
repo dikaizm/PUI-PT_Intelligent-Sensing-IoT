@@ -54,10 +54,10 @@
         </a>
         <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
             <li>
-                <a href="#" style="color: white;">Jenis Output</a>
+                <a href="{{ route('jenis-output.index') }}" style="color: white;">Jenis Output</a>
             </li>
             <li>
-                <a href="#" style="color: white;">Jenis Penelitian</a>
+                <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">Jenis Penelitian</a>
             </li>
             <li>
                 <a href="#" style="color: white;">Mitra</a>

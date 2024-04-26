@@ -12,7 +12,7 @@ class JenisOutputController extends Controller
      */
     public function index()
     {
-        //
+        return view("admin.pengaturan-jenis-output.index");
     }
 
     /**

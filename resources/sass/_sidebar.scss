@@ -50,7 +50,7 @@
 
         &.nav-item-has-children {
           & > a {
-            color: $dark;
+            color: $white;
 
             &::before {
               opacity: 1;
@@ -102,9 +102,9 @@
 
                 &.active,
                 &:hover {
-                  color: $primary;
-                  border-color: rgba($primary, 0.15);
-                  background: rgba($primary, 0.1);
+                  color: $yellow;
+                  border-color: rgba($yellow, 0.15);
+                  background: rgba($yellow, 0.1);
                 }
 
                 i {

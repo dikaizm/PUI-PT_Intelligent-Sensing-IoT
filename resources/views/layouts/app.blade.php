@@ -13,7 +13,7 @@
 
     {{-- Fonts --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap">
-    
+
 </head>
 
 <body>
@@ -34,7 +34,7 @@
     <!-- ======== main-wrapper start =========== -->
     <main class="main-wrapper" style="background-color: #F4F7FE;">
         <!-- ========== header start ========== -->
-        <header class="header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/beranda.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <header class="header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/beranda.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-6">

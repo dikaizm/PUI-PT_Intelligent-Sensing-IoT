@@ -33,4 +33,12 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\LaporanKinerjaController::class,
         'index',
     ])->name('laporan-kinerja.index');
+    Route::get('pengaturan/jenis-output',[
+        \App\Http\Controllers\JenisOutputController::class,
+        'index',
+    ])->name('jenis-output.index');
+    Route::get('pengaturan/jenis-penelitian',[
+        \App\Http\Controllers\JenisPenelitianController::class,
+        'index',
+    ])->name('jenis-penelitian.index');
 });

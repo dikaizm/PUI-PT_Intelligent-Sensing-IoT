@@ -16,9 +16,9 @@
     <!-- ========== title-wrapper end ========== -->
 
     @role('Admin')
-        @include('admin.datapengguna')
+        @include('admin.data-pengguna')
     @else
-        @include('users.datapengguna')
+        @include('users.data-pengguna')
     @endrole
 @endsection
 
