@@ -22,6 +22,21 @@ Route::middleware('auth')->group(function () {
         'index',
     ])->name('users.index');
 
+    Route::post('user/store', [
+        \App\Http\Controllers\UserController::class,
+        'store',
+    ])->name('user.store');
+
+    Route::put('user/{id}/update', [
+        \App\Http\Controllers\UserController::class,
+        'update',
+    ])->name('user.update');
+
+    Route::delete('user/{id}/delete', [
+        \App\Http\Controllers\UserController::class,
+        'destroy',
+    ])->name('user.delete');
+
     Route::get('profile', [
         \App\Http\Controllers\ProfileController::class,
         'show',
@@ -37,20 +52,12 @@ Route::middleware('auth')->group(function () {
         'index',
     ])->name('laporan-kinerja.index');
 
-    Route::post('user/store', [
-        \App\Http\Controllers\UserController::class,
-        'store',
-    ])->name('user.store');
-
-    Route::put('user/{id}/update', [
-        \App\Http\Controllers\UserController::class,
-        'update',
-    ])->name('user.update');
-    Route::get('pengaturan/jenis-output',[
+    Route::get('pengaturan/jenis-output', [
         \App\Http\Controllers\JenisOutputController::class,
         'index',
     ])->name('jenis-output.index');
-    Route::get('pengaturan/jenis-penelitian',[
+
+    Route::get('pengaturan/jenis-penelitian', [
         \App\Http\Controllers\JenisPenelitianController::class,
         'index',
     ])->name('jenis-penelitian.index');
