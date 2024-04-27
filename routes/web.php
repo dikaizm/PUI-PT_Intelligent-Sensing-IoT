@@ -73,4 +73,16 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\JenisPenelitianController::class,
         'index',
     ])->name('jenis-penelitian.index');
+    Route::post('pengaturan/jenis-penelitian/store', [
+        \App\Http\Controllers\JenisPenelitianController::class,
+        'store',
+    ])->name('jenis-penelitian.store');
+    Route::put('pengaturan/jenis-penelitian/{id}/update', [
+        \App\Http\Controllers\JenisPenelitianController::class,
+        'update',
+    ])->name('jenis-penelitian.update');
+    Route::delete('pengaturan/jenis-penelitian/{id}/destroy', [
+        \App\Http\Controllers\JenisPenelitianController::class,
+        'destroy',
+    ])->name('jenis-penelitian.destroy');
 });
