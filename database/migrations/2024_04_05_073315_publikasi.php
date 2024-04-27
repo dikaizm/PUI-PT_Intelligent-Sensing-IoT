@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->timestamps();
         });
         Schema::create('status_jurnal', function (Blueprint $table) {
-            $table->tinyInteger('id')->autoIncrement()->primary();
+            $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
             $table->string('name');
             $table->timestamps();
         });

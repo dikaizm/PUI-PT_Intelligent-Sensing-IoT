@@ -30,28 +30,28 @@ return new class extends Migration {
             $table->timestamps();
         });
         Schema::create('status_laporan', function (Blueprint $table) {
-            $table->tinyInteger('id')->autoIncrement()->primary();
+            $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
             $table->tinyInteger('status_laporan_key_id');
             $table->string('name', 32);
             $table->timestamps();
         });
         Schema::create('status_laporan_key', function (Blueprint $table) {
-            $table->tinyInteger('id')->autoIncrement()->primary();
+            $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
             $table->string('name', 32);
             $table->timestamps();
         });
         Schema::create('jenis_penelitian', function (Blueprint $table) {
-            $table->tinyInteger('id')->autoIncrement()->primary();
+            $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
             $table->string('name', 32);
             $table->timestamps();
         });
         Schema::create('mitra', function (Blueprint $table) {
-            $table->tinyInteger('id')->autoIncrement()->primary();
+            $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
             $table->string('name', 64);
             $table->timestamps();
         });
         Schema::create('jenis_output', function (Blueprint $table) {
-            $table->tinyInteger('id')->autoIncrement()->primary();
+            $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
             $table->string('name', 32);
             $table->timestamps();
         });
