@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\StatusJurnal;
 use Illuminate\Http\Request;
+use App\Http\Requests\StatusJurnalRequest;
 
 class StatusJurnalController extends Controller
 {
@@ -12,7 +13,9 @@ class StatusJurnalController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pengaturan-status-jurnal.index', [
+            'status_jurnal' => StatusJurnal::all(),
+        ]);
     }
 
     /**
@@ -26,9 +29,13 @@ class StatusJurnalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StatusJurnalRequest $request)
     {
-        //
+        StatusJurnal::create(['name' => $request->name]);
+
+        return redirect()
+            ->route('status-jurnal.index')
+            ->with('success', 'Status Jurnal berhasil ditambah!');
     }
 
     /**
@@ -50,16 +57,24 @@ class StatusJurnalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StatusJurnal $statusJurnal)
+    public function update(StatusJurnalRequest $request, string $id)
     {
-        //
+        StatusJurnal::where('id', $id)->update(['name' => $request->name]);
+
+        return redirect()
+            ->route('status-jurnal.index')
+            ->with('success', 'Status Jurnal berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StatusJurnal $statusJurnal)
+    public function destroy(string $id)
     {
-        //
+        StatusJurnal::findOrFail($id)->delete();
+
+        return redirect()
+            ->route('status-jurnal.index')
+            ->with('success', 'Status Jurnal berhasil dihapus!');
     }
 }

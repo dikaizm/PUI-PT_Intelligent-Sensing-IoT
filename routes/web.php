@@ -127,4 +127,23 @@ Route::middleware('auth')->group(function () {
         'destroy',
     ])->name('publisher.destroy');
     //end pengaturan publisher route
+
+    //pengaturan status jurnal route
+    Route::get('pengaturan/status-jurnal', [
+        \App\Http\Controllers\StatusJurnalController::class,
+        'index',
+    ])->name('status-jurnal.index');
+    Route::post('pengaturan/status-jurnal/store', [
+        \App\Http\Controllers\StatusJurnalController::class,
+        'store',
+    ])->name('status-jurnal.store');
+    Route::put('pengaturan/status-jurnal/{id}/update', [
+        \App\Http\Controllers\StatusJurnalController::class,
+        'update',
+    ])->name('status-jurnal.update');
+    Route::delete('pengaturan/status-jurnal/{id}/destroy', [
+        \App\Http\Controllers\StatusJurnalController::class,
+        'destroy',
+    ])->name('status-jurnal.destroy');
+    //end pengaturan status jurnal route
 });
