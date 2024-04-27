@@ -108,4 +108,23 @@ Route::middleware('auth')->group(function () {
         'destroy',
     ])->name('mitra.destroy');
     //end pengaturan mitra route
+
+    //pengaturan publisher route
+    Route::get('pengaturan/publisher', [
+        \App\Http\Controllers\PublisherController::class,
+        'index',
+    ])->name('publisher.index');
+    Route::post('pengaturan/publisher/store', [
+        \App\Http\Controllers\PublisherController::class,
+        'store',
+    ])->name('publisher.store');
+    Route::put('pengaturan/publisher/{id}/update', [
+        \App\Http\Controllers\PublisherController::class,
+        'update',
+    ])->name('publisher.update');
+    Route::delete('pengaturan/publisher/{id}/destroy', [
+        \App\Http\Controllers\PublisherController::class,
+        'destroy',
+    ])->name('publisher.destroy');
+    //end pengaturan publisher route
 });

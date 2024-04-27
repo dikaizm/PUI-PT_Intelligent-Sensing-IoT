@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Publisher;
 use Illuminate\Http\Request;
+use App\Http\Requests\PublisherRequest;
 
 class PublisherController extends Controller
 {
@@ -12,7 +13,9 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pengaturan-publisher.index', [
+            'publisher' => Publisher::all(),
+        ]);
     }
 
     /**
@@ -26,9 +29,15 @@ class PublisherController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PublisherRequest $request)
     {
-        //
+        Publisher::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('publisher.index')
+            ->with('success', 'Publisher berhasil ditambah!');
     }
 
     /**
@@ -50,16 +59,24 @@ class PublisherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Publisher $publisher)
+    public function update(PublisherRequest $request, string $id)
     {
-        //
+        Publisher::where('id', $id)->update(['name' => $request->name]);
+
+        return redirect()
+            ->route('publisher.index')
+            ->with('success', 'Publisher berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Publisher $publisher)
+    public function destroy(string $id)
     {
-        //
+        Publisher::findOrFail($id)->delete();
+
+        return redirect()
+            ->route('publisher.index')
+            ->with('success', 'Publisher berhasil dihapus!');
     }
 }
