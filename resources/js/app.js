@@ -13,22 +13,12 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 new DataTable('#dataTables', {
     responsive: false,
-    dom: 'Bfrtip',
-    layout: {
-        topStart: {
-            buttons: [
-                {
-                    extend: 'pdf',
-                    text: 'PDF',
-                    customize: function (doc) {
-                        doc.content.splice(1, 0, {
-                            margin: [0, 0, 0, 12],
-                            alignment: 'center',
-                        })
-                    },
-                },
-                {},
-            ],
-        },
+    dom: 'B<"row mt-2"<"col-sm-2"l><"col-sm-6"><"col-sm-4"f>>rt<"row"<"col-sm-9"i><"col-sm-3 mb-2"p>>',
+    searching: true,
+    lengthMenu: [10, 25, 50, 75, 100],
+    pageLength: 10,
+    pagingType: 'full_numbers',
+    language: {
+        info: '_START_ - _END_ dari _TOTAL_ data',
     },
 })
