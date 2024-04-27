@@ -56,6 +56,18 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\JenisOutputController::class,
         'index',
     ])->name('jenis-output.index');
+    Route::post('pengaturan/jenis-output/store', [
+        \App\Http\Controllers\JenisOutputController::class,
+        'store',
+    ])->name('jenis-output.store');
+    Route::put('pengaturan/jenis-output/{id}/update', [
+        \App\Http\Controllers\JenisOutputController::class,
+        'update',
+    ])->name('jenis-output.update');
+    Route::delete('pengaturan/jenis-output/{id}/destroy', [
+        \App\Http\Controllers\JenisOutputController::class,
+        'destroy',
+    ])->name('jenis-output.destroy');
 
     Route::get('pengaturan/jenis-penelitian', [
         \App\Http\Controllers\JenisPenelitianController::class,

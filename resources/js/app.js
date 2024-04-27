@@ -12,7 +12,7 @@ import 'datatables.net-responsive-bs5'
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 new DataTable('#dataTables', {
-    responsive: true,
+    responsive: false,
     dom: 'Bfrtip',
     layout: {
         topStart: {

@@ -2,29 +2,7 @@
     <div class="card-style-3 mb-30" style="border-radius: 20px;border: 2px solid #000;">
         <div class="card-content">
 
-            @session('success')
-                <div class="alert-box success-alert">
-                    <div class="alert">
-                        <h4 class="alert-heading">Success</h4>
-                        <p class="text-medium">
-                            {{ $value }}
-                        </p>
-                    </div>
-                </div>
-            @endsession
-
-            @if ($errors->any())
-                <div class="alert-box danger-alert">
-                    <div class="alert">
-                        <h4 class="alert-heading">Perhatian</h4>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            @endif
+            @include('alert')
 
             <div class="menu-toggle-btn mr-20" style="text-align: right;">
                 <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"

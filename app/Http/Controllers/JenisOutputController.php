@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisOutput;
 use Illuminate\Http\Request;
+use App\Http\Requests\JenisOutputRequest;
 
 class JenisOutputController extends Controller
 {
@@ -12,7 +13,9 @@ class JenisOutputController extends Controller
      */
     public function index()
     {
-        return view("admin.pengaturan-jenis-output.index");
+        return view('admin.pengaturan-jenis-output.index', [
+            'jenis_outputs' => JenisOutput::all(),
+        ]);
     }
 
     /**
@@ -26,9 +29,15 @@ class JenisOutputController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JenisOutputRequest $request)
     {
-        //
+        JenisOutput::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('jenis-output.index')
+            ->with('success', 'Jenis output berhasil ditambah!');
     }
 
     /**
@@ -50,16 +59,27 @@ class JenisOutputController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, JenisOutput $jenisOutput)
+    public function update(JenisOutputRequest $request, string $id)
     {
-        //
+        JenisOutput::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('jenis-output.index')
+            ->with('success', 'Jenis Output berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(JenisOutput $jenisOutput)
+    public function destroy(string $id)
     {
-        //
+        $jenis_output = JenisOutput::findOrFail($id);
+        $jenis_output->delete();
+
+        return redirect()
+            ->route('jenis-output.index')
+            ->with('success', 'Jenis Output berhasil dihapus!');
     }
 }
