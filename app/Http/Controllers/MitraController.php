@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 use Illuminate\Http\Request;
+use App\Http\Requests\MitraRequest;
 
 class MitraController extends Controller
 {
@@ -12,7 +13,9 @@ class MitraController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pengaturan-mitra.index', [
+            'mitra' => Mitra::all(),
+        ]);
     }
 
     /**
@@ -26,9 +29,15 @@ class MitraController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MitraRequest $request)
     {
-        //
+        Mitra::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('mitra.index')
+            ->with('success', 'Mitra berhasil ditambah!');
     }
 
     /**
@@ -50,16 +59,24 @@ class MitraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mitra $mitra)
+    public function update(MitraRequest $request, string $id)
     {
-        //
+        Mitra::where('id', $id)->update(['name' => $request->name]);
+
+        return redirect()
+            ->route('mitra.index')
+            ->with('success', 'Mitra berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mitra $mitra)
+    public function destroy(string $id)
     {
-        //
+        Mitra::findOrFail($id)->delete();
+
+        return redirect()
+            ->route('mitra.index')
+            ->with('success', 'Mitra berhasil dihapus!');
     }
 }

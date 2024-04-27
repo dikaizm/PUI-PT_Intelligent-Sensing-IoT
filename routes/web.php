@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
         'index',
     ])->name('laporan-kinerja.index');
 
+    //pengaturan jenis output route
     Route::get('pengaturan/jenis-output', [
         \App\Http\Controllers\JenisOutputController::class,
         'index',
@@ -68,7 +69,9 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\JenisOutputController::class,
         'destroy',
     ])->name('jenis-output.destroy');
+    //end pengaturan jenis output
 
+    //pengaturan jenis penelitian
     Route::get('pengaturan/jenis-penelitian', [
         \App\Http\Controllers\JenisPenelitianController::class,
         'index',
@@ -85,4 +88,24 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\JenisPenelitianController::class,
         'destroy',
     ])->name('jenis-penelitian.destroy');
+    //end pengaturan jenis penelitian route
+
+    //pengaturan mitra route
+    Route::get('pengaturan/mitra', [
+        \App\Http\Controllers\MitraController::class,
+        'index',
+    ])->name('mitra.index');
+    Route::post('pengaturan/mitra/store', [
+        \App\Http\Controllers\MitraController::class,
+        'store',
+    ])->name('mitra.store');
+    Route::put('pengaturan/mitra/{id}/update', [
+        \App\Http\Controllers\MitraController::class,
+        'update',
+    ])->name('mitra.update');
+    Route::delete('pengaturan/mitra/{id}/destroy', [
+        \App\Http\Controllers\MitraController::class,
+        'destroy',
+    ])->name('mitra.destroy');
+    //end pengaturan mitra route
 });
