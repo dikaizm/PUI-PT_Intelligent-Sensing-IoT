@@ -146,4 +146,23 @@ Route::middleware('auth')->group(function () {
         'destroy',
     ])->name('status-jurnal.destroy');
     //end pengaturan status jurnal route
+
+    //pengaturan status laporan route
+    Route::get('pengaturan/status-laporan', [
+        \App\Http\Controllers\StatusLaporanController::class,
+        'index',
+    ])->name('status-laporan.index');
+    Route::post('pengaturan/status-laporan/store', [
+        \App\Http\Controllers\StatusLaporanController::class,
+        'store',
+    ])->name('status-laporan.store');
+    Route::put('pengaturan/status-laporan/{id}/update', [
+        \App\Http\Controllers\StatusLaporanController::class,
+        'update',
+    ])->name('status-laporan.update');
+    Route::delete('pengaturan/status-laporan/{id}/destroy', [
+        \App\Http\Controllers\StatusLaporanController::class,
+        'destroy',
+    ])->name('status-laporan.destroy');
+    //end pengaturan status jurnal route
 });

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StatusLaporan;
 use Illuminate\Http\Request;
+use App\Models\StatusLaporan;
+use App\Models\StatusLaporanKey;
+use App\Http\Requests\StatusLaporanRequest;
 
 class StatusLaporanController extends Controller
 {
@@ -12,7 +14,10 @@ class StatusLaporanController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pengaturan-status-laporan.index', [
+            'status_laporan' => StatusLaporan::with('statusLaporanKey')->get(),
+            'status_laporan_key' => StatusLaporanKey::all(),
+        ]);
     }
 
     /**
@@ -26,9 +31,16 @@ class StatusLaporanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StatusLaporanRequest $request)
     {
-        //
+        StatusLaporan::create([
+            'status_laporan_key_id' => $request->status_laporan_key_id,
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('status-laporan.index')
+            ->with('success', 'Status Laporan berhasil ditambah!');
     }
 
     /**
@@ -50,16 +62,27 @@ class StatusLaporanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StatusLaporan $statusLaporan)
+    public function update(StatusLaporanRequest $request, string $id)
     {
-        //
+        StatusLaporan::where('id', $id)->update([
+            'status_laporan_key_id' => $request->status_laporan_key_id,
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('status-laporan.index')
+            ->with('success', 'Status Laporan berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StatusLaporan $statusLaporan)
+    public function destroy(string $id)
     {
-        //
+        StatusLaporan::findOrFail($id)->delete();
+
+        return redirect()
+            ->route('status-laporan.index')
+            ->with('success', 'Status Laporan berhasil dihapus!');
     }
 }

@@ -31,7 +31,7 @@ return new class extends Migration {
         });
         Schema::create('status_laporan', function (Blueprint $table) {
             $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
-            $table->tinyInteger('status_laporan_key_id');
+            $table->tinyInteger('status_laporan_key_id')->unsigned();
             $table->string('name', 32);
             $table->timestamps();
         });
