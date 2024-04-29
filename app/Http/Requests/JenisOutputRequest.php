@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class JenisOutputRequest extends FormRequest
@@ -12,7 +11,7 @@ class JenisOutputRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::check() && Auth::user()->hasRole('Admin');
+        return $this->user()->hasPermissionTo('mengelola-pengaturan');
     }
 
     /**
