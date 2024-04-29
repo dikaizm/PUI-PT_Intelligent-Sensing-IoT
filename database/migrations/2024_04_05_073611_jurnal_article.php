@@ -29,16 +29,21 @@ return new class extends Migration {
             $table->boolean('arsip');
             $table->timestamps();
         });
-        Schema::create('status_laporan', function (Blueprint $table) {
-            $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
-            $table->tinyInteger('status_laporan_key_id')->unsigned();
-            $table->string('name', 32);
-            $table->timestamps();
-        });
         Schema::create('status_laporan_key', function (Blueprint $table) {
             $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
             $table->string('name', 32);
             $table->timestamps();
+        });
+        Schema::create('status_laporan', function (Blueprint $table) {
+            $table->tinyInteger('id')->unsigned()->autoIncrement();
+            $table->tinyInteger('status_laporan_key_id')->unsigned();
+            $table->string('name', 32);
+            $table->timestamps();
+            $table
+                ->foreign('status_laporan_key_id')
+                ->references('id')
+                ->on('status_laporan_key')
+                ->onDelete('restrict');
         });
         Schema::create('jenis_penelitian', function (Blueprint $table) {
             $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();

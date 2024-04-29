@@ -24,6 +24,16 @@
                                     {{ __('Tambahkan Data') }}
                                 </button>
                             </div>
+
+                            <div class="alert-box">
+                                <div class="alert alert-info">
+                                    <h4 class="alert-heading"><i class="lni lni-warning"></i> info</h4>
+                                    <p class="text-medium">
+                                        Untuk menghapus key, anda harus menghapus terlebih dahulu data di tabel 'Status
+                                        Laporan' yang menggunakan key tersebut.
+                                    </p>
+                                </div>
+                            </div>
                             <div class="table-wrapper table-responsive">
                                 <table class="table striped-table" id="dataTables2">
                                     <thead>
@@ -32,7 +42,7 @@
                                                 <h6>ID</h6>
                                             </th>
                                             <th class="text-center" style="width: 25%;">
-                                                <h6>Name</h6>
+                                                <h6>Key</h6>
                                             </th>
                                             <th class="text-center" style="width: 5%;">
                                                 <h6>Action</h6>
@@ -49,10 +59,12 @@
                                                     <p>{{ $item->name }}</p>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalEdit">
+                                                    <a type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#modalEditStatusLaporanKey{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>
                                                     </a>
-                                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete">
+                                                    <a type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#modalDeleteStatusLaporanKey{{ $item->id }}">
                                                         <i class="lni lni-trash-can" style="color: red;"></i>
                                                     </a>
                                                 </td>
@@ -145,14 +157,17 @@
     <!-- ========== title-wrapper end ========== -->
 
     <!-- ========== modal edit =========== -->
+    @include('admin.pengaturan-status-laporan.modal-edit-status-laporan-key')
     @include('admin.pengaturan-status-laporan.modal-edit-status-laporan')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal tambah =========== -->
+    @include('admin.pengaturan-status-laporan.modal-tambah-status-laporan-key')
     @include('admin.pengaturan-status-laporan.modal-tambah-status-laporan')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal delete =========== -->
+    @include('admin.pengaturan-status-laporan.modal-delete-status-laporan-key')
     @include('admin.pengaturan-status-laporan.modal-delete-status-laporan')
     <!-- ========== modal end =========== -->
 @endsection

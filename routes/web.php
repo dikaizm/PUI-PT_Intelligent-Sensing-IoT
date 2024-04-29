@@ -164,5 +164,20 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\StatusLaporanController::class,
         'destroy',
     ])->name('status-laporan.destroy');
-    //end pengaturan status jurnal route
+    //end pengaturan status laporan route
+
+    //pengaturan status laporan key route
+    Route::post('pengaturan/status-laporan-key/store', [
+        \App\Http\Controllers\StatusLaporanKeyController::class,
+        'store',
+    ])->name('status-laporan-key.store');
+    Route::put('pengaturan/status-laporan-key/{id}/update', [
+        \App\Http\Controllers\StatusLaporanKeyController::class,
+        'update',
+    ])->name('status-laporan-key.update');
+    Route::delete('pengaturan/status-laporan-key/{id}/destroy', [
+        \App\Http\Controllers\StatusLaporanKeyController::class,
+        'destroy',
+    ])->name('status-laporan-key.destroy');
+    //end pengaturan status laporan key route
 });
