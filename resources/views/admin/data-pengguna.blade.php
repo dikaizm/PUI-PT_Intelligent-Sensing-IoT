@@ -429,8 +429,7 @@
 
 <!-- ========== modal delete =========== -->
 <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
-    <div class="modal-dialog"
-        style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
+    <div class="modal-dialog" style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
             <div class="modal-header px-0 border-0">
                 <h5 class="modal-title" id="ModalFourLabel">
