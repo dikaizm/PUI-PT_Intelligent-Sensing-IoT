@@ -13,6 +13,7 @@ use App\Models\JenisPenelitian;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
 
 class DatabaseSeeder extends Seeder
@@ -24,18 +25,14 @@ class DatabaseSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // Permission::create(['name' => 'edit articles']);
-        // Permission::create(['name' => 'delete articles']);
-        // Permission::create(['name' => 'publish articles']);
-        // Permission::create(['name' => 'unpublish articles']);
+        Permission::create(['name' => 'mengelola-pengguna']);
+        Permission::create(['name' => 'mengelola-pengaturan']);
 
         $role1 = Role::create(['name' => 'Admin']);
-        // $role1->givePermissionTo('edit articles');
-        // $role1->givePermissionTo('delete articles');
+        $role1->givePermissionTo('mengelola-pengguna');
+        $role1->givePermissionTo('mengelola-pengaturan');
 
         $role2 = Role::create(['name' => 'Dosen']);
-        // $role1->givePermissionTo('edit articles');
-        // $role1->givePermissionTo('delete articles');
 
         $role3 = Role::create(['name' => 'Kaur']);
 

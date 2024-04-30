@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-30">
-                    <h2>{{ __('Jenis Penelitian') }}</h2>
+                    <h2>{{ __('Publisher') }}</h2>
                 </div>
             </div>
             <!-- end col -->
@@ -38,13 +38,13 @@
                                 <th>
                                     <h6>Name</h6>
                                 </th>
-                                <th style="width: 20%;">
+                                <th style="width: 5%;">
                                     <h6>Action</h6>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($jenis_penelitian as $item)
+                            @foreach ($publisher as $item)
                                 <tr>
                                     <td>
                                         <p>{{ $item->id }}</p>
@@ -75,15 +75,15 @@
     </div>
 
     <!-- ========== modal edit =========== -->
-    @include('admin.pengaturan-jenis-penelitian.modal-edit')
+    @include('admin.pengaturan-publisher.modal-edit')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal tambah =========== -->
-    @include('admin.pengaturan-jenis-penelitian.modal-tambah')
+    @include('admin.pengaturan-publisher.modal-tambah')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal delete =========== -->
-    @include('admin.pengaturan-jenis-penelitian.modal-delete')
+    @include('admin.pengaturan-publisher.modal-delete')
     <!-- ========== modal end =========== -->
 @endsection
 

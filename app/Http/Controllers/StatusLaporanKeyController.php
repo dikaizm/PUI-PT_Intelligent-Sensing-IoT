@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StatusLaporanKey;
 use Illuminate\Http\Request;
+use App\Models\StatusLaporanKey;
+use App\Http\Requests\StatusLaporanKeyRequest;
 
 class StatusLaporanKeyController extends Controller
 {
@@ -26,9 +27,15 @@ class StatusLaporanKeyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StatusLaporanKeyRequest $request)
     {
-        //
+        StatusLaporanKey::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('status-laporan.index')
+            ->with('success', 'Key berhasil ditambah!');
     }
 
     /**
@@ -50,16 +57,26 @@ class StatusLaporanKeyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StatusLaporanKey $statusLaporanKey)
+    public function update(StatusLaporanKeyRequest $request, string $id)
     {
-        //
+        StatusLaporanKey::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('status-laporan.index')
+            ->with('success', 'Key berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StatusLaporanKey $statusLaporanKey)
+    public function destroy(string $id)
     {
-        //
+        StatusLaporanKey::findOrFail($id)->delete();
+
+        return redirect()
+            ->route('status-laporan.index')
+            ->with('success', 'Key berhasil dihapus!');
     }
 }
