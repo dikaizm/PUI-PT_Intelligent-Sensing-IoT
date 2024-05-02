@@ -10,6 +10,32 @@ return new class extends Migration {
      */
     public function up(): void
     {
+        Schema::create('status_penelitian_key', function (Blueprint $table) {
+            $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
+            $table->string('name', 32);
+            $table->timestamps();
+        });
+        Schema::create('status_penelitian', function (Blueprint $table) {
+            $table->smallInteger('id')->unsigned()->autoIncrement();
+            $table->tinyInteger('status_penelitian_key_id')->unsigned();
+            $table->string('name', 32);
+            $table->timestamps();
+            $table
+                ->foreign('status_penelitian_key_id')
+                ->references('id')
+                ->on('status_penelitian_key')
+                ->onDelete('restrict');
+        });
+        Schema::create('jenis_penelitian', function (Blueprint $table) {
+            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
+            $table->string('name', 32);
+            $table->timestamps();
+        });
+        Schema::create('mitra', function (Blueprint $table) {
+            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
+            $table->string('name', 64);
+            $table->timestamps();
+        });
         Schema::create('penelitian', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
@@ -40,32 +66,6 @@ return new class extends Migration {
             $table->boolean('arsip');
             $table->timestamps();
         });
-        Schema::create('status_penelitian_key', function (Blueprint $table) {
-            $table->tinyInteger('id')->unsigned()->autoIncrement()->primary();
-            $table->string('name', 32);
-            $table->timestamps();
-        });
-        Schema::create('status_penelitian', function (Blueprint $table) {
-            $table->smallInteger('id')->unsigned()->autoIncrement();
-            $table->tinyInteger('status_penelitian_key_id')->unsigned();
-            $table->string('name', 32);
-            $table->timestamps();
-            $table
-                ->foreign('status_penelitian_key_id')
-                ->references('id')
-                ->on('status_penelitian_key')
-                ->onDelete('restrict');
-        });
-        Schema::create('jenis_penelitian', function (Blueprint $table) {
-            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
-            $table->string('name', 32);
-            $table->timestamps();
-        });
-        Schema::create('mitra', function (Blueprint $table) {
-            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
-            $table->string('name', 64);
-            $table->timestamps();
-        });
     }
 
     /**
@@ -73,10 +73,10 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('penelitian');
         Schema::dropIfExists('status_penelitian_key');
         Schema::dropIfExists('status_penelitian');
         Schema::dropIfExists('jenis_penelitian');
         Schema::dropIfExists('mitra');
+        Schema::dropIfExists('penelitian');
     }
 };

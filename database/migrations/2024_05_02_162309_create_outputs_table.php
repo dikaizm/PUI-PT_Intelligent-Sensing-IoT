@@ -10,6 +10,33 @@ return new class extends Migration {
      */
     public function up(): void
     {
+        Schema::create('jenis_dokumen', function (Blueprint $table) {
+            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
+            $table->string('name', 32);
+            $table->timestamps();
+        });
+        Schema::create('publisher_key', function (Blueprint $table) {
+            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
+            $table->string('name', 64);
+            $table->timestamps();
+        });
+        Schema::create('publisher', function (Blueprint $table) {
+            $table->id();
+            $table->smallInteger('publisher_key_id')->unsigned();
+            $table
+                ->foreign('publisher_key_id')
+                ->references('id')
+                ->on('publisher_key')
+                ->onDelete('restrict');
+            $table->string('tingkat_index', 32);
+            $table->timestamps();
+        });
+        Schema::create('status_jurnal', function (Blueprint $table) {
+            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
+            $table->string('name');
+            $table->timestamps();
+        });
+
         Schema::create('output', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('jenis_dokumen_id')->unsigned();
@@ -40,27 +67,6 @@ return new class extends Migration {
             $table->string('tautan');
             $table->timestamps();
         });
-        Schema::create('publisher_key', function (Blueprint $table) {
-            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
-            $table->string('name', 64);
-            $table->timestamp();
-        });
-        Schema::create('publisher', function (Blueprint $table) {
-            $table->id();
-            $table->smallInteger('publisher_key_id')->unsigned();
-            $table
-                ->foreign('publisher_key_id')
-                ->references('id')
-                ->on('publisher_key')
-                ->onDelete('restrict');
-            $table->string('tingkat_index', 32);
-            $table->timestamp();
-        });
-        Schema::create('status_jurnal', function (Blueprint $table) {
-            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
-            $table->string('name');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -68,9 +74,10 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('output');
+        Schema::dropIfExists('jenis_dokumen');
         Schema::dropIfExists('publisher_key');
         Schema::dropIfExists('publisher');
         Schema::dropIfExists('status_jurnal');
+        Schema::dropIfExists('output');
     }
 };

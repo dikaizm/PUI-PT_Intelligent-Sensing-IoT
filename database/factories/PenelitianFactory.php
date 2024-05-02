@@ -17,7 +17,16 @@ class PenelitianFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'uuid' => fake()->uuid(),
+            'judul' => fake()->sentence(),
+            'tingkatan_tkt' => fake()->randomDigitNotNull(),
+            'pendanaan' => fake()->numerify('#####000'),
+            'jangka_waktu' => fake()->numerify('## Bulan'),
+            'feedback' => fake()->text(),
+            'status_penelitian_id' => fake()->randomDigitNotNull(),
+            'jenis_penelitian_id' => fake()->randomDigitNotNull(),
+            'mitra_id' => fake()->randomDigitNotNull(),
+            'arsip' => fake()->boolean(),
         ];
     }
 }

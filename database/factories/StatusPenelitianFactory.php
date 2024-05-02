@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JenisDokumen>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\StatusPenelitian>
  */
-class JenisDokumenFactory extends Factory
+class StatusPenelitianFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class JenisDokumenFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->word(3, true),
+            'status_penelitian_key_id' => 2,
+            'name' => fake()->word(),
         ];
     }
 }

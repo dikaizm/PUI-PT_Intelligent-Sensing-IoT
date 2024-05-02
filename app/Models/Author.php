@@ -17,7 +17,7 @@ class Author extends Model
     ];
 
     protected $fillable = [
-        'jurnal_article_id',
+        'penelitian_id',
         'user_id',
         'is_corresponding',
         'is_ketua',
