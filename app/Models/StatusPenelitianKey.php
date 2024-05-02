@@ -2,21 +2,20 @@
 
 namespace App\Models;
 
-use App\Models\Penelitian;
+use App\Models\StatusPenelitian;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Mitra extends Model
+class StatusPenelitianKey extends Model
 {
     use HasFactory;
-
-    protected $table = 'mitra';
+    protected $table = 'status_penelitian_key';
 
     protected $fillable = ['name'];
 
-    public function penelitians(): HasMany
+    public function statusPenelitians(): HasMany
     {
-        return $this->hasMany(Penelitian::class);
+        return $this->hasMany(StatusPenelitian::class);
     }
 }
