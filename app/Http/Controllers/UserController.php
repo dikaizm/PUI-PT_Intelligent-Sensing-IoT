@@ -52,20 +52,19 @@ class UserController extends Controller
         UserUpdateRequest $request,
         string $id
     ): RedirectResponse {
-        User::where('id', $id)
-            ->where('name', $request->name)
-            ->update([
-                'name' => $request->name,
-                'nip' => $request->nip,
-                'email' => $request->email,
-                'telp' => $request->telp,
-                'keahlian' => $request->keahlian,
-                'link_google_scholar' => $request->link_google_scholar,
-                'link_sinta' => $request->link_sinta,
-                'password' => $request->password
-                    ? Hash::make($request->password)
-                    : $request->input('password_old'),
-            ]);
+        User::where('id', $id)->update([
+            'name' => $request->name,
+            'nip' => $request->nip,
+            'email' => $request->email,
+            'telp' => $request->telp,
+            'keahlian' => $request->keahlian,
+            'fakultas' => $request->fakultas,
+            'link_google_scholar' => $request->link_google_scholar,
+            'link_sinta' => $request->link_sinta,
+            'password' => $request->password
+                ? Hash::make($request->password)
+                : $request->input('password_old'),
+        ]);
 
         return redirect('/users')->with('success', 'User berhasil diupdate!');
     }
@@ -75,8 +74,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        User::findOrFail($id)->delete();
 
         return redirect()
             ->route('users.index')
