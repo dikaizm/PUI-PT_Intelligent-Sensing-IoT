@@ -28,6 +28,7 @@ class User extends Authenticatable
         'link_sinta',
         'password',
         'nip',
+        'fakultas',
     ];
 
     /**

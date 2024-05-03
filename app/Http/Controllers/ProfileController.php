@@ -24,7 +24,7 @@ class ProfileController extends Controller
             'nip' => $request->nip,
             'telp' => $request->telp,
             'keahlian' => $request->keahlian,
-            'fakultas' => $request->name,
+            'fakultas' => $request->fakultas,
             'link_google_scholar' => $request->link_google_scholar,
             'link_sinta' => $request->link_sinta,
         ]);
