@@ -50,13 +50,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function jurnalArticles(): BelongsToMany
+    public function penelitians(): BelongsToMany
     {
         return $this->belongsToMany(
             JurnalArticle::class,
             'author',
             'user_id',
-            'jurnal_article_id'
+            'penelitian_id'
         )
             ->withPivot('is_corresponding', 'is_ketua')
             ->withDefault(['is_corresponding' => false, 'is_ketua' => false]);

@@ -42,7 +42,7 @@ class Penelitian extends Model
         return $this->belongsToMany(
             User::class,
             'author',
-            'jurnal_article_id',
+            'penelitian_id',
             'user_id'
         )
             ->withPivot('is_corresponding', 'is_ketua')
