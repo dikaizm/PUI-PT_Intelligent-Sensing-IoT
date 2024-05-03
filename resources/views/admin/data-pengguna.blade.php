@@ -504,8 +504,8 @@
                             <div class="col-lg-6 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Link Google Scholar') }}</li>
-                                        <a href="{{ __($user->link_google_scholar) }}" target="_blank" style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_google_scholar) }}</a>
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Bidang Keahlian') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->keahlian) }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -520,24 +520,24 @@
                             <div class="col-lg-6 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Link Sinta') }}</li>
-                                        <a href="{{ __($user->link_sinta) }}" target="_blank" style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_sinta) }}</a>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Bidang Keahlian') }}</li>
-                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->keahlian) }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
                                         <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Fakultas') }}</li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->fakultas) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Link Google Scholar') }}</li>
+                                        <a href="{{ __($user->link_google_scholar) }}" target="_blank" style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_google_scholar) }}</a>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Link Sinta') }}</li>
+                                        <a href="{{ __($user->link_sinta) }}" target="_blank" style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_sinta) }}</a>
                                     </ul>
                                 </div>
                             </div>
