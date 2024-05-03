@@ -50,12 +50,16 @@
                                 </td>
                                 <td>
                                     <a type="button" data-bs-toggle="modal"
+                                        data-bs-target="#modalUserdetail{{ $user->id }}">
+                                        <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
+                                    </a>
+                                    <a type="button" data-bs-toggle="modal"
                                         data-bs-target="#modalEdit{{ $user->id }}">
-                                        <i class="lni lni-pencil" style="color: black;"></i>
+                                        <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
                                     </a>
                                     <a type="button" data-bs-toggle="modal"
                                         data-bs-target="#modalDelete{{ $user->id }}">
-                                        <i class="lni lni-trash-can" style="color: red;"></i>
+                                        <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -444,3 +448,83 @@
 @endforeach
 <!-- ========== modal end =========== -->
 
+<!-- ========== modal detail =========== -->
+@foreach ($users as $user)
+    <div class="modal fade" id="modalUserdetail{{ $user->id }}" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 90%; width: 800px;min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+            <div class="modal-content card-style">
+                <div class="modal-header px-0 border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-0" style="width: 100%; text-align: center;">
+                    <div class="col-xl-6 col-lg-10 col-md-6" style="margin: auto;width: 90%;">
+                        <div style="border-radius: 50%; max-width: 225px; width: 100%; overflow: hidden; margin: auto; margin-top: 0px; margin-bottom: 40px;">
+                            <a style="display: block;"  style="align-content: center;">
+                                <img src="{{ asset('images/example/joji.jpg') }}" alt="Card Image" style="width: 100%;">
+                            </a>
+                        </div>
+                        <div class="row g-0 auth-row" style="color: black; font-weight: 400;line-height: 35px;">
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Nama Dosen') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->name) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Link Google Scholar') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_google_scholar) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Email Pengguna') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->email) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Link Sinta') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_sinta) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Bidang Keahlian') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->keahlian) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Fakultas') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->fakultas) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('NIP') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->nip) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+<!-- ========== modal end =========== -->

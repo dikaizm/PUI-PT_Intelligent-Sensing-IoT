@@ -15,10 +15,6 @@
     </div>
     <!-- ========== title-wrapper end ========== -->
 
-    @role('Admin')
         @include('admin.data-pengguna')
-    @else
-        @include('users.data-pengguna')
-    @endrole
 @endsection
 

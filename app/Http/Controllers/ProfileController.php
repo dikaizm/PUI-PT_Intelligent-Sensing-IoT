@@ -21,6 +21,12 @@ class ProfileController extends Controller
         auth()->user()->update([
             'name' => $request->name,
             'email' => $request->email,
+            'nip' => $request->nip,
+            'telp' => $request->telp,
+            'keahlian' => $request->keahlian,
+            'fakultas' => $request->name,
+            'link_google_scholar' => $request->link_google_scholar,
+            'link_sinta' => $request->link_sinta,
         ]);
 
         return redirect()->back()->with('success', 'Profile updated.');

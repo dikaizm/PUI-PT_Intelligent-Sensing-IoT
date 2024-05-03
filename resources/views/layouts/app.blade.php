@@ -18,10 +18,10 @@
 
 <body>
     <!-- ======== sidebar-nav start =========== -->
-    <aside class="sidebar-nav-wrapper" style="background: linear-gradient(180deg, #620707 0%, #C80E0E 100%); overflow-y: auto;">
-        <div class="navbar-logo" style="width: 140px;height: 59px;top: 28px;left: 24px;gap: 0px;opacity: 0px;">
+    <aside class="sidebar-nav-wrapper" style="background: linear-gradient(180deg, #9B0B0B 0%, #350404 100%); overflow-y: auto;">
+        <div class="navbar-logo" style="width: 100%;height: 80px;top: 28px;left: 24px;gap: 0px;opacity: 0px;">
             <a href="{{ route('home') }}">
-                <img src="{{ asset('images/logo/logo.png') }}" alt="logo" style="width: 140px;height: 59px;top: 28px;left: 24px;gap: 0px;opacity: 0px;" />
+                <img src="{{ asset('images/logo/logo.png') }}" alt="logo" style="width: 210px;height: 78px;top: 28px;left: 24px;gap: 0px;opacity: 0px;" />
             </a>
         </div>
         <nav class="sidebar-nav">
