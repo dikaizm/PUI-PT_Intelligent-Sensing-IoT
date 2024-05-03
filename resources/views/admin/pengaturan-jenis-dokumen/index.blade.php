@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-30">
-                    <h2>{{ __('Jenis Output') }}</h2>
+                    <h2>{{ __('Jenis Dokumen') }}</h2>
                 </div>
             </div>
             <!-- end col -->
@@ -46,21 +46,21 @@
                             <!-- end table row-->
                         </thead>
                         <tbody>
-                            @foreach ($jenis_outputs as $jenis_output)
+                            @foreach ($jenis_dokumen as $item)
                                 <tr>
                                     <td>
-                                        <p>{{ $jenis_output->id }}</p>
+                                        <p>{{ $item->id }}</p>
                                     </td>
                                     <td>
-                                        <p>{{ $jenis_output->name }}</p>
+                                        <p>{{ $item->name }}</p>
                                     </td>
                                     <td>
                                         <a type="button" data-bs-toggle="modal"
-                                            data-bs-target="#modalEdit{{ $jenis_output->id }}">
+                                            data-bs-target="#modalEdit{{ $item->id }}">
                                             <i class="lni lni-pencil" style="color: black;"></i>
                                         </a>
                                         <a type="button" data-bs-toggle="modal"
-                                            data-bs-target="#modalDelete{{ $jenis_output->id }}">
+                                            data-bs-target="#modalDelete{{ $item->id }}">
                                             <i class="lni lni-trash-can" style="color: red;"></i>
                                         </a>
                                     </td>
@@ -77,15 +77,15 @@
     </div>
 
     <!-- ========== modal edit =========== -->
-    @include('admin.pengaturan-jenis-output.modal-edit')
+    @include('admin.pengaturan-jenis-dokumen.modal-edit')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal tambah =========== -->
-    @include('admin.pengaturan-jenis-output.modal-tambah')
+    @include('admin.pengaturan-jenis-dokumen.modal-tambah')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal delete =========== -->
-    @include('admin.pengaturan-jenis-output.modal-delete')
+    @include('admin.pengaturan-jenis-dokumen.modal-delete')
     <!-- ========== modal end =========== -->
 @endsection
 

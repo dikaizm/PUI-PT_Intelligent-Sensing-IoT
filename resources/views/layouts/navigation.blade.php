@@ -47,14 +47,14 @@
     <li class="nav-item nav-item-has-children">
         <a class="collapsed" href="#0" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_2"
             aria-controls="ddmenu_2" aria-expanded="true" aria-label="Toggle navigation">
-                <span class="icon" style="color: white;">
-                    <i class="lni lni-cog"></i>
-                </span>
+            <span class="icon" style="color: white;">
+                <i class="lni lni-cog"></i>
+            </span>
             <span class="text" style="color: white;">Pengaturan</span>
         </a>
         <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
             <li>
-                <a href="{{ route('jenis-output.index') }}" style="color: white;">Jenis Output</a>
+                <a href="{{ route('jenis-dokumen.index') }}" style="color: white;">Jenis Output</a>
             </li>
             <li>
                 <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">Jenis Penelitian</a>

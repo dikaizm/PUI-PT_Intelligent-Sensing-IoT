@@ -1,5 +1,5 @@
-@foreach ($jenis_outputs as $jenis_output)
-    <div class="modal fade" id="modalEdit{{ $jenis_output->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+@foreach ($jenis_dokumen as $item)
+    <div class="modal fade" id="modalEdit{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
         aria-hidden="true">
         <div class="modal-dialog"
             style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
@@ -9,18 +9,17 @@
                 </div>
                 <div class="modal-body px-0">
                     <div class="content mb-30">
-                        <form action="{{ route('jenis-output.update', ['id' => $jenis_output->id]) }}" method="POST">
+                        <form action="{{ route('jenis-dokumen.update', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
 
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-style-1">
-                                        <label for="nameEdit{{ $jenis_output->id }}">{{ __('Name') }}</label>
+                                        <label for="nameEdit{{ $item->id }}">{{ __('Name') }}</label>
                                         <input type="text" @error('name') class="form-control is-invalid" @enderror
-                                            name="name" id="nameEdit{{ $jenis_output->id }}"
-                                            placeholder="{{ __('Name') }}"
-                                            value="{{ old('name', $jenis_output->name) }}">
+                                            name="name" id="nameEdit{{ $item->id }}"
+                                            placeholder="{{ __('Name') }}" value="{{ $item->name }}">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

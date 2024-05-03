@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisDokumen;
 use Illuminate\Http\Request;
+use App\Http\Requests\JenisDokumenRequest;
 
 class JenisDokumenController extends Controller
 {
@@ -12,7 +13,9 @@ class JenisDokumenController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pengaturan-jenis-dokumen.index', [
+            'jenis_dokumen' => JenisDokumen::all(),
+        ]);
     }
 
     /**
@@ -26,9 +29,15 @@ class JenisDokumenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JenisDokumenRequest $request)
     {
-        //
+        JenisDokumen::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('jenis-dokumen.index')
+            ->with('success', 'Jenis dokumen berhasil ditambah!');
     }
 
     /**
@@ -50,16 +59,24 @@ class JenisDokumenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, JenisDokumen $jenisDokumen)
+    public function update(JenisDokumenRequest $request, string $id)
     {
-        //
+        JenisDokumen::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+        return redirect()
+            ->route('jenis-dokumen.index')
+            ->with('success', 'Jenis dokumen berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(JenisDokumen $jenisDokumen)
+    public function destroy(string $id)
     {
-        //
+        JenisDokumen::findOrFail($id)->delete();
+        return redirect()
+            ->route('jenis-dokumen.index')
+            ->with('success', 'Jenis dokumen berhasil dihapus!');
     }
 }

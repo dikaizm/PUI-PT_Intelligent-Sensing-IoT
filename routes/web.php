@@ -56,24 +56,24 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('can:mengelola-pengaturan')->group(function () {
         // Rute-rute yang memerlukan kedua middleware 'auth' dan 'can:mengelola-pengaturan' ditempatkan di sini
-        //pengaturan jenis output route
-        Route::get('pengaturan/jenis-output', [
-            \App\Http\Controllers\JenisOutputController::class,
+        //pengaturan jenis dokumen route
+        Route::get('pengaturan/jenis-dokumen', [
+            \App\Http\Controllers\JenisDokumenController::class,
             'index',
-        ])->name('jenis-output.index');
-        Route::post('pengaturan/jenis-output/store', [
-            \App\Http\Controllers\JenisOutputController::class,
+        ])->name('jenis-dokumen.index');
+        Route::post('pengaturan/jenis-dokumen/store', [
+            \App\Http\Controllers\JenisDokumenController::class,
             'store',
-        ])->name('jenis-output.store');
-        Route::put('pengaturan/jenis-output/{id}/update', [
-            \App\Http\Controllers\JenisOutputController::class,
+        ])->name('jenis-dokumen.store');
+        Route::put('pengaturan/jenis-dokumen/{id}/update', [
+            \App\Http\Controllers\JenisDokumenController::class,
             'update',
-        ])->name('jenis-output.update');
-        Route::delete('pengaturan/jenis-output/{id}/destroy', [
-            \App\Http\Controllers\JenisOutputController::class,
+        ])->name('jenis-dokumen.update');
+        Route::delete('pengaturan/jenis-dokumen/{id}/destroy', [
+            \App\Http\Controllers\JenisDokumenController::class,
             'destroy',
-        ])->name('jenis-output.destroy');
-        //end pengaturan jenis output
+        ])->name('jenis-dokumen.destroy');
+        //end pengaturan jenis dokumen
 
         //pengaturan jenis penelitian
         Route::get('pengaturan/jenis-penelitian', [

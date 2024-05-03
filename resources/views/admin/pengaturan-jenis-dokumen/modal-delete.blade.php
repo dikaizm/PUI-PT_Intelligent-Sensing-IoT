@@ -1,5 +1,5 @@
-@foreach ($jenis_outputs as $jenis_output)
-    <div class="modal fade" id="modalDelete{{ $jenis_output->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+@foreach ($jenis_dokumen as $item)
+    <div class="modal fade" id="modalDelete{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
         aria-hidden="true">
         <div class="modal-dialog"
             style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
@@ -13,11 +13,11 @@
                 <div class="modal-body px-0">
                     <div class="content mb-30">
                         <p class="text-sm">
-                            {{ __('Are you sure you want to delete ' . $jenis_output->name . '?') }}
+                            {{ __('Are you sure you want to delete ' . $item->name . '?') }}
                         </p>
                     </div>
                     <div class="action d-flex flex-wrap justify-content-end">
-                        <form action="{{ route('jenis-output.destroy', ['id' => $jenis_output->id]) }}" method="POST">
+                        <form action="{{ route('jenis-dokumen.destroy', ['id' => $item->id]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="main-btn btn-sm danger-btn btn-hover m-1">
