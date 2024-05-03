@@ -505,7 +505,7 @@
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
                                         <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Link Google Scholar') }}</li>
-                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_google_scholar) }}</li>
+                                        <a href="{{ __($user->link_google_scholar) }}" target="_blank" style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_google_scholar) }}</a>
                                     </ul>
                                 </div>
                             </div>
@@ -521,7 +521,7 @@
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
                                         <li style="font-weight: 500;font-size: 25px; text-align: left;">{{ __('Link Sinta') }}</li>
-                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_sinta) }}</li>
+                                        <a href="{{ __($user->link_sinta) }}" target="_blank" style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_sinta) }}</a>
                                     </ul>
                                 </div>
                             </div>
