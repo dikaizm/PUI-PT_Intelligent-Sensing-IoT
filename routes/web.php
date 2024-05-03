@@ -151,38 +151,38 @@ Route::middleware('auth')->group(function () {
         ])->name('status-jurnal.destroy');
         //end pengaturan status jurnal route
 
-        //pengaturan status laporan route
-        Route::get('pengaturan/status-laporan', [
-            \App\Http\Controllers\StatusLaporanController::class,
+        //pengaturan status penelitian route
+        Route::get('pengaturan/status-penelitian', [
+            \App\Http\Controllers\StatusPenelitianController::class,
             'index',
-        ])->name('status-laporan.index');
-        Route::post('pengaturan/status-laporan/store', [
-            \App\Http\Controllers\StatusLaporanController::class,
+        ])->name('status-penelitian.index');
+        Route::post('pengaturan/status-penelitian/store', [
+            \App\Http\Controllers\StatusPenelitianController::class,
             'store',
-        ])->name('status-laporan.store');
-        Route::put('pengaturan/status-laporan/{id}/update', [
-            \App\Http\Controllers\StatusLaporanController::class,
+        ])->name('status-penelitian.store');
+        Route::put('pengaturan/status-penelitian/{id}/update', [
+            \App\Http\Controllers\StatusPenelitianController::class,
             'update',
-        ])->name('status-laporan.update');
-        Route::delete('pengaturan/status-laporan/{id}/destroy', [
-            \App\Http\Controllers\StatusLaporanController::class,
+        ])->name('status-penelitian.update');
+        Route::delete('pengaturan/status-penelitian/{id}/destroy', [
+            \App\Http\Controllers\StatusPenelitianController::class,
             'destroy',
-        ])->name('status-laporan.destroy');
-        //end pengaturan status laporan route
+        ])->name('status-penelitian.destroy');
+        //end pengaturan status penelitian route
 
-        //pengaturan status laporan key route
-        Route::post('pengaturan/status-laporan-key/store', [
-            \App\Http\Controllers\StatusLaporanKeyController::class,
+        //pengaturan status penelitian key route
+        Route::post('pengaturan/status-penelitian-key/store', [
+            \App\Http\Controllers\StatusPenelitianKeyController::class,
             'store',
-        ])->name('status-laporan-key.store');
-        Route::put('pengaturan/status-laporan-key/{id}/update', [
-            \App\Http\Controllers\StatusLaporanKeyController::class,
+        ])->name('status-penelitian-key.store');
+        Route::put('pengaturan/status-penelitian-key/{id}/update', [
+            \App\Http\Controllers\StatusPenelitianKeyController::class,
             'update',
-        ])->name('status-laporan-key.update');
-        Route::delete('pengaturan/status-laporan-key/{id}/destroy', [
-            \App\Http\Controllers\StatusLaporanKeyController::class,
+        ])->name('status-penelitian-key.update');
+        Route::delete('pengaturan/status-penelitian-key/{id}/destroy', [
+            \App\Http\Controllers\StatusPenelitianKeyController::class,
             'destroy',
-        ])->name('status-laporan-key.destroy');
-        //end pengaturan status laporan key route
+        ])->name('status-penelitian-key.destroy');
+        //end pengaturan status penelitian key route
     });
 });

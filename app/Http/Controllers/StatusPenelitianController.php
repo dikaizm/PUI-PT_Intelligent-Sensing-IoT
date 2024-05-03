@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StatusPenelitian;
 use Illuminate\Http\Request;
+use App\Models\StatusPenelitian;
+use App\Models\StatusPenelitianKey;
+use App\Http\Requests\StatusPenelitianRequest;
 
 class StatusPenelitianController extends Controller
 {
@@ -12,7 +14,12 @@ class StatusPenelitianController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pengaturan-status-penelitian.index', [
+            'status_penelitian' => StatusPenelitian::with(
+                'statusPenelitianKey'
+            )->get(),
+            'status_penelitian_key' => StatusPenelitianKey::all(),
+        ]);
     }
 
     /**
@@ -26,9 +33,16 @@ class StatusPenelitianController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StatusPenelitianRequest $request)
     {
-        //
+        StatusPenelitian::create([
+            'status_penelitian_key_id' => $request->status_penelitian_key_id,
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('status-penelitian.index')
+            ->with('success', 'Status Penelitian berhasil ditambah!');
     }
 
     /**
@@ -50,16 +64,27 @@ class StatusPenelitianController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StatusPenelitian $statusPenelitian)
+    public function update(StatusPenelitianRequest $request, string $id)
     {
-        //
+        StatusPenelitian::where('id', $id)->update([
+            'status_penelitian_key_id' => $request->status_penelitian_key_id,
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('status-penelitian.index')
+            ->with('success', 'Status Penelitian berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StatusPenelitian $statusPenelitian)
+    public function destroy(string $id)
     {
-        //
+        StatusPenelitian::findOrFail($id)->delete();
+
+        return redirect()
+            ->route('status-penelitian.index')
+            ->with('success', 'Status Penelitian berhasil dihapus!');
     }
 }

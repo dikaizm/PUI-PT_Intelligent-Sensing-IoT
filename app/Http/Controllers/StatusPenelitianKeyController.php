@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StatusPenelitianKey;
 use Illuminate\Http\Request;
+use App\Models\StatusPenelitianKey;
+use App\Http\Requests\StatusPenelitianKeyRequest;
 
 class StatusPenelitianKeyController extends Controller
 {
@@ -26,9 +27,15 @@ class StatusPenelitianKeyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StatusPenelitianKeyRequest $request)
     {
-        //
+        StatusPenelitianKey::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('status-penelitian.index')
+            ->with('success', 'Key berhasil ditambah!');
     }
 
     /**
@@ -50,16 +57,26 @@ class StatusPenelitianKeyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StatusPenelitianKey $statusPenelitianKey)
+    public function update(StatusPenelitianKeyRequest $request, string $id)
     {
-        //
+        StatusPenelitianKey::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('status-penelitian.index')
+            ->with('success', 'Key berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StatusPenelitianKey $statusPenelitianKey)
+    public function destroy(string $id)
     {
-        //
+        StatusPenelitianKey::findOrFail($id)->delete();
+
+        return redirect()
+            ->route('status-penelitian.index')
+            ->with('success', 'Key berhasil dihapus!');
     }
 }

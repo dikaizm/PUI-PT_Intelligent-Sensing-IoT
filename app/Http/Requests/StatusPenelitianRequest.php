@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StatusLaporanRequest extends FormRequest
+class StatusPenelitianRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class StatusLaporanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status_laporan_key_id' => ['required'],
+            'status_penelitian_key_id' => ['required'],
             'name' => ['required', 'string', 'max:32'],
         ];
     }
