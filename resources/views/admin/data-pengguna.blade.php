@@ -173,6 +173,21 @@
                                 <!-- end col -->
                                 <div class="col-12">
                                     <div class="input-style-1">
+                                        <label for="fakultasEdit{{ $user->id }}">{{ __('Fakultas') }}</label>
+                                        <input @error('fakultas') class="form-control is-invalid" @enderror
+                                            type="text" name="fakultas" id="fakultasEdit{{ $user->id }}"
+                                            placeholder="{{ __('Fakultas') }}"
+                                            value="{{ old('fakultas', $user->fakultas) }}">
+                                        @error('fakultas')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-12">
+                                    <div class="input-style-1">
                                         <label
                                             for="link_google_scholarEdit{{ $user->id }}">{{ __('Google Scholar') }}</label>
                                         <input @error('link_google_scholar') class="form-control is-invalid" @enderror
@@ -332,6 +347,20 @@
                                         name="keahlian" id="keahlianTambah" placeholder="{{ __('Keahlian') }}"
                                         value="{{ old('keahlian') }}">
                                     @error('keahlian')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <!-- end col -->
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label for="fakultasTambah">{{ __('Fakultas') }}</label>
+                                    <input @error('fakultas') class="form-control is-invalid" @enderror type="text"
+                                        name="fakultas" id="fakultasTambah" placeholder="{{ __('Fakultas') }}"
+                                        value="{{ old('fakultas') }}">
+                                    @error('fakultas')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
