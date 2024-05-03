@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Output;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StatusJurnal extends Model
 {
@@ -12,4 +13,9 @@ class StatusJurnal extends Model
     protected $table = 'status_jurnal';
 
     protected $fillable = ['name'];
+
+    public function Output(): HasMany
+    {
+        return $this->hasMany(Output::class);
+    }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\JurnalArticle;
+use App\Models\Penelitian;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class JenisPenelitian extends Model
@@ -15,8 +15,8 @@ class JenisPenelitian extends Model
 
     protected $fillable = ['name'];
 
-    public function jurnalArticle(): HasOne
+    public function penelitians(): HasMany
     {
-        return $this->hasOne(JurnalArticle::class);
+        return $this->hasMany(Penelitian::class);
     }
 }

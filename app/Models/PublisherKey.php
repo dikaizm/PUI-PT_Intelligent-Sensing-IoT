@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\Penelitian;
+use App\Models\Publisher;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Mitra extends Model
+class PublisherKey extends Model
 {
     use HasFactory;
 
-    protected $table = 'mitra';
+    protected $table = 'publisher_key';
 
     protected $fillable = ['name'];
 
-    public function penelitians(): HasMany
+    public function publishers(): HasMany
     {
-        return $this->hasMany(Penelitian::class);
+        return $this->hasMany(Publisher::class);
     }
 }

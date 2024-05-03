@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('nip', 32)->nullable();
             $table->string('email', 64);
             $table->string('telp', 32)->nullable();
+            $table->string('fakultas', 64)->nullable();
             $table->string('keahlian', 64)->nullable();
             $table->string('link_google_scholar')->nullable();
             $table->string('link_sinta')->nullable();

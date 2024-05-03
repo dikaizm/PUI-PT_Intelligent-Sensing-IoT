@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Publisher>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PublisherKey>
  */
-class PublisherFactory extends Factory
+class PublisherKeyFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class PublisherFactory extends Factory
     public function definition(): array
     {
         return [
-                //'name' => fake()->company(),
-            ];
+            'name' => fake()->company(),
+        ];
     }
 }

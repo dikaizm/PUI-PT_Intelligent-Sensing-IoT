@@ -28,7 +28,11 @@ class UserFactory extends Factory
             'nip' => fake()->nik(),
             'email' => fake()->unique()->safeEmail(),
             'telp' => fake()->phoneNumber(),
+            'fakultas' => fake()->countryISOAlpha3(),
             'keahlian' => fake()->jobTitle(),
+            'link_google_scholar' =>
+                'https://www.pui-pt.com/scholar/' . fake()->uuid(),
+            'link_sinta' => 'https://www.pui-pt.com/sinta/' . fake()->uuid(),
             'email_verified_at' => now(),
             'password' => (static::$password ??= Hash::make('password')),
             'remember_token' => Str::random(10),

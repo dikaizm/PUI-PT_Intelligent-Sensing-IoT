@@ -11,8 +11,18 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('author', function (Blueprint $table) {
-            $table->bigInteger('jurnal_article_id');
-            $table->bigInteger('user_id');
+            $table->foreignId('penelitian_id');
+            $table
+                ->foreign('penelitian_id')
+                ->references('id')
+                ->on('penelitian')
+                ->onDelete('restrict');
+            $table->foreignId('user_id');
+            $table
+                ->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('restrict');
             $table->boolean('is_corresponding')->default(false);
             $table->boolean('is_ketua')->default(false);
         });
