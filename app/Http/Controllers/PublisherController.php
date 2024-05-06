@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 use App\Http\Requests\PublisherRequest;
+use App\Models\PublisherKey;
 
 class PublisherController extends Controller
 {
@@ -14,7 +15,9 @@ class PublisherController extends Controller
     public function index()
     {
         return view('admin.pengaturan-publisher.index', [
-            'publisher' => Publisher::all(),
+            'publisher' => Publisher::with('publisherKey')->get(),
+            'publisher_key' => PublisherKey::all(),
+
         ]);
     }
 

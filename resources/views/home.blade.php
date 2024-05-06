@@ -40,7 +40,7 @@
                     </p>
                     <p class="text-bold mb-10" style="color: white; font-family: DM Sans;font-size: 14px;font-weight: 400;line-height: 18.23px;letter-spacing: 0.02em;text-align: center;">
                         Arif Abdul Aziz: 0813-1221-2867 <br>
-                        Wahyu Primadia Kusumaningrum: 0821-3817-3919
+                        Wahyu Primadia Kusumaningrum: <br> 0821-3817-3919
                     </p>
                 </div>
             </div>

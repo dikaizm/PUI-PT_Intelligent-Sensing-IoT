@@ -60,16 +60,16 @@
                 <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">Jenis Penelitian</a>
             </li>
             <li>
-                <a href="#" style="color: white;">Mitra</a>
+                <a href="{{ route('mitra.index') }}" style="color: white;">Mitra</a>
             </li>
             <li>
-                <a href="#" style="color: white;">Publisher</a>
+                <a href="{{ route('publisher.index') }}" style="color: white;">Publisher</a>
             </li>
             <li>
-                <a href="#" style="color: white;">Status Jurnal</a>
+                <a href="{{ route('status-jurnal.index') }}" style="color: white;">Status Jurnal</a>
             </li>
             <li>
-                <a href="#" style="color: white;">Status Laporan</a>
+                <a href="{{ route('status-penelitian.index') }}" style="color: white;">Status Laporan</a>
             </li>
             <li>
                 <a href="#" style="color: white;">Laporan</a>
