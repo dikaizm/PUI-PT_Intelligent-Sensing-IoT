@@ -22,7 +22,7 @@ class PublisherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'tingkat_index' => ['required', 'string', 'max:32'],
         ];
     }
 }

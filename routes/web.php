@@ -132,6 +132,21 @@ Route::middleware('auth')->group(function () {
         ])->name('publisher.destroy');
         //end pengaturan publisher route
 
+        //pengaturan publisher key route
+        Route::post('pengaturan/publisher-key/store', [
+            \App\Http\Controllers\PublisherKeyController::class,
+            'store',
+        ])->name('publisher-key.store');
+        Route::put('pengaturan/publisher-key/{id}/update', [
+            \App\Http\Controllers\PublisherKeyController::class,
+            'update',
+        ])->name('publisher-key.update');
+        Route::delete('pengaturan/publisher-key/{id}/destroy', [
+            \App\Http\Controllers\PublisherKeyController::class,
+            'destroy',
+        ])->name('publisher-key.destroy');
+        //end pengaturan publisher key route
+
         //pengaturan status jurnal route
         Route::get('pengaturan/status-jurnal', [
             \App\Http\Controllers\StatusJurnalController::class,

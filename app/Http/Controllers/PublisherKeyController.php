@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PublisherKey;
-use App\Http\Requests\StorePublisherKeyRequest;
-use App\Http\Requests\UpdatePublisherKeyRequest;
+use App\Http\Requests\PublisherKeyRequest;
 
 class PublisherKeyController extends Controller
 {
@@ -27,9 +26,15 @@ class PublisherKeyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePublisherKeyRequest $request)
+    public function store(PublisherKeyRequest $request)
     {
-        //
+        PublisherKey::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('publisher.index')
+            ->with('success', 'key berhasil ditambah!');
     }
 
     /**
@@ -51,16 +56,26 @@ class PublisherKeyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePublisherKeyRequest $request, PublisherKey $publisherKey)
+    public function update(PublisherKeyRequest $request, string $id)
     {
-        //
+        PublisherKey::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('publisher.index')
+            ->with('success', 'key berhasil diupdate!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PublisherKey $publisherKey)
+    public function destroy(string $id)
     {
-        //
+        PublisherKey::findOrFail($id)->delete();
+
+        return redirect()
+            ->route('publisher.index')
+            ->with('success', 'Key berhasil dihapus!');
     }
 }
