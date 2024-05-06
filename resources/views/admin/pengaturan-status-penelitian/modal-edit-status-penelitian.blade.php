@@ -51,6 +51,35 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-12">
+                                    <div class="input-style-1">
+                                        <label for="warna{{ $item->id }}">{{ __('Warna Badge') }}</label>
+                                        <select class="form-control @error('warna') is-invalid @enderror" name="warna"
+                                            id="warna{{ $item->id }}">
+                                            <option value="" disabled selected>Pilih Warna</option>
+                                            <option value="primary" @if (old('warna', $item->warna) == 'primary') selected @endif>
+                                                Biru</option>
+                                            <option value="secondary" @if (old('warna', $item->warna) == 'secondary') selected @endif>
+                                                Abu</option>
+                                            <option value="success" @if (old('warna', $item->warna) == 'success') selected @endif>
+                                                Hijau</option>
+                                            <option value="danger" @if (old('warna', $item->warna) == 'danger') selected @endif>
+                                                Merah</option>
+                                            <option value="warning" @if (old('warna', $item->warna) == 'warning') selected @endif>
+                                                Kuning</option>
+                                            <option value="info" @if (old('warna', $item->warna) == 'info') selected @endif>
+                                                Biru Muda</option>
+                                            <option value="dark" @if (old('warna', $item->warna) == 'dark') selected @endif>
+                                                Hitam</option>
+                                        </select>
+                                        @error('warna')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+
+                                    </div>
+                                </div>
                                 <!-- end col -->
                                 <div class="action d-flex flex-wrap justify-content-end">
                                     <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"

@@ -15,7 +15,7 @@ class StatusPenelitian extends Model
 
     protected $table = 'status_penelitian';
 
-    protected $fillable = ['name', 'status_penelitian_key_id'];
+    protected $fillable = ['name', 'status_penelitian_key_id', 'warna'];
 
     public function statusPenelitianKey(): BelongsTo
     {

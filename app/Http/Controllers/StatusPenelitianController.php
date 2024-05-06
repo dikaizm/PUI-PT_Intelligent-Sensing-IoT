@@ -38,6 +38,7 @@ class StatusPenelitianController extends Controller
         StatusPenelitian::create([
             'status_penelitian_key_id' => $request->status_penelitian_key_id,
             'name' => $request->name,
+            'warna' => $request->warna,
         ]);
 
         return redirect()
@@ -68,6 +69,7 @@ class StatusPenelitianController extends Controller
     {
         StatusPenelitian::where('id', $id)->update([
             'status_penelitian_key_id' => $request->status_penelitian_key_id,
+            'warna' => $request->warna,
             'name' => $request->name,
         ]);
 

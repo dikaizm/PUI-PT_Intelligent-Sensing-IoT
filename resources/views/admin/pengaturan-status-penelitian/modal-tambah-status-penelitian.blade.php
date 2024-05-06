@@ -16,6 +16,7 @@
                                     <label for="status_penelitian_key_id">{{ __('Key') }}</label>
                                     <select class="form-control @error('status_penelitian_key_id') is-invalid @enderror"
                                         name="status_penelitian_key_id" id="status_penelitian_key_id">
+                                        <option value="" disabled selected>Pilih Key</option>
                                         @foreach ($status_penelitian_key as $item)
                                             <option value="{{ $item->id }}"
                                                 @if (old('status_penelitian_key_id') == $item->id) selected @endif>
@@ -28,11 +29,36 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-style-1">
                                     <label for="name">{{ __('Nama') }}</label>
                                     <input type="text" @error('name') class="form-control is-invalid" @enderror
                                         name="name" id="name" placeholder="{{ __('Nama') }}"
                                         value="{{ old('name') }}">
                                     @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label for="warna">{{ __('Warna Badge') }}</label>
+                                    <select class="form-control @error('warna') is-invalid @enderror" name="warna"
+                                        id="warna">
+                                        <option value="" disabled selected>Pilih Warna</option>
+                                        <option value="primary">Biru</option>
+                                        <option value="secondary">Abu</option>
+                                        <option value="success">Hijau</option>
+                                        <option value="danger">Merah</option>
+                                        <option value="warning">Kuning</option>
+                                        <option value="info">Biru Muda</option>
+                                        <option value="dark">Hitam</option>
+                                    </select>
+                                    @error('warna')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

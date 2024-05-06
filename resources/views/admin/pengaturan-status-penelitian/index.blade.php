@@ -111,6 +111,9 @@
                                             <th>
                                                 <h6>Name</h6>
                                             </th>
+                                            <th>
+                                                <h6>Preview</h6>
+                                            </th>
                                             <th class="text-center" style="width: 5%;">
                                                 <h6>Action</h6>
                                             </th>
@@ -127,6 +130,11 @@
                                                 </td>
                                                 <td>
                                                     <p>{{ $item->name }}</p>
+                                                </td>
+                                                <td>
+                                                    <span class="badge rounded-pill bg-{{ $item->warna }}">
+                                                        {{ $item->statusPenelitianKey->name }} {{ $item->name }}
+                                                    </span>
                                                 </td>
                                                 <td class="text-center">
                                                     <a type="button" data-bs-toggle="modal"

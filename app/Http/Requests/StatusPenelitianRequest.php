@@ -23,6 +23,7 @@ class StatusPenelitianRequest extends FormRequest
     {
         return [
             'status_penelitian_key_id' => ['required'],
+            'warna' => ['required'],
             'name' => ['required', 'string', 'max:32'],
         ];
     }

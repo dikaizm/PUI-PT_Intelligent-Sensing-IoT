@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->smallInteger('id')->unsigned()->autoIncrement();
             $table->tinyInteger('status_penelitian_key_id')->unsigned();
             $table->string('name', 32);
+            $table->string('warna', 9)->default('secondary');
             $table->timestamps();
             $table
                 ->foreign('status_penelitian_key_id')
