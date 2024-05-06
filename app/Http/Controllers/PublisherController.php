@@ -32,7 +32,8 @@ class PublisherController extends Controller
     public function store(PublisherRequest $request)
     {
         Publisher::create([
-            'name' => $request->name,
+            'publisher_key_id' => $request->publisher_key_id,
+            'tingkat_index' => $request->tingkat_index,
         ]);
 
         return redirect()
@@ -61,7 +62,10 @@ class PublisherController extends Controller
      */
     public function update(PublisherRequest $request, string $id)
     {
-        Publisher::where('id', $id)->update(['name' => $request->name]);
+        Publisher::where('id', $id)->update([
+            'publisher_key_id' => $request->publisher_key_id,
+            'tingkat_index' => $request->tingkat_index,
+        ]);
 
         return redirect()
             ->route('publisher.index')

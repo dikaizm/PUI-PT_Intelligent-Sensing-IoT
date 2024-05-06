@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePublisherKeyRequest extends FormRequest
+class PublisherKeyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->hasPermissionTo('mengelola-pengaturan');
     }
 
     /**
@@ -22,7 +22,7 @@ class StorePublisherKeyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'max:64', 'string'],
         ];
     }
 }
