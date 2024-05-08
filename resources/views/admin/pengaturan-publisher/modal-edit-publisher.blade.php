@@ -1,5 +1,5 @@
 @foreach ($publisher as $item)
-    <div class="modal fade" id="modalEdit{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+    <div class="modal fade" id="modalEditPublisher{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
         aria-hidden="true">
         <div class="modal-dialog"
             style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
