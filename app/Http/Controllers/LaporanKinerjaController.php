@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Publikasi;
+use App\Models\Output;
 use Illuminate\Http\Request;
-use App\Models\JurnalArticle;
+use App\Models\Penelitian;
 
 class LaporanKinerjaController extends Controller
 {
@@ -19,18 +19,15 @@ class LaporanKinerjaController extends Controller
         $yesterday = Carbon::yesterday();
 
         //Penelitian
-        $penelitianToday = JurnalArticle::whereDate(
-            'created_at',
-            $today
-        )->count();
-        $penelitianYesterday = JurnalArticle::whereDate(
+        $penelitianToday = Penelitian::whereDate('created_at', $today)->count();
+        $penelitianYesterday = Penelitian::whereDate(
             'created_at',
             $yesterday
         )->count();
 
         //Publikasi
-        $publikasiToday = Publikasi::whereDate('created_at', $today)->count();
-        $publikasiYesterday = Publikasi::whereDate(
+        $publikasiToday = Output::whereDate('created_at', $today)->count();
+        $publikasiYesterday = Output::whereDate(
             'created_at',
             $yesterday
         )->count();
@@ -40,13 +37,13 @@ class LaporanKinerjaController extends Controller
         $userYesterday = User::whereDate('created_at', $yesterday)->count();
 
         return view('admin.laporan-kinerja', [
-            'jumlah_penelitian' => JurnalArticle::count(),
-            'jumlah_publikasi' => Publikasi::count(),
+            'jumlah_penelitian' => Penelitian::count(),
+            'jumlah_publikasi' => Output::count(),
             'jumlah_user' => User::count(),
-            'jumlah_penelitian_aktif' => JurnalArticle::whereHas(
-                'statuslaporan',
+            'jumlah_penelitian_aktif' => Penelitian::whereHas(
+                'statusPenelitian',
                 function ($query) {
-                    $query->where('status_laporan_key_id', 2);
+                    $query->where('status_penelitian_key_id', 2);
                 }
             )->count(),
             'difference_jumlah_penelitian' =>
