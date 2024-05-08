@@ -19,7 +19,7 @@
 
                             <div class="menu-toggle-btn mr-20 mb-3" style="text-align: right;">
                                 <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambah"
+                                    data-bs-target="#modalTambahPublisherKey"
                                     style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                                     {{ __('Tambahkan Data') }}
                                 </button>
@@ -60,11 +60,11 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <a type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#modalEditStatusPenelitianKey{{ $item->id }}">
+                                                        data-bs-target="#modalEditPublisherKey{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>
                                                     </a>
                                                     <a type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#modalDeleteStatusPenelitianKey{{ $item->id }}">
+                                                        data-bs-target="#modalDeletePublisherKey{{ $item->id }}">
                                                         <i class="lni lni-trash-can" style="color: red;"></i>
                                                     </a>
                                                 </td>
@@ -93,7 +93,7 @@
 
                             <div class="menu-toggle-btn mr-20 mb-3" style="text-align: right;">
                                 <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambah"
+                                    data-bs-target="#modalTambahPublisher"
                                     style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                                     {{ __('Tambahkan Data') }}
                                 </button>
@@ -102,13 +102,16 @@
                                 <table class="table striped-table" id="dataTables">
                                     <thead>
                                         <tr>
-                                            <th>
+                                            <th class="text-center" style="width: 5%;">
                                                 <h6>ID</h6>
                                             </th>
-                                            <th>
-                                                <h6>Name</h6>
+                                            <th class="text-center" style="width: 25%;">
+                                                <h6>Key</h6>
                                             </th>
-                                            <th style="width: 5%;">
+                                            <th>
+                                                <h6>Tingkat Index</h6>
+                                            </th>
+                                            <th class="text-center" style="width: 5%;">
                                                 <h6>Action</h6>
                                             </th>
                                         </tr>
@@ -116,19 +119,22 @@
                                     <tbody>
                                         @foreach ($publisher as $item)
                                             <tr>
-                                                <td>
+                                                <td class="text-center">
                                                     <p>{{ $item->id }}</p>
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     <p>{{ $item->publisherKey->name }}</p>
                                                 </td>
                                                 <td>
+                                                    <p>{{ $item->tingkat_index }}</p>
+                                                </td>
+                                                <td>
                                                     <a type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#modalEdit{{ $item->id }}">
+                                                        data-bs-target="#modalEditPublisher{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>
                                                     </a>
                                                     <a type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#modalDelete{{ $item->id }}">
+                                                        data-bs-target="#modalDeletePublisher{{ $item->id }}">
                                                         <i class="lni lni-trash-can" style="color: red;"></i>
                                                     </a>
                                                 </td>
@@ -146,15 +152,18 @@
             </div>
 
     <!-- ========== modal edit =========== -->
-    @include('admin.pengaturan-publisher.modal-edit')
+    @include('admin.pengaturan-publisher.modal-edit-publisher')
+    @include('admin.pengaturan-publisher.modal-edit-publisher-key')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal tambah =========== -->
-    @include('admin.pengaturan-publisher.modal-tambah')
+    @include('admin.pengaturan-publisher.modal-tambah-publisher')
+    @include('admin.pengaturan-publisher.modal-tambah-publisher-key')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal delete =========== -->
-    @include('admin.pengaturan-publisher.modal-delete')
+    @include('admin.pengaturan-publisher.modal-delete-publisher')
+    @include('admin.pengaturan-publisher.modal-delete-publisher-key')
     <!-- ========== modal end =========== -->
 @endsection
 
