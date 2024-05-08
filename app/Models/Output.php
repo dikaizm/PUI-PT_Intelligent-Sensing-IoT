@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\Publisher;
 use App\Models\Penelitian;
 use App\Models\JenisDokumen;
-use App\Models\StatusJurnal;
+use App\Models\StatusOutput;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,7 +20,7 @@ class Output extends Model
         'jenis_dokumen_id',
         'penelitian_id',
         'publisher_id',
-        'status_jurnal_id',
+        'status_output_id',
         'keterangan',
         'tautan',
     ];
@@ -37,8 +37,8 @@ class Output extends Model
     {
         return $this->belongsTo(Publisher::class);
     }
-    public function statusJurnal(): BelongsTo
+    public function statusOutput(): BelongsTo
     {
-        return $this->belongsTo(StatusJurnal::class);
+        return $this->belongsTo(StatusOutput::class);
     }
 }

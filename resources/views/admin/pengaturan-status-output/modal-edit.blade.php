@@ -1,4 +1,4 @@
-@foreach ($status_jurnal as $item)
+@foreach ($status_output as $item)
     <div class="modal fade" id="modalEdit{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
         aria-hidden="true">
         <div class="modal-dialog"
@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-body px-0">
                     <div class="content mb-30">
-                        <form action="{{ route('status-jurnal.update', ['id' => $item->id]) }}" method="POST">
+                        <form action="{{ route('status-output.update', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -19,7 +19,7 @@
                                         <label for="nameEdit{{ $item->id }}">{{ __('Name') }}</label>
                                         <input type="text" @error('name') class="form-control is-invalid" @enderror
                                             name="name" id="nameEdit{{ $item->id }}"
-                                            placeholder="{{ __('Name') }}" value="{{ old('name', $item->name) }}">
+                                            placeholder="{{ __('Name') }}" value="{{ $item->name }}">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -66,7 +66,7 @@
                 <a href="{{ route('publisher.index') }}" style="color: white;">Publisher</a>
             </li>
             <li>
-                <a href="{{ route('status-jurnal.index') }}" style="color: white;">Status Jurnal</a>
+                <a href="{{ route('status-output.index') }}" style="color: white;">Status Jurnal</a>
             </li>
             <li>
                 <a href="{{ route('status-penelitian.index') }}" style="color: white;">Status Laporan</a>

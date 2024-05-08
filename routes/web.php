@@ -148,23 +148,23 @@ Route::middleware('auth')->group(function () {
         //end pengaturan publisher key route
 
         //pengaturan status jurnal route
-        Route::get('pengaturan/status-jurnal', [
-            \App\Http\Controllers\StatusJurnalController::class,
+        Route::get('pengaturan/status-output', [
+            \App\Http\Controllers\StatusOutputController::class,
             'index',
-        ])->name('status-jurnal.index');
-        Route::post('pengaturan/status-jurnal/store', [
-            \App\Http\Controllers\StatusJurnalController::class,
+        ])->name('status-output.index');
+        Route::post('pengaturan/status-output/store', [
+            \App\Http\Controllers\StatusOutputController::class,
             'store',
-        ])->name('status-jurnal.store');
-        Route::put('pengaturan/status-jurnal/{id}/update', [
-            \App\Http\Controllers\StatusJurnalController::class,
+        ])->name('status-output.store');
+        Route::put('pengaturan/status-output/{id}/update', [
+            \App\Http\Controllers\StatusOutputController::class,
             'update',
-        ])->name('status-jurnal.update');
-        Route::delete('pengaturan/status-jurnal/{id}/destroy', [
-            \App\Http\Controllers\StatusJurnalController::class,
+        ])->name('status-output.update');
+        Route::delete('pengaturan/status-output/{id}/destroy', [
+            \App\Http\Controllers\StatusOutputController::class,
             'destroy',
-        ])->name('status-jurnal.destroy');
-        //end pengaturan status jurnal route
+        ])->name('status-output.destroy');
+        //end pengaturan status output route
 
         //pengaturan status penelitian route
         Route::get('pengaturan/status-penelitian', [

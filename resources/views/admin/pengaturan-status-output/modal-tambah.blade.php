@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body px-0">
                 <div class="content mb-30">
-                    <form action="{{ route('status-jurnal.store') }}" method="POST">
+                    <form action="{{ route('status-output.store') }}" method="POST">
                         @csrf
 
                         <div class="row">

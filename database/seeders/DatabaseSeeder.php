@@ -8,7 +8,7 @@ use App\Models\Mitra;
 use App\Models\Penelitian;
 use App\Models\JenisDokumen;
 use App\Models\PublisherKey;
-use App\Models\StatusJurnal;
+use App\Models\StatusOutput;
 use App\Models\JenisPenelitian;
 use Illuminate\Database\Seeder;
 use App\Models\StatusPenelitian;
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
         PublisherKey::factory()->count(3)->create();
         JenisPenelitian::factory()->count(10)->create();
         StatusPenelitian::factory()->count(10)->create();
-        StatusJurnal::factory()->count(3)->create();
+        StatusOutput::factory()->count(3)->create();
         JenisDokumen::factory()->count(3)->create();
         Penelitian::factory()->count(5)->create();
 

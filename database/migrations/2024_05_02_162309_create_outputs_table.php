@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->string('tingkat_index', 32);
             $table->timestamps();
         });
-        Schema::create('status_jurnal', function (Blueprint $table) {
+        Schema::create('status_output', function (Blueprint $table) {
             $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
             $table->string('name');
             $table->timestamps();
@@ -57,11 +57,11 @@ return new class extends Migration {
                 ->references('id')
                 ->on('publisher')
                 ->onDelete('restrict');
-            $table->smallInteger('status_jurnal_id')->unsigned();
+            $table->smallInteger('status_output_id')->unsigned();
             $table
-                ->foreign('status_jurnal_id')
+                ->foreign('status_output_id')
                 ->references('id')
-                ->on('status_jurnal')
+                ->on('status_output')
                 ->onDelete('restrict');
             $table->text('keterangan');
             $table->string('tautan');
@@ -77,7 +77,7 @@ return new class extends Migration {
         Schema::dropIfExists('jenis_dokumen');
         Schema::dropIfExists('publisher_key');
         Schema::dropIfExists('publisher');
-        Schema::dropIfExists('status_jurnal');
+        Schema::dropIfExists('status_output');
         Schema::dropIfExists('output');
     }
 };

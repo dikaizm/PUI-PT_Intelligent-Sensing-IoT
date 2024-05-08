@@ -44,7 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($status_jurnal as $item)
+                            @foreach ($status_output as $item)
                                 <tr>
                                     <td>
                                         <p>{{ $item->id }}</p>
@@ -75,15 +75,15 @@
     </div>
 
     <!-- ========== modal edit =========== -->
-    @include('admin.pengaturan-status-jurnal.modal-edit')
+    @include('admin.pengaturan-status-output.modal-edit')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal tambah =========== -->
-    @include('admin.pengaturan-status-jurnal.modal-tambah')
+    @include('admin.pengaturan-status-output.modal-tambah')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal delete =========== -->
-    @include('admin.pengaturan-status-jurnal.modal-delete')
+    @include('admin.pengaturan-status-output.modal-delete')
     <!-- ========== modal end =========== -->
 @endsection
 

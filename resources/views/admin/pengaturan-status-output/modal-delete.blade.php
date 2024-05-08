@@ -1,4 +1,4 @@
-@foreach ($status_jurnal as $item)
+@foreach ($status_output as $item)
     <div class="modal fade" id="modalDelete{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
         aria-hidden="true">
         <div class="modal-dialog"
@@ -17,7 +17,7 @@
                         </p>
                     </div>
                     <div class="action d-flex flex-wrap justify-content-end">
-                        <form action="{{ route('status-jurnal.destroy', ['id' => $item->id]) }}" method="POST">
+                        <form action="{{ route('status-output.destroy', ['id' => $item->id]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="main-btn btn-sm danger-btn btn-hover m-1">
