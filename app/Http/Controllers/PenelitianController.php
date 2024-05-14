@@ -49,7 +49,22 @@ class PenelitianController extends Controller
      */
     public function store(StorePenelitianRequest $request)
     {
-        //
+        Penelitian::create([
+            'skema' => $request->skema,
+            'judul' => $request->judul,
+            'tingkatan_tkt' => $request->tingkatan_tkt,
+            'pendanaan' => $request->pendanaan,
+            'jangka_waktu' => $request->jangka_waktu,
+            'file' => $request->file,
+            'feedback' => $request->feedback,
+            'status_penelitian_id' => $request->status_penelitian_id,
+            'jenis_penelitian' => $request->jenis_penelitian_id,
+            'mitra_id' => $request->mitra_id,
+        ]);
+
+        return redirect()
+            ->route('penelitian.index')
+            ->with('success', 'Penelitian berhasil ditambah!');
     }
 
     /**
