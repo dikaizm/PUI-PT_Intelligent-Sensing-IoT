@@ -40,6 +40,7 @@ return new class extends Migration {
         Schema::create('penelitian', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
+            $table->string('skema', 128);
             $table->string('judul');
             $table->tinyInteger('tingkatan_tkt')->unsigned();
             $table->bigInteger('pendanaan')->unsigned()->nullable();

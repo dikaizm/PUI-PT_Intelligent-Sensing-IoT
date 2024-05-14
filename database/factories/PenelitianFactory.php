@@ -18,6 +18,7 @@ class PenelitianFactory extends Factory
     {
         return [
             'uuid' => fake()->uuid(),
+            'skema' => fake()->sentence(),
             'judul' => fake()->sentence(),
             'tingkatan_tkt' => fake()->randomDigitNotNull(),
             'pendanaan' => fake()->numerify('#####000'),

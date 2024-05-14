@@ -36,20 +36,30 @@ return new class extends Migration {
             $table->string('name');
             $table->timestamps();
         });
-
         Schema::create('output', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('jenis_dokumen_id')->unsigned();
-            $table
-                ->foreign('jenis_dokumen_id')
-                ->references('id')
-                ->on('jenis_dokumen')
-                ->onDelete('restrict');
             $table->foreignId('penelitian_id');
             $table
                 ->foreign('penelitian_id')
                 ->references('id')
                 ->on('penelitian')
+                ->onDelete('restrict');
+            $table->timestamps();
+        });
+
+        Schema::create('output_detail', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('output_id');
+            $table
+                ->foreign('output_id')
+                ->references('id')
+                ->on('output')
+                ->onDelete('restrict');
+            $table->smallInteger('jenis_dokumen_id')->unsigned();
+            $table
+                ->foreign('jenis_dokumen_id')
+                ->references('id')
+                ->on('jenis_dokumen')
                 ->onDelete('restrict');
             $table->foreignId('publisher_id');
             $table
@@ -79,5 +89,6 @@ return new class extends Migration {
         Schema::dropIfExists('publisher');
         Schema::dropIfExists('status_output');
         Schema::dropIfExists('output');
+        Schema::dropIfExists('output_detail');
     }
 };
