@@ -136,7 +136,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('author')->insert([
             'penelitian_id' => '1',
-            'user_id' => '4',
+            'user_id' => '2',
         ]);
         DB::table('author')->insert([
             'penelitian_id' => '1',

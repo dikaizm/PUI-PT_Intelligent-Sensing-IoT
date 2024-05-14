@@ -45,9 +45,7 @@ class Penelitian extends Model
             'author',
             'penelitian_id',
             'user_id'
-        )
-            ->withPivot('is_corresponding', 'is_ketua')
-            ->withDefault(['is_corresponding' => false, 'is_ketua' => false]);
+        )->withPivot('is_corresponding', 'is_ketua');
     }
 
     public function output(): HasOne

@@ -200,4 +200,23 @@ Route::middleware('auth')->group(function () {
         ])->name('status-penelitian-key.destroy');
         //end pengaturan status penelitian key route
     });
+    //end mengelola-pengaturan middleware
+    //penelitian route
+    Route::get('penelitian', [
+        \App\Http\Controllers\PenelitianController::class,
+        'index',
+    ])->name('penelitian.index');
+    Route::post('penelitian/store', [
+        \App\Http\Controllers\PenelitianController::class,
+        'store',
+    ])->name('penelitian.store');
+    Route::put('penelitian/{id}/update', [
+        \App\Http\Controllers\PenelitianController::class,
+        'update',
+    ])->name('penelitian.update');
+    Route::delete('penelitian/{id}/destroy', [
+        \App\Http\Controllers\PenelitianController::class,
+        'destroy',
+    ])->name('penelitian.destroy');
+    //end penelitian route
 });

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\JurnalArticle;
+use App\Models\Penelitian;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -54,12 +54,10 @@ class User extends Authenticatable
     public function penelitians(): BelongsToMany
     {
         return $this->belongsToMany(
-            JurnalArticle::class,
+            Penelitian::class,
             'author',
             'user_id',
             'penelitian_id'
-        )
-            ->withPivot('is_corresponding', 'is_ketua')
-            ->withDefault(['is_corresponding' => false, 'is_ketua' => false]);
+        )->withPivot('is_corresponding', 'is_ketua');
     }
 }

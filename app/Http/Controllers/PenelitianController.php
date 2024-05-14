@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Penelitian;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
@@ -13,7 +14,26 @@ class PenelitianController extends Controller
      */
     public function index()
     {
-        //
+        $penelitian = auth()->user()->hasRole('Admin')
+            ? Penelitian::where('arsip', false)
+                ->with([
+                    'statusPenelitian',
+                    'statusPenelitian.statusPenelitianKey',
+                ])
+                ->get()
+            : auth()
+                ->user()
+                ->penelitians()
+                ->where('arsip', false)
+                ->with([
+                    'statusPenelitian',
+                    'statusPenelitian.statusPenelitianKey',
+                ])
+                ->get();
+
+        return view('penelitian.index', [
+            'penelitian' => $penelitian,
+        ]);
     }
 
     /**
@@ -51,8 +71,10 @@ class PenelitianController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePenelitianRequest $request, Penelitian $penelitian)
-    {
+    public function update(
+        UpdatePenelitianRequest $request,
+        Penelitian $penelitian
+    ) {
         //
     }
 
