@@ -25,6 +25,7 @@ class Penelitian extends Model
     ];
 
     protected $fillable = [
+        'skema',
         'judul',
         'tingkatan_tkt',
         'pendanaan',
