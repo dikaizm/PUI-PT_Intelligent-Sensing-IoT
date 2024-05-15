@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\EnsureAuthorPenelitian;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -21,6 +22,11 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\UserController::class,
         'index',
     ])->name('users.index');
+
+    Route::get('users/search', [
+        \App\Http\Controllers\UserController::class,
+        'search',
+    ]);
 
     Route::get('profile', [
         \App\Http\Controllers\ProfileController::class,
@@ -210,11 +216,17 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\PenelitianController::class,
         'store',
     ])->name('penelitian.store');
-    Route::put('penelitian/{id}/update', [
+    Route::get('penelitian/{uuid}', [
+        \App\Http\Controllers\PenelitianController::class,
+        'show',
+    ])
+        ->name('penelitian.show')
+        ->middleware(EnsureAuthorPenelitian::class);
+    Route::put('penelitian/{uuid}/update', [
         \App\Http\Controllers\PenelitianController::class,
         'update',
     ])->name('penelitian.update');
-    Route::delete('penelitian/{id}/destroy', [
+    Route::delete('penelitian/{uuid}/destroy', [
         \App\Http\Controllers\PenelitianController::class,
         'destroy',
     ])->name('penelitian.destroy');

@@ -80,4 +80,17 @@ class UserController extends Controller
             ->route('users.index')
             ->with('success', 'User berhasil dihapus!');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search.value');
+
+        $query = User::query()
+            ->select('id', 'name')
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%");
+            });
+
+        return datatables()->of($query)->make(true);
+    }
 }

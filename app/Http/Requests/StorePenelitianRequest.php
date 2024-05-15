@@ -32,6 +32,12 @@ class StorePenelitianRequest extends FormRequest
             'status_penelitian_id' => ['required'],
             'jenis_penelitian' => ['required'],
             'mitra_id' => ['required'],
+            'user_id' => 'required|array',
+            'user_id.*' => 'exists:users,id',
+            'is_ketua' => 'required|array',
+            'is_ketua.*' => 'boolean',
+            'is_corresponding' => 'required|array',
+            'is_corresponding.*' => 'boolean',
         ];
     }
 }
