@@ -110,7 +110,7 @@ class PenelitianController extends Controller
      */
     public function update(UpdatePenelitianRequest $request, $uuid)
     {
-        $penelitian = Penelitian::where('uuid', $uuid)->get();
+        $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
 
         $penelitian->update([
             'skema' => $request->skema,
@@ -144,8 +144,13 @@ class PenelitianController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Penelitian $penelitian)
+    public function destroy(Penelitian $penelitian, $uuid)
     {
-        //
+        $penelitian->where('uuid', $uuid)->firstOrFail();
+        $penelitian->delete();
+
+        return redirect()
+            ->route('penelitian.index')
+            ->with('success', 'Penelitian berhasil dihapus!');
     }
 }
