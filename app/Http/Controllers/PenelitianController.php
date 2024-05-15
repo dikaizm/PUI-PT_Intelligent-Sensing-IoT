@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penelitian;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
 
@@ -11,10 +12,18 @@ class PenelitianController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $arsip = $request->query('arsip', 'false');
+        if (!in_array($arsip, ['true', 'false'])) {
+            abort(
+                400,
+                'Invalid value for arsip parameter. It should be either true or false.'
+            );
+        }
+
         $penelitian = auth()->user()->hasRole('Admin')
-            ? Penelitian::where('arsip', false)
+            ? Penelitian::where('arsip', $arsip === 'true')
                 ->with([
                     'statusPenelitian',
                     'statusPenelitian.statusPenelitianKey',
@@ -23,7 +32,7 @@ class PenelitianController extends Controller
             : auth()
                 ->user()
                 ->penelitians()
-                ->where('arsip', false)
+                ->where('arsip', $arsip === 'true')
                 ->with([
                     'statusPenelitian',
                     'statusPenelitian.statusPenelitianKey',

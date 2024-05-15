@@ -24,10 +24,10 @@
                 <a href="{{ route('laporan-kinerja.index') }}" style="color: white;">Laporan Kinerja</a>
             </li>
             <li>
-                <a href="#" style="color: white;">Arsip Kegiatan</a>
+                <a href="{{ route('penelitian.arsip', ['arsip' => 'true']) }}" style="color: white;">Arsip Kegiatan</a>
             </li>
             <li>
-                <a href="#" style="color: white;">Penelitian</a>
+                <a href="{{ route('penelitian.index') }}" style="color: white;">Penelitian</a>
             </li>
             <li>
                 <a href="#" style="color: white;">Publikasi</a>

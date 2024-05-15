@@ -212,6 +212,10 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\PenelitianController::class,
         'index',
     ])->name('penelitian.index');
+    Route::get('penelitian/arsip', [
+        \App\Http\Controllers\PenelitianController::class,
+        'index',
+    ])->name('penelitian.arsip');
     Route::post('penelitian/store', [
         \App\Http\Controllers\PenelitianController::class,
         'store',
