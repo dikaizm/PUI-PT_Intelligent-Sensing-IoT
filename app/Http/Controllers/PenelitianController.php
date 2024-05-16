@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penelitian;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
 
@@ -11,10 +12,18 @@ class PenelitianController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $arsip = $request->query('arsip', 'false');
+        if (!in_array($arsip, ['true', 'false'])) {
+            abort(
+                400,
+                'Invalid value for arsip parameter. It should be either true or false.'
+            );
+        }
+
         $penelitian = auth()->user()->hasRole('Admin')
-            ? Penelitian::where('arsip', false)
+            ? Penelitian::where('arsip', $arsip === 'true')
                 ->with([
                     'statusPenelitian',
                     'statusPenelitian.statusPenelitianKey',
@@ -23,7 +32,7 @@ class PenelitianController extends Controller
             : auth()
                 ->user()
                 ->penelitians()
-                ->where('arsip', false)
+                ->where('arsip', $arsip === 'true')
                 ->with([
                     'statusPenelitian',
                     'statusPenelitian.statusPenelitianKey',
@@ -110,7 +119,7 @@ class PenelitianController extends Controller
      */
     public function update(UpdatePenelitianRequest $request, $uuid)
     {
-        $penelitian = Penelitian::where('uuid', $uuid)->get();
+        $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
 
         $penelitian->update([
             'skema' => $request->skema,
@@ -141,11 +150,38 @@ class PenelitianController extends Controller
             ->with('success', 'Penelitian berhasil diperbarui!');
     }
 
+    public function updateStatusPenelitian(
+        UpdatePenelitianRequest $request,
+        $uuid
+    ) {
+        Penelitian::where('uuid', $uuid)->update([
+            'status_penelitian_id' => $request->status_penelitian_id,
+        ]);
+        return redirect()
+            ->route('penelitian.index')
+            ->with('success', 'Status Penelitian berhasil diperbarui!');
+    }
+
+    public function updateFeedback(UpdatePenelitianRequest $request, $uuid)
+    {
+        Penelitian::where('uuid', $uuid)->update([
+            'feedback' => $request->feedback,
+        ]);
+        return redirect()
+            ->route('penelitian.index')
+            ->with('success', 'Feedback berhasil diperbarui!');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Penelitian $penelitian)
+    public function destroy(Penelitian $penelitian, $uuid)
     {
-        //
+        $penelitian->where('uuid', $uuid)->firstOrFail();
+        $penelitian->delete();
+
+        return redirect()
+            ->route('penelitian.index')
+            ->with('success', 'Penelitian berhasil dihapus!');
     }
 }

@@ -212,6 +212,12 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\PenelitianController::class,
         'index',
     ])->name('penelitian.index');
+    //arsip
+    Route::get('penelitian/arsip', [
+        \App\Http\Controllers\PenelitianController::class,
+        'index',
+    ])->name('penelitian.arsip');
+    //end
     Route::post('penelitian/store', [
         \App\Http\Controllers\PenelitianController::class,
         'store',
@@ -226,6 +232,14 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\PenelitianController::class,
         'update',
     ])->name('penelitian.update');
+    Route::patch('penelitian/{uuid}/update-status-penelitian', [
+        \App\Http\Controllers\PenelitianController::class,
+        'updateStatusPenelitian',
+    ])->name('penelitian.update-status-penelitian');
+    Route::patch('penelitian/{uuid}/update-feedback', [
+        \App\Http\Controllers\PenelitianController::class,
+        'updateFeedback',
+    ])->name('penelitian.update-feedback');
     Route::delete('penelitian/{uuid}/destroy', [
         \App\Http\Controllers\PenelitianController::class,
         'destroy',

@@ -24,7 +24,7 @@
                 <a href="{{ route('laporan-kinerja.index') }}" style="color: white;">{{ __('Laporan Kinerja') }}</a>
             </li>
             <li>
-                <a href="#" style="color: white;">{{ __('Arsip Kegiatan') }}</a>
+                <a href="{{ route('penelitian.arsip', ['arsip' => 'true']) }}" style="color: white;">{{ __('Arsip Kegiatan') }}</a>
             </li>
             <li>
                 <a href="{{ route('penelitian.index') }}" style="color: white;">{{ __('Penelitian') }}</a>
