@@ -150,6 +150,28 @@ class PenelitianController extends Controller
             ->with('success', 'Penelitian berhasil diperbarui!');
     }
 
+    public function updateStatusPenelitian(
+        UpdatePenelitianRequest $request,
+        $uuid
+    ) {
+        Penelitian::where('uuid', $uuid)->update([
+            'status_penelitian_id' => $request->status_penelitian_id,
+        ]);
+        return redirect()
+            ->route('penelitian.index')
+            ->with('success', 'Status Penelitian berhasil diperbarui!');
+    }
+
+    public function updateFeedback(UpdatePenelitianRequest $request, $uuid)
+    {
+        Penelitian::where('uuid', $uuid)->update([
+            'feedback' => $request->feedback,
+        ]);
+        return redirect()
+            ->route('penelitian.index')
+            ->with('success', 'Feedback berhasil diperbarui!');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
