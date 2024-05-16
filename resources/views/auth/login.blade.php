@@ -18,9 +18,9 @@
     <!-- end col -->
     <div class="col-lg-5" style="font-family: DM Sans;">
         <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/auth/bg-login.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
-            <div class="outer-card" style="background-color:#9B0B0B; padding: 30px; border-radius: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); width: 90%; height: 400px;">
+            <div class="outer-card" style="background-color:#9B0B0B; padding: 30px; border-radius: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); width: 90%; height: 425px;">
                 <div class="inner-card" style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); height:100%;display: flex; flex-direction: column; justify-content: center; padding: 20px;">
-                    <form action="{{ route('login') }}" method="POST" style="max-width: 200px; margin:auto;">
+                    <form action="{{ route('login') }}" method="POST" style="max-width: 300px; margin:auto;">
                         @csrf
 
                         <div style="text-align: center;letter-spacing: 0.02em;">
@@ -59,11 +59,15 @@
                         </div>
                         <!-- end form-check -->
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" style="background: linear-gradient(0deg, #620707 0%, #C80E0E 100%); color:white;width: 190px;height: 48px;top: 594px;left: 940px;gap: 0px;opacity: 0px;border-radius: 10px;align-items: center;">
+                        <div class="d-grid gap-2" style="justify-items: center; align-items: center;">
+                            <button type="submit" style="background: linear-gradient(0deg, #620707 0%, #C80E0E 100%); color:white;width: 190px;height: 48px;gap: 0px;opacity: 0px;border-radius: 10px;">
                                 {{ __('Login') }}
                             </button>
                         </div>
+
+                        <p class="text-sm text-medium text-dark text-center mt-20">
+                            {{ __('Belum punya akun?') }} <a href="{{ route('register') }}" style="font-size: 14px;font-weight: 500;line-height: 18.23px;color: #DE0F0F;">{{ __('Daftar sekarang') }}</a>
+                        </p>
                         <!-- end form-group -->
                     </form>
                 </div>

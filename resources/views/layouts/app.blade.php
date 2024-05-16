@@ -121,6 +121,9 @@
     <!-- ========= All Javascript files linkup ======== -->
     @vite('resources/js/app.js')
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/chart.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
 </body>
 
 </html>

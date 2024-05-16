@@ -35,16 +35,16 @@
                                 </div>
                             </div>
                             <div class="table-wrapper table-responsive">
-                                <table class="table striped-table" id="dataTables2">
+                                <table class="table striped-table" id="dataTables2" style="width: 100%; border-collapse: collapse;">
                                     <thead>
                                         <tr>
-                                            <th class="text-center" style="width: 5%;">
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 3%;">
                                                 <h6>ID</h6>
                                             </th>
-                                            <th class="text-center" style="width: 25%;">
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 3%;">
                                                 <h6>Key</h6>
                                             </th>
-                                            <th class="text-center" style="width: 5%;">
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 3%;">
                                                 <h6>Action</h6>
                                             </th>
                                         </tr>
@@ -52,13 +52,13 @@
                                     <tbody>
                                         @foreach ($status_penelitian_key as $item)
                                             <tr>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->id }}</p>
                                                 </td>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->name }}</p>
                                                 </td>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <a type="button" data-bs-toggle="modal"
                                                         data-bs-target="#modalEditStatusPenelitianKey{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>
@@ -99,22 +99,22 @@
                                 </button>
                             </div>
                             <div class="table-wrapper table-responsive">
-                                <table class="table striped-table" id="dataTables">
+                                <table class="table striped-table" id="dataTables" style="width: 100%; border-collapse: collapse;">
                                     <thead>
                                         <tr>
-                                            <th class="text-center" style="width: 5%;">
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 3%;">
                                                 <h6>ID</h6>
                                             </th>
-                                            <th class="text-center" style="width: 25%;">
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                                 <h6>Key</h6>
                                             </th>
-                                            <th>
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                                 <h6>Name</h6>
                                             </th>
-                                            <th>
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                                 <h6>Preview</h6>
                                             </th>
-                                            <th class="text-center" style="width: 5%;">
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                                 <h6>Action</h6>
                                             </th>
                                         </tr>
@@ -122,21 +122,21 @@
                                     <tbody>
                                         @foreach ($status_penelitian as $item)
                                             <tr>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->id }}</p>
                                                 </td>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->statusPenelitianKey->name }}</p>
                                                 </td>
-                                                <td>
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->name }}</p>
                                                 </td>
-                                                <td>
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <span class="badge rounded-pill bg-{{ $item->warna }}">
                                                         {{ $item->statusPenelitianKey->name }} {{ $item->name }}
                                                     </span>
                                                 </td>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <a type="button" data-bs-toggle="modal"
                                                         data-bs-target="#modalEditStatusPenelitian{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>

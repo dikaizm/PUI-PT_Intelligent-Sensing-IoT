@@ -15,24 +15,24 @@
             @endcan
 
             <div class="table-wrapper table-responsive" style="font-family: DM Sans">
-                <table class="table striped-table" id="dataTables">
+                <table class="table striped-table" id="dataTables" style="width: 100%; border-collapse: collapse;">
                     <thead>
                         <tr>
-                            <th>
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                 <h6>Name</h6>
                             </th>
-                            <th>
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                 <h6>Email</h6>
                             </th>
-                            <th>
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                 <h6>Nip</h6>
                             </th>
                             @can('mengelola-pengguna')
-                                <th>
+                                <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                     <h6>Tipe Pengguna</h6>
                                 </th>
                             @endcan
-                            <th>
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                 <h6>Action</h6>
                             </th>
                         </tr>
@@ -41,22 +41,22 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>
+                                <td style="padding: 12px; text-align: center !important;">
                                     <p>{{ $user->name }}</p>
                                 </td>
-                                <td>
+                                <td style="padding: 12px; text-align: center !important;">
                                     <p>{{ $user->email }}</p>
                                 </td>
-                                <td>
+                                <td style="padding: 12px; text-align: center !important;">
                                     <p>{{ $user->nip }}</p>
                                 </td>
                                 @can('mengelola-pengguna')
-                                    <td>
+                                    <td style="padding: 12px; text-align: center !important;">
                                         <p>{{ $user->getRoleNames()->implode(', ') }}</p>
                                     </td>
                                 @endcan
 
-                                <td>
+                                <td style="padding: 12px; text-align: center !important;">
                                     <a type="button" data-bs-toggle="modal"
                                         data-bs-target="#modalUserdetail{{ $user->id }}">
                                         <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
