@@ -152,10 +152,11 @@ class PenelitianController extends Controller
             ->with('success', 'Penelitian berhasil diperbarui!');
     }
 
-    public function updateStatusPenelitian(
-        UpdatePenelitianRequest $request,
-        $uuid
-    ) {
+    public function updateStatusPenelitian(Request $request, $uuid)
+    {
+        $request->validate([
+            'status_penelitian_id' => ['required'],
+        ]);
         Penelitian::where('uuid', $uuid)->update([
             'status_penelitian_id' => $request->status_penelitian_id,
         ]);
@@ -164,8 +165,11 @@ class PenelitianController extends Controller
             ->with('success', 'Status Penelitian berhasil diperbarui!');
     }
 
-    public function updateFeedback(UpdatePenelitianRequest $request, $uuid)
+    public function updateFeedback(Request $request, $uuid)
     {
+        $request->validate([
+            'feedback' => ['string|max:1000'],
+        ]);
         Penelitian::where('uuid', $uuid)->update([
             'feedback' => $request->feedback,
         ]);
