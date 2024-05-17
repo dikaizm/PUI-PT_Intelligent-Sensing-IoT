@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Penelitian;
 use Illuminate\Http\Request;
+use App\Models\JenisPenelitian;
 use App\Models\StatusPenelitian;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
@@ -43,6 +44,7 @@ class PenelitianController extends Controller
         return view('penelitian.index', [
             'penelitian' => $penelitian,
             'status_penelitian' => StatusPenelitian::all(),
+            'jenis_penelitian' => JenisPenelitian::all(),
         ]);
     }
 

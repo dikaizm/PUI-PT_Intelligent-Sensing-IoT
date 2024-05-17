@@ -12,7 +12,9 @@ class OutputController extends Controller
      */
     public function index()
     {
-        //
+        return view('output.index', [
+            'output' => Output::with(['penelitian', 'outputDetails'])->get(),
+        ]);
     }
 
     /**
