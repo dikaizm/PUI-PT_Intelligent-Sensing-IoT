@@ -18,7 +18,6 @@ class PenelitianFactory extends Factory
     {
         return [
             'uuid' => fake()->uuid(),
-            'skema' => fake()->sentence(),
             'judul' => fake()->sentence(),
             'tingkatan_tkt' => fake()->randomDigitNotNull(),
             'pendanaan' => fake()->numerify('#####000'),
@@ -26,7 +25,7 @@ class PenelitianFactory extends Factory
             'feedback' => fake()->text(),
             'status_penelitian_id' => fake()->randomDigitNotNull(),
             'jenis_penelitian_id' => fake()->randomDigitNotNull(),
-            'mitra_id' => fake()->randomDigitNotNull(),
+            'skema_id' => fake()->randomDigitNotNull(),
             'arsip' => fake()->boolean(),
         ];
     }

@@ -17,6 +17,7 @@ class JenisOutputFactory extends Factory
     public function definition(): array
     {
         return [
+            'jenis_output_key_id' => 1,
             'name' => fake()->word(3, true),
         ];
     }

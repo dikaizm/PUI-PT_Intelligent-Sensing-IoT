@@ -25,6 +25,12 @@
             "options": {
                 "parser": "babel"
             }
+        },
+        {
+            "files": "*.html",
+            "options": {
+                "parser": "html"
+            }
         }
     ]
 }

@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Mitra;
+use App\Models\Skema;
 use App\Models\Penelitian;
+use App\Models\JenisOutput;
 use App\Models\JenisDokumen;
 use App\Models\PublisherKey;
 use App\Models\StatusOutput;
@@ -88,51 +89,17 @@ class DatabaseSeeder extends Seeder
             'name' => 'Eksternal Telkom',
         ]);
 
-        Mitra::factory()->count(9)->create();
         User::factory()->count(10)->create();
-        PublisherKey::factory()->count(3)->create();
         JenisPenelitian::factory()->count(10)->create();
         StatusPenelitian::factory()->count(10)->create();
         StatusOutput::factory()->count(3)->create();
-        JenisDokumen::factory()->count(3)->create();
+        Skema::factory()->count(9)->create();
         Penelitian::factory()->count(5)->create();
 
-        DB::table('publisher')->insert([
-            'publisher_key_id' => '1',
-            'tingkat_index' => '1',
+        DB::table('jenis_output_key')->insert([
+            'name' => 'Publikasi',
         ]);
-        DB::table('publisher')->insert([
-            'publisher_key_id' => '1',
-            'tingkat_index' => '2',
-        ]);
-        DB::table('publisher')->insert([
-            'publisher_key_id' => '1',
-            'tingkat_index' => '3',
-        ]);
-        DB::table('publisher')->insert([
-            'publisher_key_id' => '2',
-            'tingkat_index' => '1',
-        ]);
-        DB::table('publisher')->insert([
-            'publisher_key_id' => '2',
-            'tingkat_index' => '2',
-        ]);
-        DB::table('publisher')->insert([
-            'publisher_key_id' => '2',
-            'tingkat_index' => '3',
-        ]);
-        DB::table('publisher')->insert([
-            'publisher_key_id' => '3',
-            'tingkat_index' => '1',
-        ]);
-        DB::table('publisher')->insert([
-            'publisher_key_id' => '3',
-            'tingkat_index' => '2',
-        ]);
-        DB::table('publisher')->insert([
-            'publisher_key_id' => '3',
-            'tingkat_index' => '3',
-        ]);
+        JenisOutput::factory()->count(3)->create();
 
         DB::table('author')->insert([
             'penelitian_id' => '1',
@@ -173,6 +140,34 @@ class DatabaseSeeder extends Seeder
         DB::table('author')->insert([
             'penelitian_id' => '5',
             'user_id' => '13',
+        ]);
+
+        DB::table('output')->insert([
+            'penelitian_id' => '1',
+        ]);
+        DB::table('output_detail')->insert([
+            'output_id' => '1',
+            'jenis_output_id' => '1',
+            'status_output_id' => '1',
+            'judul' => 'seeders',
+            'tautan' => 'seeders',
+            'file' => 'public',
+        ]);
+        DB::table('output_detail')->insert([
+            'output_id' => '1',
+            'jenis_output_id' => '2',
+            'status_output_id' => '1',
+            'judul' => 'seeders',
+            'tautan' => 'seeders',
+            'file' => 'public',
+        ]);
+        DB::table('output_detail')->insert([
+            'output_id' => '1',
+            'jenis_output_id' => '3',
+            'status_output_id' => '1',
+            'judul' => 'seeders',
+            'tautan' => 'seeders',
+            'file' => 'public',
         ]);
     }
 }

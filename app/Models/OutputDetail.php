@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Output;
-use App\Models\Publisher;
+use App\Models\JenisOutput;
 use App\Models\JenisDokumen;
 use App\Models\StatusOutput;
 use Illuminate\Database\Eloquent\Model;
@@ -18,24 +18,20 @@ class OutputDetail extends Model
 
     protected $fillable = [
         'output_id',
-        'jenis_dokumen_id',
-        'publisher_id',
+        'jenis_output_id',
         'status_output_id',
-        'keterangan',
+        'judul',
         'tautan',
+        'file',
     ];
 
     public function output(): BelongsTo
     {
         return $this->belongsTo(Output::class);
     }
-    public function jenisDokumen(): BelongsTo
+    public function jenisOutput(): BelongsTo
     {
-        return $this->belongsTo(JenisDokumen::class);
-    }
-    public function publisher(): BelongsTo
-    {
-        return $this->belongsTo(Publisher::class);
+        return $this->belongsTo(JenisOutput::class);
     }
     public function statusOutput(): BelongsTo
     {

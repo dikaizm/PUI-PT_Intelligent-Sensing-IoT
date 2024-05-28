@@ -100,24 +100,24 @@ Route::middleware('auth')->group(function () {
         ])->name('jenis-penelitian.destroy');
         //end pengaturan jenis penelitian route
 
-        //pengaturan mitra route
-        Route::get('pengaturan/mitra', [
-            \App\Http\Controllers\MitraController::class,
+        //pengaturan skema route
+        Route::get('pengaturan/skema', [
+            \App\Http\Controllers\SkemaController::class,
             'index',
-        ])->name('mitra.index');
-        Route::post('pengaturan/mitra/store', [
-            \App\Http\Controllers\MitraController::class,
+        ])->name('skema.index');
+        Route::post('pengaturan/skema/store', [
+            \App\Http\Controllers\SkemaController::class,
             'store',
-        ])->name('mitra.store');
-        Route::put('pengaturan/mitra/{id}/update', [
-            \App\Http\Controllers\MitraController::class,
+        ])->name('skema.store');
+        Route::put('pengaturan/skema/{id}/update', [
+            \App\Http\Controllers\SkemaController::class,
             'update',
-        ])->name('mitra.update');
-        Route::delete('pengaturan/mitra/{id}/destroy', [
-            \App\Http\Controllers\MitraController::class,
+        ])->name('skema.update');
+        Route::delete('pengaturan/skema/{id}/destroy', [
+            \App\Http\Controllers\SkemaController::class,
             'destroy',
-        ])->name('mitra.destroy');
-        //end pengaturan mitra route
+        ])->name('skema.destroy');
+        //end pengaturan skema route
 
         //pengaturan publisher route
         Route::get('pengaturan/publisher', [

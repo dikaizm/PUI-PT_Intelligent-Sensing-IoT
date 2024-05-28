@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->string('name', 32);
             $table->timestamps();
         });
-        Schema::create('mitra', function (Blueprint $table) {
+        Schema::create('skema', function (Blueprint $table) {
             $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
             $table->string('name', 64);
             $table->timestamps();
@@ -40,7 +40,6 @@ return new class extends Migration {
         Schema::create('penelitian', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->string('skema', 128);
             $table->string('judul');
             $table->tinyInteger('tingkatan_tkt')->unsigned();
             $table->bigInteger('pendanaan')->unsigned()->nullable();
@@ -59,11 +58,11 @@ return new class extends Migration {
                 ->references('id')
                 ->on('jenis_penelitian')
                 ->onDelete('restrict');
-            $table->smallInteger('mitra_id')->unsigned();
+            $table->smallInteger('skema_id')->unsigned();
             $table
-                ->foreign('mitra_id')
+                ->foreign('skema_id')
                 ->references('id')
-                ->on('mitra')
+                ->on('skema')
                 ->onDelete('restrict');
             $table->boolean('arsip');
             $table->timestamps();
@@ -78,7 +77,7 @@ return new class extends Migration {
         Schema::dropIfExists('status_penelitian_key');
         Schema::dropIfExists('status_penelitian');
         Schema::dropIfExists('jenis_penelitian');
-        Schema::dropIfExists('mitra');
+        Schema::dropIfExists('skema');
         Schema::dropIfExists('penelitian');
     }
 };
