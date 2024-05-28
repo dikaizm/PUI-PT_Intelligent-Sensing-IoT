@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mitra;
+use App\Models\Skema;
 use Illuminate\Http\Request;
-use App\Http\Requests\MitraRequest;
+use App\Http\Requests\SkemaRequest;
 
-class MitraController extends Controller
+class SkemaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.pengaturan-mitra.index', [
-            'mitra' => Mitra::all(),
+        return view('admin.master-skema.index', [
+            'skema' => Skema::all(),
         ]);
     }
 
@@ -31,13 +31,13 @@ class MitraController extends Controller
      */
     public function store(MitraRequest $request)
     {
-        Mitra::create([
+        Skema::create([
             'name' => $request->name,
         ]);
 
         return redirect()
-            ->route('mitra.index')
-            ->with('success', 'Mitra berhasil ditambah!');
+            ->route('skema.index')
+            ->with('success', 'skema berhasil ditambah!');
     }
 
     /**
@@ -59,13 +59,13 @@ class MitraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MitraRequest $request, string $id)
+    public function update(SkemaRequest $request, string $id)
     {
-        Mitra::where('id', $id)->update(['name' => $request->name]);
+        Skema::where('id', $id)->update(['name' => $request->name]);
 
         return redirect()
-            ->route('mitra.index')
-            ->with('success', 'Mitra berhasil diupdate!');
+            ->route('skema.index')
+            ->with('success', 'Skema berhasil diupdate!');
     }
 
     /**
@@ -73,10 +73,10 @@ class MitraController extends Controller
      */
     public function destroy(string $id)
     {
-        Mitra::findOrFail($id)->delete();
+        Skema::findOrFail($id)->delete();
 
         return redirect()
-            ->route('mitra.index')
-            ->with('success', 'Mitra berhasil dihapus!');
+            ->route('skema.index')
+            ->with('success', 'Skema berhasil dihapus!');
     }
 }

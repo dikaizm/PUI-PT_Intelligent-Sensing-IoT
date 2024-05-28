@@ -1,4 +1,4 @@
-@foreach ($mitra as $item)
+@foreach ($skema as $item)
     <div class="modal fade" id="modalEdit{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
         aria-hidden="true">
         <div class="modal-dialog"
@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-body px-0">
                     <div class="content mb-30">
-                        <form action="{{ route('mitra.update', ['id' => $item->id]) }}" method="POST">
+                        <form action="{{ route('skema.update', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
 

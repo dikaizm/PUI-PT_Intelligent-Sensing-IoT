@@ -60,7 +60,7 @@
                 <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">Jenis Penelitian</a>
             </li>
             <li>
-                <a href="{{ route('mitra.index') }}" style="color: white;">Mitra</a>
+                <a href="{{ route('skema.index') }}" style="color: white;">Mitra</a>
             </li>
             <li>
                 <a href="{{ route('publisher.index') }}" style="color: white;">Publisher</a>

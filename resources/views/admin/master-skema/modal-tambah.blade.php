@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body px-0">
                 <div class="content mb-30">
-                    <form action="{{ route('mitra.store') }}" method="POST">
+                    <form action="{{ route('skema.store') }}" method="POST">
                         @csrf
 
                         <div class="row">

@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-30">
-                    <h2>{{ __('Mitra') }}</h2>
+                    <h2>{{ __('Skema') }}</h2>
                 </div>
             </div>
             <!-- end col -->
@@ -44,7 +44,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($mitra as $item)
+                            @foreach ($skema as $item)
                                 <tr>
                                     <td>
                                         <p>{{ $item->id }}</p>
@@ -75,15 +75,15 @@
     </div>
 
     <!-- ========== modal edit =========== -->
-    @include('admin.pengaturan-mitra.modal-edit')
+    @include('admin.master-skema.modal-edit')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal tambah =========== -->
-    @include('admin.pengaturan-mitra.modal-tambah')
+    @include('admin.master-skema.modal-tambah')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal delete =========== -->
-    @include('admin.pengaturan-mitra.modal-delete')
+    @include('admin.master-skema.modal-delete')
     <!-- ========== modal end =========== -->
 @endsection
 
