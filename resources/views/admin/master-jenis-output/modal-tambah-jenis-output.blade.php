@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalTambahPublisher" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
+<div class="modal fade" id="modalTambahJenisOutput" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
     <div class="modal-dialog"
         style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
@@ -7,24 +7,24 @@
             </div>
             <div class="modal-body px-0">
                 <div class="content mb-30">
-                    <form action="{{ route('publisher.store') }}" method="POST">
+                    <form action="{{ route('jenis-output.store') }}" method="POST">
                         @csrf
 
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-style-1">
-                                    <label for="publisher_key_id">{{ __('Key') }}</label>
-                                    <select class="form-control @error('publisher_key_id') is-invalid @enderror"
-                                        name="publisher_key_id" id="publisher_key_id">
+                                    <label for="jenis_output_key_id">{{ __('Key') }}</label>
+                                    <select class="form-control @error('jenis_output_key_id') is-invalid @enderror"
+                                        name="jenis_output_key_id" id="jenis_output_key_id">
                                         <option value="" disabled selected>Pilih Key</option>
-                                        @foreach ($publisher_key as $item)
+                                        @foreach ($jenis_output_key as $item)
                                             <option value="{{ $item->id }}"
-                                                @if (old('publisher_key_id') == $item->id) selected @endif>
+                                                @if (old('jenis_output_key_id') == $item->id) selected @endif>
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('publisher_key_id')
+                                    @error('jenis_output_key_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -33,11 +33,11 @@
                             </div>
                             <div class="col-12">
                                 <div class="input-style-1">
-                                    <label for="tingkat_index">{{ __('Tingkat Index') }}</label>
-                                    <input type="text" @error('tingkat_index') class="form-control is-invalid" @enderror
-                                        name="tingkat_index" id="tingkat_index" placeholder="{{ __('Tingkat Index') }}"
-                                        value="{{ old('tingkat_index') }}">
-                                    @error('tingkat_index')
+                                    <label for="name">{{ __('Nama') }}</label>
+                                    <input type="text" @error('name') class="form-control is-invalid" @enderror
+                                        name="name" id="name" placeholder="{{ __('Nama') }}"
+                                        value="{{ old('name') }}">
+                                    @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -64,3 +64,4 @@
         </div>
     </div>
 </div>
+

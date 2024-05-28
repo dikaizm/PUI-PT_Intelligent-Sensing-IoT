@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalTambahPublisherKey" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
+<div class="modal fade" id="modalTambahJenisOutputKey" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
     <div class="modal-dialog"
         style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
         <div class="modal-content card-style">
@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body px-0">
                 <div class="content mb-30">
-                    <form action="{{ route('publisher-key.store') }}" method="POST">
+                    <form action="{{ route('jenis-output-key.store') }}" method="POST">
                         @csrf
 
                         <div class="row">
@@ -44,3 +44,4 @@
         </div>
     </div>
 </div>
+

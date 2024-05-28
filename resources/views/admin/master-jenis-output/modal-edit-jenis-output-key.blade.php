@@ -1,6 +1,6 @@
-@foreach ($publisher_key as $item)
-    <div class="modal fade" id="modalEditPublisherKey{{ $item->id }}" tabindex="-1"
-        aria-labelledby="ModalFourLabel" aria-hidden="true">
+@foreach ($jenis_output_key as $item)
+    <div class="modal fade" id="modalEditJenisOutputKey{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+        aria-hidden="true">
         <div class="modal-dialog"
             style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
             <div class="modal-content card-style">
@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-body px-0">
                     <div class="content mb-30">
-                        <form action="{{ route('publisher-key.update', ['id' => $item->id]) }}" method="POST">
+                        <form action="{{ route('jenis-output-key.update', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -17,9 +17,9 @@
                                 <div class="col-12">
                                     <div class="input-style-1">
                                         <label
-                                            for="nameEditPublisherKey{{ $item->id }}">{{ __('Name') }}</label>
+                                            for="nameEditJenisOutputKey{{ $item->id }}">{{ __('Name') }}</label>
                                         <input type="text" @error('name') class="form-control is-invalid" @enderror
-                                            name="name" id="nameEditPublisherKey{{ $item->id }}"
+                                            name="name" id="nameEditJenisOutputKey{{ $item->id }}"
                                             placeholder="{{ __('Name') }}" value="{{ $item->name }}">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
@@ -49,3 +49,4 @@
         </div>
     </div>
 @endforeach
+

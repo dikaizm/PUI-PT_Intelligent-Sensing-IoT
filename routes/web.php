@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JenisOutputController;
 use App\Http\Middleware\EnsureAuthorPenelitian;
+use App\Http\Controllers\JenisOutputKeyController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -62,24 +64,6 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('can:mengelola-pengaturan')->group(function () {
         // Rute-rute yang memerlukan kedua middleware 'auth' dan 'can:mengelola-pengaturan' ditempatkan di sini
-        //pengaturan jenis dokumen route
-        Route::get('pengaturan/jenis-dokumen', [
-            \App\Http\Controllers\JenisDokumenController::class,
-            'index',
-        ])->name('jenis-dokumen.index');
-        Route::post('pengaturan/jenis-dokumen/store', [
-            \App\Http\Controllers\JenisDokumenController::class,
-            'store',
-        ])->name('jenis-dokumen.store');
-        Route::put('pengaturan/jenis-dokumen/{id}/update', [
-            \App\Http\Controllers\JenisDokumenController::class,
-            'update',
-        ])->name('jenis-dokumen.update');
-        Route::delete('pengaturan/jenis-dokumen/{id}/destroy', [
-            \App\Http\Controllers\JenisDokumenController::class,
-            'destroy',
-        ])->name('jenis-dokumen.destroy');
-        //end pengaturan jenis dokumen
 
         //pengaturan jenis penelitian
         Route::get('pengaturan/jenis-penelitian', [
@@ -100,58 +84,58 @@ Route::middleware('auth')->group(function () {
         ])->name('jenis-penelitian.destroy');
         //end pengaturan jenis penelitian route
 
-        //pengaturan skema route
-        Route::get('pengaturan/skema', [
+        //master-data skema route
+        Route::get('master-data/skema', [
             \App\Http\Controllers\SkemaController::class,
             'index',
         ])->name('skema.index');
-        Route::post('pengaturan/skema/store', [
+        Route::post('master-data/skema/store', [
             \App\Http\Controllers\SkemaController::class,
             'store',
         ])->name('skema.store');
-        Route::put('pengaturan/skema/{id}/update', [
+        Route::put('master-data/skema/{id}/update', [
             \App\Http\Controllers\SkemaController::class,
             'update',
         ])->name('skema.update');
-        Route::delete('pengaturan/skema/{id}/destroy', [
+        Route::delete('master-data/skema/{id}/destroy', [
             \App\Http\Controllers\SkemaController::class,
             'destroy',
         ])->name('skema.destroy');
-        //end pengaturan skema route
+        //end master-data skema route
 
-        //pengaturan publisher route
-        Route::get('pengaturan/publisher', [
-            \App\Http\Controllers\PublisherController::class,
+        //master data jenis-output route
+        Route::get('master-data/jenis-output', [
+            JenisOutputController::class,
             'index',
-        ])->name('publisher.index');
-        Route::post('pengaturan/publisher/store', [
-            \App\Http\Controllers\PublisherController::class,
+        ])->name('jenis-output.index');
+        Route::post('master-data/jenis-output/store', [
+            \App\Http\Controllers\JenisOutputController::class,
             'store',
-        ])->name('publisher.store');
-        Route::put('pengaturan/publisher/{id}/update', [
-            \App\Http\Controllers\PublisherController::class,
+        ])->name('jenis-output.store');
+        Route::put('master-data/jenis-output/{id}/update', [
+            \App\Http\Controllers\JenisOutputController::class,
             'update',
-        ])->name('publisher.update');
-        Route::delete('pengaturan/publisher/{id}/destroy', [
-            \App\Http\Controllers\PublisherController::class,
+        ])->name('jenis-output.update');
+        Route::delete('master-data/jenis-output/{id}/destroy', [
+            \App\Http\Controllers\JenisOutputController::class,
             'destroy',
-        ])->name('publisher.destroy');
-        //end pengaturan publisher route
+        ])->name('jenis-output.destroy');
+        //end master data jenis-output route
 
-        //pengaturan publisher key route
-        Route::post('pengaturan/publisher-key/store', [
-            \App\Http\Controllers\PublisherKeyController::class,
+        //master data jenis-output key route
+        Route::post('master-data/jenis-output-key/store', [
+            JenisOutputKeyController::class,
             'store',
-        ])->name('publisher-key.store');
-        Route::put('pengaturan/publisher-key/{id}/update', [
-            \App\Http\Controllers\PublisherKeyController::class,
+        ])->name('jenis-output-key.store');
+        Route::put('master-data/jenis-output-key/{id}/update', [
+            \App\Http\Controllers\JenisOutputKeyController::class,
             'update',
-        ])->name('publisher-key.update');
-        Route::delete('pengaturan/publisher-key/{id}/destroy', [
-            \App\Http\Controllers\PublisherKeyController::class,
+        ])->name('jenis-output-key.update');
+        Route::delete('master-data/jenis-output-key/{id}/destroy', [
+            \App\Http\Controllers\JenisOutputKeyController::class,
             'destroy',
-        ])->name('publisher-key.destroy');
-        //end pengaturan publisher key route
+        ])->name('jenis-output-key.destroy');
+        //end master data jenis-output key route
 
         //pengaturan status jurnal route
         Route::get('pengaturan/status-output', [

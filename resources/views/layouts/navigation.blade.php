@@ -54,16 +54,13 @@
         </a>
         <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
             <li>
-                <a href="{{ route('jenis-dokumen.index') }}" style="color: white;">Jenis Output</a>
+                <a href="{{ route('jenis-output.index') }}" style="color: white;">Jenis Output</a>
             </li>
             <li>
                 <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">Jenis Penelitian</a>
             </li>
             <li>
                 <a href="{{ route('skema.index') }}" style="color: white;">Mitra</a>
-            </li>
-            <li>
-                <a href="{{ route('publisher.index') }}" style="color: white;">Publisher</a>
             </li>
             <li>
                 <a href="{{ route('status-output.index') }}" style="color: white;">Status Jurnal</a>
