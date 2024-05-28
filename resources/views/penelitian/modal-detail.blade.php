@@ -9,173 +9,100 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body px-0" style="width: 100%; text-align: center;">
-                    <div class="col-xl-6 col-lg-10 col-md-6" style="margin: auto;width: 90%;">
+                    <div class="col-12" style="margin: auto;width: 90%;">
                         <div class="row g-0 auth-row" style="color: black; font-weight: 400;line-height: 35px;">
-                            <div class="col-lg-4 row g-1">
+                            <div class="col-12 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('Skema Penelitian') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{-- {{ __($user->keahlian) }} --}} Jojon
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('Nama Dosen') }}
+                                        </li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{-- {{ __($user->name) }} --}}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 row g-1">
+                            <div class="col-12 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('Ketua Penelitian') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{-- {{ __($user->fakultas) }} --}}Docang
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('Bidang Keahlian') }}
+                                        </li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{-- {{ __($user->keahlian) }} --}}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 row g-1">
+                            <div class="col-12 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('Anggota Tim') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{ __('ddmmyy') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('Status Penelitian') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{-- {{ __($user->nip) }} --}} batu bgt
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('Email Pengguna') }}
+                                        </li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{-- {{ __($user->email) }} --}}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 row g-1">
+                            <div class="col-12 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('Mitra Penelitian') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{-- {{ __($user->nip) }} --}} batu bgt
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('Fakultas') }}
+                                        </li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{-- {{ __($user->fakultas) }} --}}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 row g-1">
+                            <div class="col-12 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('Jenis Penelitian') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{-- {{ __($user->nip) }} --}} batu bgt
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('NIP') }}
+                                        </li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{-- {{ __($user->nip) }} --}}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 row g-1">
+                            <div class="col-12 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('Jangka Waktu Penelitian') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{-- {{ __($user->nip) }} --}} batu bgt
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('No Handphone') }}
+                                        </li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{-- {{ __($user->telp) }} --}}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 row g-1">
+                            <div class="col-12 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('Pendanaan') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{-- {{ __($user->nip) }} --}} batu bgt
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('Link Google Scholar') }}
+                                        </li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{-- {{ __($user->telp) }} --}}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-4 row g-1">
+                            <div class="col-12 row g-1">
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('Tingkatan TKT') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{-- {{ __($user->nip) }} --}} batu bgt
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('Link Sinta') }}
                                         </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 15px; text-align: left;">
-                                            {{ __('File Penelitian') }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-8 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 400;font-size: 14px; text-align: left;">
-                                            {{-- {{ __($user->nip) }} --}} batu bgt
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{-- {{ __($user->telp) }} --}}
                                         </li>
                                     </ul>
                                 </div>

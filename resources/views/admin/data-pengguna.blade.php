@@ -518,9 +518,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body px-0" style="width: 100%; text-align: center;">
-                    <div class="col-xl-6 col-lg-10 col-md-6" style="margin: auto;width: 90%;">
-                        <div
-                            style="border-radius: 50%; max-width: 225px; width: 100%; overflow: hidden; margin: auto; margin-top: 0px; margin-bottom: 40px;">
+                    <div class="col-12" style="margin: auto;width-max: 90%;">
+                        <div style="border-radius: 50%; max-width: 225px; width: 100%; overflow: hidden; margin: auto; margin-top: 0px; margin-bottom: 40px;">
                             <a style="display: block;" style="align-content: center;">
                                 <img src="{{ asset('images/example/joji.jpg') }}" alt="Card Image"
                                     style="width: 100%;">

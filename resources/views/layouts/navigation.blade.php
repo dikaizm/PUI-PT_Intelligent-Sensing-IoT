@@ -74,18 +74,22 @@
         </ul>
     </li>
 
-    <li class="nav-item">
-        <form method="POST" action="{{ route('logout') }}" style="position: sticky; top: 100px;">
-            @csrf
-            <a class="dropdown-item" style="color: white;" href="{{ route('logout') }}"
-                onclick="event.preventDefault(); this.closest('form').submit();">
+    <ul class="nav">
+        <li class="nav-item">
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                class="logout-button" style="color: white;">
                 <span class="icon" style="color: white;">
-                    <i class="lni lni-exit"></i>
+                <i class="lni lni-exit"></i>
                 </span>
-                <span class="text" style="color: white;">{{ __('Logout') }}</span>
+               {{ __('Logout') }}
             </a>
-        </form>
-    </li>
+        </li>
+    </ul>
+
 
 </ul>
 

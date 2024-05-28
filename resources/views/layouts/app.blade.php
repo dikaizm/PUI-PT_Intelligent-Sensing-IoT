@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap">
     {{-- Peng-rupiahan --}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
+    
 </head>
 
 <body>
@@ -125,6 +124,7 @@
     @vite('resources/js/app.js')
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/chart.js') }}"></script>
+    <script src="{{ asset('js/output.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/jquery.inputmask.min.js"></script>

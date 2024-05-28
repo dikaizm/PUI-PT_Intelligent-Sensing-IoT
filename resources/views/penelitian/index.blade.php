@@ -121,4 +121,8 @@
 @include('penelitian.modal-delete')
 <!-- ========== modal end =========== -->
 
+<!-- ========== modal edit =========== -->
+@include('penelitian.modal-edit')
+<!-- ========== modal end =========== -->
+
 @endsection
