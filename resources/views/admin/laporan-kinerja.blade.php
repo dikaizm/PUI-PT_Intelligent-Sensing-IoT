@@ -1,10 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="title mb-5">
+                    <h2>{{ __('Laporan Kinerja') }}</h2>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
     <div class="row pt-30">
+
         <!-- Left Column: 2 col-2 cards stacked vertically -->
         <div class="col-xl-2 col-lg-2 col-sm-12 d-flex flex-column">
-            <div class="icon-card mb-30">
+            <div class="menu-toggle-btn" style="text-align: center;">
+                <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#modalFilterLaporanKinerja"
+                    style="background: linear-gradient(0deg, #DE0F0F 0%, #780808 100%); color:white;width:100%;">
+                    {{ __('[Tahun]') }}
+                </button>
+            </div>
+            <div class="icon-card mt-15 mb-15">
                 <div class="content" style="align-items: center; text-align:center;">
                     <h6 class="mb-10">{{ __('Jumlah Status Penelitian') }}</h6>
                     <h3 class="text-bold mb-10">{{ $jumlah_user }}</h3>
@@ -38,6 +61,7 @@
             <!-- End Icon Cart -->
         </div>
         <!-- End Left Column -->
+    <!-- End  Row -->
 
         <!-- Right Column: 2 col-5 charts stacked vertically -->
         <div class="col-xl-10 col-lg-10 col-sm-12">
@@ -68,9 +92,9 @@
             </div>
         </div>
         <!-- End Right Column -->
+
     </div>
 
-    <!-- End  Row -->
     <div class="row">
         <!-- End Col -->
         <div class="col-xl-6 col-lg-6 col-sm-12">
@@ -97,5 +121,6 @@
         <!-- End Col -->
     </div>
     <!-- End  Row -->
+
 @endsection
 

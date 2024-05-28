@@ -107,6 +107,16 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-style-1">
+                                        <label for="nameEdit{{ $user->id }}">{{ __('Jenis Pengguna') }}</label>
+                                        <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
+                                            <option value="admin">Admin</option>
+                                            <option value="user">User</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-12">
+                                    <div class="input-style-1">
                                         <label for="nameEdit{{ $user->id }}">{{ __('Name') }}</label>
                                         <input type="text" @error('name') class="form-control is-invalid" @enderror
                                             name="name" id="nameEdit{{ $user->id }}"
@@ -294,6 +304,16 @@
                         @csrf
 
                         <div class="row">
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label for="nameTambah{{ $user->id }}">{{ __('Jenis Pengguna') }}</label>
+                                    <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
+                                        <option value="admin">Admin</option>
+                                        <option value="user">User</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- end col -->
                             <div class="col-12">
                                 <div class="input-style-1">
                                     <label for="nameTambah">{{ __('Nama') }}</label>
@@ -551,6 +571,26 @@
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
                                         <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('NIP') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{ __($user->nip) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('No Handphone') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{ __($user->telp) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
                                             {{ __('Link Google Scholar') }}</li>
                                         <a href="{{ __($user->link_google_scholar) }}" target="_blank"
                                             style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_google_scholar) }}</a>
@@ -564,16 +604,6 @@
                                             {{ __('Link Sinta') }}</li>
                                         <a href="{{ __($user->link_sinta) }}" target="_blank"
                                             style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_sinta) }}</a>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
-                                            {{ __('NIP') }}</li>
-                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __($user->nip) }}</li>
                                     </ul>
                                 </div>
                             </div>

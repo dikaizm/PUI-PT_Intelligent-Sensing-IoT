@@ -1,6 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="title mb-4">
+                    <h2>{{ __('Penelitian') }}</h2>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
 <div class="card-styles">
     <div class="card-style-3 mb-30" style="border-radius: 20px;border: 2px solid #000;">
         <div class="card-content">
@@ -53,7 +68,7 @@
                                 </td>
                                 <td style="padding: 12px; text-align: center !important;">
                                     <p></p>
-                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalStatus{{ $item->id }}" style="color: gray !important;">
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalStatusPenelitian{{ $item->id }}" style="color: gray !important;">
                                         <span class="badge rounded-pill bg-{{ $item->statusPenelitian->warna }}">
                                             {{ $item->statusPenelitian->statusPenelitianKey->name }} {{ $item->statusPenelitian->name }}
                                         </span>
@@ -63,17 +78,19 @@
                                     <p>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y') }}</p>
                                 </td>
                                 <td style="padding: 12px; text-align: center !important;">
-                                    <a href="#" style="color: gray !important;">{{ $item->feedback }}</a>
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalFeedbackPenelitian{{ $item->id }}" style="color: gray !important;">
+                                        {{ $item->feedback }}
+                                    </a>
                                 </td>
                                 <td style="padding: 8px; text-align: center !important;">
-                                    <a type="button" data-bs-toggle="modal" data-bs-target="#{{ $item->judul }}">
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalDetailPenelitian{{ $item->id }}">
                                         <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
                                     </a>
                                     @can('mengelola-pengguna')
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#{{ $item->judul }}">
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalEditPenelitian{{ $item->id }}">
                                             <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
                                         </a>
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#{{ $item->judul }}">
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalDeletePenelitian{{ $item->id }}">
                                             <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>
                                         </a>
                                     @endcan
@@ -94,6 +111,14 @@
 
 <!-- ========== modal feedback =========== -->
 @include('penelitian.modal-feedback')
+<!-- ========== modal end =========== -->
+
+<!-- ========== modal detail =========== -->
+@include('penelitian.modal-detail')
+<!-- ========== modal end =========== -->
+
+<!-- ========== modal delete =========== -->
+@include('penelitian.modal-delete')
 <!-- ========== modal end =========== -->
 
 @endsection
