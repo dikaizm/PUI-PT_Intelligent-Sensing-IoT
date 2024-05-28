@@ -10,25 +10,20 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('jenis_dokumen', function (Blueprint $table) {
-            $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
-            $table->string('name', 32);
-            $table->timestamps();
-        });
-        Schema::create('publisher_key', function (Blueprint $table) {
+        Schema::create('jenis_output_key', function (Blueprint $table) {
             $table->smallInteger('id')->unsigned()->autoIncrement()->primary();
             $table->string('name', 64);
             $table->timestamps();
         });
-        Schema::create('publisher', function (Blueprint $table) {
+        Schema::create('jenis_output', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('publisher_key_id')->unsigned();
+            $table->smallInteger('jenis_output_key_id')->unsigned();
             $table
-                ->foreign('publisher_key_id')
+                ->foreign('jenis_output_key_id')
                 ->references('id')
-                ->on('publisher_key')
+                ->on('jenis_output_key')
                 ->onDelete('restrict');
-            $table->string('tingkat_index', 32);
+            $table->string('name', 32);
             $table->timestamps();
         });
         Schema::create('status_output', function (Blueprint $table) {
@@ -55,17 +50,11 @@ return new class extends Migration {
                 ->references('id')
                 ->on('output')
                 ->onDelete('restrict');
-            $table->smallInteger('jenis_dokumen_id')->unsigned();
+            $table->foreignId('jenis_output_id');
             $table
-                ->foreign('jenis_dokumen_id')
+                ->foreign('jenis_output_id')
                 ->references('id')
-                ->on('jenis_dokumen')
-                ->onDelete('restrict');
-            $table->foreignId('publisher_id');
-            $table
-                ->foreign('publisher_id')
-                ->references('id')
-                ->on('publisher')
+                ->on('jenis_output')
                 ->onDelete('restrict');
             $table->smallInteger('status_output_id')->unsigned();
             $table
@@ -73,8 +62,9 @@ return new class extends Migration {
                 ->references('id')
                 ->on('status_output')
                 ->onDelete('restrict');
-            $table->text('keterangan');
+            $table->string('judul');
             $table->string('tautan');
+            $table->string('file');
             $table->timestamps();
         });
     }
@@ -84,9 +74,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('jenis_dokumen');
-        Schema::dropIfExists('publisher_key');
-        Schema::dropIfExists('publisher');
+        Schema::dropIfExists('jenis_output_key');
+        Schema::dropIfExists('jenis_output');
         Schema::dropIfExists('status_output');
         Schema::dropIfExists('output');
         Schema::dropIfExists('output_detail');

@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\Publisher;
+use App\Models\JenisOutput;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class PublisherKey extends Model
+class JenisOutputKey extends Model
 {
     use HasFactory;
 
-    protected $table = 'publisher_key';
+    protected $table = 'jenis_output_key';
 
     protected $fillable = ['name'];
 
-    public function publishers(): HasMany
+    public function jenisOutput(): HasMany
     {
-        return $this->hasMany(Publisher::class);
+        return $this->hasMany(JenisOutput::class);
     }
 }

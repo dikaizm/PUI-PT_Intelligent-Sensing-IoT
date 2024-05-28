@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Mitra extends Model
+class Skema extends Model
 {
     use HasFactory;
 
-    protected $table = 'mitra';
+    protected $table = 'skema';
 
     protected $fillable = ['name'];
 

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Mitra;
+use App\Models\Skema;
 use App\Models\Output;
 use App\Models\JenisPenelitian;
 use App\Models\StatusPenelitian;
@@ -25,7 +25,6 @@ class Penelitian extends Model
     ];
 
     protected $fillable = [
-        'skema',
         'judul',
         'tingkatan_tkt',
         'pendanaan',
@@ -34,7 +33,7 @@ class Penelitian extends Model
         'feedback',
         'status_penelitian_id',
         'jenis_penelitian_id',
-        'mitra_id',
+        'skema_id',
         'arsip',
     ];
 
@@ -63,9 +62,9 @@ class Penelitian extends Model
         return $this->belongsTo(JenisPenelitian::class);
     }
 
-    public function mitra(): BelongsTo
+    public function skema(): BelongsTo
     {
-        return $this->belongsTo(Mitra::class);
+        return $this->belongsTo(Skema::class);
     }
 
     public function newUniqueId(): string
