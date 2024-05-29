@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PublisherRequest extends FormRequest
+class JenisOutputRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class PublisherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'publisher_key_id' => ['required'],
-            'tingkat_index' => ['required', 'string', 'max:32'],
+            'jenis_output_key_id' => ['required'],
+            'name' => ['required', 'string', 'max:32'],
         ];
     }
 }

@@ -29,7 +29,7 @@ class SkemaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(MitraRequest $request)
+    public function store(SkemaRequest $request)
     {
         Skema::create([
             'name' => $request->name,

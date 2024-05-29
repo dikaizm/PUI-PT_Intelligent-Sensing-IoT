@@ -1,6 +1,6 @@
-@foreach ($publisher_key as $item)
-    <div class="modal fade" id="modalDeletePublisherKey{{ $item->id }}" tabindex="-1"
-        aria-labelledby="ModalFourLabel" aria-hidden="true">
+@foreach ($jenis_output as $item)
+    <div class="modal fade" id="modalDeleteJenisOutput{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+        aria-hidden="true">
         <div class="modal-dialog"
             style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
             <div class="modal-content card-style">
@@ -17,7 +17,7 @@
                         </p>
                     </div>
                     <div class="action d-flex flex-wrap justify-content-end">
-                        <form action="{{ route('publisher-key.destroy', ['id' => $item->id]) }}" method="POST">
+                        <form action="{{ route('jenis-output.destroy', ['id' => $item->id]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="main-btn btn-sm danger-btn btn-hover m-1">
@@ -34,3 +34,4 @@
         </div>
     </div>
 @endforeach
+

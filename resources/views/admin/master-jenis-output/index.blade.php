@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="title-wrapper pt-30">
         <div class="row align-items-top">
 
@@ -19,7 +18,7 @@
 
                             <div class="menu-toggle-btn mr-20 mb-3" style="text-align: right;">
                                 <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahPublisherKey"
+                                    data-bs-target="#modalTambahJenisOutputKey"
                                     style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                                     {{ __('Tambahkan Data') }}
                                 </button>
@@ -50,7 +49,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($publisher_key as $item)
+                                        @foreach ($jenis_output_key as $item)
                                             <tr>
                                                 <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->id }}</p>
@@ -60,11 +59,11 @@
                                                 </td>
                                                 <td style="padding: 12px; text-align: center !important;">
                                                     <a type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#modalEditPublisherKey{{ $item->id }}">
+                                                        data-bs-target="#modalEditJenisOutputKey{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>
                                                     </a>
                                                     <a type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#modalDeletePublisherKey{{ $item->id }}">
+                                                        data-bs-target="#modalDeleteJenisOutputKey{{ $item->id }}">
                                                         <i class="lni lni-trash-can" style="color: red;"></i>
                                                     </a>
                                                 </td>
@@ -84,7 +83,7 @@
             <div class="col-md-7">
 
                 <div class="title mb-30">
-                    <h2>{{ __('Publisher') }}</h2>
+                    <h2>{{ __('Jenis Output') }}</h2>
                 </div>
 
                 <div class="card-styles" style="font-family: DM Sans">
@@ -93,7 +92,7 @@
 
                             <div class="menu-toggle-btn mr-20 mb-3" style="text-align: right;">
                                 <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#modalTambahPublisher"
+                                    data-bs-target="#modalTambahJenisOutput"
                                     style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                                     {{ __('Tambahkan Data') }}
                                 </button>
@@ -117,24 +116,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($publisher as $item)
+                                        @foreach ($jenis_output as $item)
                                             <tr>
                                                 <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->id }}</p>
                                                 </td>
+<<<<<<< HEAD:resources/views/admin/pengaturan-publisher/index.blade.php
                                                 <td style="padding: 12px; text-align: left !important;">
                                                     <p>{{ $item->publisherKey->name }}</p>
                                                 </td>
                                                 <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->tingkat_index }}</p>
+=======
+                                                <td class="text-center">
+                                                    <p>{{ $item->jenisOutputKey->name }}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $item->name }}</p>
+>>>>>>> f48b4ab2d077e8565b60d87475121bbfff769ea9:resources/views/admin/master-jenis-output/index.blade.php
                                                 </td>
                                                 <td style="padding: 12px; text-align: center !important;">
                                                     <a type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#modalEditPublisher{{ $item->id }}">
+                                                        data-bs-target="#modalEditJenisOutput{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>
                                                     </a>
                                                     <a type="button" data-bs-toggle="modal"
-                                                        data-bs-target="#modalDeletePublisher{{ $item->id }}">
+                                                        data-bs-target="#modalDeleteJenisOutput{{ $item->id }}">
                                                         <i class="lni lni-trash-can" style="color: red;"></i>
                                                     </a>
                                                 </td>
@@ -151,19 +158,19 @@
                 </div>
             </div>
 
-    <!-- ========== modal edit =========== -->
-    @include('admin.pengaturan-publisher.modal-edit-publisher')
-    @include('admin.pengaturan-publisher.modal-edit-publisher-key')
-    <!-- ========== modal end =========== -->
+            <!-- ========== modal edit =========== -->
+            @include('admin.master-jenis-output.modal-edit-jenis-output')
+            @include('admin.master-jenis-output.modal-edit-jenis-output-key')
+            <!-- ========== modal end =========== -->
 
-    <!-- ========== modal tambah =========== -->
-    @include('admin.pengaturan-publisher.modal-tambah-publisher')
-    @include('admin.pengaturan-publisher.modal-tambah-publisher-key')
-    <!-- ========== modal end =========== -->
+            <!-- ========== modal tambah =========== -->
+            @include('admin.master-jenis-output.modal-tambah-jenis-output')
+            @include('admin.master-jenis-output.modal-tambah-jenis-output-key')
+            <!-- ========== modal end =========== -->
 
-    <!-- ========== modal delete =========== -->
-    @include('admin.pengaturan-publisher.modal-delete-publisher')
-    @include('admin.pengaturan-publisher.modal-delete-publisher-key')
-    <!-- ========== modal end =========== -->
-@endsection
+            <!-- ========== modal delete =========== -->
+            @include('admin.master-jenis-output.modal-delete-jenis-output')
+            @include('admin.master-jenis-output.modal-delete-jenis-output-key')
+            <!-- ========== modal end =========== -->
+        @endsection
 

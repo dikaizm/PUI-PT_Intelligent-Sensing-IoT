@@ -1,6 +1,6 @@
-@foreach ($publisher_key as $item)
-    <div class="modal fade" id="modalEditPublisherKey{{ $item->id }}" tabindex="-1"
-        aria-labelledby="ModalFourLabel" aria-hidden="true">
+@foreach ($jenis_output as $item)
+    <div class="modal fade" id="modalEditJenisOutput{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+        aria-hidden="true">
         <div class="modal-dialog"
             style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
             <div class="modal-content card-style">
@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-body px-0">
                     <div class="content mb-30">
-                        <form action="{{ route('publisher-key.update', ['id' => $item->id]) }}" method="POST">
+                        <form action="{{ route('jenis-output.update', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -17,9 +17,29 @@
                                 <div class="col-12">
                                     <div class="input-style-1">
                                         <label
-                                            for="nameEditPublisherKey{{ $item->id }}">{{ __('Name') }}</label>
+                                            for="statusJenisOutputKeyIdEdit{{ $item->id }}">{{ __('Output Key') }}</label>
+                                        <select class="form-control @error('jenis_output_key_id') is-invalid @enderror"
+                                            name="jenis_output_key_id"
+                                            id="statusPenelitianKeyIdEdit{{ $item->id }}">
+                                            @foreach ($jenis_output_key as $status)
+                                                <option value="{{ $status->id }}"
+                                                    @if ($item->jenisOutputKey->id == $status->id) selected @endif>
+                                                    {{ $status->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('jenis_output_key_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-style-1">
+                                        <label for="nameEdit{{ $item->id }}">{{ __('Name') }}</label>
                                         <input type="text" @error('name') class="form-control is-invalid" @enderror
-                                            name="name" id="nameEditPublisherKey{{ $item->id }}"
+                                            name="name" id="nameEdit{{ $item->id }}"
                                             placeholder="{{ __('Name') }}" value="{{ $item->name }}">
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
@@ -49,3 +69,4 @@
         </div>
     </div>
 @endforeach
+
