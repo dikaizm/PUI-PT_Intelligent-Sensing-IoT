@@ -209,3 +209,17 @@ p {
 .radio-style.radio-danger .form-check-input:focus {
   box-shadow: none;
 }
+
+.nav-link {
+    transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+    color: #000; 
+  }
+
+.nav-link:hover {
+    background-color: #f0f0f0; /* Warna latar belakang saat dihover */
+    color: #000; /* Warna teks saat dihover */
+}
+.nav-link.active {
+    background-color: #ff000081; /* Warna latar belakang saat aktif */
+    color: #fff; /* Warna teks saat aktif */
+}

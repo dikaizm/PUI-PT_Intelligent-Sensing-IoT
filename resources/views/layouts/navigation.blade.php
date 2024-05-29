@@ -50,7 +50,7 @@
             <span class="icon" style="color: white;">
                 <i class="lni lni-cog"></i>
             </span>
-            <span class="text" style="color: white;">{{ __('Pengaturan') }}</span>
+            <span class="text" style="color: white;">{{ __('Master Data') }}</span>
         </a>
         <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
             <li>
