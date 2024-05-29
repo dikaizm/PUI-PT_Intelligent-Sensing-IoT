@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JenisOutputKey;
 use Illuminate\Http\Request;
+use App\Models\JenisOutputKey;
+use App\Http\Requests\JenisOutputKeyRequest;
 
 class JenisOutputKeyController extends Controller
 {
@@ -26,9 +27,15 @@ class JenisOutputKeyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JenisOutputKeyRequest $request)
     {
-        //
+        JenisOutputKey::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('jenis-output.index')
+            ->with('success', 'Jenis Output Key berhasil ditambah!');
     }
 
     /**
@@ -50,16 +57,26 @@ class JenisOutputKeyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, JenisOutputKey $jenisOutputKey)
+    public function update(JenisOutputKeyRequest $request, string $id)
     {
-        //
+        JenisOutputKey::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()
+            ->route('jenis-output.index')
+            ->with('success', 'Jenis Output Key berhasil diubah!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(JenisOutputKey $jenisOutputKey)
+    public function destroy($id)
     {
-        //
+        JenisOutputKey::findOrFail($id)->delete();
+
+        return redirect()
+            ->route('jenis-output.index')
+            ->with('success', 'Jenis Output Key berhasil dihapus!');
     }
 }
