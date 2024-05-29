@@ -31,6 +31,7 @@ class Penelitian extends Model
         'jangka_waktu',
         'file',
         'feedback',
+        'mitra',
         'status_penelitian_id',
         'jenis_penelitian_id',
         'skema_id',

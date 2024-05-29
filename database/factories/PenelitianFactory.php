@@ -23,6 +23,7 @@ class PenelitianFactory extends Factory
             'pendanaan' => fake()->numerify('#####000'),
             'jangka_waktu' => fake()->numerify('## Bulan'),
             'feedback' => fake()->text(),
+            'mitra' => fake()->company(),
             'status_penelitian_id' => fake()->randomDigitNotNull(),
             'jenis_penelitian_id' => fake()->randomDigitNotNull(),
             'skema_id' => fake()->randomDigitNotNull(),

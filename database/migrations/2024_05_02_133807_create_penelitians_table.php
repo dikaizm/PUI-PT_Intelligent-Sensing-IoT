@@ -46,6 +46,7 @@ return new class extends Migration {
             $table->string('jangka_waktu', 32)->nullable();
             $table->string('file')->nullable();
             $table->text('feedback')->nullable();
+            $table->string('mitra')->nullable();
             $table->smallInteger('status_penelitian_id')->unsigned();
             $table
                 ->foreign('status_penelitian_id')
