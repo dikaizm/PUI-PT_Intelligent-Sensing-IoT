@@ -13,7 +13,17 @@ class OutputController extends Controller
     public function index()
     {
         return view('output.index', [
-            'output' => Output::with(['penelitian', 'outputDetails'])->get(),
+            'output' => auth()->user()->hasRole('Admin')
+                ? Output::with(['penelitian', 'outputDetails'])->get()
+                : Output::with([
+                    'penelitian',
+                    'outputDetails',
+                    'penelitian.users',
+                ])
+                    ->whereHas('penelitian.users', function ($query) {
+                        $query->where('users.id', auth()->user()->id);
+                    })
+                    ->get(),
         ]);
     }
 
