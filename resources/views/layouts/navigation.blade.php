@@ -44,35 +44,38 @@
         </a>
     </li>
 
-    <li class="nav-item nav-item-has-children">
-        <a class="collapsed" href="#0" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_2"
-            aria-controls="ddmenu_2" aria-expanded="true" aria-label="Toggle navigation">
-            <span class="icon" style="color: white;">
-                <i class="lni lni-cog"></i>
-            </span>
-            <span class="text" style="color: white;">Pengaturan</span>
-        </a>
-        <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
-            <li>
-                <a href="{{ route('jenis-output.index') }}" style="color: white;">Jenis Output</a>
-            </li>
-            <li>
-                <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">Jenis Penelitian</a>
-            </li>
-            <li>
-                <a href="{{ route('skema.index') }}" style="color: white;">Mitra</a>
-            </li>
-            <li>
-                <a href="{{ route('status-output.index') }}" style="color: white;">Status Jurnal</a>
-            </li>
-            <li>
-                <a href="{{ route('status-penelitian.index') }}" style="color: white;">Status Laporan</a>
-            </li>
-            <li>
-                <a href="#" style="color: white;">Laporan</a>
-            </li>
-        </ul>
-    </li>
+    @can('mengelola-pengaturan')
+        <li class="nav-item nav-item-has-children">
+            <a class="collapsed" href="#0" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_2"
+                aria-controls="ddmenu_2" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="icon" style="color: white;">
+                    <i class="lni lni-cog"></i>
+                </span>
+                <span class="text" style="color: white;">Pengaturan</span>
+            </a>
+            <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
+                <li>
+                    <a href="{{ route('jenis-output.index') }}" style="color: white;">Jenis Output</a>
+                </li>
+                <li>
+                    <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">Jenis Penelitian</a>
+                </li>
+                <li>
+                    <a href="{{ route('skema.index') }}" style="color: white;">Mitra</a>
+                </li>
+                <li>
+                    <a href="{{ route('status-output.index') }}" style="color: white;">Status Jurnal</a>
+                </li>
+                <li>
+                    <a href="{{ route('status-penelitian.index') }}" style="color: white;">Status Laporan</a>
+                </li>
+                @can('mengelola-pengguna')
+                    <li>
+                        <a href="{{ route('register-key.index') }}" style="color: white;">Register Key</a>
+                    </li>
+                @endcan
+            </ul>
+    </li>@endcan
 
     <li class="nav-item">
         <form method="POST" action="{{ route('logout') }}" style="position: sticky; top: 100px;">
