@@ -30,7 +30,7 @@
                 <a href="{{ route('penelitian.index') }}" style="color: white;">Penelitian</a>
             </li>
             <li>
-                <a href="#" style="color: white;">Publikasi</a>
+                <a href="{{ route('laporan-output.index') }}" style="color: white;">Laporan Output</a>
             </li>
         </ul>
     </li>

@@ -229,4 +229,11 @@ Route::middleware('auth')->group(function () {
         'destroy',
     ])->name('penelitian.destroy');
     //end penelitian route
+
+    //laporan output routes
+    Route::get('laporan-output', [
+        \App\Http\Controllers\OutputController::class,
+        'index',
+    ])->name('laporan-output.index');
+    //end laporan output routes
 });
