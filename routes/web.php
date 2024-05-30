@@ -65,24 +65,24 @@ Route::middleware('auth')->group(function () {
     Route::middleware('can:mengelola-pengaturan')->group(function () {
         // Rute-rute yang memerlukan kedua middleware 'auth' dan 'can:mengelola-pengaturan' ditempatkan di sini
 
-        //pengaturan jenis penelitian
-        Route::get('pengaturan/jenis-penelitian', [
+        //master-data jenis penelitian
+        Route::get('master-data/jenis-penelitian', [
             \App\Http\Controllers\JenisPenelitianController::class,
             'index',
         ])->name('jenis-penelitian.index');
-        Route::post('pengaturan/jenis-penelitian/store', [
+        Route::post('master-data/jenis-penelitian/store', [
             \App\Http\Controllers\JenisPenelitianController::class,
             'store',
         ])->name('jenis-penelitian.store');
-        Route::put('pengaturan/jenis-penelitian/{id}/update', [
+        Route::put('master-data/jenis-penelitian/{id}/update', [
             \App\Http\Controllers\JenisPenelitianController::class,
             'update',
         ])->name('jenis-penelitian.update');
-        Route::delete('pengaturan/jenis-penelitian/{id}/destroy', [
+        Route::delete('master-data/jenis-penelitian/{id}/destroy', [
             \App\Http\Controllers\JenisPenelitianController::class,
             'destroy',
         ])->name('jenis-penelitian.destroy');
-        //end pengaturan jenis penelitian route
+        //end master-data jenis penelitian route
 
         //master-data skema route
         Route::get('master-data/skema', [
@@ -137,60 +137,60 @@ Route::middleware('auth')->group(function () {
         ])->name('jenis-output-key.destroy');
         //end master data jenis-output key route
 
-        //pengaturan status jurnal route
-        Route::get('pengaturan/status-output', [
+        //master-data status jurnal route
+        Route::get('master-data/status-output', [
             \App\Http\Controllers\StatusOutputController::class,
             'index',
         ])->name('status-output.index');
-        Route::post('pengaturan/status-output/store', [
+        Route::post('master-data/status-output/store', [
             \App\Http\Controllers\StatusOutputController::class,
             'store',
         ])->name('status-output.store');
-        Route::put('pengaturan/status-output/{id}/update', [
+        Route::put('master-data/status-output/{id}/update', [
             \App\Http\Controllers\StatusOutputController::class,
             'update',
         ])->name('status-output.update');
-        Route::delete('pengaturan/status-output/{id}/destroy', [
+        Route::delete('master-data/status-output/{id}/destroy', [
             \App\Http\Controllers\StatusOutputController::class,
             'destroy',
         ])->name('status-output.destroy');
-        //end pengaturan status output route
+        //end master-data status output route
 
-        //pengaturan status penelitian route
-        Route::get('pengaturan/status-penelitian', [
+        //master-data status penelitian route
+        Route::get('master-data/status-penelitian', [
             \App\Http\Controllers\StatusPenelitianController::class,
             'index',
         ])->name('status-penelitian.index');
-        Route::post('pengaturan/status-penelitian/store', [
+        Route::post('master-data/status-penelitian/store', [
             \App\Http\Controllers\StatusPenelitianController::class,
             'store',
         ])->name('status-penelitian.store');
-        Route::put('pengaturan/status-penelitian/{id}/update', [
+        Route::put('master-data/status-penelitian/{id}/update', [
             \App\Http\Controllers\StatusPenelitianController::class,
             'update',
         ])->name('status-penelitian.update');
-        Route::delete('pengaturan/status-penelitian/{id}/destroy', [
+        Route::delete('master-data/status-penelitian/{id}/destroy', [
             \App\Http\Controllers\StatusPenelitianController::class,
             'destroy',
         ])->name('status-penelitian.destroy');
-        //end pengaturan status penelitian route
+        //end master-data status penelitian route
 
-        //pengaturan status penelitian key route
-        Route::post('pengaturan/status-penelitian-key/store', [
+        //master-data status penelitian key route
+        Route::post('master-data/status-penelitian-key/store', [
             \App\Http\Controllers\StatusPenelitianKeyController::class,
             'store',
         ])->name('status-penelitian-key.store');
-        Route::put('pengaturan/status-penelitian-key/{id}/update', [
+        Route::put('master-data/status-penelitian-key/{id}/update', [
             \App\Http\Controllers\StatusPenelitianKeyController::class,
             'update',
         ])->name('status-penelitian-key.update');
-        Route::delete('pengaturan/status-penelitian-key/{id}/destroy', [
+        Route::delete('master-data/status-penelitian-key/{id}/destroy', [
             \App\Http\Controllers\StatusPenelitianKeyController::class,
             'destroy',
         ])->name('status-penelitian-key.destroy');
-        //end pengaturan status penelitian key route
+        //end master-data status penelitian key route
     });
-    //end mengelola-pengaturan middleware
+    //end mengelola-master-data middleware
     //penelitian route
     Route::get('penelitian', [
         \App\Http\Controllers\PenelitianController::class,
