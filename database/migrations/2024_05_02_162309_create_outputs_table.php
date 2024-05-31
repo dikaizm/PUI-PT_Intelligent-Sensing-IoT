@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\OutputType;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration {
     /**
@@ -62,6 +63,7 @@ return new class extends Migration {
                 ->references('id')
                 ->on('status_output')
                 ->onDelete('restrict');
+            $table->enum('tipe', OutputType::getValues());
             $table->string('judul');
             $table->string('tautan');
             $table->string('file');
