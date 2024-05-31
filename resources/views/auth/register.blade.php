@@ -18,21 +18,19 @@
     <!-- end col -->
     <div class="col-lg-5" style="font-family: DM Sans;">
         <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/auth/bg-login.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
-            <div class="outer-card" style="background-color:#9B0B0B; padding: 30px; border-radius: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); width: 90%; height: 500px;">
+            <div class="outer-card" style="background-color:#9B0B0B; padding: 30px; border-radius: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); width: 90%; height: 525px;">
                 <div class="inner-card" style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); height:100%;display: flex; flex-direction: column; justify-content: center; padding: 20px;">
                     <form action="{{ route('register') }}" method="POST" style="max-width: 85%; width:400px; margin:auto;">
                         @csrf
 
                         <div style="text-align: center;letter-spacing: 0.02em;">
-                            <h1 style="font-size: 24px;font-weight: 700;line-height: 31.25px;color: #590606;">
-                                {{ __('Register') }}</h1>
-                            <h1 style="font-size: 14px;font-weight: 500;line-height: 18.23px;color: #590606;">
-                                {{ __('Create an account') }}</h1>
+                            <h1 style="margin-top: 20px;top: 379px;left: 956px;gap: 0px;opacity: 0px;color: #590606;">
+                                {{ __('Buat Akun') }}</h1>
                         </div>
 
                             <div>
                                 <label for="name" class="form-label"></label>
-                                <input @error('name') class="form-control is-invalid" @else class="form-control" @enderror type="name" name="name" id="name" placeholder="{{ __('Name') }}" required autocomplete="name" autofocus>
+                                <input @error('name') class="form-control is-invalid" @else class="form-control" @enderror type="name" name="name" id="name" placeholder="{{ __('Nama Lengkap') }}" required autocomplete="name" autofocus>
                                 @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -42,7 +40,7 @@
                             <!-- end col -->
                             <div class="mb-3" >
                                 <label for="email" class="form-label"></label>
-                                    <input @error('email') class="form-control is-invalid" @else class="form-control" @enderror type="email" name="email" id="email" placeholder="{{ __('Email') }}" required autocomplete="email" autofocus>
+                                    <input @error('email') class="form-control is-invalid" @else class="form-control" @enderror type="email" name="email" id="email" placeholder="{{ __('Masukkan Email') }}" required autocomplete="email" autofocus>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -51,7 +49,7 @@
                             </div>
                             <!-- end col -->
                             <div class="mb-3">
-                                <input type="password" @error('password') class="form-control is-invalid" @else class="form-control" @enderror name="password" id="password" placeholder="{{ __('Password') }}" required autocomplete="new-password">
+                                <input type="password" @error('password') class="form-control is-invalid" @else class="form-control" @enderror name="password" id="password" placeholder="{{ __('Masukkan Password') }}" required autocomplete="new-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -60,8 +58,17 @@
                             </div>
                             <!-- end col -->
                             <div class="mb-3">
-                                <input type="password" @error('password_confirmation') class="form-control is-invalid" @else class="form-control" @enderror name="password_confirmation" id="password_confirmation" placeholder="{{ __('Password Confirmation') }}" required autocomplete="new-password">
+                                <input type="password" @error('password_confirmation') class="form-control is-invalid" @else class="form-control" @enderror name="password_confirmation" id="password_confirmation" placeholder="{{ __('Ulangi Password') }}" required autocomplete="new-password">
                                 @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <!-- end col -->
+                            <div class="mb-3">
+                                <input type="text" @error('key') class="form-control is-invalid" @else class="form-control" @enderror name="key" id="key" placeholder="{{ __('Register Key') }}" value="{{ request()->query('key') }}" required>
+                                @error('key')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -76,9 +83,9 @@
                                 </div>
                             </div>
 
-                            <p class="text-sm text-medium text-dark text-center">
-                                Already have an account? <a href="{{ route('home') }}" style="font-size: 14px;font-weight: 500;line-height: 18.23px;color: #590606;">Sign In</a>
-                              </p>
+                            <p class="text-sm text-medium text-dark text-center mb-20">
+                                {{ __('Sudah punya akun?') }} <a href="{{ route('home') }}" style="font-size: 14px;font-weight: 500;line-height: 18.23px;color: #DE0F0F;">{{ __('Login') }}</a>
+                            </p>
                     <!-- end row -->
                    </form>
                 </div>

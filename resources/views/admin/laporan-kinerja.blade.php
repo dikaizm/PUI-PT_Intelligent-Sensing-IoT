@@ -1,58 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="title mb-5">
+                    <h2>{{ __('Laporan Kinerja') }}</h2>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
     <div class="row pt-30">
-        <div class="col-xl-3 col-lg-4 col-sm-6">
-            <div class="icon-card mb-30">
-                <div class="icon purple">
-                    <i class="lni lni-book"></i>
-                </div>
-                <div class="content">
-                    <h6 class="mb-10">Jumlah Penelitian</h6>
-                    <h3 class="text-bold mb-10">{{ $jumlah_penelitian }}</h3>
-                    @if ($difference_jumlah_penelitian >= 0)
-                        <p class="text-sm text-success">
-                            <i class="lni lni-arrow-up"></i> +{{ $difference_jumlah_penelitian }}
-                        </p>
-                    @else
-                        <p class="text-sm text-danger">
-                            <i class="lni lni-arrow-down"></i>{{ $difference_jumlah_penelitian }}
-                        </p>
-                    @endif
-                </div>
+
+        <!-- Left Column: 2 col-2 cards stacked vertically -->
+        <div class="col-xl-2 col-lg-2 col-sm-12 d-flex flex-column">
+            <div class="menu-toggle-btn" style="text-align: center;">
+                <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#modalFilterLaporanKinerja"
+                    style="background: linear-gradient(0deg, #DE0F0F 0%, #780808 100%); color:white;width:100%;">
+                    {{ __('[Tahun]') }}
+                </button>
             </div>
-            <!-- End Icon Cart -->
-        </div>
-        <!-- End Col -->
-        <div class="col-xl-3 col-lg-4 col-sm-6">
-            <div class="icon-card mb-30">
-                <div class="icon success">
-                    <i class="lni lni-eye"></i>
-                </div>
-                <div class="content">
-                    <h6 class="mb-10">Jumlah Publikasi</h6>
-                    <h3 class="text-bold mb-10">{{ $jumlah_publikasi }}</h3>
-                    @if ($difference_jumlah_publikasi >= 0)
-                        <p class="text-sm text-success">
-                            <i class="lni lni-arrow-up"></i> +{{ $difference_jumlah_publikasi }}
-                        </p>
-                    @else
-                        <p class="text-sm text-danger">
-                            <i class="lni lni-arrow-down"></i>{{ $difference_jumlah_publikasi }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <!-- End Icon Cart -->
-        </div>
-        <!-- End Col -->
-        <div class="col-xl-3 col-lg-4 col-sm-6">
-            <div class="icon-card mb-30">
-                <div class="icon primary">
-                    <i class="lni lni-users"></i>
-                </div>
-                <div class="content">
-                    <h6 class="mb-10">Jumlah Anggota</h6>
+            <div class="icon-card mt-15 mb-15">
+                <div class="content" style="align-items: center; text-align:center;">
+                    <h6 class="mb-10">{{ __('Jumlah Status Penelitian') }}</h6>
                     <h3 class="text-bold mb-10">{{ $jumlah_user }}</h3>
                     @if ($difference_jumlah_user >= 0)
                         <p class="text-sm text-success">
@@ -66,15 +43,9 @@
                 </div>
             </div>
             <!-- End Icon Cart -->
-        </div>
-        <!-- End Col -->
-        <div class="col-xl-3 col-lg-4 col-sm-6">
             <div class="icon-card mb-30">
-                <div class="icon orange">
-                    <i class="lni lni-files"></i>
-                </div>
-                <div class="content">
-                    <h6 class="mb-10">Penelitian Aktif</h6>
+                <div class="content" style="align-items: center; text-align:center;">
+                    <h6 class="mb-10">{{ __('Jumlah Jenis Output') }}</h6>
                     <h3 class="text-bold mb-10">{{ $jumlah_penelitian_aktif }}</h3>
                     @if ($difference_jumlah_penelitian >= 0)
                         <p class="text-sm text-success">
@@ -89,62 +60,67 @@
             </div>
             <!-- End Icon Cart -->
         </div>
-        <!-- End Col -->
+        <!-- End Left Column -->
+    <!-- End  Row -->
+
+        <!-- Right Column: 2 col-5 charts stacked vertically -->
+        <div class="col-xl-10 col-lg-10 col-sm-12">
+            <div class="row">
+                <div class="col-6">
+                    <div class="icon-card mb-30" style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="title" style="margin-bottom: 10px; text-align: center;">
+                            {{ __('Status Penelitian') }}
+                        </div>
+                        <div style="width: 100%; height: 100%;">
+                            <canvas id="donatPenelitian"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- End First Chart -->
+
+                <div class="col-6">
+                    <div class="icon-card mb-30" style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="title" style="margin-bottom: 10px; text-align: center;">
+                            {{ __('Jenis Output') }}
+                        </div>
+                        <div style="width: 100%; height: 100%;">
+                            <canvas id="donatOutput"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Second Chart -->
+            </div>
+        </div>
+        <!-- End Right Column -->
+
     </div>
 
     <div class="row">
-        <div class="col-lg-5">
+        <!-- End Col -->
+        <div class="col-xl-6 col-lg-6 col-sm-12">
             <div class="card-style mb-30">
-                <div class="title d-flex justify-content-between">
-                    <div class="left">
-                        <h6 class="text-medium mb-20">Target Penelitian dan Publikasi 2024</h6>
-                    </div>
+                <div style="text-align: center">
+                    {{ __('Jumlah Output Per Kategori Tahun [1] dan [2]') }}
                 </div>
-                <!-- End Title-->
-                <div class="chart">
-                    <canvas id="stackedBar1" style="width: 320px; height: 300px; display: block; box-sizing: border-box;"
-                        width="640" height="600"></canvas>
+                <div class="card-body">
+                    <canvas id="barchartOutput"></canvas>
                 </div>
-                <!-- End Chart -->
             </div>
         </div>
         <!-- End Col -->
-        <div class="col-lg-7">
+        <div class="col-xl-6 col-lg-6 col-sm-12">
             <div class="card-style mb-30">
-                <div class="title d-flex flex-wrap align-items-center justify-content-between">
-                    <div class="left">
-                        <h6 class="text-medium mb-2">Target Penelitian dan Publikasi 2024</h6>
-                    </div>
+                <div style="text-align: center">
+                    {{ __('Jumlah Penelitian dan Target Tahun [1] dan [2]') }}
                 </div>
-                <!-- End Title -->
-                <div class="chart">
-                    <div id="legend3">
-                        <ul class="legend3 d-flex align-items-center mb-30">
-                            <li>
-                                <div class="d-flex">
-                                    <span class="bg-color primary-bg"> </span>
-                                    <div class="text">
-                                        <p class="text-sm text-dark">Penelitian</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-flex">
-                                    <span class="bg-color purple-bg"></span>
-                                    <div class="text">
-                                        <p class="text-sm text-dark">Publikasi</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <canvas id="Chart3"
-                        style="width: 355px; height: 271px; margin-left: -35px; display: block; box-sizing: border-box;"
-                        width="710" height="542"></canvas>
+                <div class="card-body">
+                    <canvas id="barchartPublikasi"></canvas>
                 </div>
             </div>
         </div>
         <!-- End Col -->
     </div>
+    <!-- End  Row -->
+
 @endsection
 

@@ -15,24 +15,24 @@
             @endcan
 
             <div class="table-wrapper table-responsive" style="font-family: DM Sans">
-                <table class="table striped-table" id="dataTables">
+                <table class="table striped-table" id="dataTables" style="width: 100%; border-collapse: collapse;">
                     <thead>
                         <tr>
-                            <th>
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                 <h6>Name</h6>
                             </th>
-                            <th>
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                 <h6>Email</h6>
                             </th>
-                            <th>
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                 <h6>Nip</h6>
                             </th>
                             @can('mengelola-pengguna')
-                                <th>
+                                <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                     <h6>Tipe Pengguna</h6>
                                 </th>
                             @endcan
-                            <th>
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                 <h6>Action</h6>
                             </th>
                         </tr>
@@ -41,22 +41,22 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>
+                                <td style="padding: 12px; text-align: center !important;">
                                     <p>{{ $user->name }}</p>
                                 </td>
-                                <td>
+                                <td style="padding: 12px; text-align: center !important;">
                                     <p>{{ $user->email }}</p>
                                 </td>
-                                <td>
+                                <td style="padding: 12px; text-align: center !important;">
                                     <p>{{ $user->nip }}</p>
                                 </td>
                                 @can('mengelola-pengguna')
-                                    <td>
+                                    <td style="padding: 12px; text-align: center !important;">
                                         <p>{{ $user->getRoleNames()->implode(', ') }}</p>
                                     </td>
                                 @endcan
 
-                                <td>
+                                <td style="padding: 12px; text-align: center !important;">
                                     <a type="button" data-bs-toggle="modal"
                                         data-bs-target="#modalUserdetail{{ $user->id }}">
                                         <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
@@ -107,11 +107,21 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-style-1">
+                                        <label for="nameEdit{{ $user->id }}">{{ __('Jenis Pengguna') }}</label>
+                                        <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
+                                            <option value="admin">Admin</option>
+                                            <option value="user">Dosen</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- end col -->
+                                <div class="col-12">
+                                    <div class="input-style-1">
                                         <label for="nameEdit{{ $user->id }}">{{ __('Name') }}</label>
                                         <input type="text" @error('name') class="form-control is-invalid" @enderror
                                             name="name" id="nameEdit{{ $user->id }}"
                                             placeholder="{{ __('Name') }}" value="{{ old('name', $user->name) }}"
-                                            required>
+                                            required readonly>
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -126,7 +136,7 @@
                                         <input type="text" @error('nip') class="form-control is-invalid" @enderror
                                             name="nip" id="nipEdit{{ $user->id }}"
                                             placeholder="{{ __('NIP') }}" value="{{ old('nip', $user->nip) }}"
-                                            required>
+                                            required readonly>
                                         @error('nip')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -141,86 +151,8 @@
                                         <input @error('email') class="form-control is-invalid" @enderror type="email"
                                             name="email" id="emailEdit{{ $user->id }}"
                                             placeholder="{{ __('Email') }}" value="{{ old('email', $user->email) }}"
-                                            required>
+                                            required readonly>
                                         @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label
-                                            for="telpEdit{{ $user->id }}{{ $user->id }}">{{ __('Nomor HP') }}</label>
-                                        <input @error('telp') class="form-control is-invalid" @enderror type="text"
-                                            name="telp" id="telpEdit{{ $user->id }}{{ $user->id }}"
-                                            placeholder="{{ __('Nomor HP') }}" value="{{ old('telp', $user->telp) }}"
-                                            required>
-                                        @error('telp')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label for="keahlianEdit{{ $user->id }}">{{ __('Keahlian') }}</label>
-                                        <input @error('keahlian') class="form-control is-invalid" @enderror
-                                            type="text" name="keahlian" id="keahlianEdit{{ $user->id }}"
-                                            placeholder="{{ __('Keahlian') }}"
-                                            value="{{ old('keahlian', $user->keahlian) }}">
-                                        @error('keahlian')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label for="fakultasEdit{{ $user->id }}">{{ __('Fakultas') }}</label>
-                                        <input @error('fakultas') class="form-control is-invalid" @enderror
-                                            type="text" name="fakultas" id="fakultasEdit{{ $user->id }}"
-                                            placeholder="{{ __('Fakultas') }}"
-                                            value="{{ old('fakultas', $user->fakultas) }}">
-                                        @error('fakultas')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label
-                                            for="link_google_scholarEdit{{ $user->id }}">{{ __('Google Scholar') }}</label>
-                                        <input @error('link_google_scholar') class="form-control is-invalid" @enderror
-                                            type="text" name="link_google_scholar"
-                                            id="link_google_scholarEdit{{ $user->id }}"
-                                            placeholder="{{ __('Link Google Scholar') }}"
-                                            value="{{ old('link_google_scholar', $user->link_google_scholar) }}">
-                                        @error('link_google_scholar')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label for="link_sintaEdit{{ $user->id }}">{{ __('Sinta') }}</label>
-                                        <input @error('link_sinta') class="form-control is-invalid" @enderror
-                                            type="text" name="link_sinta" id="link_sintaEdit{{ $user->id }}"
-                                            placeholder="{{ __('Link Sinta') }}"
-                                            value="{{ old('link_sinta', $user->link_sinta) }}">
-                                        @error('link_sinta')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -294,6 +226,16 @@
                         @csrf
 
                         <div class="row">
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label for="nameTambah{{ $user->id }}">{{ __('Jenis Pengguna') }}</label>
+                                    <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
+                                        <option value="admin">Admin</option>
+                                        <option value="user">User</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- end col -->
                             <div class="col-12">
                                 <div class="input-style-1">
                                     <label for="nameTambah">{{ __('Nama') }}</label>
@@ -498,9 +440,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body px-0" style="width: 100%; text-align: center;">
-                    <div class="col-xl-6 col-lg-10 col-md-6" style="margin: auto;width: 90%;">
-                        <div
-                            style="border-radius: 50%; max-width: 225px; width: 100%; overflow: hidden; margin: auto; margin-top: 0px; margin-bottom: 40px;">
+                    <div class="col-12" style="margin: auto;width-max: 90%;">
+                        <div style="border-radius: 50%; max-width: 225px; width: 100%; overflow: hidden; margin: auto; margin-top: 0px; margin-bottom: 40px;">
                             <a style="display: block;" style="align-content: center;">
                                 <img src="{{ asset('images/example/joji.jpg') }}" alt="Card Image"
                                     style="width: 100%;">
@@ -551,6 +492,26 @@
                                 <div style="text-align: center;">
                                     <ul style="list-style: none; padding-left:15%;">
                                         <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('NIP') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{ __($user->nip) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                                            {{ __('No Handphone') }}</li>
+                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                                            {{ __($user->telp) }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 row g-1">
+                                <div style="text-align: center;">
+                                    <ul style="list-style: none; padding-left:15%;">
+                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
                                             {{ __('Link Google Scholar') }}</li>
                                         <a href="{{ __($user->link_google_scholar) }}" target="_blank"
                                             style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_google_scholar) }}</a>
@@ -564,16 +525,6 @@
                                             {{ __('Link Sinta') }}</li>
                                         <a href="{{ __($user->link_sinta) }}" target="_blank"
                                             style="font-weight: 400;font-size: 18px; text-align: left;">{{ __($user->link_sinta) }}</a>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 row g-1">
-                                <div style="text-align: center;">
-                                    <ul style="list-style: none; padding-left:15%;">
-                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
-                                            {{ __('NIP') }}</li>
-                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __($user->nip) }}</li>
                                     </ul>
                                 </div>
                             </div>

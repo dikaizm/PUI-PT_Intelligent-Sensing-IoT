@@ -34,16 +34,16 @@
                                 </div>
                             </div>
                             <div class="table-wrapper table-responsive">
-                                <table class="table striped-table" id="dataTables2">
+                                <table class="table striped-table" id="dataTables2" style="width: 100%; border-collapse: collapse;">
                                     <thead>
                                         <tr>
-                                            <th class="text-center" style="width: 5%;">
+                                        <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 3%;">
                                                 <h6>ID</h6>
                                             </th>
-                                            <th class="text-center" style="width: 25%;">
+                                        <th style="border-bottom: 1px solid black; padding: 16px; text-align: left !important; width: 87%;">
                                                 <h6>Key</h6>
                                             </th>
-                                            <th class="text-center" style="width: 5%;">
+                                        <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                                 <h6>Action</h6>
                                             </th>
                                         </tr>
@@ -51,13 +51,13 @@
                                     <tbody>
                                         @foreach ($jenis_output_key as $item)
                                             <tr>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->id }}</p>
                                                 </td>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: left !important;">
                                                     <p>{{ $item->name }}</p>
                                                 </td>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <a type="button" data-bs-toggle="modal"
                                                         data-bs-target="#modalEditJenisOutputKey{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>
@@ -98,19 +98,19 @@
                                 </button>
                             </div>
                             <div class="table-wrapper table-responsive">
-                                <table class="table striped-table" id="dataTables">
+                                <table class="table striped-table" id="dataTables" style="width: 100%; border-collapse: collapse;">
                                     <thead>
                                         <tr>
-                                            <th class="text-center" style="width: 5%;">
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 3%;">
                                                 <h6>ID</h6>
                                             </th>
-                                            <th class="text-center" style="width: 25%;">
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: left !important; width: 57%;">
                                                 <h6>Key</h6>
                                             </th>
-                                            <th>
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 30%;">
                                                 <h6>Tingkat Index</h6>
                                             </th>
-                                            <th class="text-center" style="width: 5%;">
+                                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                                 <h6>Action</h6>
                                             </th>
                                         </tr>
@@ -118,16 +118,24 @@
                                     <tbody>
                                         @foreach ($jenis_output as $item)
                                             <tr>
-                                                <td class="text-center">
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <p>{{ $item->id }}</p>
                                                 </td>
+<<<<<<< HEAD:resources/views/admin/pengaturan-publisher/index.blade.php
+                                                <td style="padding: 12px; text-align: left !important;">
+                                                    <p>{{ $item->publisherKey->name }}</p>
+                                                </td>
+                                                <td style="padding: 12px; text-align: center !important;">
+                                                    <p>{{ $item->tingkat_index }}</p>
+=======
                                                 <td class="text-center">
                                                     <p>{{ $item->jenisOutputKey->name }}</p>
                                                 </td>
                                                 <td>
                                                     <p>{{ $item->name }}</p>
+>>>>>>> f48b4ab2d077e8565b60d87475121bbfff769ea9:resources/views/admin/master-jenis-output/index.blade.php
                                                 </td>
-                                                <td>
+                                                <td style="padding: 12px; text-align: center !important;">
                                                     <a type="button" data-bs-toggle="modal"
                                                         data-bs-target="#modalEditJenisOutput{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>

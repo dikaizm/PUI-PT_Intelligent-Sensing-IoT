@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-30">
-                    <h2>{{ __('Status Jurnal') }}</h2>
+                    <h2>{{ __('Status Output') }}</h2>
                 </div>
             </div>
             <!-- end col -->
@@ -29,16 +29,16 @@
                     </button>
                 </div>
                 <div class="table-wrapper table-responsive">
-                    <table class="table striped-table" id="dataTables">
+                    <table class="table striped-table" id="dataTables" style="width: 100%; border-collapse: collapse;">
                         <thead>
                             <tr>
-                                <th>
+                                <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 3%;">
                                     <h6>ID</h6>
                                 </th>
-                                <th>
+                                <th style="border-bottom: 1px solid black; padding: 16px; text-align: left !important; width: 87%;">
                                     <h6>Name</h6>
                                 </th>
-                                <th style="width: 5%;">
+                                <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                     <h6>Action</h6>
                                 </th>
                             </tr>
@@ -46,13 +46,13 @@
                         <tbody>
                             @foreach ($status_output as $item)
                                 <tr>
-                                    <td>
+                                    <td style="padding: 12px; text-align: center !important;">
                                         <p>{{ $item->id }}</p>
                                     </td>
-                                    <td>
+                                    <td style="padding: 12px; text-align: left !important;">
                                         <p>{{ $item->name }}</p>
                                     </td>
-                                    <td>
+                                    <td style="padding: 12px; text-align: center !important;">
                                         <a type="button" data-bs-toggle="modal"
                                             data-bs-target="#modalEdit{{ $item->id }}">
                                             <i class="lni lni-pencil" style="color: black;"></i>
