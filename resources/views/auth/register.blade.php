@@ -67,8 +67,8 @@
                             </div>
                             <!-- end col -->
                             <div class="mb-3">
-                                <input type="password" @error('password_confirmation') class="form-control is-invalid" @else class="form-control" @enderror name="password_confirmation" id="password_confirmation" placeholder="{{ __('Register Key') }}" required autocomplete="new-password">
-                                @error('password')
+                                <input type="text" @error('key') class="form-control is-invalid" @else class="form-control" @enderror name="key" id="key" placeholder="{{ __('Register Key') }}" value="{{ request()->query('key') }}" required>
+                                @error('key')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -110,7 +110,7 @@
                                         <label for="nameEdit{{ $user->id }}">{{ __('Jenis Pengguna') }}</label>
                                         <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
                                             <option value="admin">Admin</option>
-                                            <option value="user">User</option>
+                                            <option value="user">Dosen</option>
                                         </select>
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                                         <input type="text" @error('name') class="form-control is-invalid" @enderror
                                             name="name" id="nameEdit{{ $user->id }}"
                                             placeholder="{{ __('Name') }}" value="{{ old('name', $user->name) }}"
-                                            required>
+                                            required readonly>
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -136,7 +136,7 @@
                                         <input type="text" @error('nip') class="form-control is-invalid" @enderror
                                             name="nip" id="nipEdit{{ $user->id }}"
                                             placeholder="{{ __('NIP') }}" value="{{ old('nip', $user->nip) }}"
-                                            required>
+                                            required readonly>
                                         @error('nip')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -151,86 +151,8 @@
                                         <input @error('email') class="form-control is-invalid" @enderror type="email"
                                             name="email" id="emailEdit{{ $user->id }}"
                                             placeholder="{{ __('Email') }}" value="{{ old('email', $user->email) }}"
-                                            required>
+                                            required readonly>
                                         @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label
-                                            for="telpEdit{{ $user->id }}{{ $user->id }}">{{ __('Nomor HP') }}</label>
-                                        <input @error('telp') class="form-control is-invalid" @enderror type="text"
-                                            name="telp" id="telpEdit{{ $user->id }}{{ $user->id }}"
-                                            placeholder="{{ __('Nomor HP') }}" value="{{ old('telp', $user->telp) }}"
-                                            required>
-                                        @error('telp')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label for="keahlianEdit{{ $user->id }}">{{ __('Keahlian') }}</label>
-                                        <input @error('keahlian') class="form-control is-invalid" @enderror
-                                            type="text" name="keahlian" id="keahlianEdit{{ $user->id }}"
-                                            placeholder="{{ __('Keahlian') }}"
-                                            value="{{ old('keahlian', $user->keahlian) }}">
-                                        @error('keahlian')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label for="fakultasEdit{{ $user->id }}">{{ __('Fakultas') }}</label>
-                                        <input @error('fakultas') class="form-control is-invalid" @enderror
-                                            type="text" name="fakultas" id="fakultasEdit{{ $user->id }}"
-                                            placeholder="{{ __('Fakultas') }}"
-                                            value="{{ old('fakultas', $user->fakultas) }}">
-                                        @error('fakultas')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label
-                                            for="link_google_scholarEdit{{ $user->id }}">{{ __('Google Scholar') }}</label>
-                                        <input @error('link_google_scholar') class="form-control is-invalid" @enderror
-                                            type="text" name="link_google_scholar"
-                                            id="link_google_scholarEdit{{ $user->id }}"
-                                            placeholder="{{ __('Link Google Scholar') }}"
-                                            value="{{ old('link_google_scholar', $user->link_google_scholar) }}">
-                                        @error('link_google_scholar')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <!-- end col -->
-                                <div class="col-12">
-                                    <div class="input-style-1">
-                                        <label for="link_sintaEdit{{ $user->id }}">{{ __('Sinta') }}</label>
-                                        <input @error('link_sinta') class="form-control is-invalid" @enderror
-                                            type="text" name="link_sinta" id="link_sintaEdit{{ $user->id }}"
-                                            placeholder="{{ __('Link Sinta') }}"
-                                            value="{{ old('link_sinta', $user->link_sinta) }}">
-                                        @error('link_sinta')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

@@ -55,11 +55,14 @@
                                             </select>
                                         </div>
                                         <div class="input-style-1">
-                                            <label for="nameEdit{{ $user->id }}">{{ __('Judul Publikasi') }}</label>
+                                            <label for="nameEdit{{ $user->id }}">{{ __('Jenis') }}</label>
                                             <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
-                                                <option value="admin">Internasional</option>
-                                                <option value="user">Domestik</option>
+                                                <option value="admin">Jurnal</option>
+                                                <option value="user">Conference</option>
                                             </select>
+                                        </div>
+                                        <div class="input-style-1">
+                                            <label for="nameEdit{{ $user->id }}">{{ __('Judul Publikasi') }}</label>
                                             <input @error('name') class="form-control is-invalid" @enderror type="text"
                                                 name="name" id="name" placeholder="{{ __('Skema Penelitian') }}"
                                                 value="{{ old('name', auth()->user()->name) }}">
@@ -98,7 +101,26 @@
                                             </div>
                                         </div>
                                         <div class="input-style-1">
-                                            <label for="nameEdit{{ $user->id }}">{{ __('Status HKI') }}</label>
+                                            <label for="name">{{ __('Corresponding') }}</label>
+                                            <div id="inputContainer">
+                                                <div class="input-style-1">
+                                                    <input type="text"
+                                                           name="name"
+                                                           {{-- id="nameEdit{{ $user->id }}" --}}
+                                                           placeholder="{{ __('Name') }}"
+                                                           {{-- value="{{ old('name', $user->name) }}" --}}
+                                                           required
+                                                           class="form-control @error('name') is-invalid @enderror">
+                                                    @error('name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="input-style-1">
+                                            <label for="nameEdit{{ $user->id }}">{{ __('Status Output') }}</label>
                                             <select
                                                 class="form-control @error('status_penelitian') is-invalid @enderror"
                                                 name="status_penelitian"
@@ -118,7 +140,7 @@
                                             @enderror
                                         </div>
                                         <div class="input-style-1">
-                                            <label for="nameEdit{{ $user->id }}">{{ __('Tanggal Granted') }} <span style="color:gray;">{{ __('*Diisi jika memilih status Granted') }}</span></label>
+                                            <label for="nameEdit{{ $user->id }}">{{ __('Tanggal Publish') }} <span style="color:gray;">{{ __('*Diisi jika memilih status Published') }}</span></label>
                                             @error('status_penelitian')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -127,7 +149,7 @@
                                             <input type="date" id="dateInput" required>
                                         </div>
                                         <div class="input-style-1">
-                                            <label for="name">{{ __('Link HKI') }} <span style="color:gray;">{{ __('*Apabila sudah publish') }}</span> </label>
+                                            <label for="name">{{ __('Link Jurnal') }} <span style="color:gray;">{{ __('*Apabila sudah publish') }}</span> </label>
                                             <input @error('name') class="form-control is-invalid" @enderror type="text"
                                                 name="name" id="name" placeholder="{{ __('Skema Penelitian') }}"
                                                 value="{{ old('name', auth()->user()->name) }}">
@@ -139,6 +161,14 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-hki" role="tabpanel" aria-labelledby="v-pills-hki-tab">
+                                        <div class="input-style-1">
+                                            <label for="nameEdit{{ $user->id }}">{{ __('Jenis') }}</label>
+                                            <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
+                                                <option value="admin">Paten</option>
+                                                <option value="user">Paten Sederhana</option>
+                                                <option value="user">Hak Cipta</option>
+                                            </select>
+                                        </div>
                                         <div class="input-style-1">
                                             <label for="nameEdit{{ $user->id }}">{{ __('Judul HKI') }}</label>
                                             <input @error('name') class="form-control is-invalid" @enderror type="text"
@@ -162,7 +192,7 @@
                                             @enderror
                                         </div>
                                         <div class="input-style-1">
-                                            <label for="nameEdit{{ $user->id }}">{{ __('Status HKI') }}</label>
+                                            <label for="nameEdit{{ $user->id }}">{{ __('Status Output') }}</label>
                                             <select
                                                 class="form-control @error('status_penelitian') is-invalid @enderror"
                                                 name="status_penelitian"
@@ -246,20 +276,15 @@
                                             @enderror
                                         </div>
                                         <div class="input-style-1">
-                                            <label for="email_verified_at">{{ __('File Video') }}</label>
-                                            <div class="input-style-1">
-                                                <input type="file"
-                                                    accept=".pdf"
-                                                    @error('name') class="form-control is-invalid" @enderror
-                                                    name="name"
-                                                    placeholder="{{ __('Name') }}"
-                                                    required>
-                                                    @error('name')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                            </div>
+                                            <label for="email_verified_at">{{ __('Link Video') }}</label>
+                                            <input @error('name') class="form-control is-invalid" @enderror type="text"
+                                                name="name" id="name" placeholder="{{ __('Skema Penelitian') }}"
+                                                value="{{ old('name', auth()->user()->name) }}">
+                                            @error('name')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

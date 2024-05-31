@@ -87,7 +87,7 @@
                                         <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
                                     </a>
                                     @can('mengelola-pengguna')
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalEditPenelitian{{ $item->id }}">
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#">
                                             <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
                                         </a>
                                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalDeletePenelitian{{ $item->id }}">
@@ -113,16 +113,8 @@
 @include('penelitian.modal-feedback')
 <!-- ========== modal end =========== -->
 
-<!-- ========== modal detail =========== -->
-@include('penelitian.modal-detail')
-<!-- ========== modal end =========== -->
-
 <!-- ========== modal delete =========== -->
 @include('penelitian.modal-delete')
-<!-- ========== modal end =========== -->
-
-<!-- ========== modal edit =========== -->
-@include('penelitian.modal-edit')
 <!-- ========== modal end =========== -->
 
 @endsection

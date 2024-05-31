@@ -54,30 +54,22 @@
         </a>
         <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
             <li>
-<<<<<<< HEAD
-                <a href="{{ route('jenis-dokumen.index') }}" style="color: white;">{{ __('Jenis Dokumen') }}</a>
-=======
+                <a href="{{ route('skema.index') }}" style="color: white;">{{ __('Skema') }}</a>
+            </li>
+            <li>
                 <a href="{{ route('jenis-output.index') }}" style="color: white;">Jenis Output</a>
->>>>>>> f48b4ab2d077e8565b60d87475121bbfff769ea9
             </li>
             <li>
                 <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">{{ __('Jenis Penelitian') }}</a>
             </li>
             <li>
-                <a href="{{ route('skema.index') }}" style="color: white;">Mitra</a>
-            </li>
-            <li>
-<<<<<<< HEAD
-                <a href="{{ route('publisher.index') }}" style="color: white;">{{ __('Publisher') }}</a>
-            </li>
-            <li>
                 <a href="{{ route('status-output.index') }}" style="color: white;">{{ __('Status Output') }}</a>
-=======
-                <a href="{{ route('status-output.index') }}" style="color: white;">Status Jurnal</a>
->>>>>>> f48b4ab2d077e8565b60d87475121bbfff769ea9
             </li>
             <li>
                 <a href="{{ route('status-penelitian.index') }}" style="color: white;">{{ __('Status Penelitian') }}</a>
+            </li>
+            <li>
+                <a href="#" style="color: white;">{{ __('Laporan') }}</a>
             </li>
         </ul>
     </li>
