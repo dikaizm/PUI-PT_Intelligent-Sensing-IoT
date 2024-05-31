@@ -169,5 +169,8 @@ class DatabaseSeeder extends Seeder
             'tautan' => 'seeders',
             'file' => 'public',
         ]);
+        DB::table('register_keys')->insert([
+            'key' => '123456789abcd',
+        ]);
     }
 }
