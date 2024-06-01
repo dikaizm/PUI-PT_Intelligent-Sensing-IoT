@@ -170,7 +170,7 @@ class PenelitianController extends Controller
     public function updateFeedback(Request $request, $uuid)
     {
         $request->validate([
-            'feedback' => ['string|max:1000'],
+            'feedback' => ['string', 'max:1000'],
         ]);
         Penelitian::where('uuid', $uuid)->update([
             'feedback' => $request->feedback,
