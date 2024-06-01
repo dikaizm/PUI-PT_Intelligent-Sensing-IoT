@@ -163,7 +163,7 @@ class PenelitianController extends Controller
             'status_penelitian_id' => $request->status_penelitian_id,
         ]);
         return redirect()
-            ->route('penelitian.index')
+            ->back()
             ->with('success', 'Status Penelitian berhasil diperbarui!');
     }
 
@@ -176,7 +176,7 @@ class PenelitianController extends Controller
             'feedback' => $request->feedback,
         ]);
         return redirect()
-            ->route('penelitian.index')
+            ->back()
             ->with('success', 'Feedback berhasil diperbarui!');
     }
 
