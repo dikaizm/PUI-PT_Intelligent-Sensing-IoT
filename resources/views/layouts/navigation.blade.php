@@ -31,10 +31,7 @@
                 <a href="{{ route('penelitian.index') }}" style="color: white;">{{ __('Penelitian') }}</a>
             </li>
             <li>
-                <<<<<<< HEAD <a href="#" style="color: white;">{{ __('Laporan Output') }}</a>
-                    =======
-                    <a href="{{ route('laporan-output.index') }}" style="color: white;">Laporan Output</a>
-                    >>>>>>> 7a9b03c1c17eb5e017108e1d18a1a4ebfa85c211
+                <a href="{{ route('laporan-output.index') }}" style="color: white;">{{ __('Laporan Output') }}</a>
             </li>
         </ul>
     </li>
