@@ -221,6 +221,10 @@ Route::middleware('auth')->group(function () {
     ])
         ->name('penelitian.show')
         ->middleware(EnsureAuthorPenelitian::class);
+    Route::get('penelitian/{uuid}/edit', [
+        \App\Http\Controllers\PenelitianController::class,
+        'edit',
+    ])->name('penelitian.edit');
     Route::put('penelitian/{uuid}/update', [
         \App\Http\Controllers\PenelitianController::class,
         'update',

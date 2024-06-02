@@ -94,15 +94,13 @@
                                             data-bs-target="#modalDetailPenelitian{{ $item->id }}">
                                             <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
                                         </a>
-                                        @can('mengelola-pengguna')
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#">
-                                                <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
-                                            </a>
-                                            <a type="button" data-bs-toggle="modal"
-                                                data-bs-target="#modalDeletePenelitian{{ $item->id }}">
-                                                <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>
-                                            </a>
-                                        @endcan
+                                        <a type="button" href="{{ route('penelitian.edit', ['uuid' => $item->uuid]) }}">
+                                            <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
+                                        </a>
+                                        <a type="button" data-bs-toggle="modal"
+                                            data-bs-target="#modalDeletePenelitian{{ $item->id }}">
+                                            <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -120,6 +118,10 @@
 
     <!-- ========== modal feedback =========== -->
     @include('penelitian.modal-feedback')
+    <!-- ========== modal end =========== -->
+
+    <!-- ========== modal detail =========== -->
+    @include('penelitian.modal-detail')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal delete =========== -->
