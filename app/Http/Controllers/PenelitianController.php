@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Skema;
 use App\Models\Penelitian;
 use Illuminate\Http\Request;
 use App\Models\JenisPenelitian;
@@ -53,7 +55,14 @@ class PenelitianController extends Controller
      */
     public function create()
     {
-        //
+        return view('penelitian.tambah-data-penelitian', [
+            'skema' => Skema::select('id', 'name')->get(),
+            'jenis_penelitian' => JenisPenelitian::select('id', 'name')->get(),
+            'status_penelitian' => StatusPenelitian::with(
+                'statusPenelitianKey'
+            )->get(),
+            'users' => User::select('id', 'name')->get(),
+        ]);
     }
 
     /**
