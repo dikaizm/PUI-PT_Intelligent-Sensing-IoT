@@ -30,7 +30,7 @@
                     </div>
                 @endsession
 
-                <form action="{{ route('profile.update') }}" method="POST">
+                <form action="{{ route('penelitian.update', ['uuid' => $item->uuid]) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="row">

@@ -124,7 +124,14 @@ class PenelitianController extends Controller
      */
     public function edit(Penelitian $penelitian)
     {
-        //
+        return view('penelitian.edit-data-penelitian', [
+            'skema' => Skema::select('id', 'name')->get(),
+            'jenis_penelitian' => JenisPenelitian::select('id', 'name')->get(),
+            'status_penelitian' => StatusPenelitian::with(
+                'statusPenelitianKey'
+            )->get(),
+            'users' => User::select('id', 'name')->get(),
+        ]);
     }
 
     /**
