@@ -20,14 +20,20 @@
             <div class="card-content">
                 <form action="{{ route('penelitian.store') }}" method="POST">
                     @csrf
-                    @method('PUT')
                     <div class="row">
                         <div class="col-12">
                             <div class="input-style-1">
-                                <label for="name">{{ __('Skema Penelitian') }}</label>
-                                <input @error('name') class="form-control is-invalid" @enderror type="text"
-                                    name="name" id="name" placeholder="{{ __('Skema Penelitian') }}">
-                                @error('name')
+                                <label style="text-align: left;" for="skema">
+                                    {{ __('Pilih Skema Penelitian') }}
+                                </label>
+                                <select class="form-control @error('skema') is-invalid @enderror" name="skema" id="skema" style="max-width: 100%; margin: 0 auto;">
+                                    @foreach ($skema as $s)
+                                        <option value="{{ $s->id }}" @if (old('skema') == $s->id) selected @endif>
+                                            {{ $s->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('skema')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -37,10 +43,10 @@
                         <!-- end col -->
                         <div class="col-12">
                             <div class="input-style-1">
-                                <label for="email">{{ __('Judul Penelitian') }}</label>
-                                <input @error('email') class="form-control is-invalid" @enderror type="email"
-                                    name="email" id="email" placeholder="{{ __('Judul Penelitian') }}">
-                                @error('email')
+                                <label for="judul">{{ __('Judul Penelitian') }}</label>
+                                <input @error('judul') class="form-control is-invalid" @enderror type="judul"
+                                    name="judul" id="judul" placeholder="{{ __('Judul Penelitian') }}">
+                                @error('judul')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -50,42 +56,20 @@
                         <!-- end col -->
                         <div class="col-12">
                             <div class="input-style-1">
-                                <label for="password">{{ __('Ketua Tim') }}</label>
-                                <input type="password"
-                                    @error('password') class="form-control is-invalid"
-                                        @enderror
-                                    name="password" id="password" placeholder="{{ __('Ketua Tim') }}">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- end col -->
-                        <div class="col-12">
-                            <div class="input-style-1">
-                                <label for="password_confirmation">{{ __('Anggota Tim') }}</label>
+                                <label for="anggota_tim">{{ __('Anggota Tim') }}</label>
                                 <div class="row">
-                                    <div class="col-8" id="inputContainer">
-                                        <div class="input-style-1">
-                                            <input type="text" name="name" {{-- id="nameEdit{{ $user->id }}" --}}
-                                                placeholder="{{ __('Name') }}" {{-- value="{{ old('name', $user->name) }}" --}} required
-                                                class="form-control @error('name') is-invalid @enderror">
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-1" id="iconContainer">
-                                        <div style="display: flex; flex-direction: column;">
-                                            <button type="button" id="addButton" style="border: none; background: none;">
-                                                <i class="lni lni-plus"
-                                                    style="color: black; margin:15px; font-size: 30px;"></i>
-                                            </button>
-                                        </div>
+                                    <div class="col-12" id="inputContainer">
+                                        <select name="anggota_tim[]" class="form-control select2" multiple="multiple" style="width: 100%;
+                                        height: 58px;" required>
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('anggota_tim')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <div class="col-lg-3" id="tambahAnggotaContainer">
                                         <div style="display: flex; flex-direction: column;">
@@ -99,23 +83,33 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end col -->
-                        <div class="input-style-1">
-                            <label for="nip">{{ __('Status Penelitian') }}</label>
-                            <select id="statusPenelitian" name="statusPenelitian" class="form-control">
-                                <option value="submitted">Submitted</option>
-                                <option value="accepted">Accepted</option>
-                                <option value="rejected">Rejected</option>
-                                <option value="on_going">On going</option>
-                                <option value="finished">Finished</option>
-                            </select>
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label for="is_ketua">{{ __('Ketua Tim') }}</label>
+                                <select name="is_ketua" id="is_ketua" class="form-control select2" style="width: 100%;
+                                height: 58px;" required>
+                                    <!-- Opsi "Ketua Tim" akan ditambahkan melalui JavaScript -->
+                                </select>
+                                @error('is_ketua')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                         <!-- end col -->
                         <div class="input-style-1">
-                            <label for="telp">{{ __('Mitra Penelitian') }}</label>
-                            <input type="text" @error('telp') class="form-control is-invalid" @enderror name="telp"
-                                id="telp" placeholder="{{ __('Mitra Penelitian') }}">
-                            @error('telp')
+                            <label for="statusPenelitian">
+                                {{ __('Status Penelitian') }}
+                            </label>
+                            <select class="form-control @error('status_penelitian_id') is-invalid @enderror" name="status_penelitian_id" id="statusPenelitian" style="max-width: 100%; margin: 0 auto;">
+                                @foreach ($status_penelitian as $status)
+                                    <option value="{{ $status->id }}" @if (old('status_penelitian_id') == $status->id) selected @endif>
+                                        {{ $status->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('status_penelitian_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -123,19 +117,45 @@
                         </div>
                         <!-- end col -->
                         <div class="input-style-1">
-                            <label for="keahlian">{{ __('Jenis Penelitian') }}</label>
-                            <select id="statusPenelitian" name="statusPenelitian" class="form-control">
-                                <option value="submitted">Dasar</option>
-                                <option value="accepted">Terapan</option>
-                            </select>
+                            <label for="mitra_id">{{ __('Mitra Penelitian') }}</label>
+                            <input type="text" @error('mitra_id') class="form-control is-invalid" @enderror name="mitra_id"
+                                id="mitra_id" placeholder="{{ __('Mitra Penelitian') }}">
+                            @error('mitra_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <!-- end col -->
                         <div class="input-style-1">
-                            <label for="fakultas">{{ __('Jangka Waktu Penelitian') }}</label>
+                            <label for="jenisPenelitian">
+                                {{ __('Jenis Penelitian') }}
+                            </label>
+                            <select class="form-control @error('jenis_penelitian_id') is-invalid @enderror" name="jenis_penelitian_id" id="jenisPenelitian" style="max-width: 100%; margin: 0 auto;">
+                                @foreach ($jenis_penelitian as $jenis)
+                                    <option value="{{ $jenis->id }}" @if (old('jenis_penelitian_id') == $jenis->id) selected @endif>
+                                        {{ $jenis->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('jenis_penelitian_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <!-- end col -->
+                        <div class="input-style-1">
+                            <label for="jangka_waktu">{{ __('Jangka Waktu Penelitian') }}</label>
                             <div class="row">
                                 <div class="col-xl-2 col-lg-2 col-md-4 input-style-1">
-                                    <input type="number" placeholder="{{ __('Berapa') }}" class="form-control"
-                                        min="1">
+                                    <input type="number" @error('jangka_waktu') class="form-control is-invalid" @enderror name="jangka_waktu"
+                                        id="jangka_waktu" placeholder="{{ __('Jangka') }}">
+                                    @error('jangka_waktu')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="col-xl-10 col-lg-10 col-md-8">
                                     <ul style="padding-left:0%;">
@@ -147,44 +167,39 @@
                         </div>
                         <!-- end col -->
                         <div class="input-style-1">
-                            <label for="link_google_scholar">{{ __('Pendanaan') }}</label>
+                            <label for="pendanaan">{{ __('Pendanaan') }}</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp.</span>
                                 </div>
-                                <input type="text" id="nominalInput" placeholder="{{ __('Nominal') }}"
+                                <input type="number" id="nominalInput" placeholder="{{ __('Nominal') }}"
                                     class="form-control" min="0">
                             </div>
                         </div>
                         <!-- end col -->
                         <div class="input-style-1">
-                            <label for="link_sinta">{{ __('Tingkatan TKT') }}</label>
-                            <input type="number" placeholder="{{ __('1-9') }}" class="form-control" min="1"
-                                max="9">
+                            <label for="tingkatan_tkt">{{ __('Tingkatan TKT') }}</label>
+                            <input type="number" placeholder="{{ __('1-9') }}"  @error('tingkatan_tkt') class="form-control" min="1"
+                                max="9" @enderror name="tingkatan_tkt"
+                                id="tingkatan_tkt" placeholder="{{ __('Jangka') }}">
+                                @error('tingkatan_tkt')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
                         <!-- end col -->
                         <div class="input-style-1">
-                            <label for="email_verified_at">{{ __('File Penelitian') }}</label>
-                            <div class="row">
-                                <div class="col-8" id="inputContainer2">
-                                    <div class="input-style-1">
-                                        <input type="file" accept=".pdf"
-                                            @error('name') class="form-control is-invalid" @enderror name="name"
-                                            placeholder="{{ __('Name') }}" required>
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-1" id="iconContainer2">
-                                    <div style="display: flex; flex-direction: column;">
-                                        <button type="button" id="addButton2" style="border: none; background: none;">
-                                            <i class="lni lni-plus"
-                                                style="color: black; margin:15px; font-size: 30px;"></i>
-                                        </button>
-                                    </div>
+                            <label for="file">{{ __('File Penelitian') }}</label>
+                                <div class="input-style-1">
+                                    <input type="file" accept=".pdf"
+                                        @error('file') class="form-control is-invalid" @enderror name="file"
+                                        placeholder="{{ __('File') }}" required>
+                                    @error('file')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -233,4 +248,3 @@
     @include('penelitian.modal-tombol-penelitian')
     <!-- ========== modal end =========== -->
 @endsection
-

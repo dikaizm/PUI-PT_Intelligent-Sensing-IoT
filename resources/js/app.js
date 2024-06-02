@@ -1,5 +1,5 @@
 import './bootstrap'
 import './datatables'
-import './penelitian'
 import './pendanaan'
 import './tanggal'
+import './tambah-anggota'

@@ -25,20 +25,6 @@
                                 </div>
                             </div>
                             <!-- end col -->
-                            <div class="col-12">
-                                <div class="input-style-1">
-                                    <label for="nipTambah">{{ __('Asal Instansi') }}</label>
-                                    <input type="text" @error('nip') class="form-control is-invalid" @enderror
-                                        name="nip" id="nipTambah" placeholder="{{ __('Nama Instansi') }}"
-                                        value="{{ old('nip') }}" required>
-                                    @error('nip')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <!-- end col -->
                             <div class="action d-flex flex-wrap justify-content-end">
                                 <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"
                                     style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);">

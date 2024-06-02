@@ -169,7 +169,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp.</span>
                                 </div>
-                                <input type="text" id="nominalInput" placeholder="{{ __('Nominal') }}" class="form-control" min="0">
+                                <input type="text" id="pendaan" placeholder="{{ __('Nominal') }}" class="form-control" min="0">
                             </div>
                         </div>
                         <!-- end col -->
