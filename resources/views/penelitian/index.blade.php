@@ -21,12 +21,15 @@
 
                 @include('alert')
 
-                <div class="menu-toggle-btn mr-20" style="text-align: right;">
-                    <a href="{{ route('penelitian.create') }}" class="main-btn btn-hover btn-sm"
-                        style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
-                        {{ __('Tambahkan Data') }}
-                    </a>
-                </div>
+                @can('mengelola-pengguna')
+                    <div class="menu-toggle-btn mr-20" style="text-align: right;">
+                        <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#modalTambah"
+                            style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
+                            {{ __('Tambahkan Data') }}
+                        </button>
+                    </div>
+                @endcan
 
                 <div class="table-wrapper table-responsive" style="font-family: DM Sans">
                     <table class="table striped-table" id="dataTables" style="width: 100%; border-collapse: collapse;">
@@ -94,6 +97,54 @@
                                             data-bs-target="#modalDetailPenelitian{{ $item->id }}">
                                             <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
                                         </a>
+                                        @can('mengelola-pengguna')
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#">
+                                                <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
+                                            </a>
+                                            <a type="button" data-bs-toggle="modal"
+                                                data-bs-target="#modalDeletePenelitian{{ $item->id }}">
+                                                <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>
+                                            </a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                                <!-- end table row-->
+                                </thead>
+                        <tbody>
+                            @foreach ($penelitian as $index => $item)
+                                <tr>
+                                    <td style="padding: 12px; text-align: center !important;">
+                                        <p>{{ $index + 1 }}</p>
+                                    </td>
+                                    <td style="padding: 12px; text-align: center !important;">
+                                        <p>{{ $item->judul }}</p>
+                                    </td>
+                                    <td style="padding: 12px; text-align: center !important;">
+                                        <p></p>
+                                        <a type="button" data-bs-toggle="modal"
+                                            data-bs-target="#modalStatusPenelitian{{ $item->id }}"
+                                            style="color: gray !important;">
+                                            <span class="badge rounded-pill bg-{{ $item->statusPenelitian->warna }}">
+                                                {{ $item->statusPenelitian->statusPenelitianKey->name }}
+                                                {{ $item->statusPenelitian->name }}
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td style="padding: 12px; text-align: center !important;">
+                                        <p>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y') }}</p>
+                                    </td>
+                                    <td style="padding: 12px; text-align: center !important;">
+                                        <a type="button" data-bs-toggle="modal"
+                                            data-bs-target="#modalFeedbackPenelitian{{ $item->id }}"
+                                            style="color: gray !important;">
+                                            {{ $item->feedback }}
+                                        </a>
+                                    </td>
+                                    <td style="padding: 8px; text-align: center !important;">
+                                        <a type="button" data-bs-toggle="modal"
+                                            data-bs-target="#modalDetailPenelitian{{ $item->id }}">
+                                            <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
+                                        </a>
                                         <a type="button" href="{{ route('penelitian.edit', ['uuid' => $item->uuid]) }}">
                                             <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
                                         </a>
@@ -111,21 +162,32 @@
             </div>
         </div>
     </div>
+    </div>
 
     <!-- ========== modal status =========== -->
     @include('penelitian.modal-status')
-    <!-- ========== modal end =========== -->
-
-    <!-- ========== modal feedback =========== -->
-    @include('penelitian.modal-feedback')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal detail =========== -->
     @include('penelitian.modal-detail')
     <!-- ========== modal end =========== -->
 
+    <!-- ========== modal feedback =========== -->
+    @include('penelitian.modal-feedback')
+    <!-- ========== modal end =========== -->
+
     <!-- ========== modal delete =========== -->
     @include('penelitian.modal-delete')
     <!-- ========== modal end =========== -->
-@endsection
+
+    <<<<<<< HEAD <!--==========modal detail===========-->
+        @include('penelitian.modal-detail')
+        <!-- ========== modal end =========== -->
+
+        <!-- ========== modal delete =========== -->
+        @include('penelitian.modal-delete')
+        <!-- ========== modal end =========== -->
+        =======
+        >>>>>>> 7f25d1128027d9418884da054674df126364d062
+    @endsection
 

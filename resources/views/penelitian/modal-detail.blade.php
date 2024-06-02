@@ -1,6 +1,6 @@
 <!-- ========== modal detail =========== -->
-@foreach ($penelitian as $user)
-    <div class="modal fade" id="modalDetailPenelitian{{ $user->id }}" tabindex="-1"
+@foreach ($penelitian as $item)
+    <div class="modal fade" id="modalDetailPenelitian{{ $item->id }}" tabindex="-1"
         aria-labelledby="ModalFourLabel" aria-hidden="true">
         <div class="modal-dialog"
             style="max-width: 90%; width: 800px; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center;">
@@ -18,7 +18,7 @@
                                             {{ __('Skema Penelitian') }}
                                         </li>
                                         <li style="font-weight: 400; font-size: 18px; text-align: left;">
-                                            {{ __('Skema Penelitian') }}
+                                            {{ $item->skema }}
                                         </li>
                                     </ul>
                                 </div>
@@ -30,7 +30,7 @@
                                             {{ __('Judul Keahlian') }}
                                         </li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __('Judul Keahlian') }}
+                                            {{ $item->judul }}
                                         </li>
                                     </ul>
                                 </div>
@@ -66,7 +66,7 @@
                                             {{ __('Status Penelitian') }}
                                         </li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __('Status Penelitian') }}
+                                            {{$item ->status_penelitian_id}}
                                         </li>
                                     </ul>
                                 </div>
@@ -78,7 +78,7 @@
                                             {{ __('Mitra Penelitian') }}
                                         </li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __('Mitra Penelitian') }}
+                                            {{$item->mitra_id}}
                                         </li>
                                     </ul>
                                 </div>
@@ -90,7 +90,7 @@
                                             {{ __('Jangka Waktu Penelitian') }}
                                         </li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __('Jangka Waktu Penelitian') }}
+                                            {{ $item->jangka_waktu }}
                                         </li>
                                     </ul>
                                 </div>
@@ -102,7 +102,7 @@
                                             {{ __('Jenis Penelitian') }}
                                         </li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __('Jenis Penelitian') }}
+                                            {{ $item->jenis_penelitian_id }}
                                         </li>
                                     </ul>
                                 </div>
@@ -114,7 +114,7 @@
                                             {{ __('Pendanaan') }}
                                         </li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __('Pendanaan') }}
+                                            {{ $item->pendanaan }}
                                         </li>
                                     </ul>
                                 </div>
@@ -126,7 +126,7 @@
                                             {{ __('Tingkatan TKT') }}
                                         </li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __('Tingkatan TKT') }}
+                                            {{ $item->tingkatan_tkt }}
                                         </li>
                                     </ul>
                                 </div>
@@ -138,7 +138,7 @@
                                             {{ __('File Penelitian') }}
                                         </li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __('File Penelitian') }}
+                                            {{ $item->file }}
                                         </li>
                                     </ul>
                                 </div>
@@ -152,18 +152,6 @@
                                         </li>
                                         <li style="font-weight: 400;font-size: 18px; text-align: left;">
                                             {{ __('Judul Output') }}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-12 row g-1">
-                                <div style="text-align: left; width: 100%;">
-                                    <ul style="list-style: none; padding-left:5%;">
-                                        <li style="font-weight: 500;font-size: 25px; text-align: left;">
-                                            {{ __('File Penelitian') }}
-                                        </li>
-                                        <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                            {{ __('File Penelitian') }}
                                         </li>
                                     </ul>
                                 </div>
