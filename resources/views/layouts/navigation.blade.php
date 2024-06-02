@@ -76,7 +76,7 @@
                     <li>
                         <a href="{{ route('register-key.index') }}" style="color: white;">Register Key</a>
                     </li>
-                @endcan
+            @endcan
         </ul>
     </li>
 
