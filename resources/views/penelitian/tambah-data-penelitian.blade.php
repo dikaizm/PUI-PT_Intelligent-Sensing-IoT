@@ -69,13 +69,9 @@
                                 <div class="row">
                                     <div class="col-8" id="inputContainer">
                                         <div class="input-style-1">
-                                            <input type="text"
-                                                   name="name"
-                                                   {{-- id="nameEdit{{ $user->id }}" --}}
-                                                   placeholder="{{ __('Name') }}"
-                                                   {{-- value="{{ old('name', $user->name) }}" --}}
-                                                   required
-                                                   class="form-control @error('name') is-invalid @enderror">
+                                            <input type="text" name="name" {{-- id="nameEdit{{ $user->id }}" --}}
+                                                placeholder="{{ __('Name') }}" {{-- value="{{ old('name', $user->name) }}" --}} required
+                                                class="form-control @error('name') is-invalid @enderror">
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -86,13 +82,16 @@
                                     <div class="col-1" id="iconContainer">
                                         <div style="display: flex; flex-direction: column;">
                                             <button type="button" id="addButton" style="border: none; background: none;">
-                                                <i class="lni lni-plus" style="color: black; margin:15px; font-size: 30px;"></i>
+                                                <i class="lni lni-plus"
+                                                    style="color: black; margin:15px; font-size: 30px;"></i>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="col-lg-3" id="tambahAnggotaContainer">
                                         <div style="display: flex; flex-direction: column;">
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#modalTambahAnggotaEksternal" style="font-size:20px; color: red !important;">
+                                            <a type="button" data-bs-toggle="modal"
+                                                data-bs-target="#modalTambahAnggotaEksternal"
+                                                style="font-size:20px; color: red !important;">
                                                 {{ __('Tambah Anggota') }} <br> {{ __('Eksternal') }}
                                             </a>
                                         </div>
@@ -114,8 +113,8 @@
                         <!-- end col -->
                         <div class="input-style-1">
                             <label for="telp">{{ __('Mitra Penelitian') }}</label>
-                            <input type="text" @error('telp') class="form-control is-invalid" @enderror
-                                name="telp" id="telp" placeholder="{{ __('Mitra Penelitian') }}">
+                            <input type="text" @error('telp') class="form-control is-invalid" @enderror name="telp"
+                                id="telp" placeholder="{{ __('Mitra Penelitian') }}">
                             @error('telp')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -135,9 +134,8 @@
                             <label for="fakultas">{{ __('Jangka Waktu Penelitian') }}</label>
                             <div class="row">
                                 <div class="col-xl-2 col-lg-2 col-md-4 input-style-1">
-                                    <input type="number"
-                                    placeholder="{{ __('Berapa') }}"
-                                    class="form-control" min="1">
+                                    <input type="number" placeholder="{{ __('Berapa') }}" class="form-control"
+                                        min="1">
                                 </div>
                                 <div class="col-xl-10 col-lg-10 col-md-8">
                                     <ul style="padding-left:0%;">
@@ -154,15 +152,15 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp.</span>
                                 </div>
-                                <input type="text" id="nominalInput" placeholder="{{ __('Nominal') }}" class="form-control" min="0">
+                                <input type="text" id="nominalInput" placeholder="{{ __('Nominal') }}"
+                                    class="form-control" min="0">
                             </div>
                         </div>
                         <!-- end col -->
                         <div class="input-style-1">
                             <label for="link_sinta">{{ __('Tingkatan TKT') }}</label>
-                            <input type="number"
-                            placeholder="{{ __('1-9') }}"
-                            class="form-control" min="1" max="9">
+                            <input type="number" placeholder="{{ __('1-9') }}" class="form-control" min="1"
+                                max="9">
                         </div>
                         <!-- end col -->
                         <div class="input-style-1">
@@ -170,23 +168,21 @@
                             <div class="row">
                                 <div class="col-8" id="inputContainer2">
                                     <div class="input-style-1">
-                                        <input type="file"
-                                            accept=".pdf"
-                                            @error('name') class="form-control is-invalid" @enderror
-                                            name="name"
-                                            placeholder="{{ __('Name') }}"
-                                            required>
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                        <input type="file" accept=".pdf"
+                                            @error('name') class="form-control is-invalid" @enderror name="name"
+                                            placeholder="{{ __('Name') }}" required>
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-1" id="iconContainer2">
                                     <div style="display: flex; flex-direction: column;">
                                         <button type="button" id="addButton2" style="border: none; background: none;">
-                                            <i class="lni lni-plus" style="color: black; margin:15px; font-size: 30px;"></i>
+                                            <i class="lni lni-plus"
+                                                style="color: black; margin:15px; font-size: 30px;"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -195,7 +191,8 @@
                         <!-- end col -->
                         <div class="col-12">
                             <div class="button-group d-flex justify-content-center flex-wrap">
-                                <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center" style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);">
+                                <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center"
+                                    style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);">
                                     {{ __('Tambahkan') }}
                                 </button>
                             </div>
@@ -205,14 +202,17 @@
                             <div style="text-align: center;">
                                 <ul style="list-style: none; padding-left:15%;padding-top:75px;">
                                     <li style="font-weight: 400;font-size: 20px; text-align: left;color: gray;">
-                                        {{ __('Note: Apabila penelitian sudah selesai silahkan laporkan tombol laporan output penelitian dibawah ini!') }}</li>
+                                        {{ __('Note: Apabila penelitian sudah selesai silahkan laporkan tombol laporan output penelitian dibawah ini!') }}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                         <!-- end col -->
                         <div class="col-12">
                             <div class="button-group d-flex justify-content-center flex-wrap">
-                                <button type="button" class="main-btn primary-btn btn-hover w-100 text-center" style="background: linear-gradient(90deg, #4737FF 0%, #2B2199 100%);" data-bs-toggle="modal" data-bs-target="#modalLaporkanOutput">
+                                <button type="button" class="main-btn primary-btn btn-hover w-100 text-center"
+                                    style="background: linear-gradient(90deg, #4737FF 0%, #2B2199 100%);"
+                                    data-bs-toggle="modal" data-bs-target="#modalLaporkanOutput">
                                     {{ __('Laporkan Output Penelitian') }}
                                 </button>
                             </div>
@@ -225,13 +225,12 @@
         </div>
     </div>
 
-<!-- ========== modal status =========== -->
-@include('auth.modal-tambah-anggota-eksternal')
-<!-- ========== modal end =========== -->
+    <!-- ========== modal status =========== -->
+    @include('penelitian.modal-tambah-anggota-eksternal')
+    <!-- ========== modal end =========== -->
 
-<!-- ========== modal status =========== -->
-@include('auth.modal-tombol-penelitian')
-<!-- ========== modal end =========== -->
-
+    <!-- ========== modal status =========== -->
+    @include('penelitian.modal-tombol-penelitian')
+    <!-- ========== modal end =========== -->
 @endsection
 
