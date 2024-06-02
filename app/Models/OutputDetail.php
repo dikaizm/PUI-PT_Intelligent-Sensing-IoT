@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Output;
+use App\Enums\OutputType;
 use App\Models\JenisOutput;
 use App\Models\JenisDokumen;
 use App\Models\StatusOutput;
@@ -15,6 +16,10 @@ class OutputDetail extends Model
     use HasFactory;
 
     protected $table = 'output_detail';
+
+    protected $casts = [
+        'tipe' => OutputType::class,
+    ];
 
     protected $fillable = [
         'output_id',

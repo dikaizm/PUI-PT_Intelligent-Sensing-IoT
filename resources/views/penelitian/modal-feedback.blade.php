@@ -1,10 +1,11 @@
 <!-- ========== modal feedback =========== -->
-@foreach ($penelitian as  $item)
-    <div class="modal fade" id="modalFeedbackPenelitian{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
+@foreach ($penelitian as $item)
+    <div class="modal fade" id="modalFeedbackPenelitian{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+        aria-hidden="true">
         <div class="modal-dialog"
             style="max-width: 90%; width: 400px;min-height: 100vh; display: flex; align-items: center; justify-content: center;">
             <div class="modal-content card-style">
-                <form action="{{ route('penelitian.update-status-penelitian', ['uuid' => $item->uuid]) }}" method="POST">
+                <form action="{{ route('penelitian.update-feedback', ['uuid' => $item->uuid]) }}" method="POST">
                     @csrf
                     @method('PATCH')
 
@@ -19,7 +20,8 @@
                                         <ul style="list-style: none;">
                                             <li style="font-weight: 500;font-size: 25px; text-align: center;">
                                                 {{ __('Feedback Sekarang') }}</li>
-                                            <li style="font-weight: 400;font-size: 18px; text-align: center;color:gray;">
+                                            <li
+                                                style="font-weight: 400;font-size: 18px; text-align: center;color:gray;">
                                                 {{ $item->feedback }}</li>
                                         </ul>
                                     </div>
@@ -28,10 +30,10 @@
                                     <div class="col-12">
                                         <div class="input-style-1">
                                             <label style="font-weight: 500;font-size: 25px; text-align: center;"
-                                            for="feedback">{{ __('Feedback') }}</label>
-                                            <input @error('feedback') class="form-control is-invalid" @enderror type="text"
-                                                name="feedback" id="feedback" placeholder="{{ __('Ubah Feedback') }}"
-                                                value="{{ old('feedback', auth()->user()->feedback) }}">
+                                                for="feedback">{{ __('Feedback') }}</label>
+                                            <input @error('feedback') class="form-control is-invalid" @enderror
+                                                type="text" name="feedback" id="feedback"
+                                                placeholder="{{ __('Ubah Feedback') }}" value="{{ old('feedback') }}">
                                             @error('feedback')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -40,7 +42,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <!-- end col -->
+                                <!-- end col -->
                                 <!-- end col -->
                                 <div class="action d-flex flex-wrap justify-content-end mt-20">
                                     <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"
@@ -64,3 +66,4 @@
     </div>
 @endforeach
 <!-- ========== modal end =========== -->
+

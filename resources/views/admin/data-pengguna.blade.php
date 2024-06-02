@@ -18,21 +18,26 @@
                 <table class="table striped-table" id="dataTables" style="width: 100%; border-collapse: collapse;">
                     <thead>
                         <tr>
-                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
+                            <th
+                                style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                 <h6>Name</h6>
                             </th>
-                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
+                            <th
+                                style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                 <h6>Email</h6>
                             </th>
-                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
+                            <th
+                                style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 27%;">
                                 <h6>Nip</h6>
                             </th>
                             @can('mengelola-pengguna')
-                                <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                <th
+                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                     <h6>Tipe Pengguna</h6>
                                 </th>
                             @endcan
-                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                            <th
+                                style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                 <h6>Action</h6>
                             </th>
                         </tr>
@@ -107,10 +112,14 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-style-1">
-                                        <label for="nameEdit{{ $user->id }}">{{ __('Jenis Pengguna') }}</label>
-                                        <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
-                                            <option value="admin">Admin</option>
-                                            <option value="user">Dosen</option>
+                                        <label for="role">{{ __('Jenis Pengguna') }}</label>
+                                        <select id="role" name="role" class="form-control">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role }}"
+                                                    {{ $user->roles->contains('name', $role) ? 'selected' : '' }}>
+                                                    {{ ucfirst($role) }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -120,8 +129,7 @@
                                         <label for="nameEdit{{ $user->id }}">{{ __('Name') }}</label>
                                         <input type="text" @error('name') class="form-control is-invalid" @enderror
                                             name="name" id="nameEdit{{ $user->id }}"
-                                            placeholder="{{ __('Name') }}" value="{{ old('name', $user->name) }}"
-                                            required readonly>
+                                            placeholder="{{ __('Name') }}" value="{{ $user->name }}" required>
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -135,8 +143,7 @@
                                         <label for="nipEdit{{ $user->id }}">{{ __('NIP') }}</label>
                                         <input type="text" @error('nip') class="form-control is-invalid" @enderror
                                             name="nip" id="nipEdit{{ $user->id }}"
-                                            placeholder="{{ __('NIP') }}" value="{{ old('nip', $user->nip) }}"
-                                            required readonly>
+                                            placeholder="{{ __('NIP') }}" value="{{ $user->nip }}" required>
                                         @error('nip')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -150,8 +157,7 @@
                                         <label for="emailEdit{{ $user->id }}">{{ __('Email') }}</label>
                                         <input @error('email') class="form-control is-invalid" @enderror type="email"
                                             name="email" id="emailEdit{{ $user->id }}"
-                                            placeholder="{{ __('Email') }}" value="{{ old('email', $user->email) }}"
-                                            required readonly>
+                                            placeholder="{{ __('Email') }}" value="{{ $user->email }}" required>
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -228,10 +234,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-style-1">
-                                    <label for="nameTambah{{ $user->id }}">{{ __('Jenis Pengguna') }}</label>
-                                    <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
+                                    <label for="role">{{ __('Jenis Pengguna') }}</label>
+                                    <select id="role" name="role" class="form-control">
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role }}">{{ $role }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -431,8 +438,8 @@
 
 <!-- ========== modal detail =========== -->
 @foreach ($users as $user)
-    <div class="modal fade" id="modalUserdetail{{ $user->id }}" tabindex="-1"
-        aria-labelledby="ModalFourLabel" aria-hidden="true">
+    <div class="modal fade" id="modalUserdetail{{ $user->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+        aria-hidden="true">
         <div class="modal-dialog"
             style="max-width: 90%; width: 800px;min-height: 100vh; display: flex; align-items: center; justify-content: center;">
             <div class="modal-content card-style">
@@ -441,7 +448,8 @@
                 </div>
                 <div class="modal-body px-0" style="width: 100%; text-align: center;">
                     <div class="col-12" style="margin: auto;width-max: 90%;">
-                        <div style="border-radius: 50%; max-width: 225px; width: 100%; overflow: hidden; margin: auto; margin-top: 0px; margin-bottom: 40px;">
+                        <div
+                            style="border-radius: 50%; max-width: 225px; width: 100%; overflow: hidden; margin: auto; margin-top: 0px; margin-bottom: 40px;">
                             <a style="display: block;" style="align-content: center;">
                                 <img src="{{ asset('images/example/joji.jpg') }}" alt="Card Image"
                                     style="width: 100%;">

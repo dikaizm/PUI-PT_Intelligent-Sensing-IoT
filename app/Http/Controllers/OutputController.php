@@ -14,12 +14,19 @@ class OutputController extends Controller
     {
         return view('output.index', [
             'output' => auth()->user()->hasRole('Admin')
-                ? Output::with(['penelitian', 'outputDetails'])->get()
+                ? Output::with(['penelitian', 'outputDetails'])
+                    ->whereHas('penelitian', function ($query) {
+                        $query->where('arsip', false);
+                    })
+                    ->get()
                 : Output::with([
                     'penelitian',
                     'outputDetails',
                     'penelitian.users',
                 ])
+                    ->whereHas('penelitian', function ($query) {
+                        $query->where('arsip', false);
+                    })
                     ->whereHas('penelitian.users', function ($query) {
                         $query->where('users.id', auth()->user()->id);
                     })

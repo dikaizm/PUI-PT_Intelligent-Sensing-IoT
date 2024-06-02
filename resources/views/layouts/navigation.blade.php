@@ -24,17 +24,14 @@
                 <a href="{{ route('laporan-kinerja.index') }}" style="color: white;">{{ __('Laporan Kinerja') }}</a>
             </li>
             <li>
-                <a href="{{ route('penelitian.arsip', ['arsip' => 'true']) }}" style="color: white;">{{ __('Arsip Kegiatan') }}</a>
+                <a href="{{ route('penelitian.arsip', ['arsip' => 'true']) }}"
+                    style="color: white;">{{ __('Arsip Kegiatan') }}</a>
             </li>
             <li>
                 <a href="{{ route('penelitian.index') }}" style="color: white;">{{ __('Penelitian') }}</a>
             </li>
             <li>
-<<<<<<< HEAD
-                <a href="#" style="color: white;">{{ __('Laporan Output') }}</a>
-=======
-                <a href="{{ route('laporan-output.index') }}" style="color: white;">Laporan Output</a>
->>>>>>> 7a9b03c1c17eb5e017108e1d18a1a4ebfa85c211
+                <a href="{{ route('laporan-output.index') }}" style="color: white;">{{ __('Laporan Output') }}</a>
             </li>
         </ul>
     </li>
@@ -47,38 +44,40 @@
             <span class="text" style="color: white;">{{ __('Data Pengguna') }}</span>
         </a>
     </li>
-
-    <li class="nav-item nav-item-has-children">
-        <a class="collapsed" href="#0" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_2"
-            aria-controls="ddmenu_2" aria-expanded="true" aria-label="Toggle navigation">
-            <span class="icon" style="color: white;">
-                <i class="lni lni-cog"></i>
-            </span>
-            <span class="text" style="color: white;">{{ __('Master Data') }}</span>
-        </a>
-        <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
-            <li>
-                <a href="{{ route('skema.index') }}" style="color: white;">{{ __('Skema') }}</a>
-            </li>
-            <li>
-                <a href="{{ route('jenis-output.index') }}" style="color: white;">Jenis Output</a>
-            </li>
-            <li>
-                <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">{{ __('Jenis Penelitian') }}</a>
-            </li>
-            <li>
-                <a href="{{ route('status-output.index') }}" style="color: white;">{{ __('Status Output') }}</a>
-            </li>
-            <li>
-                <a href="{{ route('status-penelitian.index') }}" style="color: white;">{{ __('Status Penelitian') }}</a>
-            </li>
-            @can('mengelola-pengguna')
+    @can('mengelola-pengaturan')
+        <li class="nav-item nav-item-has-children">
+            <a class="collapsed" href="#0" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_2"
+                aria-controls="ddmenu_2" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="icon" style="color: white;">
+                    <i class="lni lni-cog"></i>
+                </span>
+                <span class="text" style="color: white;">{{ __('Master Data') }}</span>
+            </a>
+            <ul id="ddmenu_2" class="dropdown-nav collapse" style="">
+                <li>
+                    <a href="{{ route('skema.index') }}" style="color: white;">{{ __('Skema') }}</a>
+                </li>
+                <li>
+                    <a href="{{ route('jenis-output.index') }}" style="color: white;">Jenis Output</a>
+                </li>
+                <li>
+                    <a href="{{ route('jenis-penelitian.index') }}" style="color: white;">{{ __('Jenis Penelitian') }}</a>
+                </li>
+                <li>
+                    <a href="{{ route('status-output.index') }}" style="color: white;">{{ __('Status Output') }}</a>
+                </li>
+                <li>
+                    <a href="{{ route('status-penelitian.index') }}"
+                        style="color: white;">{{ __('Status Penelitian') }}</a>
+                </li>
+                @can('mengelola-pengguna')
                     <li>
                         <a href="{{ route('register-key.index') }}" style="color: white;">Register Key</a>
                     </li>
-            @endcan
-        </ul>
-    </li>
+                @endcan
+            </ul>
+        </li>
+    @endcan
 
     <ul class="nav">
         <li class="nav-item">
@@ -86,16 +85,15 @@
                 @csrf
             </form>
             <a href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                class="logout-button" style="color: white;">
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="logout-button"
+                style="color: white;">
                 <span class="icon" style="color: white;">
-                <i class="lni lni-exit"></i>
+                    <i class="lni lni-exit"></i>
                 </span>
-               {{ __('Logout') }}
+                {{ __('Logout') }}
             </a>
         </li>
     </ul>
-
 
 </ul>
 

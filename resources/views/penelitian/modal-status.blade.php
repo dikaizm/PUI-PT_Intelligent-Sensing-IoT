@@ -1,6 +1,7 @@
 <!-- ========== modal status =========== -->
-@foreach ($penelitian as  $item)
-    <div class="modal fade" id="modalStatusPenelitian{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel" aria-hidden="true">
+@foreach ($penelitian as $item)
+    <div class="modal fade" id="modalStatusPenelitian{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+        aria-hidden="true">
         <div class="modal-dialog"
             style="max-width: 90%; width: 400px;min-height: 100vh; display: flex; align-items: center; justify-content: center;">
             <div class="modal-content card-style">
@@ -20,9 +21,12 @@
                                             <li style="font-weight: 500;font-size: 25px; text-align: center;">
                                                 {{ __('Status Sekarang') }}</li>
                                             <li style="font-weight: 400;font-size: 18px; text-align: center;">
-                                                <span class="badge rounded-pill bg-{{ $item->statusPenelitian->warna }}">
-                                                    {{ $item->statusPenelitian->statusPenelitianKey->name }} {{ $item->statusPenelitian->name }}
-                                                </span></li>
+                                                <span
+                                                    class="badge rounded-pill bg-{{ $item->statusPenelitian->warna }}">
+                                                    {{ $item->statusPenelitian->statusPenelitianKey->name }}
+                                                    {{ $item->statusPenelitian->name }}
+                                                </span>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -32,18 +36,17 @@
                                             <label style="font-weight: 500;font-size: 25px; text-align: center;"
                                                 for="statusPenelitian{{ $item->id }}">{{ __('Ubah Status Penelitian') }}</label>
                                             <select
-                                                class="form-control @error('status_penelitian') is-invalid @enderror"
-                                                name="status_penelitian"
-                                                id="statusPenelitian{{ $item->id }}"
+                                                class="form-control @error('status_penelitian_id') is-invalid @enderror"
+                                                name="status_penelitian_id" id="statusPenelitian{{ $item->id }}"
                                                 style="max-width: 70%; margin: 0 auto;">
                                                 @foreach ($status_penelitian as $status)
                                                     <option value="{{ $status->id }}"
-                                                        @if (old('status_penelitian', $item->statusPenelitian->id) == $status->id) selected @endif>
+                                                        @if (old('status_penelitian_id', $item->statusPenelitian->id) == $status->id) selected @endif>
                                                         {{ $status->statusPenelitianKey->name }} {{ $status->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            @error('status_penelitian')
+                                            @error('status_penelitian_id')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -51,7 +54,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <!-- end col -->
+                                <!-- end col -->
                                 <!-- end col -->
                                 <div class="action d-flex flex-wrap justify-content-end mt-20">
                                     <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"
@@ -75,3 +78,4 @@
     </div>
 @endforeach
 <!-- ========== modal end =========== -->
+

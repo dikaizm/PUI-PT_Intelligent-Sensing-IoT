@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\UserCreateRequest;
@@ -15,8 +16,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate();
+        $roles = Role::all()->pluck('name');
 
-        return view('users.index', compact('users'));
+        return view('users.index', compact('users', 'roles'));
     }
 
     /**
@@ -37,7 +39,7 @@ class UserController extends Controller
             'link_sinta' => $request->input('link_sinta'),
             'password' => Hash::make($request->input('password')),
         ]);
-        $user->assignRole('Dosen');
+        $user->assignRole($request->role);
 
         return redirect('/users')->with(
             'success',
@@ -52,7 +54,9 @@ class UserController extends Controller
         UserUpdateRequest $request,
         string $id
     ): RedirectResponse {
-        User::where('id', $id)->update([
+        $user = User::findOrFail($id);
+
+        $user->update([
             'name' => $request->name,
             'nip' => $request->nip,
             'email' => $request->email,
@@ -65,6 +69,8 @@ class UserController extends Controller
                 ? Hash::make($request->password)
                 : $request->input('password_old'),
         ]);
+
+        $user->syncRoles([$request->role]);
 
         return redirect('/users')->with('success', 'User berhasil diupdate!');
     }

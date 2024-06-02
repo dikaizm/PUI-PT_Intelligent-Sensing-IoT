@@ -163,20 +163,20 @@ class PenelitianController extends Controller
             'status_penelitian_id' => $request->status_penelitian_id,
         ]);
         return redirect()
-            ->route('penelitian.index')
+            ->back()
             ->with('success', 'Status Penelitian berhasil diperbarui!');
     }
 
     public function updateFeedback(Request $request, $uuid)
     {
         $request->validate([
-            'feedback' => ['string|max:1000'],
+            'feedback' => ['string', 'max:1000'],
         ]);
         Penelitian::where('uuid', $uuid)->update([
             'feedback' => $request->feedback,
         ]);
         return redirect()
-            ->route('penelitian.index')
+            ->back()
             ->with('success', 'Feedback berhasil diperbarui!');
     }
 

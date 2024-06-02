@@ -233,7 +233,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('penelitian/{uuid}/update-feedback', [
         \App\Http\Controllers\PenelitianController::class,
         'updateFeedback',
-    ])->name('penelitian.updateFeedbackP');
+    ])->name('penelitian.update-feedback');
     Route::delete('penelitian/{uuid}/destroy', [
         \App\Http\Controllers\PenelitianController::class,
         'destroy',
