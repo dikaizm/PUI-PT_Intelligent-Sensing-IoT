@@ -12,7 +12,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 new DataTable('#dataTables', {
     responsive: false,
-    dom: 'B<"row mt-2"<"col-sm-2"l><"col-sm-6"><"col-sm-4"f>>rt<"row"<"col-sm-9"i><"col-sm-3 mb-2"p>>',
+    dom: 'B<"row mt-2 mb-2"<"col-sm-2"l><"col-sm-6"><"col-sm-4"f>>rt<"row"<"col-sm-9"i><"col-sm-3 mb-2"p>>',
     searching: true,
     lengthMenu: [10, 25, 50, 75, 100],
     pageLength: 10,
