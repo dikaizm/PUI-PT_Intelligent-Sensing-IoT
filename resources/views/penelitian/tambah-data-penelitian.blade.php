@@ -18,7 +18,7 @@
     <div class="card-styles">
         <div class="card-style-3 mb-30" style="border-radius: 20px;border: 2px solid #000;">
             <div class="card-content">
-                <form action="{{ route('profile.update') }}" method="POST">
+                <form action="{{ route('penelitian.store') }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="row">

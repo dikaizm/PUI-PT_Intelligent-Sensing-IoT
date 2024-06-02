@@ -109,6 +109,10 @@
 @include('penelitian.modal-status')
 <!-- ========== modal end =========== -->
 
+<!-- ========== modal detail =========== -->
+@include('penelitian.modal-detail')
+<!-- ========== modal end =========== -->
+
 <!-- ========== modal feedback =========== -->
 @include('penelitian.modal-feedback')
 <!-- ========== modal end =========== -->
