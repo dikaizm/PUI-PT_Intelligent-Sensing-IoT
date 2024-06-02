@@ -122,9 +122,24 @@ class PenelitianController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Penelitian $penelitian)
+    public function edit(string $uuid)
     {
-        //
+        return view('penelitian.edit-data-penelitian', [
+            'penelitian' => Penelitian::where('uuid', $uuid)
+                ->with([
+                    'skema',
+                    'jenisPenelitian',
+                    'statusPenelitian.statusPenelitianKey',
+                    'users',
+                ])
+                ->first(),
+            'skema' => Skema::select('id', 'name')->get(),
+            'jenis_penelitian' => JenisPenelitian::select('id', 'name')->get(),
+            'status_penelitian' => StatusPenelitian::with(
+                'statusPenelitianKey'
+            )->get(),
+            'users' => User::select('id', 'name')->get(),
+        ]);
     }
 
     /**
