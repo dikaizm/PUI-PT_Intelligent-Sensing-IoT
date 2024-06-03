@@ -18,7 +18,9 @@
     <div class="card-styles">
         <div class="card-style-3 mb-30" style="border-radius: 20px;border: 2px solid #000;">
             <div class="card-content">
+
                 @include('alert')
+
                 <form action="{{ route('penelitian.store') }}" method="POST">
                     @csrf
                     @method('post')
@@ -194,24 +196,30 @@
                         <!-- end col -->
                         <div class="input-style-1">
                             <label for="file">{{ __('File Penelitian') }}</label>
-                            <div class="input-style-1">
-                                <input type="file" accept=".pdf"
-                                    @error('file') class="form-control is-invalid" @enderror name="file"
-                                    placeholder="{{ __('File') }}">
-                                @error('file')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input type="file" name="file" accept=".pdf"
+                                class="form-control @error('file') is-invalid @enderror"
+                                placeholder="{{ __('File Penelitian') }}">
+                            @error('file')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <!-- end col -->
+                        <div>
+                            <label for="arsip" style="font-size: 20px;font-weight: 500;color: $dark;display: block;margin-bottom: 10px;margin-left:20px;">{{ __('Arsip') }}</label>
+                            <div class="form-check" style="width: 100%;">
+                                <input class="form-check-input" type="checkbox" value="arsip" id="checkbox-jenis-output-1" style="margin-left: 0px;">
+                                <label class="form-check-label" for="checkbox-jenis-output-1" style="font-size:16px; margin-left: 25px;">
+                                    {{ __('Masukkan ke Arsip') }}
+                                </label>
                             </div>
                         </div>
-                        <label for="arsip">{{ __('Arsip') }}</label>
-                        <input type="checkbox" name="arsip" id="arsip">{{ __('Simpan sebagai arsip') }}
                         <!-- end col -->
                     </div>
 
                     <div class="col-12">
-                        <div class="button-group d-flex justify-content-center flex-wrap">
+                        <div class="button-group d-flex justify-content-center flex-wrap pt-20">
                             <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center"
                                 style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);">
                                 {{ __('Tambahkan') }}
@@ -219,7 +227,7 @@
                         </div>
                     </div>
                     <!-- end col -->
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <div style="text-align: center;">
                             <ul style="list-style: none; padding-left:15%;padding-top:75px;">
                                 <li style="font-weight: 400;font-size: 20px; text-align: left;color: gray;">
@@ -227,7 +235,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- end col -->
                     {{-- <div class="col-12">
                         <div class="button-group d-flex justify-content-center flex-wrap">

@@ -117,31 +117,34 @@ class PenelitianController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $uuid)
-    {
-        return view('penelitian.edit-data-penelitian', [
-            'penelitian' => Penelitian::where('uuid', $uuid)
-                ->with([
-                    'skema',
-                    'jenisPenelitian',
-                    'statusPenelitian.statusPenelitianKey',
-                    'users',
-                ])
-                ->first(),
-            'skema' => Skema::select('id', 'name')->get(),
-            'jenis_penelitian' => JenisPenelitian::select('id', 'name')->get(),
-            'status_penelitian' => StatusPenelitian::with(
-                'statusPenelitianKey'
-            )->get(),
-            'users' => User::select('id', 'name')->get(),
-        ]);
-    }
+{
+    $penelitian = Penelitian::where('uuid', $uuid)
+        ->with([
+            'skema',
+            'jenisPenelitian',
+            'statusPenelitian.statusPenelitianKey',
+            'users',
+        ])
+        ->firstOrFail();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePenelitianRequest $request, $uuid)
-    {
-        $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
+    // Ambil daftar anggota tim dan siapa ketua timnya
+    $anggotaTim = $penelitian->users->pluck('id')->toArray();
+    $ketuaTim = $penelitian->users->where('pivot.is_ketua', true)->first()->id ?? null;
+
+    return view('penelitian.edit-data-penelitian', [
+        'penelitian' => $penelitian,
+        'skema' => Skema::select('id', 'name')->get(),
+        'jenis_penelitian' => JenisPenelitian::select('id', 'name')->get(),
+        'status_penelitian' => StatusPenelitian::with('statusPenelitianKey')->get(),
+        'users' => User::select('id', 'name')->get(),
+        'anggotaTim' => $anggotaTim,
+        'ketuaTim' => $ketuaTim,
+    ]);
+}
+
+public function update(UpdatePenelitianRequest $request, $uuid)
+{
+    $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
 
         $penelitian->update([
             'skema' => $request->skema,
@@ -159,18 +162,21 @@ class PenelitianController extends Controller
         ]);
 
         $pivotData = [];
-        foreach ($request->user_id as $userId) {
+        foreach ($request->user_id as $index => $userId) {
             $pivotData[$userId] = [
-                'is_ketua' => $userId == $request->is_ketua ? true : false,
+                'is_ketua' => $request->is_ketua[$index] ?? false,
+                'is_corresponding' =>
+                    $request->is_corresponding[$index] ?? false,
             ];
         }
 
-        $penelitian->users()->sync($pivotData);
+    $penelitian->users()->sync($pivotData);
 
-        return redirect()
-            ->route('penelitian.index')
-            ->with('success', 'Penelitian berhasil diperbarui!');
-    }
+    return redirect()
+        ->route('penelitian.index')
+        ->with('success', 'Penelitian berhasil diperbarui!');
+}
+
 
     public function updateStatusPenelitian(Request $request, $uuid)
     {

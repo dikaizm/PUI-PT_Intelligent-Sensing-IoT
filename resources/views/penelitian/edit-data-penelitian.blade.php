@@ -19,13 +19,18 @@
         <div class="card-style-3 mb-30" style="border-radius: 20px;border: 2px solid #000;">
             <div class="card-content">
 
+                @include('alert')
+
                 <form action="{{ route('profile.update', $penelitian->uuid) }}" method="POST">
                     @csrf
                     @method('PUT')
+
                     <div class="row">
                         <div class="col-12">
                             <div class="input-style-1">
-                                <label for="skema">{{ __('Skema Penelitian') }}</label>
+                                <label for="skema">
+                                    {{ __('Skema Penelitian') }}
+                                </label>
                                 <select name="skema" id="skema" class="form-control">
                                     @foreach ($skema as $item)
                                         <option value="{{ $item->id }}"
@@ -54,50 +59,36 @@
                                 @enderror
                             </div>
                         </div>
+                        <!-- end col -->
                         <div class="col-12">
                             <div class="input-style-1">
-                                <label for="ketua_tim">{{ __('Ketua Tim') }}</label>
-                                <input type="text" name="ketua_tim" id="ketua_tim" class="form-control"
-                                    placeholder="{{ __('Ketua Tim') }}"
-                                    value="{{ old('ketua_tim', auth()->user()->name) }}">
-                                @error('ketua_tim')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="input-style-1">
-                                <label for="anggota_tim">{{ __('Anggota Tim') }}</label>
-                                <div class="row">
-                                    <div class="col-8" id="inputContainer">
-                                        @foreach ($penelitian->users as $user)
-                                            <input type="text" name="anggota_tim[]" class="form-control"
-                                                placeholder="{{ __('Name') }}" value="{{ $user->name }}">
-                                            <input type="hidden" name="user_id[]" value="{{ $user->id }}">
-                                            @error('anggota_tim')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        @endforeach
-                                    </div>
-                                    <div class="col-1" id="iconContainer">
-                                        <button type="button" id="addButton" style="border: none; background: none;">
-                                            <i class="lni lni-plus" style="color: black; margin:15px; font-size: 30px;"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-lg-3" id="tambahAnggotaContainer">
-                                        <a type="button" data-bs-toggle="modal"
-                                            data-bs-target="#modalTambahAnggotaEksternal"
-                                            style="font-size:20px; color: red !important;">
-                                            {{ __('Tambah Anggota Eksternal') }}
-                                        </a>
-                                    </div>
+                                <label for="user_id">{{ __('Anggota Tim') }}</label>
+                                <select name="user_id[]" class="form-control select2" multiple="multiple" style="width: 100%; height: 58px;" required>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" @if(in_array($user->id, $anggotaTim)) selected @endif>{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="mt-2">
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalTambahAnggotaEksternal"
+                                        style="font-size:20px; color: red !important;">
+                                        {{ __('Tambah Anggota Eksternal') }}
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                        <!-- end col -->
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label for="is_ketua">{{ __('Ketua Tim') }}</label>
+                                <select name="is_ketua" id="is_ketua" class="form-control select2" style="width: 100%; height: 58px;" required>
+                                    <option value="">-- Pilih Ketua Tim --</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" @if($user->id == $ketuaTim) selected @endif>{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <!-- end col -->
                         <div class="input-style-1">
                             <label for="status_penelitian">{{ __('Status Penelitian') }}</label>
                             <select id="status_penelitian" name="status_penelitian" class="form-control">
@@ -168,8 +159,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp.</span>
                                 </div>
-                                <input type="text" name="pendanaan" id="pendanaan" class="form-control"
-                                    placeholder="{{ __('Nominal') }}"
+                                <input type="number" name="pendanaan" id="" placeholder="{{ __('Nominal') }}"
+                                    class="form-control" min="0"
                                     value="{{ old('pendanaan', $penelitian->pendanaan) }}">
                                 @error('pendanaan')
                                     <span class="invalid-feedback" role="alert">
@@ -192,7 +183,7 @@
                         <div class="input-style-1">
                             <label for="file">{{ __('File Penelitian') }}</label>
                             <div class="row">
-                                <div class="col-11" id="inputContainer2">
+                                <div class="col-12" id="inputContainer2">
                                     <input type="file" name="file" accept=".pdf"
                                         class="form-control @error('file') is-invalid @enderror"
                                         placeholder="{{ __('File Penelitian') }}">
@@ -204,15 +195,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            <label for="arsip" style="font-size: 20px;font-weight: 500;color: $dark;display: block;margin-bottom: 10px;margin-left:20px;">{{ __('Arsip') }}</label>
+                            <div class="form-check" style="width: 100%;">
+                                <input class="form-check-input" type="checkbox" value="arsip" id="checkbox-jenis-output-1" style="margin-left: 0px;">
+                                <label class="form-check-label" for="checkbox-jenis-output-1" style="font-size:16px; margin-left: 25px;">
+                                    {{ __('Masukkan ke Arsip') }}
+                                </label>
+                            </div>
+                        </div>
+                        <!-- end col -->
                         <div class="col-12">
-                            <div class="button-group d-flex justify-content-center flex-wrap">
+                            <div class="button-group d-flex justify-content-center flex-wrap pt-20">
                                 <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center"
                                     style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);">
                                     {{ __('Edit') }}
                                 </button>
                             </div>
                         </div>
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <div style="text-align: center;">
                                 <ul style="list-style: none; padding-left:15%;padding-top:75px;">
                                     <li style="font-weight: 400;font-size: 20px; text-align: left;color: gray;">
@@ -220,8 +221,8 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="col-12">
+                        </div> --}}
+                        {{-- <div class="col-12">
                             <div class="button-group d-flex justify-content-center flex-wrap">
                                 <button type="button" class="main-btn primary-btn btn-hover w-100 text-center"
                                     style="background: linear-gradient(90deg, #4737FF 0%, #2B2199 100%);"
@@ -229,7 +230,7 @@
                                     {{ __('Laporkan Output Penelitian') }}
                                 </button>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </form>
 

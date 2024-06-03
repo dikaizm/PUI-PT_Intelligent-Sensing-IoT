@@ -38,7 +38,7 @@
     <!-- ======== main-wrapper start =========== -->
     <main class="main-wrapper" style="background-color: #F4F7FE;">
         <!-- ========== header start ========== -->
-        <header class="header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/beranda.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <header class="header" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('images/logo/beranda.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-6">
@@ -63,7 +63,7 @@
                                         </div>
                                         <div>
                                             <h6 class="mr-5" style="//styleName: Display Text/Small/Display Small (Bold);font-family: DM Sans;font-size: 27px;font-weight: 700;line-height: 42px;letter-spacing: -0.02em;text-align: left; color: #DE0F0F;">
-                                            Welcome Back!
+                                                {{ __('Welcome Back!') }}
                                             </h6>
                                         </div>
                                     </div>
@@ -126,7 +126,6 @@
     @vite('resources/js/app.js')
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/chart.js') }}"></script>
-    <script src="{{ asset('js/output.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/jquery.inputmask.min.js"></script>
