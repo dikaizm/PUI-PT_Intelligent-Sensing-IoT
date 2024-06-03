@@ -47,10 +47,10 @@
                             <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                 <h6>Tgl Update</h6>
                             </th>
-                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 28%;">
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 25%;">
                                 <h6>Feedback</h6>
                             </th>
-                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 7%;">
+                            <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                 <h6>Action</h6>
                             </th>
                         </tr>
