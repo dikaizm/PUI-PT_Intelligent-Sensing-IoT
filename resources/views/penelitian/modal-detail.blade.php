@@ -51,7 +51,7 @@
                                     {{ __('Ketua Tim') }}
                                 </li>
                                 <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                                    {{ $penelitian->ketua_tim }}
+                                    {{ $is_ketua ? App\Models\User::find($is_ketua)->name : 'Belum ada ketua' }}
                                 </li>
                             </ul>
                         </div>

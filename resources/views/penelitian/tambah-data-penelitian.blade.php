@@ -68,7 +68,7 @@
                                 <select name="user_id[]" class="form-control select2" multiple="multiple"
                                     style="width: 100%; height: 58px;" required>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    <option value="{{ $user->id }}" @if(old('user_id') && in_array($user->id, old('user_id'))) selected @endif>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('user_id')
@@ -88,9 +88,11 @@
                         <div class="col-12">
                             <div class="input-style-1">
                                 <label for="is_ketua">{{ __('Ketua Tim') }}</label>
-                                <select name="is_ketua" id="is_ketua" class="form-control select2"
-                                    style="width: 100%; height: 58px;" required>
-                                    <!-- Options will be populated by JavaScript -->
+                                <select name="is_ketua" id="is_ketua" class="form-control select2" style="width: 100%; height: 58px;" required>
+                                    <option value="">-- Pilih Ketua Tim --</option>
+                                    @foreach ($users as $user)
+                                    <option value="{{ $user->id }}" @if(old('is_ketua') == $user->id) selected @endif>{{ $user->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('is_ketua')
                                     <span class="invalid-feedback" role="alert">
@@ -122,7 +124,7 @@
                         <div class="input-style-1">
                             <label for="mitra">{{ __('Mitra Penelitian') }}</label>
                             <input type="text" @error('mitra') class="form-control is-invalid" @enderror name="mitra"
-                                id="mitra" placeholder="{{ __('Mitra Penelitian') }}">
+                                id="mitra" placeholder="{{ __('Mitra Penelitian') }}" value="{{ old('mitra') }}">
                             @error('mitra')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -154,7 +156,8 @@
                             <div class="row">
                                 <div class="col-xl-2 col-lg-2 col-md-4 input-style-1">
                                     <input type="number" @error('jangka_waktu') class="form-control is-invalid" @enderror
-                                        name="jangka_waktu" id="jangka_waktu" placeholder="{{ __('Jangka') }}">
+                                        name="jangka_waktu" id="jangka_waktu" placeholder="{{ __('Jangka') }}"
+                                        value="{{ old('jangka_waktu') }}">
                                     @error('jangka_waktu')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -177,7 +180,7 @@
                                     <span class="input-group-text">Rp.</span>
                                 </div>
                                 <input type="number" name="pendanaan" id="" placeholder="{{ __('Nominal') }}"
-                                    class="form-control" min="0">
+                                    class="form-control" min="0" value="{{ old('pendanaan') }}">
                             </div>
                         </div>
                         <!-- end col -->
@@ -186,7 +189,8 @@
                             <input type="number" placeholder="{{ __('1-9') }}"
                                 @error('tingkatan_tkt') class="form-control" min="1"
                                 max="9" @enderror
-                                name="tingkatan_tkt" id="tingkatan_tkt" placeholder="{{ __('Jangka') }}">
+                                name="tingkatan_tkt" id="tingkatan_tkt" placeholder="{{ __('Jangka') }}"
+                                value="{{ old('tingkatan_tkt') }}">
                             @error('tingkatan_tkt')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -198,7 +202,7 @@
                             <label for="file">{{ __('File Penelitian') }}</label>
                                 <input type="file" name="file" accept=".pdf"
                                 class="form-control @error('file') is-invalid @enderror"
-                                placeholder="{{ __('File Penelitian') }}">
+                                placeholder="{{ __('File Penelitian') }}" value="{{ old('file') }}">
                             @error('file')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

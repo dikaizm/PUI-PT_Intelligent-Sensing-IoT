@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // Inisialisasi select2
     $('.select2').select2({
-        placeholder: 'Pilih Anggota Tim',
+        placeholder: 'Pilih Nama',
         allowClear: true,
     });
 

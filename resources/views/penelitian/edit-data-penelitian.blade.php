@@ -21,7 +21,7 @@
 
                 @include('alert')
 
-                <form action="{{ route('profile.update', $penelitian->uuid) }}" method="POST">
+                <form action="{{ route('penelitian.update', $penelitian->uuid) }}" method="POST">
                     @csrf
                     @method('PUT')
 
@@ -79,11 +79,15 @@
                         <!-- end col -->
                         <div class="col-12">
                             <div class="input-style-1">
-                                <label for="is_ketua">{{ __('Ketua Tim') }}</label>
+                                <label for="is_ketua">
+                                    @if($userKetua)
+                                    Ketua Sekarang: {{ $userKetua->name }} <br>
+                                    <span style="color: gray;">Pilih untuk mengganti ketua</span>
+                                    @endif                                </label>
                                 <select name="is_ketua" id="is_ketua" class="form-control select2" style="width: 100%; height: 58px;" required>
-                                    <option value="">-- Pilih Ketua Tim --</option>
+                                    <option value="">Ketua Tim</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" @if($user->id == $ketuaTim) selected @endif>{{ $user->name }}</option>
+                                    <option value="{{ $user->id }}" @if($user->id == $is_ketua) selected @endif>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
