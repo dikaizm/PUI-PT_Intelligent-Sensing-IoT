@@ -102,91 +102,90 @@ class PenelitianController extends Controller
      * Display the specified resource.
      */
     public function show($uuid)
-{
-    $penelitian = Penelitian::where('uuid', $uuid)->first();
-    $output = $penelitian->output ? $penelitian->output->outputDetails : null;
-    $anggotaTim = $penelitian->users->pluck('id')->toArray();
-    $ketuaTim = $penelitian->users->where('pivot.is_ketua', true)->first();
-    $is_ketua = $ketuaTim ? $ketuaTim->id : null;
+    {
+        $penelitian = Penelitian::where('uuid', $uuid)->first();
+        $output = $penelitian->output
+            ? $penelitian->output->outputDetails
+            : null;
+        $anggotaTim = $penelitian->users->pluck('id')->toArray();
+        $ketuaTim = $penelitian->users->where('pivot.is_ketua', true)->first();
+        $is_ketua = $ketuaTim ? $ketuaTim->id : null;
 
-    return view('penelitian.modal-detail', [
-        'penelitian' => $penelitian,
-        'output' => $output,
-        'is_ketua' => $is_ketua, // Kirimkan $is_ketua ke dalam view
-    ]);
-}
+        return view('penelitian.modal-detail', [
+            'penelitian' => $penelitian,
+            'output' => $output,
+            'is_ketua' => $is_ketua, // Kirimkan $is_ketua ke dalam view
+        ]);
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $uuid)
-{
-    $penelitian = Penelitian::where('uuid', $uuid)
-        ->with([
-            'skema',
-            'jenisPenelitian',
-            'statusPenelitian.statusPenelitianKey',
-            'users',
-        ])
-        ->firstOrFail();
+    {
+        $penelitian = Penelitian::where('uuid', $uuid)
+            ->with([
+                'skema',
+                'jenisPenelitian',
+                'statusPenelitian.statusPenelitianKey',
+                'users',
+            ])
+            ->firstOrFail();
 
-    // Ambil daftar anggota tim dan siapa ketua timnya
-    $anggotaTim = $penelitian->users->pluck('id')->toArray();
-    $ketuaTim = $penelitian->users->where('pivot.is_ketua', true)->first();
-    $is_ketua = $ketuaTim ? $ketuaTim->id : null;
+        // Ambil daftar anggota tim dan siapa ketua timnya
+        $anggotaTim = $penelitian->users->pluck('id')->toArray();
+        $ketuaTim = $penelitian->users->where('pivot.is_ketua', true)->first();
+        $is_ketua = $ketuaTim ? $ketuaTim->id : null;
 
-    // Temukan model User berdasarkan ID ketua
-    $userKetua = User::find($is_ketua);
+        // Temukan model User berdasarkan ID ketua
+        $userKetua = User::find($is_ketua);
 
-    return view('penelitian.edit-data-penelitian', [
-        'penelitian' => $penelitian,
-        'skema' => Skema::select('id', 'name')->get(),
-        'jenis_penelitian' => JenisPenelitian::select('id', 'name')->get(),
-        'status_penelitian' => StatusPenelitian::with('statusPenelitianKey')->get(),
-        'users' => User::select('id', 'name')->get(),
-        'anggotaTim' => $anggotaTim,
-        'is_ketua' => $is_ketua,
-        'userKetua' => $userKetua, // Kirim model User ketua ke view
-    ]);
-}
-
-
-
-public function update(UpdatePenelitianRequest $request, $uuid)
-{
-    $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
-
-    // Update penelitian
-    $penelitian->update([
-        'skema' => $request->skema,
-        'judul' => $request->judul,
-        'tingkatan_tkt' => $request->tingkatan_tkt,
-        'pendanaan' => $request->pendanaan,
-        'jangka_waktu' => $request->jangka_waktu,
-        'file' => $request->file,
-        'feedback' => $request->feedback,
-        'mitra' => $request->mitra,
-        'status_penelitian_id' => $request->status_penelitian_id,
-        'jenis_penelitian_id' => $request->jenis_penelitian_id,
-        'skema_id' => $request->skema_id,
-        'arsip' => $request->boolean('arsip', false),
-    ]);
-
-    // Sync users with pivot data
-    $pivotData = [];
-    foreach ($request->user_id as $userId) {
-        $pivotData[$userId] = [
-            'is_ketua' => ($userId == $request->is_ketua) ? 1 : 0,
-            'is_corresponding' => in_array($userId, $request->is_corresponding ?? []) ? 1 : 0,
-        ];
+        return view('penelitian.edit-data-penelitian', [
+            'penelitian' => $penelitian,
+            'skema' => Skema::select('id', 'name')->get(),
+            'jenis_penelitian' => JenisPenelitian::select('id', 'name')->get(),
+            'status_penelitian' => StatusPenelitian::with(
+                'statusPenelitianKey'
+            )->get(),
+            'users' => User::select('id', 'name')->get(),
+            'anggotaTim' => $anggotaTim,
+            'is_ketua' => $is_ketua,
+            'userKetua' => $userKetua, // Kirim model User ketua ke view
+        ]);
     }
 
-    $penelitian->users()->sync($pivotData);
+    public function update(UpdatePenelitianRequest $request, $uuid)
+    {
+        $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
 
-    return redirect()
-        ->route('penelitian.index')
-        ->with('success', 'Penelitian berhasil diperbarui!');
-}
+        // Update penelitian
+        $penelitian->update([
+            'judul' => $request->judul,
+            'tingkatan_tkt' => $request->tingkatan_tkt,
+            'pendanaan' => $request->pendanaan,
+            'jangka_waktu' => $request->jangka_waktu,
+            'file' => $request->file,
+            'feedback' => $request->feedback,
+            'mitra' => $request->mitra,
+            'status_penelitian_id' => $request->status_penelitian_id,
+            'jenis_penelitian_id' => $request->jenis_penelitian_id,
+            'skema_id' => $request->skema_id,
+            'arsip' => $request->boolean('arsip'),
+        ]);
+
+        $pivotData = [];
+        foreach ($request->user_id as $userId) {
+            $pivotData[$userId] = [
+                'is_ketua' => $userId == $request->is_ketua ? true : false,
+            ];
+        }
+
+        $penelitian->users()->sync($pivotData);
+
+        return redirect()
+            ->route('penelitian.index')
+            ->with('success', 'Penelitian berhasil diperbarui!');
+    }
 
     public function updateStatusPenelitian(Request $request, $uuid)
     {

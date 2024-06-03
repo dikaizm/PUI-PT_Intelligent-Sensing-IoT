@@ -68,7 +68,8 @@
                                 <select name="user_id[]" class="form-control select2" multiple="multiple"
                                     style="width: 100%; height: 58px;" required>
                                     @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" @if(old('user_id') && in_array($user->id, old('user_id'))) selected @endif>{{ $user->name }}</option>
+                                        <option value="{{ $user->id }}"
+                                            @if (old('user_id') && in_array($user->id, old('user_id'))) selected @endif>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('user_id')
@@ -88,10 +89,12 @@
                         <div class="col-12">
                             <div class="input-style-1">
                                 <label for="is_ketua">{{ __('Ketua Tim') }}</label>
-                                <select name="is_ketua" id="is_ketua" class="form-control select2" style="width: 100%; height: 58px;" required>
+                                <select name="is_ketua" id="is_ketua" class="form-control select2"
+                                    style="width: 100%; height: 58px;" required>
                                     <option value="">-- Pilih Ketua Tim --</option>
                                     @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" @if(old('is_ketua') == $user->id) selected @endif>{{ $user->name }}</option>
+                                        <option value="{{ $user->id }}"
+                                            @if (old('is_ketua') == $user->id) selected @endif>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('is_ketua')
@@ -200,7 +203,7 @@
                         <!-- end col -->
                         <div class="input-style-1">
                             <label for="file">{{ __('File Penelitian') }}</label>
-                                <input type="file" name="file" accept=".pdf"
+                            <input type="file" name="file" accept=".pdf"
                                 class="form-control @error('file') is-invalid @enderror"
                                 placeholder="{{ __('File Penelitian') }}" value="{{ old('file') }}">
                             @error('file')
@@ -211,12 +214,21 @@
                         </div>
                         <!-- end col -->
                         <div>
-                            <label for="arsip" style="font-size: 20px;font-weight: 500;color: $dark;display: block;margin-bottom: 10px;margin-left:20px;">{{ __('Arsip') }}</label>
+                            <label for="arsip"
+                                style="font-size: 20px;font-weight: 500;color: $dark;display: block;margin-bottom: 10px;margin-left:20px;">{{ __('Arsip') }}</label>
                             <div class="form-check" style="width: 100%;">
-                                <input class="form-check-input" type="checkbox" value="arsip" id="checkbox-jenis-output-1" style="margin-left: 0px;">
-                                <label class="form-check-label" for="checkbox-jenis-output-1" style="font-size:16px; margin-left: 25px;">
+                                <input class="form-check-input @error('arsip') is-invalid @enderror" type="checkbox"
+                                    name="arsip" value="1" id="checkbox-jenis-output-1"
+                                    style="margin-left: 0px;">
+                                <label class="form-check-label" for="checkbox-jenis-output-1"
+                                    style="font-size:16px; margin-left: 25px;">
                                     {{ __('Masukkan ke Arsip') }}
                                 </label>
+                                @error('arsip')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <!-- end col -->
