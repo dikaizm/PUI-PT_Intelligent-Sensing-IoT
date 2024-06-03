@@ -208,9 +208,10 @@ class PenelitianController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Penelitian $penelitian, $uuid)
+    public function destroy($uuid)
     {
-        $penelitian->where('uuid', $uuid)->firstOrFail();
+        $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
+        $penelitian->users()->detach();
         $penelitian->delete();
 
         return redirect()

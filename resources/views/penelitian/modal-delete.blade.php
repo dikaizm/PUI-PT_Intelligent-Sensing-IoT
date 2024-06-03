@@ -14,13 +14,11 @@
                 <div class="modal-body px-0">
                     <div class="content mb-30">
                         <p class="text-sm">
-                            {{ __('Are you sure you want to delete ' . $item->name . '?') }}
+                            {{ __('Are you sure you want to delete ' . $item->judul . '?') }}
                         </p>
                     </div>
                     <div class="action d-flex flex-wrap justify-content-end">
-                        <form action="#
-                        {{-- {{ route('item.delete', ['id' => $item->id]) }} --}}
-                        " method="POST">
+                        <form action="{{ route('penelitian.destroy', ['uuid' => $item->uuid]) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="main-btn btn-sm danger-btn btn-hover m-1">
@@ -38,3 +36,4 @@
     </div>
 @endforeach
 <!-- ========== modal end =========== -->
+
