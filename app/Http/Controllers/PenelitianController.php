@@ -101,22 +101,15 @@ class PenelitianController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Penelitian $penelitian, $uuid)
+    public function show($uuid)
     {
-        return view('penelitian.show', [
-            'penelitian' => $penelitian
-                ->where('uuid', $uuid)
-                ->with([
-                    'statusPenelitian',
-                    'statusPenelitian.statusPenelitianKey',
-                    'jenisPenelitian',
-                    'mitra',
-                    'users',
-                    'output',
-                    'output.outputDetails',
-                    'output.outputDetails.jenisDokumen',
-                ])
-                ->get(),
+        $penelitian = Penelitian::where('uuid', $uuid)->first();
+        $output = $penelitian->output
+            ? $penelitian->output->outputDetails
+            : null;
+        return view('penelitian.modal-detail', [
+            'penelitian' => $penelitian,
+            'output' => $output,
         ]);
     }
 
@@ -162,7 +155,7 @@ class PenelitianController extends Controller
             'status_penelitian_id' => $request->status_penelitian_id,
             'jenis_penelitian' => $request->jenis_penelitian_id,
             'skema_id' => $request->skema_id,
-            'arsip' => $request->arsip,
+            'arsip' => $request->boolean('arsip', false),
         ]);
 
         $pivotData = [];

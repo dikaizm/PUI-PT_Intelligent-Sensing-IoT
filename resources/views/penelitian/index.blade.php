@@ -90,8 +90,7 @@
                                         </a>
                                     </td>
                                     <td style="padding: 8px; text-align: center !important;">
-                                        <a type="button" data-bs-toggle="modal"
-                                            data-bs-target="#modalDetailPenelitian{{ $item->id }}">
+                                        <a type="button" href="{{ route('penelitian.show', ['uuid' => $item->uuid]) }}">
                                             <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
                                         </a>
                                         <a type="button" href="{{ route('penelitian.edit', ['uuid' => $item->uuid]) }}">
@@ -116,7 +115,6 @@
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal detail =========== -->
-    @include('penelitian.modal-detail')
     <!-- ========== modal end =========== -->
 
     <!-- ========== modal feedback =========== -->
