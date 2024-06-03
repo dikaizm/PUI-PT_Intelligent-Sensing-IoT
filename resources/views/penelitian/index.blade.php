@@ -110,7 +110,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <!-- ========== modal status =========== -->
     @include('penelitian.modal-status')

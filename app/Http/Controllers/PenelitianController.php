@@ -74,7 +74,7 @@ class PenelitianController extends Controller
             'judul' => $request->judul,
             'tingkatan_tkt' => $request->tingkatan_tkt,
             'pendanaan' => $request->pendanaan,
-            'jangka_waktu' => $request->jangka_waktu . ' Bulan',
+            'jangka_waktu' => $request->jangka_waktu,
             'file' => $request->file,
             'feedback' => $request->feedback,
             'mitra' => $request->mitra,
@@ -153,29 +153,29 @@ public function update(UpdatePenelitianRequest $request, $uuid)
 {
     $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
 
-    $penelitian->update([
-        'skema' => $request->skema,
-        'judul' => $request->judul,
-        'tingkatan_tkt' => $request->tingkatan_tkt,
-        'pendanaan' => $request->pendanaan,
-        'jangka_waktu' => $request->jangka_waktu,
-        'file' => $request->file,
-        'feedback' => $request->feedback,
-        'status_penelitian_id' => $request->status_penelitian_id,
-        'jenis_penelitian' => $request->jenis_penelitian_id,
-        'mitra_id' => $request->mitra_id,
-    ]);
+        $penelitian->update([
+            'skema' => $request->skema,
+            'judul' => $request->judul,
+            'tingkatan_tkt' => $request->tingkatan_tkt,
+            'pendanaan' => $request->pendanaan,
+            'jangka_waktu' => $request->jangka_waktu,
+            'file' => $request->file,
+            'feedback' => $request->feedback,
+            'mitra' => $request->mitra,
+            'status_penelitian_id' => $request->status_penelitian_id,
+            'jenis_penelitian' => $request->jenis_penelitian_id,
+            'skema_id' => $request->skema_id,
+            'arsip' => $request->arsip,
+        ]);
 
-    $pivotData = [];
-    foreach ($request->user_id as $index => $userId) {
-        $isKetua = ($userId == $request->is_ketua); // Periksa apakah anggota tim ini adalah ketua tim
-        $isCorresponding = ($userId == $request->is_corresponding); // Anda mungkin memiliki logika tambahan untuk penulis utama
-
-        $pivotData[$userId] = [
-            'is_ketua' => $isKetua,
-            'is_corresponding' => $isCorresponding,
-        ];
-    }
+        $pivotData = [];
+        foreach ($request->user_id as $index => $userId) {
+            $pivotData[$userId] = [
+                'is_ketua' => $request->is_ketua[$index] ?? false,
+                'is_corresponding' =>
+                    $request->is_corresponding[$index] ?? false,
+            ];
+        }
 
     $penelitian->users()->sync($pivotData);
 
@@ -214,9 +214,10 @@ public function update(UpdatePenelitianRequest $request, $uuid)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Penelitian $penelitian, $uuid)
+    public function destroy($uuid)
     {
-        $penelitian->where('uuid', $uuid)->firstOrFail();
+        $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
+        $penelitian->users()->detach();
         $penelitian->delete();
 
         return redirect()
