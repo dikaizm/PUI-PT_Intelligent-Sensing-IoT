@@ -25,6 +25,11 @@ Route::middleware('auth')->group(function () {
         'index',
     ])->name('users.index');
 
+    Route::get('users/search', [
+        \App\Http\Controllers\UserController::class,
+        'search',
+    ]);
+
     Route::get('profile', [
         \App\Http\Controllers\ProfileController::class,
         'show',
@@ -207,10 +212,6 @@ Route::middleware('auth')->group(function () {
         'index',
     ])->name('penelitian.arsip');
     //end
-    Route::get('penelitian/create', [
-        \App\Http\Controllers\PenelitianController::class,
-        'create',
-    ])->name('penelitian.create');
     Route::post('penelitian/store', [
         \App\Http\Controllers\PenelitianController::class,
         'store',

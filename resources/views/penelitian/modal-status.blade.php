@@ -13,7 +13,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body px-0" style="width: 100%; text-align: center;">
-                        <div class="col-xl-6 col-lg-10 col-md-6" style="margin: auto;width: 90%;">
+                        <div class="col-xl-12 col-lg-12 col-md-12" style="margin: auto;width: 90%;">
                             <div style="color: black; font-weight: 400;line-height: 35px;">
                                 <div class="row">
                                     <div style="text-align: center;">

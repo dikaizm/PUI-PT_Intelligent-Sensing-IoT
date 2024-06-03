@@ -78,7 +78,7 @@
                                 </td>
                                 <td style="padding: 12px; text-align: center !important;">
                                     <a type="button" data-bs-toggle="modal" data-bs-target="#modalFeedbackPenelitian{{ $item->id }}" style="color: gray !important;">
-                                        {{ $item->feedback }}
+                                        {{ $item->feedback ? $item->feedback : 'Isi feedback' }}
                                     </a>
                                 </td>
                                 <td style="padding: 8px; text-align: center !important;">
