@@ -74,7 +74,7 @@ class PenelitianController extends Controller
             'judul' => $request->judul,
             'tingkatan_tkt' => $request->tingkatan_tkt,
             'pendanaan' => $request->pendanaan,
-            'jangka_waktu' => $request->jangka_waktu . ' Bulan',
+            'jangka_waktu' => $request->jangka_waktu,
             'file' => $request->file,
             'feedback' => $request->feedback,
             'mitra' => $request->mitra,
@@ -158,17 +158,17 @@ class PenelitianController extends Controller
             'jangka_waktu' => $request->jangka_waktu,
             'file' => $request->file,
             'feedback' => $request->feedback,
+            'mitra' => $request->mitra,
             'status_penelitian_id' => $request->status_penelitian_id,
             'jenis_penelitian' => $request->jenis_penelitian_id,
-            'mitra_id' => $request->mitra_id,
+            'skema_id' => $request->skema_id,
+            'arsip' => $request->arsip,
         ]);
 
         $pivotData = [];
-        foreach ($request->user_id as $index => $userId) {
+        foreach ($request->user_id as $userId) {
             $pivotData[$userId] = [
-                'is_ketua' => $request->is_ketua[$index] ?? false,
-                'is_corresponding' =>
-                    $request->is_corresponding[$index] ?? false,
+                'is_ketua' => $userId == $request->is_ketua ? true : false,
             ];
         }
 

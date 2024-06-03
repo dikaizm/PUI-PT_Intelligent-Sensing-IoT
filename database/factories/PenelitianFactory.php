@@ -21,7 +21,7 @@ class PenelitianFactory extends Factory
             'judul' => fake()->sentence(),
             'tingkatan_tkt' => fake()->randomDigitNotNull(),
             'pendanaan' => fake()->numerify('#####000'),
-            'jangka_waktu' => fake()->numerify('## Bulan'),
+            'jangka_waktu' => fake()->numerify('##'),
             'feedback' => fake()->text(),
             'mitra' => fake()->company(),
             'status_penelitian_id' => fake()->randomDigitNotNull(),
