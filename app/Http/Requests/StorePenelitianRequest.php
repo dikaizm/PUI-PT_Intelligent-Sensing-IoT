@@ -22,22 +22,22 @@ class StorePenelitianRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'skema' => ['required', 'string', 'max:128'],
+            'skema_id' => ['required', 'exists:skema,id'],
             'judul' => ['required', 'string', 'max:255'],
-            'tingkatan_tkt' => ['required', 'string', 'max:9', 'min:1'],
-            'pendanaan' => ['numeric'],
-            'jangka_waktu' => ['string|max:32'],
-            'file' => ['file|mimes:pdf'],
-            'feedback' => ['string|max:1000'],
-            'status_penelitian_id' => ['required'],
-            'jenis_penelitian' => ['required'],
-            'mitra_id' => ['required'],
-            'user_id' => 'required|array',
-            'user_id.*' => 'exists:users,id',
-            'is_ketua' => 'required|array',
-            'is_ketua.*' => 'boolean',
-            'is_corresponding' => 'required|array',
-            'is_corresponding.*' => 'boolean',
+            'tingkatan_tkt' => ['required', 'integer', 'between:1,9'],
+            'pendanaan' => ['required', 'integer', 'min:0'],
+            'jangka_waktu' => ['required', 'integer', 'min:1'],
+            'file' => ['nullable', 'file', 'mimes:pdf', 'max:2048'],
+            'status_penelitian_id' => [
+                'required',
+                'exists:status_penelitian,id',
+            ],
+            'jenis_penelitian_id' => ['required', 'exists:jenis_penelitian,id'],
+            'mitra' => ['nullable', 'string', 'max:64'],
+            'user_id' => ['required', 'array'],
+            'user_id.*' => ['exists:users,id'],
+            'is_ketua' => ['required', 'exists:users,id'],
+            'arsip' => ['nullable', 'boolean'],
         ];
     }
 }

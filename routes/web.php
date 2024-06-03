@@ -25,6 +25,11 @@ Route::middleware('auth')->group(function () {
         'index',
     ])->name('users.index');
 
+    Route::post('user/external-store', [
+        \App\Http\Controllers\UserController::class,
+        'externalStore',
+    ])->name('user.external-store');
+
     Route::get('profile', [
         \App\Http\Controllers\ProfileController::class,
         'show',

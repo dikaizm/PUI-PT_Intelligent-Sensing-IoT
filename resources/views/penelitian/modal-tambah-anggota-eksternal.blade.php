@@ -7,8 +7,9 @@
             </div>
             <div class="modal-body px-0">
                 <div class="content mb-30">
-                    <form action="{{ route('user.store') }}" method="POST">
+                    <form action="{{ route('user.external-store') }}" method="POST">
                         @csrf
+                        @method('post')
 
                         <div class="row">
                             <div class="col-12">
@@ -31,7 +32,7 @@
                                     {{ __('Tambah') }}
                                 </button>
                                 <button type="button" class="main-btn btn-sm danger-btn-outline btn-hover m-1"
-                                data-bs-dismiss="modal">
+                                    data-bs-dismiss="modal">
                                     {{ __('Batal') }}
                                 </button>
                             </div>
@@ -43,3 +44,4 @@
         </div>
     </div>
 </div>
+

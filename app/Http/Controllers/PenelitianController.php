@@ -71,22 +71,23 @@ class PenelitianController extends Controller
     public function store(StorePenelitianRequest $request)
     {
         $penelitian = Penelitian::create([
-            'skema' => $request->skema,
             'judul' => $request->judul,
             'tingkatan_tkt' => $request->tingkatan_tkt,
             'pendanaan' => $request->pendanaan,
-            'jangka_waktu' => $request->jangka_waktu,
+            'jangka_waktu' => $request->jangka_waktu . ' Bulan',
             'file' => $request->file,
             'feedback' => $request->feedback,
+            'mitra' => $request->mitra,
             'status_penelitian_id' => $request->status_penelitian_id,
-            'jenis_penelitian' => $request->jenis_penelitian_id,
-            'mitra_id' => $request->mitra_id,
+            'jenis_penelitian_id' => $request->jenis_penelitian_id,
+            'skema_id' => $request->skema_id,
+            'arsip' => $request->boolean('arsip', false),
         ]);
 
         $pivotData = [];
-        foreach ($request->user_id as $index => $userId) {
+        foreach ($request->user_id as $userId) {
             $pivotData[$userId] = [
-                'is_ketua' => $request->is_ketua[$index],
+                'is_ketua' => $userId == $request->is_ketua ? true : false,
             ];
         }
 

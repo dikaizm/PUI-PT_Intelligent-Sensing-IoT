@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
@@ -45,6 +46,26 @@ class UserController extends Controller
             'success',
             'User berhasil ditambahkan!'
         );
+    }
+
+    public function externalStore(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => ['unique:users,name'],
+        ]);
+        $uuid = Uuid::uuid4()->toString();
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $uuid . '@example.com',
+            'password' => Hash::make($uuid),
+        ]);
+
+        return redirect()
+            ->back()
+            ->with(
+                'success',
+                'User external berhasil ditambahkan, silahkan pilih anggota tim anda!'
+            );
     }
 
     /**

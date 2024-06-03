@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Skema;
+use Ramsey\Uuid\Uuid;
 use App\Models\Output;
 use App\Models\JenisPenelitian;
 use App\Models\StatusPenelitian;
