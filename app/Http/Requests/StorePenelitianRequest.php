@@ -26,8 +26,8 @@ class StorePenelitianRequest extends FormRequest
             'judul' => ['required', 'string', 'max:255'],
             'tingkatan_tkt' => ['required', 'integer', 'between:1,9'],
             'pendanaan' => ['required', 'integer', 'min:0'],
-            'jangka_waktu' => ['required', 'integer', 'min:1'],
-            'file' => ['nullable', 'file', 'mimes:pdf', 'max:2048'],
+            'jangka_waktu' => ['nullable', 'numeric', 'min:1'],
+            'file' => ['nullable', 'file', 'mimes:pdf', 'max:10240'],
             'status_penelitian_id' => [
                 'required',
                 'exists:status_penelitian,id',
