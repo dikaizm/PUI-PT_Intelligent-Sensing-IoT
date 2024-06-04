@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-4">
-                    <h2>{{ __('Penelitian') }}</h2>
+                    <h2>{{ __('Output Penelitian') }}</h2>
                 </div>
             </div>
             <!-- end col -->
@@ -78,7 +78,16 @@
                                                     <td>{{ $detail->judul }}</td>
                                                     <td>{{ $detail->statusOutput->name }}</td>
                                                     <td>{{ $detail->tautan }}</td>
-                                                    <td>detail, edit, hapus</td>
+                                                    <td>
+                                                        <a type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#modalEditOutput{{ $item->id }}">
+                                                            <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
+                                                        </a>
+                                                        <a type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#modalDeleteOutput{{ $item->id }}">
+                                                            <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 @php
                                                     $childCounter++;

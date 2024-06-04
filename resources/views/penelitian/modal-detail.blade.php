@@ -158,11 +158,11 @@
                     <div class="menu-toggle-btn mr-20" style="text-align: right;">
                         <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
                             href="{{ route('penelitian.edit', ['uuid' => $penelitian->uuid]) }}"
-                            style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
+                            style="background: linear-gradient(180deg, #DDCE49 0%, #776F27 100%);color:white;">
                             {{ __('Edit Penelitian') }}
                         </a>
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalDeletePenelitian"
-                            class="main-btn btn-hover btn-md"style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
+                            class="main-btn btn-hover btn-md"style="background: linear-gradient(180deg, #DE210F 0%, #781208 100%); color:white;">
                             {{ __('Hapus Penelitian') }}
                         </a>
                         <div class="modal fade" id="modalDeletePenelitian" tabindex="-1" aria-labelledby="ModalFourLabel"

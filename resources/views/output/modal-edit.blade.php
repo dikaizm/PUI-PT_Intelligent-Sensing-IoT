@@ -1,6 +1,6 @@
 <!-- ========== modal edit =========== -->
 @foreach ($penelitian as $user)
-    <div class="modal fade" id="modalEditPenelitian{{ $user->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+    <div class="modal fade" id="modalEditOutput{{ $user->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
         aria-hidden="true" style="">
         <div class="modal-dialog"
             style="min-height: 100vh; max-width:90%; width:800px; display: flex !important;align-items: center;justify-content: center;">
