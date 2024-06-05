@@ -21,7 +21,7 @@
 
                 @include('alert')
 
-                <div class="menu-toggle-btn mr-20" style="text-align: right;">
+                <div class="menu-toggle-btn mr-20 pb-20" style="text-align: right;">
                     <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
                         href="{{ route('output-detail.create') }}"
                         style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
@@ -107,14 +107,6 @@
             </div>
         </div>
     </div>
-    <<<<<<< HEAD=======<!--==========modal edit===========-->
-        @include('output.modal-edit')
-        <!-- ========== modal end =========== -->
 
-        <!-- ========== modal delete =========== -->
-        @include('output.modal-delete')
-        <!-- ========== modal end =========== -->
-
-        >>>>>>> a122687c319f1efd66257ca3c8331bf9d17b8e89
     @endsection
 

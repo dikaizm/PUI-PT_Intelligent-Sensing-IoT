@@ -2,7 +2,7 @@
     <div class="input-style-1">
         <label for="judul_penelitian">{{ __('Judul Penelitian') }}</label>
         <input @error('judul_penelitian') class="form-control is-invalid" @enderror type="text"
-            name="judul_penelitian" id="judul_penelitian" placeholder="{{ __('Judul Penelitian') }}" value="{{ old('judul_penelitian') }}">
+            name="judul_penelitian" id="judul_penelitian" placeholder="{{ __('Judul Penelitian') }}" value="{{ old('judul_penelitian', request()->query('judul')) }}">
         @error('judul_penelitian')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -14,15 +14,24 @@
         for="tipePublikasi"
         >{{ __('Tipe') }}</label>
         <select id="tipePublikasi" name="tipePublikasi" class="form-control">
-            <option value="admin">Internasional</option>
-            <option value="user">Domestik</option>
+            <option value="">Pilih Tipe</option>
+            @foreach ($tipe as $item)
+            <option value="{{ $item }}">{{ $item }}</option>
+            @endforeach
         </select>
+        @error('tipePublikasi')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
     <div class="input-style-1">
-        <label for="jenisPublikasi">{{ __('Jenis') }}</label>
-        <select id="jenisPublikasi{{ $user->id }}" name="jenisPublikasi" class="form-control">
-            <option value="jurnal">Jurnal</option>
-            <option value="conference">Conference</option>
+        <label for="jenis_output_id">{{ __('Jenis') }}</label>
+        <select id="jenis_output_id" name="jenis_output_id" class="form-control">
+            <option value="">Pilih Jenis</option>
+            @foreach ($jenis_output as $item)
+            <option value="{{ $item->id }}">{{ $item->jenisOutputKey->name }} {{ $item->name }}</option>
+            @endforeach
         </select>
     </div>
     <div class="input-style-1">
@@ -39,10 +48,10 @@
         <label>{{ __('Author') }}</label>
         <select name="user_id[]" class="form-control select2" multiple="multiple"
             style="width: 100%; height: 58px;" required>
-            {{-- @foreach ($users as $user)
+            @foreach ($users as $user)
                 <option value="{{ $user->id }}"
                     @if (old('user_id') && in_array($user->id, old('user_id'))) selected @endif>{{ $user->name }}</option>
-            @endforeach --}}
+            @endforeach
         </select>
         @error('user_id')
             <span class="invalid-feedback" role="alert">
@@ -72,12 +81,10 @@
             name="status_output"
             id="status_output"
             style="max-width: 100%; margin: 0 auto;">
-            {{-- @foreach ($status_output as $status)
-                <option value="{{ $status->id }}"
-                    @if (old('status_output', $item->statusPenelitian->id) == $status->id) selected @endif>
-                    {{ $status->statusPenelitianKey->name }} {{ $status->name }}
-                </option>
-            @endforeach --}}
+            <option value="">Pilih Status</option>
+            @foreach ($status_output as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+            @endforeach
         </select>
         @error('status_output')
             <span class="invalid-feedback" role="alert">

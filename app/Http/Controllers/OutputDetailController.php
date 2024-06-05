@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\JenisOutput;
 use App\Models\OutputDetail;
 use App\Models\StatusOutput;
+use App\Enums\OutputType;
 use Illuminate\Http\Request;
 
 class OutputDetailController extends Controller
@@ -23,7 +24,17 @@ class OutputDetailController extends Controller
      */
     public function create()
     {
-        return view('output.tambah-data-output', [
+        return view('output.tambah.index', [
+            'jenis_output' => JenisOutput::with('jenisOutputKey')->get(),
+            'status_output' => StatusOutput::all(),
+            'tipe' => OutputType::getValues(),
+            'users' => User::select('id', 'name')->get(),
+        ]);
+    }
+
+    public function createFromPenelitian()
+    {
+        return view('output.tambah.index',[
             'jenis_output' => JenisOutput::with('jenisOutputKey')->get(),
             'status_output' => StatusOutput::all(),
             'tipe' => OutputType::getValues(),

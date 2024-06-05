@@ -3,7 +3,7 @@
         <div class="input-style-1">
             <label for="judul_penelitian">{{ __('Judul Penelitian') }}</label>
             <input @error('judul_penelitian') class="form-control is-invalid" @enderror type="text"
-                name="judul_penelitian" id="judul_penelitian" placeholder="{{ __('Judul Penelitian') }}" value="{{ old('judul_penelitian') }}">
+                name="judul_penelitian" id="judul_penelitian" placeholder="{{ __('Judul Penelitian') }}" value="{{ old('judul_penelitian', request()->query('judul')) }}">
             @error('judul_penelitian')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

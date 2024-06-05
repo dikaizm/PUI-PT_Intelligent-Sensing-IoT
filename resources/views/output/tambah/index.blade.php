@@ -46,16 +46,16 @@
                     </div>
                     <div class="col-lg-10 tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-publikasi" role="tabpanel" aria-labelledby="v-pills-publikasi-tab">
-                            @include('output.tambah-publikasi')
+                            @include('output.tambah.tambah-publikasi')
                         </div>
                         <div class="tab-pane fade" id="v-pills-hki" role="tabpanel" aria-labelledby="v-pills-hki-tab">
-                            @include('output.tambah-hki')
+                            @include('output.tambah.tambah-hki')
                         </div>
                         <div class="tab-pane fade" id="v-pills-foto" role="tabpanel" aria-labelledby="v-pills-foto-tab">
-                            @include('output.tambah-foto-poster')
+                            @include('output.tambah.tambah-foto-poster')
                         </div>
                         <div class="tab-pane fade" id="v-pills-video" role="tabpanel" aria-labelledby="v-pills-video-tab">
-                            @include('output.tambah-video')
+                            @include('output.tambah.tambah-video')
                         </div>
                     </div>
                 </div>

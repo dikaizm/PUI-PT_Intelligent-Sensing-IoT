@@ -203,7 +203,7 @@
                             </div>
                         </div>
                         <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
-                            href="{{ route('penelitian.create') }}"
+                            href="{{ route('output-detail.create-from-penelitian', ['uuid'=>$penelitian->uuid, 'judul'=>$penelitian->judul]) }}"
                             style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                             {{ __('Laporkan Output') }}
                         </a>
