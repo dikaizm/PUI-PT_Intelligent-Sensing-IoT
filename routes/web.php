@@ -201,6 +201,7 @@ Route::middleware('auth')->group(function () {
         //end master-data status penelitian key route
     });
     //end mengelola-master-data middleware
+
     //penelitian route
     Route::get('penelitian', [
         \App\Http\Controllers\PenelitianController::class,
@@ -222,28 +223,33 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\PenelitianController::class,
         'store',
     ])->name('penelitian.store');
-    Route::get('penelitian/{uuid}', [
-        \App\Http\Controllers\PenelitianController::class,
-        'show',
-    ])
-        ->name('penelitian.show')
-        ->middleware(EnsureAuthorPenelitian::class);
-    Route::get('penelitian/{uuid}/edit', [
-        \App\Http\Controllers\PenelitianController::class,
-        'edit',
-    ])->name('penelitian.edit');
+
+    Route::middleware([EnsureAuthorPenelitian::class])->group(function () {
+        Route::get('penelitian/{uuid}', [
+            \App\Http\Controllers\PenelitianController::class,
+            'show',
+        ])->name('penelitian.show');
+        Route::get('penelitian/{uuid}/edit', [
+            \App\Http\Controllers\PenelitianController::class,
+            'edit',
+        ])->name('penelitian.edit');
+    });
+
     Route::put('penelitian/{uuid}/update', [
         \App\Http\Controllers\PenelitianController::class,
         'update',
     ])->name('penelitian.update');
+
     Route::patch('penelitian/{uuid}/update-status-penelitian', [
         \App\Http\Controllers\PenelitianController::class,
         'updateStatusPenelitian',
     ])->name('penelitian.update-status-penelitian');
+
     Route::patch('penelitian/{uuid}/update-feedback', [
         \App\Http\Controllers\PenelitianController::class,
         'updateFeedback',
     ])->name('penelitian.update-feedback');
+
     Route::delete('penelitian/{uuid}/destroy', [
         \App\Http\Controllers\PenelitianController::class,
         'destroy',

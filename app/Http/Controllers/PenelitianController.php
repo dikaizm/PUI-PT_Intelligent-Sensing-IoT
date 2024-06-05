@@ -174,7 +174,6 @@ class PenelitianController extends Controller
             'file' => $request->hasFile('file')
                 ? $request->file('file')->store('penelitian', 'public')
                 : $penelitian->file,
-            'feedback' => $request->feedback,
             'mitra' => $request->mitra,
             'status_penelitian_id' => $request->status_penelitian_id,
             'jenis_penelitian_id' => $request->jenis_penelitian_id,
