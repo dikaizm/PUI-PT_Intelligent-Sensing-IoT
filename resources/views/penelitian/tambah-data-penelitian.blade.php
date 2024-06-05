@@ -92,10 +92,10 @@
                                 <select name="is_ketua" id="is_ketua" class="form-control select2"
                                     style="width: 100%; height: 58px;" required>
                                     <option value="">-- Pilih Ketua Tim --</option>
-                                    @foreach ($users as $user)
+                                    {{-- @foreach ($users as $user)
                                         <option value="{{ $user->id }}"
                                             @if (old('is_ketua') == $user->id) selected @endif>{{ $user->name }}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                                 @error('is_ketua')
                                     <span class="invalid-feedback" role="alert">

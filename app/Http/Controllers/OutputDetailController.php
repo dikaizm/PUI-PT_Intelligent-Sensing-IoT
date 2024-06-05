@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Enums\OutputType;
+use App\Models\Penelitian;
 use App\Models\JenisOutput;
 use App\Models\OutputDetail;
 use App\Models\StatusOutput;
-use App\Enums\OutputType;
 use Illuminate\Http\Request;
 
 class OutputDetailController extends Controller
@@ -32,13 +33,16 @@ class OutputDetailController extends Controller
         ]);
     }
 
-    public function createFromPenelitian()
+    public function createFromPenelitian($uuid)
     {
-        return view('output.tambah.index',[
+        return view('output.tambah.index', [
             'jenis_output' => JenisOutput::with('jenisOutputKey')->get(),
             'status_output' => StatusOutput::all(),
             'tipe' => OutputType::getValues(),
             'users' => User::select('id', 'name')->get(),
+            'penelitian' => Penelitian::with('users')
+                ->where('uuid', $uuid)
+                ->firstOrFail(),
         ]);
     }
 

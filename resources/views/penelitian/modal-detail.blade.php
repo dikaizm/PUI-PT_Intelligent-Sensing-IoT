@@ -203,7 +203,7 @@
                             </div>
                         </div>
                         <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
-                            href="{{ route('output-detail.create-from-penelitian', ['uuid'=>$penelitian->uuid, 'judul'=>$penelitian->judul]) }}"
+                            href="{{ route('output-detail.create-from-penelitian', ['uuid' => $penelitian->uuid, 'judul' => $penelitian->judul]) }}"
                             style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                             {{ __('Laporkan Output') }}
                         </a>
@@ -245,7 +245,9 @@
                                             style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 3%;">
                                             <h6>{{ $item->jenisOutput->jenisOutputKey->name }}
                                                 {{ $item->jenisOutput->name }}
-                                                {{ $item->tipe }}
+                                                @if ($item->jenisOutput->jenisOutputKey->name == 'Publikasi')
+                                                    {{ $item->tipe }}
+                                                @endif
                                             </h6>
                                         </td>
                                         <td

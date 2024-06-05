@@ -267,7 +267,7 @@ Route::middleware('auth')->group(function () {
         'create',
     ])->name('output-detail.create');
 
-    Route::get('output-detail/create?judul={judul}/{uuid}', [
+    Route::get('output-detail/{uuid}/create/{judul}', [
         \App\Http\Controllers\OutputDetailController::class,
         'createFromPenelitian',
     ])->name('output-detail.create-from-penelitian');
