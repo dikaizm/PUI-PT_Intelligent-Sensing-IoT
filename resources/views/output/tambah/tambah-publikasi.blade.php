@@ -12,14 +12,14 @@
         @enderror
     </div>
     <div class="input-style-1">
-        <label for="tipePublikasi">{{ __('Tipe') }}</label>
-        <select id="tipePublikasi" name="tipePublikasi" class="form-control">
-            <option value="">Pilih Tipe</option>
+        <label for="tipe">{{ __('Tipe') }}</label>
+        <select id="tipe" name="tipe" class="form-control">
+            <option value="">--Pilih Tipe--</option>
             @foreach ($tipe as $item)
                 <option value="{{ $item }}">{{ $item }}</option>
             @endforeach
         </select>
-        @error('tipePublikasi')
+        @error('tipe')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -28,7 +28,7 @@
     <div class="input-style-1">
         <label for="jenis_output_id">{{ __('Jenis') }}</label>
         <select id="jenis_output_id" name="jenis_output_id" class="form-control">
-            <option value="">Pilih Jenis</option>
+            <option value="">--Pilih Jenis Output--</option>
             @foreach ($jenis_output as $item)
                 <option value="{{ $item->id }}">{{ $item->jenisOutputKey->name }} {{ $item->name }}</option>
             @endforeach
@@ -54,16 +54,22 @@
                 </option>
             @endforeach
         </select>
-        @error('user_id')
+        @error('user_id[]')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
+        <div class="mt-2">
+            <a type="button" data-bs-toggle="modal" data-bs-target="#modalTambahAnggotaEksternal"
+                style="font-size:20px; color: red !important;">
+                {{ __('Tambah Anggota Eksternal') }}
+            </a>
+        </div>
     </div>
     <div class="input-style-1">
         <label for="is_corresponding">{{ __('Corresponding') }}</label>
         <select name="is_corresponding" id="is_corresponding" class="form-control select2"
-            style="width: 100%; height: 58px;" required>
+            style="width: 100%; height: 58px;" required data-selected="{{ old('is_corresponding') }}">
         </select>
         @error('is_corresponding')
             <span class="invalid-feedback" role="alert">
@@ -117,4 +123,8 @@
         </button>
     </div>
 </form>
+
+<!-- ========== modal tambah anggota eksternal =========== -->
+@include('penelitian.modal-tambah-anggota-eksternal')
+<!-- ========== modal end =========== -->
 

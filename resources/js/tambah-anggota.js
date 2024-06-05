@@ -22,29 +22,72 @@ $(document).ready(function () {
         )
 
         // Tambahkan opsi ketua tim dari anggota yang telah dipilih sebelumnya
+        var addedOptions = {}
         $.each(selectedMembers, function (index, memberId) {
             var memberName = $(
                 '.select2[name="user_id[]"] option[value="' + memberId + '"]',
             ).text()
-            $('#is_ketua').append(
-                $('<option>', {
-                    value: memberId,
-                    text: memberName,
-                    selected: memberId == selectedKetua,
-                }),
-            )
+            if (!addedOptions[memberId]) {
+                $('#is_ketua').append(
+                    $('<option>', {
+                        value: memberId,
+                        text: memberName,
+                        selected: memberId == selectedKetua,
+                    }),
+                )
+                addedOptions[memberId] = true
+            }
         })
 
-        // Memilih ketua tim yang sudah disimpan sebelumnya (untuk halaman edit)
-        // var selectedKetua = $('#is_ketua').data('selected-ketua');
-        // if (selectedKetua) {
-        //     $('#is_ketua').val(selectedKetua).trigger('change'); // Set selected value
-        // }
+        // Perbarui select2 untuk is_ketua
+        $('#is_ketua').trigger('change.select2')
     }
 
-    // Panggil fungsi populateKetuaTim saat anggota tim berubah
-    $('.select2[name="user_id[]"]').on('change', populateKetuaTim)
+    // Fungsi untuk memfilter opsi corresponding author
+    function populateCorresponding() {
+        var selectedMembers = $('.select2[name="user_id[]"]').val()
+        var selectedCorresponding = $('#is_corresponding').data('selected')
 
-    // Panggil fungsi populateKetuaTim saat halaman pertama kali dimuat
+        // Kosongkan opsi corresponding author
+        $('#is_corresponding').empty()
+
+        // Tambahkan opsi default "Corresponding Author"
+        $('#is_corresponding').append(
+            $('<option>', {
+                value: '',
+                text: '-- Pilih Corresponding Author --',
+            }),
+        )
+
+        // Tambahkan opsi corresponding author dari anggota yang telah dipilih sebelumnya
+        var addedOptions = {}
+        $.each(selectedMembers, function (index, memberId) {
+            var memberName = $(
+                '.select2[name="user_id[]"] option[value="' + memberId + '"]',
+            ).text()
+            if (!addedOptions[memberId]) {
+                $('#is_corresponding').append(
+                    $('<option>', {
+                        value: memberId,
+                        text: memberName,
+                        selected: memberId == selectedCorresponding,
+                    }),
+                )
+                addedOptions[memberId] = true
+            }
+        })
+
+        // Perbarui select2 untuk is_corresponding
+        $('#is_corresponding').trigger('change.select2')
+    }
+
+    // Panggil fungsi populateKetuaTim dan populateCorresponding saat anggota tim berubah
+    $('.select2[name="user_id[]"]').on('change', function () {
+        populateKetuaTim()
+        populateCorresponding()
+    })
+
+    // Panggil fungsi populateKetuaTim dan populateCorresponding saat halaman pertama kali dimuat
     populateKetuaTim()
+    populateCorresponding()
 })
