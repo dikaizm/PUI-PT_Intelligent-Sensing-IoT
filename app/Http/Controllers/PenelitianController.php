@@ -8,6 +8,7 @@ use App\Models\Penelitian;
 use Illuminate\Http\Request;
 use App\Models\JenisPenelitian;
 use App\Models\StatusPenelitian;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
 
@@ -75,7 +76,9 @@ class PenelitianController extends Controller
             'tingkatan_tkt' => $request->tingkatan_tkt,
             'pendanaan' => $request->pendanaan,
             'jangka_waktu' => $request->jangka_waktu,
-            'file' => $request->file,
+            'file' => $request->hasFile('file')
+                ? $request->file('file')->store('penelitian', 'public')
+                : null,
             'feedback' => $request->feedback,
             'mitra' => $request->mitra,
             'status_penelitian_id' => $request->status_penelitian_id,
@@ -158,14 +161,19 @@ class PenelitianController extends Controller
     {
         $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
 
+        if ($request->hasFile('file') && $penelitian->file) {
+            Storage::disk('public')->delete($penelitian->file);
+        }
+
         // Update penelitian
         $penelitian->update([
             'judul' => $request->judul,
             'tingkatan_tkt' => $request->tingkatan_tkt,
             'pendanaan' => $request->pendanaan,
             'jangka_waktu' => $request->jangka_waktu,
-            'file' => $request->file,
-            'feedback' => $request->feedback,
+            'file' => $request->hasFile('file')
+                ? $request->file('file')->store('penelitian', 'public')
+                : $penelitian->file,
             'mitra' => $request->mitra,
             'status_penelitian_id' => $request->status_penelitian_id,
             'jenis_penelitian_id' => $request->jenis_penelitian_id,

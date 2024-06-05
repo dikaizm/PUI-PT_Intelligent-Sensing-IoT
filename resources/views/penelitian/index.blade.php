@@ -83,11 +83,15 @@
                                         <p>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y') }}</p>
                                     </td>
                                     <td style="padding: 12px; text-align: center !important;">
-                                        <a type="button" data-bs-toggle="modal"
-                                            data-bs-target="#modalFeedbackPenelitian{{ $item->id }}"
-                                            style="color: gray !important;">
+                                        @can('update-feedback')
+                                            <a type="button" data-bs-toggle="modal"
+                                                data-bs-target="#modalFeedbackPenelitian{{ $item->id }}"
+                                                style="color: gray !important;">
+                                            @endcan
                                             {{ $item->feedback ? $item->feedback : 'Isi feedback' }}
-                                        </a>
+                                            @can('update-feedback')
+                                            </a>
+                                        @endcan
                                     </td>
                                     <td style="padding: 8px; text-align: center !important;">
                                         <a type="button" href="{{ route('penelitian.show', ['uuid' => $item->uuid]) }}">

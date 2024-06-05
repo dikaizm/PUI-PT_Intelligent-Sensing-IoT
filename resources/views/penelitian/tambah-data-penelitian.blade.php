@@ -21,7 +21,7 @@
 
                 @include('alert')
 
-                <form action="{{ route('penelitian.store') }}" method="POST">
+                <form action="{{ route('penelitian.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('post')
 

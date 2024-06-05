@@ -21,7 +21,8 @@
 
                 @include('alert')
 
-                <form action="{{ route('penelitian.update', $penelitian->uuid) }}" method="POST">
+                <form action="{{ route('penelitian.update', $penelitian->uuid) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 

@@ -29,14 +29,14 @@ class DatabaseSeeder extends Seeder
 
         Permission::create(['name' => 'mengelola-pengguna']);
         Permission::create(['name' => 'mengelola-pengaturan']);
+        Permission::create(['name' => 'update-feedback']);
 
         $role1 = Role::create(['name' => 'Admin']);
         $role1->givePermissionTo('mengelola-pengguna');
         $role1->givePermissionTo('mengelola-pengaturan');
+        $role1->givePermissionTo('update-feedback');
 
         $role2 = Role::create(['name' => 'Dosen']);
-
-        $role3 = Role::create(['name' => 'Kaur']);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin',
@@ -53,11 +53,11 @@ class DatabaseSeeder extends Seeder
         $user->assignRole($role2);
 
         $user = \App\Models\User::factory()->create([
-            'name' => 'Kepala Koor',
-            'email' => 'kaur@example.com',
-            'password' => 'kaur',
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+            'password' => 'john',
         ]);
-        $user->assignRole($role3);
+        $user->assignRole($role2);
 
         DB::table('status_penelitian_key')->insert([
             'name' => 'Proposal',
@@ -98,6 +98,15 @@ class DatabaseSeeder extends Seeder
 
         DB::table('jenis_output_key')->insert([
             'name' => 'Publikasi',
+        ]);
+        DB::table('jenis_output_key')->insert([
+            'name' => 'HKI',
+        ]);
+        DB::table('jenis_output_key')->insert([
+            'name' => 'Foto/Poster',
+        ]);
+        DB::table('jenis_output_key')->insert([
+            'name' => 'Video',
         ]);
         JenisOutput::factory()->count(3)->create();
 

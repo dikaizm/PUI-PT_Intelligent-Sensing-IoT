@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <!-- ========== title-wrapper start ========== -->
     <div class="title-wrapper pt-30">
         <div class="row align-items-center">
@@ -29,24 +28,8 @@
             </div>
             <div class="icon-card mt-15 mb-15">
                 <div class="content" style="align-items: center; text-align:center;">
-                    <h6 class="mb-10">{{ __('Jumlah Status Penelitian') }}</h6>
-                    <h3 class="text-bold mb-10">{{ $jumlah_user }}</h3>
-                    @if ($difference_jumlah_user >= 0)
-                        <p class="text-sm text-success">
-                            <i class="lni lni-arrow-up"></i> +{{ $difference_jumlah_user }}
-                        </p>
-                    @else
-                        <p class="text-sm text-danger">
-                            <i class="lni lni-arrow-down"></i>{{ $difference_jumlah_user }}
-                        </p>
-                    @endif
-                </div>
-            </div>
-            <!-- End Icon Cart -->
-            <div class="icon-card mb-30">
-                <div class="content" style="align-items: center; text-align:center;">
-                    <h6 class="mb-10">{{ __('Jumlah Jenis Output') }}</h6>
-                    <h3 class="text-bold mb-10">{{ $jumlah_penelitian_aktif }}</h3>
+                    <h6 class="mb-10">{{ __('Jumlah Penelitian') }}</h6>
+                    <h3 class="text-bold mb-10">{{ $jumlah_penelitian }}</h3>
                     @if ($difference_jumlah_penelitian >= 0)
                         <p class="text-sm text-success">
                             <i class="lni lni-arrow-up"></i> +{{ $difference_jumlah_penelitian }}
@@ -59,9 +42,25 @@
                 </div>
             </div>
             <!-- End Icon Cart -->
+            <div class="icon-card mb-30">
+                <div class="content" style="align-items: center; text-align:center;">
+                    <h6 class="mb-10">{{ __('Jumlah Output') }}</h6>
+                    <h3 class="text-bold mb-10">{{ $jumlah_output }}</h3>
+                    @if ($difference_jumlah_output >= 0)
+                        <p class="text-sm text-success">
+                            <i class="lni lni-arrow-up"></i> +{{ $difference_jumlah_output }}
+                        </p>
+                    @else
+                        <p class="text-sm text-danger">
+                            <i class="lni lni-arrow-down"></i>{{ $difference_jumlah_output }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+            <!-- End Icon Cart -->
         </div>
         <!-- End Left Column -->
-    <!-- End  Row -->
+        <!-- End  Row -->
 
         <!-- Right Column: 2 col-5 charts stacked vertically -->
         <div class="col-xl-10 col-lg-10 col-sm-12">
@@ -121,6 +120,5 @@
         <!-- End Col -->
     </div>
     <!-- End  Row -->
-
 @endsection
 
