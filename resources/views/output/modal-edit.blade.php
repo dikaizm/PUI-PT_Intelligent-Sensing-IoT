@@ -1,6 +1,8 @@
 <!-- ========== modal edit =========== -->
-@foreach ($penelitian as $user)
-    <div class="modal fade" id="modalEditOutput{{ $user->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
+{{-- @foreach ($penelitian as $user) --}}
+    <div class="modal fade"
+    {{-- id="modalEditOutput{{ $user->id }}" --}}
+    tabindex="-1" aria-labelledby="ModalFourLabel"
         aria-hidden="true" style="">
         <div class="modal-dialog"
             style="min-height: 100vh; max-width:90%; width:800px; display: flex !important;align-items: center;justify-content: center;">
@@ -17,19 +19,19 @@
                             <div class="d-flex align-items-start">
                                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <button class="nav-link active" id="v-pills-judul-tab" data-bs-toggle="pill" data-bs-target="#v-pills-judul" type="button" role="tab" aria-controls="v-pills-judul" aria-selected="true">
-                                        Nama
+                                        {{ __('Nama') }}
                                     </button>
                                     <button class="nav-link" id="v-pills-publikasi-tab" data-bs-toggle="pill" data-bs-target="#v-pills-publikasi" type="button" role="tab" aria-controls="v-pills-publikasi" aria-selected="false">
-                                        Publikasi
+                                        {{ __('Publikasi') }}
                                     </button>
                                     <button class="nav-link" id="v-pills-hki-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hki" type="button" role="tab" aria-controls="v-pills-hki" aria-selected="false">
-                                        HKI
+                                        {{ __('HKI') }}
                                     </button>
                                     <button class="nav-link" id="v-pills-foto-tab" data-bs-toggle="pill" data-bs-target="#v-pills-foto" type="button" role="tab" aria-controls="v-pills-foto" aria-selected="false">
-                                        Foto/Poster
+                                        {{ __('Foto/Poster') }}
                                     </button>
                                     <button class="nav-link" id="v-pills-video-tab" data-bs-toggle="pill" data-bs-target="#v-pills-video" type="button" role="tab" aria-controls="v-pills-video" aria-selected="false">
-                                        Video
+                                        {{ __('Video') }}
                                     </button>
                                 </div>
                                 <div class="col-lg-10 tab-content" id="v-pills-tabContent">
@@ -37,7 +39,7 @@
                                         <div class="input-style-1">
                                             <label for="name">{{ __('Nama Penelitian') }}</label>
                                             <input @error('name') class="form-control is-invalid" @enderror type="text"
-                                                name="name" id="name" placeholder="{{ __('Skema Penelitian') }}"
+                                                name="name" id="name" placeholder="{{ __('Nama Penelitian') }}"
                                                 value="{{ old('name', auth()->user()->name) }}">
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -48,21 +50,31 @@
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-publikasi" role="tabpanel" aria-labelledby="v-pills-publikasi-tab">
                                         <div class="input-style-1">
-                                            <label for="nameEdit{{ $user->id }}">{{ __('Tipe') }}</label>
-                                            <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
+                                            <label
+                                            {{-- for="nameEdit{{ $user->id }}" --}}
+                                            >{{ __('Tipe') }}</label>
+                                            <select
+                                            {{-- id="jenisPengguna{{ $user->id }}" --}}
+                                            name="jenisPengguna" class="form-control">
                                                 <option value="admin">Internasional</option>
                                                 <option value="user">Domestik</option>
                                             </select>
                                         </div>
                                         <div class="input-style-1">
-                                            <label for="nameEdit{{ $user->id }}">{{ __('Jenis') }}</label>
-                                            <select id="jenisPengguna{{ $user->id }}" name="jenisPengguna" class="form-control">
+                                            <label
+                                            {{-- for="nameEdit{{ $user->id }}" --}}
+                                            >{{ __('Jenis') }}</label>
+                                            <select
+                                            {{-- id="jenisPengguna{{ $user->id }}" --}}
+                                            name="jenisPengguna" class="form-control">
                                                 <option value="admin">Jurnal</option>
                                                 <option value="user">Conference</option>
                                             </select>
                                         </div>
                                         <div class="input-style-1">
-                                            <label for="nameEdit{{ $user->id }}">{{ __('Judul Publikasi') }}</label>
+                                            <label
+                                            {{-- for="nameEdit{{ $user->id }}" --}}
+                                            >{{ __('Judul Publikasi') }}</label>
                                             <input @error('name') class="form-control is-invalid" @enderror type="text"
                                                 name="name" id="name" placeholder="{{ __('Skema Penelitian') }}"
                                                 value="{{ old('name', auth()->user()->name) }}">
@@ -120,7 +132,9 @@
                                             </div>
                                         </div>
                                         <div class="input-style-1">
-                                            <label for="nameEdit{{ $user->id }}">{{ __('Status Output') }}</label>
+                                            <label
+                                            for="nameEdit{{ $user->id }}"
+                                            >{{ __('Status Output') }}</label>
                                             <select
                                                 class="form-control @error('status_penelitian') is-invalid @enderror"
                                                 name="status_penelitian"
@@ -316,5 +330,5 @@
             </div>
         </div>
     </div>
-@endforeach
+{{-- @endforeach --}}
 <!-- ========== modal end =========== -->

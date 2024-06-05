@@ -105,11 +105,6 @@
         </div>
     </div>
 
-
-    <!-- ========== modal edit =========== -->
-    @include('output.modal-edit')
-    <!-- ========== modal end =========== -->
-
     <!-- ========== modal delete =========== -->
     @include('output.modal-delete')
     <!-- ========== modal end =========== -->
