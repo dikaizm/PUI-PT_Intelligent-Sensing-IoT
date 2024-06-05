@@ -21,15 +21,13 @@
 
                 @include('alert')
 
-            @can('mengelola-pengguna')
-            <div class="menu-toggle-btn mr-20" style="text-align: right;">
+            <div class="menu-toggle-btn pb-20" style="text-align: right;">
                 <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
-                    href="{{ route('penelitian.create') }}"
+                    href="#"
                     style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                     {{ __('Tambahkan Data') }}
                 </a>
             </div>
-            @endcan
 
             <div class="table-wrapper table-responsive" style="font-family: DM Sans">
                 @php
@@ -106,6 +104,14 @@
             </div>
         </div>
     </div>
-</div>
+
+
+    <!-- ========== modal status =========== -->
+    @include('output.modal-edit')
+    <!-- ========== modal end =========== -->
+
+    <!-- ========== modal status =========== -->
+    @include('output.modal-delete')
+    <!-- ========== modal end =========== -->
 
 @endsection
