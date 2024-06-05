@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Output;
-use Illuminate\Http\Request;
 use App\Models\Penelitian;
+use App\Models\OutputDetail;
+use Illuminate\Http\Request;
 
 class LaporanKinerjaController extends Controller
 {
@@ -25,32 +26,21 @@ class LaporanKinerjaController extends Controller
             $yesterday
         )->count();
 
-        //Publikasi
-        $publikasiToday = Output::whereDate('created_at', $today)->count();
-        $publikasiYesterday = Output::whereDate(
+        //output
+        $outputToday = OutputDetail::whereDate('created_at', $today)->count();
+        $outputYesterday = OutputDetail::whereDate(
             'created_at',
             $yesterday
         )->count();
 
-        //user
-        $userToday = User::whereDate('created_at', $today)->count();
-        $userYesterday = User::whereDate('created_at', $yesterday)->count();
+        //
 
         return view('admin.laporan-kinerja', [
             'jumlah_penelitian' => Penelitian::count(),
-            'jumlah_publikasi' => Output::count(),
-            'jumlah_user' => User::count(),
-            'jumlah_penelitian_aktif' => Penelitian::whereHas(
-                'statusPenelitian',
-                function ($query) {
-                    $query->where('status_penelitian_key_id', 2);
-                }
-            )->count(),
+            'jumlah_output' => OutputDetail::count(),
             'difference_jumlah_penelitian' =>
                 $penelitianToday - $penelitianYesterday,
-            'difference_jumlah_publikasi' =>
-                $publikasiToday - $publikasiYesterday,
-            'difference_jumlah_user' => $userToday - $userYesterday,
+            'difference_jumlah_output' => $outputToday - $outputYesterday,
         ]);
     }
 

@@ -261,5 +261,10 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\OutputController::class,
         'index',
     ])->name('laporan-output.index');
+
+    Route::get('output-detail/create', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'create',
+    ])->name('output-detail.create');
     //end laporan output routes
 });

@@ -99,6 +99,15 @@ class DatabaseSeeder extends Seeder
         DB::table('jenis_output_key')->insert([
             'name' => 'Publikasi',
         ]);
+        DB::table('jenis_output_key')->insert([
+            'name' => 'HKI',
+        ]);
+        DB::table('jenis_output_key')->insert([
+            'name' => 'Foto/Poster',
+        ]);
+        DB::table('jenis_output_key')->insert([
+            'name' => 'Video',
+        ]);
         JenisOutput::factory()->count(3)->create();
 
         DB::table('author')->insert([
