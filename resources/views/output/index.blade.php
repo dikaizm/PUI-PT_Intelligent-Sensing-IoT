@@ -107,5 +107,14 @@
             </div>
         </div>
     </div>
-@endsection
+    <<<<<<< HEAD=======<!--==========modal edit===========-->
+        @include('output.modal-edit')
+        <!-- ========== modal end =========== -->
+
+        <!-- ========== modal delete =========== -->
+        @include('output.modal-delete')
+        <!-- ========== modal end =========== -->
+
+        >>>>>>> a122687c319f1efd66257ca3c8331bf9d17b8e89
+    @endsection
 
