@@ -22,13 +22,13 @@
                 @include('alert')
 
             @can('mengelola-pengguna')
-                <div class="menu-toggle-btn mr-20 pb-10" style="text-align: right;">
-                    <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#modalTambah"
-                        style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
-                        {{ __('Tambahkan Data') }}
-                    </button>
-                </div>
+            <div class="menu-toggle-btn mr-20" style="text-align: right;">
+                <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
+                    href="{{ route('penelitian.create') }}"
+                    style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
+                    {{ __('Tambahkan Data') }}
+                </a>
+            </div>
             @endcan
 
             <div class="table-wrapper table-responsive" style="font-family: DM Sans">
