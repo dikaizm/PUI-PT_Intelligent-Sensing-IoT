@@ -63,10 +63,12 @@ return new class extends Migration {
                 ->references('id')
                 ->on('status_output')
                 ->onDelete('restrict');
-            $table->enum('tipe', OutputType::getValues());
+            $table
+                ->enum('tipe', OutputType::getValues())
+                ->default(OutputType::NULL());
             $table->string('judul');
-            $table->string('tautan');
-            $table->string('file');
+            $table->string('tautan')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

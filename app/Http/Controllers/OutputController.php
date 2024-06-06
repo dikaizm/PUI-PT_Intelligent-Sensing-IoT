@@ -45,9 +45,11 @@ class OutputController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public static function store(string $penelitian_id)
     {
-        //
+        $output = Output::firstOrCreate(['penelitian_id' => $penelitian_id]);
+
+        return $output;
     }
 
     /**
