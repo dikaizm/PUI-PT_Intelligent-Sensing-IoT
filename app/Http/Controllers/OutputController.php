@@ -18,7 +18,7 @@ class OutputController extends Controller
                     ->whereHas('penelitian', function ($query) {
                         $query->where('arsip', false);
                     })
-                    ->get()
+                    ->paginate(5)
                 : Output::with([
                     'penelitian',
                     'outputDetails',
@@ -30,7 +30,7 @@ class OutputController extends Controller
                     ->whereHas('penelitian.users', function ($query) {
                         $query->where('users.id', auth()->user()->id);
                     })
-                    ->get(),
+                    ->paginate(5),
         ]);
     }
 

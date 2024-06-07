@@ -103,10 +103,10 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $output->links() }}
                 </div>
             </div>
         </div>
     </div>
-
-    @endsection
+@endsection
 
