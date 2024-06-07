@@ -59,6 +59,17 @@ class DatabaseSeeder extends Seeder
         ]);
         $user->assignRole($role2);
 
+        DB::table('status_output')->insert([
+            'name' => 'Tidak Ada',
+        ]);
+        DB::table('status_penelitian_key')->insert([
+            'name' => 'Tidak Ada',
+        ]);
+        DB::table('status_penelitian')->insert([
+            'status_penelitian_key' => '1',
+            'name' => 'NONE',
+        ]);
+
         DB::table('status_penelitian_key')->insert([
             'name' => 'Proposal',
         ]);
