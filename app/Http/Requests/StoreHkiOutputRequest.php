@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\OutputType;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePublikasiOutputRequest extends FormRequest
+class StoreHkiOutputRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +26,6 @@ class StorePublikasiOutputRequest extends FormRequest
             'status_output_id' => ['required', 'exists:status_output,id'],
             'judul_penelitian' => ['required', 'max:254'],
             'judul_output' => ['required', 'max:254'],
-            'tipe' => [
-                'required',
-                'in:' . implode(',', OutputType::getValues()),
-            ],
             'tautan' => ['nullable', 'url', 'regex:/^https?:\/\/.*/i'],
         ];
     }

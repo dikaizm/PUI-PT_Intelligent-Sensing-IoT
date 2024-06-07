@@ -10,6 +10,7 @@ use App\Models\OutputDetail;
 use App\Models\StatusOutput;
 use Illuminate\Http\Request;
 use App\Http\Controllers\OutputController;
+use App\Http\Requests\StoreHkiOutputRequest;
 use App\Http\Requests\StorePublikasiOutputRequest;
 
 class OutputDetailController extends Controller
@@ -98,9 +99,45 @@ class OutputDetailController extends Controller
             ->with('success', 'Output publikasi berhasil disimpan!');
     }
 
-    public function storeHKI(Request $request)
+    public function storeHKI(StoreHkiOutputRequest $request)
     {
-        //
+        $uuid = $request->uuid;
+
+        $uuid
+            ? ($penelitian = Penelitian::with('output.outputDetails')
+                ->where('uuid', $uuid)
+                ->first())
+            : ($penelitian = Penelitian::create([
+                'judul' => $request->judul_penelitian,
+                'status_penelitian_id' => 1,
+                'jenis_penelitian_id' => 1,
+                'skema_id' => 1,
+            ]));
+
+        $pivotData = [];
+        foreach ($request->user_id as $userId) {
+            $pivotData[$userId] = [
+                'is_corresponding' =>
+                    $userId == $request->is_corresponding ? true : false,
+            ];
+        }
+
+        $penelitian->users()->sync($pivotData);
+
+        $output = OutputController::store($penelitian->id);
+
+        OutputDetail::create([
+            'output_id' => $output->id,
+            'jenis_output_id' => $request->jenis_output_id,
+            'status_output_id' => $request->status_output_id,
+            'judul' => $request->judul_output,
+            'tautan' => $request->tautan,
+            'published_at' => $request->published_at,
+        ]);
+
+        return redirect()
+            ->route('laporan-output.index')
+            ->with('success', 'Output publikasi berhasil disimpan!');
     }
 
     public function storeFotoPoster(Request $request)
