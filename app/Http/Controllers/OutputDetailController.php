@@ -10,6 +10,7 @@ use App\Models\OutputDetail;
 use App\Models\StatusOutput;
 use Illuminate\Http\Request;
 use App\Http\Controllers\OutputController;
+use App\Http\Requests\StorePublikasiOutputRequest;
 
 class OutputDetailController extends Controller
 {
@@ -55,7 +56,7 @@ class OutputDetailController extends Controller
         //
     }
 
-    public function storePublikasi(Request $request)
+    public function storePublikasi(StorePublikasiOutputRequest $request)
     {
         $uuid = $request->uuid;
 
@@ -89,6 +90,7 @@ class OutputDetailController extends Controller
             'tipe' => $request->tipe,
             'judul' => $request->judul_output,
             'tautan' => $request->tautan,
+            'published_at' => $request->published_at,
         ]);
 
         return redirect()

@@ -8,5 +8,5 @@ final class OutputType extends Enum
 {
     const INTERNASIONAL = 'Internasional';
     const DOMESTIK = 'Domestik';
-    const NULL = '';
+    const NONE = '';
 }

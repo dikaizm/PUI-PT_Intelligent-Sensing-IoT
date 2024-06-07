@@ -96,20 +96,20 @@
         @enderror
     </div>
     <div class="input-style-1">
-        <label for="tanggal_publish">{{ __('Tanggal Publish') }} <span
+        <label for="published_at">{{ __('Tanggal Publish') }} <span
                 style="color:gray;">{{ __('*Diisi jika memilih status Published') }}</span></label>
-        @error('status_penelitian')
+        <input type="date" id="dateInput" name="published_at" required>
+        @error('published_at')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
-        <input type="date" id="dateInput" required>
     </div>
     <div class="input-style-1">
         <label for="tautan">{{ __('Link Jurnal') }} <span
                 style="color:gray;">{{ __('*Apabila sudah publish') }}</span> </label>
         <input @error('tautan') class="form-control is-invalid" @enderror type="text" name="tautan" id="tautan"
-            placeholder="{{ __('Link Jurnal') }}" value="{{ old('tautan') }}">
+            placeholder="{{ __('gunakan http:// atau https://') }}" value="{{ old('tautan') }}">
         @error('tautan')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
