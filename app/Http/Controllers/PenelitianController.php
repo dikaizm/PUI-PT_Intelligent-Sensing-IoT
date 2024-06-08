@@ -96,6 +96,8 @@ class PenelitianController extends Controller
 
         $penelitian->users()->sync($pivotData);
 
+        OutputController::store($penelitian->id);
+
         return redirect()
             ->route('penelitian.index')
             ->with('success', 'Penelitian berhasil ditambah!');
