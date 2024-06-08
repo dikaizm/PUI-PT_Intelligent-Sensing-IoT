@@ -24,11 +24,7 @@ class StoreVideoOutputRequest extends FormRequest
         return [
             'jenis_output_id' => ['required', 'exists:jenis_output,id'],
             'judul_output' => ['required', 'string', 'max:255'],
-            'tautan' => [
-                'nullable',
-                'url',
-                'regex:/^https?:\/\/[^\s$.?#].[^\s]*$/i',
-            ],
+            'tautan' => ['nullable', 'regex:/^https?:\/\/[^\s$.?#].[^\s]*$/i'],
         ];
     }
 }

@@ -66,8 +66,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Tidak Ada',
         ]);
         DB::table('status_penelitian')->insert([
-            'status_penelitian_key' => '1',
-            'name' => 'NONE',
+            'status_penelitian_key_id' => '1',
+            'name' => '*',
         ]);
 
         DB::table('status_penelitian_key')->insert([
@@ -119,7 +119,27 @@ class DatabaseSeeder extends Seeder
         DB::table('jenis_output_key')->insert([
             'name' => 'Video',
         ]);
-        JenisOutput::factory()->count(3)->create();
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '1',
+            'name' => 'Jurnal',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '1',
+            'name' => 'Conference',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '2',
+            'name' => '*',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '3',
+            'name' => '*',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '4',
+            'name' => '*',
+        ]);
+        //JenisOutput::factory()->count(3)->create();
 
         DB::table('author')->insert([
             'penelitian_id' => '1',

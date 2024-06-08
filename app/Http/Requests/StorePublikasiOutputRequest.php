@@ -31,7 +31,7 @@ class StorePublikasiOutputRequest extends FormRequest
                 'required',
                 'in:' . implode(',', OutputType::getValues()),
             ],
-            'tautan' => ['nullable', 'url', 'regex:/^https?:\/\/.*/i'],
+            'tautan' => ['nullable', 'regex:/^https?:\/\/.*/i'],
         ];
     }
 }

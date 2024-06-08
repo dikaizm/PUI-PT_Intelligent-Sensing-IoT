@@ -31,7 +31,11 @@ class OutputDetailController extends Controller
     public function create()
     {
         return view('output.tambah.index', [
-            'jenis_output' => JenisOutput::with('jenisOutputKey')->get(),
+            'jenis_output' => JenisOutput::with([
+                'jenisOutputKey' => function ($query) {
+                    $query->orderBy('name', 'asc');
+                },
+            ])->get(),
             'status_output' => StatusOutput::all(),
             'tipe' => OutputType::getValues(),
             'users' => User::select('id', 'name')->get(),
@@ -61,6 +65,23 @@ class OutputDetailController extends Controller
 
     public function storePublikasi(StorePublikasiOutputRequest $request)
     {
+        $output_key = JenisOutput::with('jenisOutputKey')
+            ->where('id', $request->jenis_output_id)
+            ->first();
+
+        $jenis_output_key_name = $output_key->jenisOutputKey->name;
+
+        if ($jenis_output_key_name !== 'Publikasi') {
+            return redirect()
+                ->back()
+                ->with(
+                    'danger',
+                    'Formulir tidak sesuai, jenis output: ' .
+                        $jenis_output_key_name .
+                        ',formulir: Publikasi'
+                );
+        }
+
         $uuid = $request->uuid;
 
         $uuid
@@ -103,6 +124,23 @@ class OutputDetailController extends Controller
 
     public function storeHKI(StoreHkiOutputRequest $request)
     {
+        $output_key = JenisOutput::with('jenisOutputKey')
+            ->where('id', $request->jenis_output_id)
+            ->first();
+
+        $jenis_output_key_name = $output_key->jenisOutputKey->name;
+
+        if ($jenis_output_key_name !== 'HKI') {
+            return redirect()
+                ->back()
+                ->with(
+                    'danger',
+                    'Formulir tidak sesuai, jenis output: ' .
+                        $jenis_output_key_name .
+                        ',formulir: HKI'
+                );
+        }
+
         $uuid = $request->uuid;
 
         $uuid
@@ -144,6 +182,23 @@ class OutputDetailController extends Controller
 
     public function storeFotoPoster(StoreFotoPosterOutputRequest $request)
     {
+        $output_key = JenisOutput::with('jenisOutputKey')
+            ->where('id', $request->jenis_output_id)
+            ->first();
+
+        $jenis_output_key_name = $output_key->jenisOutputKey->name;
+
+        if ($jenis_output_key_name !== 'Foto/Poster') {
+            return redirect()
+                ->back()
+                ->with(
+                    'danger',
+                    'Formulir tidak sesuai, jenis output: ' .
+                        $jenis_output_key_name .
+                        ',formulir: Foto/Poster'
+                );
+        }
+
         $uuid = $request->uuid;
 
         $uuid
@@ -188,6 +243,23 @@ class OutputDetailController extends Controller
 
     public function storeVideo(StoreVideoOutputRequest $request)
     {
+        $output_key = JenisOutput::with('jenisOutputKey')
+            ->where('id', $request->jenis_output_id)
+            ->first();
+
+        $jenis_output_key_name = $output_key->jenisOutputKey->name;
+
+        if ($jenis_output_key_name !== 'Video') {
+            return redirect()
+                ->back()
+                ->with(
+                    'danger',
+                    'Formulir tidak sesuai, jenis output: ' .
+                        $jenis_output_key_name .
+                        ',formulir: Video'
+                );
+        }
+
         $uuid = $request->uuid;
 
         $uuid

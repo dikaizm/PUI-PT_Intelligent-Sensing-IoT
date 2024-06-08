@@ -1,7 +1,18 @@
 @session('success')
     <div class="alert-box success-alert">
         <div class="alert">
-            <h4 class="alert-heading">Success</h4>
+            <h4 class="alert-heading">Berhasil</h4>
+            <p class="text-medium">
+                {{ $value }}
+            </p>
+        </div>
+    </div>
+@endsession
+
+@session('danger')
+    <div class="alert-box danger-alert">
+        <div class="alert">
+            <h4 class="alert-heading">Terjadi kesalahan :</h4>
             <p class="text-medium">
                 {{ $value }}
             </p>
