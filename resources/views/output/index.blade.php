@@ -34,7 +34,7 @@
                         $parentCounter = 1;
                     @endphp
 
-                    <table class="table table-striped table-bordered">
+                    <table class="table striped-table table-bordered">
                         <thead>
                             <tr>
                                 <td>No</td>
@@ -53,7 +53,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4">
-                                        <table class="table mb-0">
+                                        <table class="table mb-0 striped-table">
                                             <thead>
                                                 <tr>
                                                     <td>No</td>
