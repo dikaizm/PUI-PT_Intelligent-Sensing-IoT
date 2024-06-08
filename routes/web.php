@@ -293,6 +293,18 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\OutputDetailController::class,
         'storeVideo',
     ])->name('output-detail.store-video');
+    //end output store
+
+    //output update
+    //
+    //end output update
+
+    //output delete
+    Route::delete('output-detail/{id}/destroy', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'destroy',
+    ])->name('output-detail.destroy');
+    //end output delete
 
     //end laporan output routes
 });

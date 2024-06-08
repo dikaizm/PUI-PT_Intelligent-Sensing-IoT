@@ -327,8 +327,19 @@ class OutputDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OutputDetail $outputDetail)
+    public function destroy(string $id)
     {
-        //
+        $output_detail = OutputDetail::findOrFail($id);
+
+        if ($output_detail->file) {
+            $filePath = storage_path('app/public/' . $output_detail->file);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
+        $output_detail->delete();
+
+        return redirect()->back()->with('success', 'Output berhasil dihapus!');
     }
 }

@@ -1,6 +1,6 @@
 <!-- ========== modal delete =========== -->
-{{-- @foreach ($penelitian as $item) --}}
-    <div class="modal fade" id="#" tabindex="-1" aria-labelledby="ModalFourLabel"
+@foreach ($output as $item)
+    <div class="modal fade" id="modalDelete{{ $item->id }}" tabindex="-1" aria-labelledby="ModalFourLabel"
         aria-hidden="true">
         <div class="modal-dialog"
             style="min-height: 100vh;display: flex !important;align-items: center;justify-content: center;">
@@ -14,15 +14,14 @@
                 <div class="modal-body px-0">
                     <div class="content mb-30">
                         <p class="text-sm">
-                            {{-- {{ __('Are you sure you want to delete ' . $item->name . '?') }} --}}
+                            {{ __('Are you sure you want to delete ' . $item->judul . '?') }}
                         </p>
                     </div>
                     <div class="action d-flex flex-wrap justify-content-end">
-                        <form action="#
-                        {{-- {{ route('item.delete', ['id' => $item->id]) }} --}}
-                        " method="POST">
+                        <form action=" {{ route('output-detail.destroy', ['id' => $item->id]) }} " method="POST">
                             @method('DELETE')
                             @csrf
+
                             <button type="submit" class="main-btn btn-sm danger-btn btn-hover m-1">
                                 Delete
                             </button>
@@ -36,5 +35,6 @@
             </div>
         </div>
     </div>
-{{-- @endforeach --}}
+@endforeach
 <!-- ========== modal end =========== -->
+
