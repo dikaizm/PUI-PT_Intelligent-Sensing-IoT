@@ -26,7 +26,7 @@ class StoreHkiOutputRequest extends FormRequest
             'status_output_id' => ['required', 'exists:status_output,id'],
             'judul_penelitian' => ['required', 'max:254'],
             'judul_output' => ['required', 'max:254'],
-            'tautan' => ['nullable', 'regex:/^https?:\/\/.*/i'],
+            'tautan' => ['nullable', 'regex:/^https?:\/\/.*/i', 'max:255'],
         ];
     }
 }

@@ -30,7 +30,11 @@ class UpdatePublikasiOutputRequest extends FormRequest
             'judul_output' => ['required', 'string', 'max:255'],
             'status_output_id' => ['required', 'exists:status_output,id'],
             'published_at' => ['nullable', 'date'],
-            'tautan' => ['nullable', 'regex:/^https?:\/\/[^\s$.?#].[^\s]*$/i'],
+            'tautan' => [
+                'nullable',
+                'regex:/^https?:\/\/[^\s$.?#].[^\s]*$/i',
+                'max:255',
+            ],
         ];
     }
 }

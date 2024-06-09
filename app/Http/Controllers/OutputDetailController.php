@@ -14,6 +14,7 @@ use App\Http\Controllers\OutputController;
 use App\Http\Requests\StoreHkiOutputRequest;
 use App\Http\Requests\UpdateHkiOutputRequest;
 use App\Http\Requests\StoreVideoOutputRequest;
+use App\Http\Requests\UpdateVideoOutputRequest;
 use App\Http\Requests\StorePublikasiOutputRequest;
 use App\Http\Requests\StoreFotoPosterOutputRequest;
 use App\Http\Requests\UpdatePublikasiOutputRequest;
@@ -321,31 +322,6 @@ class OutputDetailController extends Controller
     }
 
     /**
-     * Update the file resource in storage.
-     * Args[]
-     */
-    private static function handleFileUpdate(
-        $request,
-        $inputName,
-        $existingFilePath,
-        $destinationPath
-    ) {
-        if ($request->hasFile($inputName)) {
-            if (
-                $existingFilePath &&
-                file_exists(public_path($existingFilePath))
-            ) {
-                unlink(public_path($existingFilePath));
-            }
-            // Simpan file baru
-            $file = $request->file($inputName);
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path($destinationPath), $filename);
-            return $destinationPath . '/' . $filename;
-        }
-        return $existingFilePath;
-    }
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
@@ -387,8 +363,9 @@ class OutputDetailController extends Controller
 
         return redirect()
             ->back()
-            ->with('success', 'Publikasi berhasil diperbarui');
+            ->with('success', 'Output Publikasi anda berhasil diperbarui');
     }
+
     public function updateFotoPoster(
         UpdateFotoPosterOutputRequest $request,
         string $id
@@ -404,21 +381,28 @@ class OutputDetailController extends Controller
 
         $fotoposter->file = $request->hasFile('file')
             ? $request->file('file')->store('output-foto-poster', 'public')
-            : $penelitian->file;
+            : $fotoposter->file;
 
         $fotoposter->save();
 
         return redirect()
             ->back()
-            ->with('success', 'Foto poster berhasil diperbarui');
+            ->with('success', 'Output Foto poster anda berhasil diperbarui');
     }
 
-    public function updateVideo(Request $request, string $id)
+    public function updateVideo(UpdateVideoOutputRequest $request, string $id)
     {
         $video = OutputDetail::findOrFail($id);
+
+        $video->jenis_output_id = $video->jenis_output_id;
+        $video->judul = $request->judul_output;
+        $video->tautan = $request->tautan;
+
+        $video->save();
+
         return redirect()
             ->back()
-            ->with('success', 'Publikasi berhasil diperbarui');
+            ->with('success', 'Output video anda berhasil diperbarui');
     }
 
     /**
