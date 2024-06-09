@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Output;
+use App\Enums\OutputType;
+use App\Models\JenisOutput;
+use App\Models\StatusOutput;
 use Illuminate\Http\Request;
 
 class OutputController extends Controller
@@ -33,6 +37,13 @@ class OutputController extends Controller
                     })
                     ->whereHas('outputDetails')
                     ->paginate(5),
+            'jenis_output' => JenisOutput::with([
+                'jenisOutputKey' => function ($query) {
+                    $query->orderBy('name', 'asc');
+                },
+            ])->get(),
+            'status_output' => StatusOutput::all(),
+            'tipe' => OutputType::getValues(),
         ]);
     }
 

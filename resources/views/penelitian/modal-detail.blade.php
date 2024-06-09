@@ -229,6 +229,10 @@
                                 </th>
                                 <th
                                     style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                    <h6>Tanggal Publish / Granted</h6>
+                                </th>
+                                <th
+                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                     <h6>Tautan</h6>
                                 </th>
                                 <th
@@ -262,6 +266,9 @@
                                             style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                             <h6>{{ $item->statusOutput->name }}</h6>
                                         </td>
+                                        <td
+                                            style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                            {{ $item->published_at ? $item->published_at : '' }}</td>
                                         <td
                                             style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                             <h6><a href="{{ $item->tautan }}" target="_blank" class="btn btn-md"><i

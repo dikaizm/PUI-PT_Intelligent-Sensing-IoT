@@ -71,17 +71,23 @@
                                                         style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
                                                         No</td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
                                                         Output</td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 40%;">
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 45%;">
                                                         Judul Luaran</td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
                                                         Status Output</td>
+                                                    <td
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
+                                                        Tanggal Publish / Granted</td>
                                                     <td
                                                         style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
                                                         Tautan</td>
+                                                    <td
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
+                                                        File</td>
                                                     <td
                                                         style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                                         Action</td>
@@ -103,8 +109,17 @@
                                                         <td style="padding: 12px; text-align: center !important;">
                                                             {{ $detail->statusOutput->name }}</td>
                                                         <td style="padding: 12px; text-align: center !important;">
+                                                            {{ $detail->published_at ? $detail->published_at : '' }}</td>
+                                                        <td style="padding: 12px; text-align: center !important;">
                                                             @if ($detail->tautan)
-                                                                <a href="{{ asset('storage/' . $detail->tautan) }}"
+                                                                <a href="{{ $detail->tautan }}" target="_blank">
+                                                                    <i class="lni lni-link"
+                                                                        style="color: gray; margin: 2px;"></i>
+                                                                </a>
+                                                            @endif
+                                                        <td style="padding: 12px; text-align: center !important;">
+                                                            @if ($detail->file)
+                                                                <a href="{{ asset('storage/' . $detail->file) }}"
                                                                     target="_blank">
                                                                     <i class="lni lni-download"
                                                                         style="color: gray; margin: 2px;"></i>

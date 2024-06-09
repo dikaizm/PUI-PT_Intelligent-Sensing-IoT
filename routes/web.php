@@ -274,29 +274,44 @@ Route::middleware('auth')->group(function () {
     ])->name('output-detail.create-from-penelitian');
 
     //output store
-    Route::post('penelitian/store-publikasi', [
+    Route::post('output-detail/store-publikasi', [
         \App\Http\Controllers\OutputDetailController::class,
         'storePublikasi',
     ])->name('output-detail.store-publikasi');
 
-    Route::post('penelitian/store-hki', [
+    Route::post('output-detail/store-hki', [
         \App\Http\Controllers\OutputDetailController::class,
         'storeHKI',
     ])->name('output-detail.store-hki');
 
-    Route::post('penelitian/store-foto-poster', [
+    Route::post('output-detail/store-foto-poster', [
         \App\Http\Controllers\OutputDetailController::class,
         'storeFotoPoster',
     ])->name('output-detail.store-foto-poster');
 
-    Route::post('penelitian/store-video', [
+    Route::post('output-detail/store-video', [
         \App\Http\Controllers\OutputDetailController::class,
         'storeVideo',
     ])->name('output-detail.store-video');
     //end output store
 
     //output update
-    //
+    Route::put('output-detail/{id}/update-publikasi', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'updatePublikasi',
+    ])->name('output-detail.update-publikasi');
+    Route::put('output-detail/{id}/update-hki', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'updateHKI',
+    ])->name('output-detail.update-hki');
+    Route::put('output-detail/{id}/update-foto-poster', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'updateFotoPoster',
+    ])->name('output-detail.update-foto-poster');
+    Route::put('output-detail/{id}/update-video', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'updateVideo',
+    ])->name('output-detail.update-video');
     //end output update
 
     //output delete

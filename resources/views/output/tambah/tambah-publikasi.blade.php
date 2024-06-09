@@ -98,7 +98,7 @@
     <div class="input-style-1">
         <label for="published_at">{{ __('Tanggal Publish') }} <span
                 style="color:gray;">{{ __('*Diisi jika memilih status Published') }}</span></label>
-        <input type="date" id="dateInput" name="published_at" required>
+        <input type="date" id="dateInput" name="published_at">
         @error('published_at')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
