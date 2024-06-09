@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Enums\OutputType;
+use App\Models\Penelitian;
 use App\Models\JenisOutput;
 use App\Models\OutputDetail;
 use App\Models\StatusOutput;
-use App\Enums\OutputType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\OutputController;
 
 class OutputDetailController extends Controller
 {
@@ -32,13 +34,16 @@ class OutputDetailController extends Controller
         ]);
     }
 
-    public function createFromPenelitian()
+    public function createFromPenelitian($uuid)
     {
-        return view('output.tambah.index',[
+        return view('output.tambah.index', [
             'jenis_output' => JenisOutput::with('jenisOutputKey')->get(),
             'status_output' => StatusOutput::all(),
             'tipe' => OutputType::getValues(),
             'users' => User::select('id', 'name')->get(),
+            'penelitian' => Penelitian::with('users')
+                ->where('uuid', $uuid)
+                ->firstOrFail(),
         ]);
     }
 
@@ -46,6 +51,62 @@ class OutputDetailController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+    {
+        //
+    }
+
+    public function storePublikasi(Request $request)
+    {
+        $uuid = $request->uuid;
+
+        $uuid
+            ? ($penelitian = Penelitian::with('output.outputDetails')
+                ->where('uuid', $uuid)
+                ->first())
+            : ($penelitian = Penelitian::create([
+                'judul' => $request->judul_penelitian,
+                'status_penelitian_id' => 1,
+                'jenis_penelitian_id' => 1,
+                'skema_id' => 1,
+            ]));
+
+        $pivotData = [];
+        foreach ($request->user_id as $userId) {
+            $pivotData[$userId] = [
+                'is_corresponding' =>
+                    $userId == $request->is_corresponding ? true : false,
+            ];
+        }
+
+        $penelitian->users()->sync($pivotData);
+
+        $output = OutputController::store($penelitian->id);
+
+        OutputDetail::create([
+            'output_id' => $output->id,
+            'jenis_output_id' => $request->jenis_output_id,
+            'status_output_id' => $request->status_output_id,
+            'tipe' => $request->tipe,
+            'judul' => $request->judul_output,
+            'tautan' => $request->tautan,
+        ]);
+
+        return redirect()
+            ->route('laporan-output.index')
+            ->with('success', 'Output publikasi berhasil disimpan!');
+    }
+
+    public function storeHKI(Request $request)
+    {
+        //
+    }
+
+    public function storeFotoPoster(Request $request)
+    {
+        //
+    }
+
+    public function storeVideo(Request $request)
     {
         //
     }

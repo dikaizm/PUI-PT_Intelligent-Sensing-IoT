@@ -33,6 +33,7 @@
                                 </label>
                                 <select class="form-control @error('skema') is-invalid @enderror" name="skema_id"
                                     id="skema" style="max-width: 100%; margin: 0 auto;">
+                                    <option value=""> --Pilih Skema--</option>
                                     @foreach ($skema as $s)
                                         <option value="{{ $s->id }}"
                                             @if (old('skema') == $s->id) selected @endif>
@@ -90,12 +91,7 @@
                             <div class="input-style-1">
                                 <label for="is_ketua">{{ __('Ketua Tim') }}</label>
                                 <select name="is_ketua" id="is_ketua" class="form-control select2"
-                                    style="width: 100%; height: 58px;" required>
-                                    <option value="">-- Pilih Ketua Tim --</option>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}"
-                                            @if (old('is_ketua') == $user->id) selected @endif>{{ $user->name }}</option>
-                                    @endforeach
+                                    style="width: 100%; height: 58px;" required data-selected="{{ old('is_ketua') }}">
                                 </select>
                                 @error('is_ketua')
                                     <span class="invalid-feedback" role="alert">
@@ -111,6 +107,7 @@
                             </label>
                             <select class="form-control @error('status_penelitian_id') is-invalid @enderror"
                                 name="status_penelitian_id" id="statusPenelitian" style="max-width: 100%; margin: 0 auto;">
+                                <option value="">--Pilih Status Penelitian--</option>
                                 @foreach ($status_penelitian as $status)
                                     <option value="{{ $status->id }}" @if (old('status_penelitian_id') == $status->id) selected @endif>
                                         {{ $status->statusPenelitianKey->name }} {{ $status->name }}
@@ -141,6 +138,7 @@
                             </label>
                             <select class="form-control @error('jenis_penelitian_id') is-invalid @enderror"
                                 name="jenis_penelitian_id" id="jenisPenelitian" style="max-width: 100%; margin: 0 auto;">
+                                <option value="">--Pilih Jenis Penelitian--</option>
                                 @foreach ($jenis_penelitian as $jenis)
                                     <option value="{{ $jenis->id }}" @if (old('jenis_penelitian_id') == $jenis->id) selected @endif>
                                         {{ $jenis->name }}

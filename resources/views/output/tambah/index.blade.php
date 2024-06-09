@@ -19,33 +19,32 @@
         <div class="card-style-3 mb-30" style="border-radius: 20px;border: 2px solid #000;">
             <div class="card-content">
 
-                @session('success')
-                    <div class="alert-box success-alert">
-                        <div class="alert">
-                            <h4 class="alert-heading">Edit Berhasil</h4>
-                            <p class="text-medium">
-                                {{ $value }}
-                            </p>
-                        </div>
-                    </div>
-                @endsession
+                @include('alert')
+
                 <div class="d-flex align-items-start">
                     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <button class="nav-link active" id="v-pills-publikasi-tab" data-bs-toggle="pill" data-bs-target="#v-pills-publikasi" type="button" role="tab" aria-controls="v-pills-publikasi" aria-selected="true">
+                        <button class="nav-link active" id="v-pills-publikasi-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-publikasi" type="button" role="tab"
+                            aria-controls="v-pills-publikasi" aria-selected="true">
                             {{ __('Publikasi') }}
                         </button>
-                        <button class="nav-link" id="v-pills-hki-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hki" type="button" role="tab" aria-controls="v-pills-hki" aria-selected="false">
+                        <button class="nav-link" id="v-pills-hki-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hki"
+                            type="button" role="tab" aria-controls="v-pills-hki" aria-selected="false">
                             {{ __('HKI') }}
                         </button>
-                        <button class="nav-link" id="v-pills-foto-tab" data-bs-toggle="pill" data-bs-target="#v-pills-foto" type="button" role="tab" aria-controls="v-pills-foto" aria-selected="false">
+                        <button class="nav-link" id="v-pills-foto-tab" data-bs-toggle="pill" data-bs-target="#v-pills-foto"
+                            type="button" role="tab" aria-controls="v-pills-foto" aria-selected="false">
                             {{ __('Foto/Poster') }}
                         </button>
-                        <button class="nav-link" id="v-pills-video-tab" data-bs-toggle="pill" data-bs-target="#v-pills-video" type="button" role="tab" aria-controls="v-pills-video" aria-selected="false">
+                        <button class="nav-link" id="v-pills-video-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-video" type="button" role="tab" aria-controls="v-pills-video"
+                            aria-selected="false">
                             {{ __('Video') }}
                         </button>
                     </div>
                     <div class="col-lg-10 tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-publikasi" role="tabpanel" aria-labelledby="v-pills-publikasi-tab">
+                        <div class="tab-pane fade show active" id="v-pills-publikasi" role="tabpanel"
+                            aria-labelledby="v-pills-publikasi-tab">
                             @include('output.tambah.tambah-publikasi')
                         </div>
                         <div class="tab-pane fade" id="v-pills-hki" role="tabpanel" aria-labelledby="v-pills-hki-tab">

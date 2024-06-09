@@ -235,6 +235,7 @@ Route::middleware('auth')->group(function () {
             \App\Http\Controllers\PenelitianController::class,
             'show',
         ])->name('penelitian.show');
+
         Route::get('penelitian/{uuid}/edit', [
             \App\Http\Controllers\PenelitianController::class,
             'edit',
@@ -273,9 +274,31 @@ Route::middleware('auth')->group(function () {
         'create',
     ])->name('output-detail.create');
 
-    Route::get('output-detail/create?judul={judul}/{uuid}', [
+    Route::get('output-detail/{uuid}/create/{judul}', [
         \App\Http\Controllers\OutputDetailController::class,
         'createFromPenelitian',
     ])->name('output-detail.create-from-penelitian');
+
+    //output store
+    Route::post('penelitian/store-publikasi', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'storePublikasi',
+    ])->name('output-detail.store-publikasi');
+
+    Route::post('penelitian/store-hki', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'storeHKI',
+    ])->name('output-detail.store-hki');
+
+    Route::post('penelitian/store-foto-poster', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'storeFotoPoster',
+    ])->name('output-detail.store-foto-poster');
+
+    Route::post('penelitian/store-video', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'storeVideo',
+    ])->name('output-detail.store-video');
+
     //end laporan output routes
 });

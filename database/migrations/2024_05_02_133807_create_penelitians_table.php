@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->id();
             $table->uuid('uuid');
             $table->string('judul');
-            $table->tinyInteger('tingkatan_tkt')->unsigned();
+            $table->tinyInteger('tingkatan_tkt')->unsigned()->nullable();
             $table->bigInteger('pendanaan')->unsigned()->nullable();
             $table->string('jangka_waktu', 32)->nullable();
             $table->string('file')->nullable();
