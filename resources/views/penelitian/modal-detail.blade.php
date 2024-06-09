@@ -270,8 +270,12 @@
                                         </td>
                                         <td
                                             style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
-                                            <h6><a href="{{ asset('storage/' . $item->file) }}" target="_blank"><i
-                                                        class="lni lni-download" style="color: gray; margin:2px;"></i></a>
+                                            <h6>
+                                                @if ($item->file)
+                                                    <a href="{{ asset('storage/' . $item->file) }}" target="_blank">
+                                                        <i class="lni lni-download" style="color: gray; margin: 2px;"></i>
+                                                    </a>
+                                                @endif
                                             </h6>
                                         </td>
                                         <td
@@ -295,11 +299,11 @@
         </div>
     </div>
 
-    @include('output.modal-edit.publikasi')
-    @include('output.modal-edit.hki')
-    @include('output.modal-edit.foto-poster')
-    @include('output.modal-edit.video')
-    @include('output.modal-delete')
+    @include('penelitian.modal-edit-output.delete')
+    @include('penelitian.modal-edit-output.foto-poster')
+    @include('penelitian.modal-edit-output.hki')
+    @include('penelitian.modal-edit-output.publikasi')
+    @include('penelitian.modal-edit-output.video')
 
 @endsection
 

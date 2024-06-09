@@ -34,34 +34,57 @@
                         $parentCounter = 1;
                     @endphp
 
-                    <table class="table striped-table table-bordered">
+                    <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <td>No</td>
-                                <td>Penelitian</td>
-                                <td>Tgl Update</td>
-                                <td>Feedback</td>
+                                <td
+                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                    No</td>
+                                <td
+                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 30%;">
+                                    Penelitian</td>
+                                <td
+                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                    Tgl Update</td>
+                                <td
+                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 60%;">
+                                    Feedback</td>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($output as $item)
                                 <tr>
-                                    <td>{{ $parentCounter }}</td>
-                                    <td>{{ $item->penelitian->judul }}</td>
-                                    <td>{{ $item->penelitian->updated_at }}</td>
-                                    <td>{{ $item->penelitian->feedback }}</td>
+                                    <td style="padding: 12px; text-align: center !important;"> {{ $parentCounter }}</td>
+                                    <td style="padding: 12px; text-align: center !important;">{{ $item->penelitian->judul }}
+                                    </td>
+                                    <td style="padding: 12px; text-align: center !important;">
+                                        {{ \Carbon\Carbon::parse($item->penelitian->updated_at)->format('d/m/Y') }}</td>
+                                    <td style="padding: 12px; text-align: center !important;">
+                                        {{ $item->penelitian->feedback }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
                                         <table class="table mb-0 striped-table">
                                             <thead>
                                                 <tr>
-                                                    <td>No</td>
-                                                    <td>Output</td>
-                                                    <td>Judul Luaran</td>
-                                                    <td>Status Output</td>
-                                                    <td>Tautan</td>
-                                                    <td>Action</td>
+                                                    <td
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
+                                                        No</td>
+                                                    <td
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                                        Output</td>
+                                                    <td
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 40%;">
+                                                        Judul Luaran</td>
+                                                    <td
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
+                                                        Status Output</td>
+                                                    <td
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
+                                                        Tautan</td>
+                                                    <td
+                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                                        Action</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -71,24 +94,39 @@
 
                                                 @foreach ($item->outputDetails as $detail)
                                                     <tr>
-                                                        <td>{{ $parentCounter }}.{{ $childCounter }}</td>
-                                                        <td>{{ $detail->jenisOutput->jenisOutputKey->name }}</td>
-                                                        <td>{{ $detail->judul }}</td>
-                                                        <td>{{ $detail->statusOutput->name }}</td>
-                                                        <td>{{ $detail->tautan }}</td>
-                                                        <td>
+                                                        <td style="padding: 12px; text-align: center !important;">
+                                                            {{ $parentCounter }}.{{ $childCounter }}</td>
+                                                        <td style="padding: 12px; text-align: center !important;">
+                                                            {{ $detail->jenisOutput->jenisOutputKey->name }}</td>
+                                                        <td style="padding: 12px; text-align: center !important;">
+                                                            {{ $detail->judul }}</td>
+                                                        <td style="padding: 12px; text-align: center !important;">
+                                                            {{ $detail->statusOutput->name }}</td>
+                                                        <td style="padding: 12px; text-align: center !important;">
+                                                            @if ($detail->tautan)
+                                                                <a href="{{ asset('storage/' . $detail->tautan) }}"
+                                                                    target="_blank">
+                                                                    <i class="lni lni-download"
+                                                                        style="color: gray; margin: 2px;"></i>
+                                                                </a>
+                                                            @endif
+                                                        </td>
+                                                        <td style="padding: 12px; text-align: center !important;">
                                                             <a type="button" data-bs-toggle="modal"
-                                                                data-bs-target="#modalEditOutput{{ $detail->id }}">
-                                                                <i class="lni lni-pencil"
-                                                                    style="color: black; margin:2px;"></i>
+                                                                data-bs-target="#modalEdit{{ $detail->jenisOutput->jenisOutputKey->name }}{{ $detail->id }}">
+                                                                <i class="lni lni-pencil" style="color: black;"></i>
                                                             </a>
                                                             <a type="button" data-bs-toggle="modal"
-                                                                data-bs-target="#modalDeleteOutput{{ $detail->id }}">
-                                                                <i class="lni lni-trash-can"
-                                                                    style="color: red; margin:2px;"></i>
+                                                                data-bs-target="#modalDelete{{ $detail->id }}">
+                                                                <i class="lni lni-trash-can" style="color: red;"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    @include('output.modal-edit.publikasi')
+                                                    @include('output.modal-edit.hki')
+                                                    @include('output.modal-edit.foto-poster')
+                                                    @include('output.modal-edit.video')
+                                                    @include('output.modal-delete')
                                                     @php
                                                         $childCounter++;
                                                     @endphp
