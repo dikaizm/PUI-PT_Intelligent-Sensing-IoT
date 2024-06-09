@@ -45,6 +45,12 @@ Route::middleware('auth')->group(function () {
         'index',
     ])->name('laporan-kinerja.index');
 
+    Route::post('/laporan-kinerja', [
+        \App\Http\Controllers\LaporanKinerjaController::class,
+        'store',
+    ])->name('laporan-kinerja.store');
+
+
     Route::middleware('can:mengelola-pengguna')->group(function () {
         Route::get('master-data/register-key', [
             \App\Http\Controllers\RegisterKeyController::class,

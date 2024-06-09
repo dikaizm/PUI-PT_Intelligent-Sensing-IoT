@@ -5,7 +5,7 @@
     <div class="title-wrapper pt-30">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <div class="title mb-5">
+                <div class="title mb-4">
                     <h2>{{ __('Laporan Kinerja') }}</h2>
                 </div>
             </div>
@@ -15,19 +15,17 @@
     </div>
     <!-- ========== title-wrapper end ========== -->
 
-    <div class="row pt-30">
-
+    <div class="row pt-3">
         <!-- Left Column: 2 col-2 cards stacked vertically -->
         <div class="col-xl-2 col-lg-2 col-sm-12 d-flex flex-column">
             <div class="menu-toggle-btn" style="text-align: center;">
-                <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#modalFilterLaporanKinerja"
-                    style="background: linear-gradient(0deg, #DE0F0F 0%, #780808 100%); color:white;width:100%;">
-                    {{ __('[Tahun]') }}
+                <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal" data-bs-target="#modalFilterLaporanKinerja"
+                style="background: linear-gradient(0deg, #DE0F0F 0%, #780808 100%); color:white;width:100%;">
+                    {{ __('Filter') }}
                 </button>
             </div>
-            <div class="icon-card mt-15 mb-15">
-                <div class="content" style="align-items: center; text-align:center;">
+            <div class="icon-card mt-15 mb-15 d-flex flex-column align-items-center justify-content-center" style="height: 100%;">
+                <div class="content" style="text-align: center;">
                     <h6 class="mb-10">{{ __('Jumlah Penelitian') }}</h6>
                     <h3 class="text-bold mb-10">{{ $jumlah_penelitian }}</h3>
                     @if ($difference_jumlah_penelitian >= 0)
@@ -42,8 +40,8 @@
                 </div>
             </div>
             <!-- End Icon Cart -->
-            <div class="icon-card mb-30">
-                <div class="content" style="align-items: center; text-align:center;">
+            <div class="icon-card mb-30 d-flex flex-column align-items-center justify-content-center" style="height: 100%;">
+                <div class="content" style="text-align: center;">
                     <h6 class="mb-10">{{ __('Jumlah Output') }}</h6>
                     <h3 class="text-bold mb-10">{{ $jumlah_output }}</h3>
                     @if ($difference_jumlah_output >= 0)
@@ -113,7 +111,7 @@
                     {{ __('Jumlah Penelitian dan Target Tahun [1] dan [2]') }}
                 </div>
                 <div class="card-body">
-                    <canvas id="barchartPublikasi"></canvas>
+                    <canvas id="barchartPenelitian"></canvas>
                 </div>
             </div>
         </div>
@@ -122,3 +120,15 @@
     <!-- End  Row -->
 @endsection
 
+@include('admin.modal-filter-laporan-kinerja')
+
+<script>
+    window.statusCountsPenelitian = {!! $status_counts_penelitian !!};
+    window.statusCountsOutput = {!! $status_counts_output !!};
+    window.statusCountsOutputAwal = {!! $status_counts_output_awal !!};
+    window.statusCountsOutputAkhir = {!! $status_counts_output_akhir !!};
+    var tahunAwal = '{{ $tahun_awal }}';
+    var tahunAkhir = '{{ $tahun_akhir }}';
+    var penelitianTahunAwal = {{ $penelitian_tahun_awal }};
+    var penelitianTahunAkhir = {{ $penelitian_tahun_akhir }};
+</script>
