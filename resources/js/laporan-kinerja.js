@@ -35,24 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('tahunAwal').value = tahunAwalValue;
         document.getElementById('tahunAkhir').value = tahunAkhirValue;
     });
-
-    // Mendengarkan perubahan pada tahun akhir
-    tahunAkhirSelect.addEventListener('change', function () {
-        // Mendapatkan tahun yang dipilih pada tahun akhir
-        const tahunAkhirValue = parseInt(tahunAkhirSelect.value);
-
-        // Mendapatkan tahun yang dipilih pada tahun awal
-        const tahunAwalValue = parseInt(tahunAwalSelect.value);
-
-        // Jika tahun yang dipilih pada tahun akhir kurang dari tahun yang dipilih pada tahun awal, atur opsi select tahun awal ke nilai yang dipilih pada tahun akhir
-        if (tahunAkhirValue < tahunAwalValue) {
-            tahunAwalSelect.value = tahunAkhirValue;
-        }
-
-        // Set nilai input tahunAwal dan tahunAkhir
-        document.getElementById('tahunAwal').value = tahunAwalValue;
-        document.getElementById('tahunAkhir').value = tahunAkhirValue;
-    });
 });
 //END JS Pilih Tahun
 
@@ -269,19 +251,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const ctx3 = document.getElementById('barchartOutput').getContext('2d');
     new Chart(ctx3, config3);
 });
-
 //END JS Display Diagram Balok Jenis Output
 
 
 //START JS Display Diagram Balok Status Penelitian
 document.addEventListener('DOMContentLoaded', function () {
+    const targetPenelitian = window.targetPenelitian;
+
     const labels2 = ['Tahun ' + tahunAwal, 'Tahun ' + tahunAkhir];
     const data2 = {
         labels: labels2,
         datasets: [
             {
                 label: 'Target',
-                data: [100, 100],
+                data: [targetPenelitian[tahunAwal], targetPenelitian[tahunAkhir]],
                 borderColor: 'rgba(233,113,52,255)',
                 backgroundColor: 'rgba(233,113,52,255)',
             },
@@ -317,3 +300,54 @@ document.addEventListener('DOMContentLoaded', function () {
     new Chart(ctx2, config2);
 });
 //END JS Display Diagram Balok Status Penelitian
+
+//START JS ENTOTTT
+document.addEventListener('DOMContentLoaded', function () {
+    const startYear = new Date().getFullYear();
+    const tahunAwalSelect = document.getElementById('tahunAwal');
+    const tahunAkhirSelect = document.getElementById('tahunAkhir');
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const tahunAwalQuery = urlParams.get('tahunAwal');
+    const tahunAkhirQuery = urlParams.get('tahunAkhir');
+
+    // Populate tahunAwal select options
+    for (let year = startYear; year <= startYear + 20; year++) {
+        let optionAwal = document.createElement('option');
+        optionAwal.value = year;
+        optionAwal.text = year;
+        if (year == tahunAwalQuery) {
+            optionAwal.selected = true;
+        }
+        tahunAwalSelect.add(optionAwal);
+    }
+
+    // Function to update tahunAkhir options based on tahunAwal selection
+    function updateTahunAkhirOptions() {
+        // Clear existing options
+        tahunAkhirSelect.innerHTML = '';
+
+        // Get selected tahunAwal value
+        const selectedTahunAwal = parseInt(tahunAwalSelect.value);
+
+        // Add new option for tahunAkhir
+        let optionAkhir = document.createElement('option');
+        optionAkhir.value = selectedTahunAwal + 1;
+        optionAkhir.text = selectedTahunAwal + 1;
+        if ((selectedTahunAwal + 1) == tahunAkhirQuery) {
+            optionAkhir.selected = true;
+        }
+        tahunAkhirSelect.add(optionAkhir);
+    }
+
+    // Initial population of tahunAkhir based on query string or default tahunAwal
+    if (tahunAwalQuery) {
+        tahunAwalSelect.value = tahunAwalQuery;
+        updateTahunAkhirOptions();
+    }
+
+    // Update tahunAkhir options whenever tahunAwal changes
+    tahunAwalSelect.addEventListener('change', updateTahunAkhirOptions);
+});
+//END JS ENTOTTT

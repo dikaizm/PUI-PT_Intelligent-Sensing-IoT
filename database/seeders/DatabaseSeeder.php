@@ -181,5 +181,9 @@ class DatabaseSeeder extends Seeder
         DB::table('register_keys')->insert([
             'key' => '123456789abcd',
         ]);
+
+        $this->call([
+            TargetPenelitianSeeder::class,
+        ]);
     }
 }

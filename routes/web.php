@@ -50,6 +50,10 @@ Route::middleware('auth')->group(function () {
         'store',
     ])->name('laporan-kinerja.store');
 
+    Route::get('/get-target-penelitian', [
+        \App\Http\Controllers\TargetPenelitianController::class,
+        'getTargetPenelitian']);
+
 
     Route::middleware('can:mengelola-pengguna')->group(function () {
         Route::get('master-data/register-key', [
