@@ -59,6 +59,13 @@ class DatabaseSeeder extends Seeder
         ]);
         $user->assignRole($role2);
 
+        DB::table('status_output')->insert([
+            'name' => 'Tidak Ada',
+        ]);
+        DB::table('status_output')->insert([
+            'name' => 'Publsh',
+        ]);
+
         DB::table('status_penelitian_key')->insert([
             'name' => 'Proposal',
         ]);
@@ -67,19 +74,51 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('status_penelitian')->insert([
             'status_penelitian_key_id' => '1',
-            'name' => 'Menyusun',
+            'name' => 'Submitted',
         ]);
         DB::table('status_penelitian')->insert([
             'status_penelitian_key_id' => '1',
-            'name' => 'Disetujui',
+            'name' => 'Review',
         ]);
         DB::table('status_penelitian')->insert([
             'status_penelitian_key_id' => '1',
-            'name' => 'Ditolak',
+            'name' => 'Accepted',
+        ]);
+        DB::table('status_penelitian')->insert([
+            'status_penelitian_key_id' => '1',
+            'name' => 'Rejected',
+        ]);
+        DB::table('status_penelitian')->insert([
+            'status_penelitian_key_id' => '1',
+            'name' => 'On Going',
+        ]);
+        DB::table('status_penelitian')->insert([
+            'status_penelitian_key_id' => '1',
+            'name' => 'Finished',
         ]);
         DB::table('status_penelitian')->insert([
             'status_penelitian_key_id' => '2',
-            'name' => 'Pendanaan',
+            'name' => 'Submitted',
+        ]);
+        DB::table('status_penelitian')->insert([
+            'status_penelitian_key_id' => '2',
+            'name' => 'Review',
+        ]);
+        DB::table('status_penelitian')->insert([
+            'status_penelitian_key_id' => '2',
+            'name' => 'Accepted',
+        ]);
+        DB::table('status_penelitian')->insert([
+            'status_penelitian_key_id' => '2',
+            'name' => 'Rejected',
+        ]);
+        DB::table('status_penelitian')->insert([
+            'status_penelitian_key_id' => '2',
+            'name' => 'On Going',
+        ]);
+        DB::table('status_penelitian')->insert([
+            'status_penelitian_key_id' => '2',
+            'name' => 'Finished',
         ]);
 
         DB::table('jenis_penelitian')->insert([
@@ -89,12 +128,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Eksternal Telkom',
         ]);
 
-        User::factory()->count(10)->create();
-        JenisPenelitian::factory()->count(10)->create();
-        StatusPenelitian::factory()->count(10)->create();
-        StatusOutput::factory()->count(3)->create();
+        //User::factory()->count(10)->create();
+        //JenisPenelitian::factory()->count(10)->create();
+        //StatusPenelitian::factory()->count(10)->create();
+        //StatusOutput::factory()->count(3)->create();
         Skema::factory()->count(9)->create();
-        Penelitian::factory()->count(5)->create();
+        //Penelitian::factory()->count(5)->create();
 
         DB::table('jenis_output_key')->insert([
             'name' => 'Publikasi',
@@ -108,76 +147,96 @@ class DatabaseSeeder extends Seeder
         DB::table('jenis_output_key')->insert([
             'name' => 'Video',
         ]);
-        JenisOutput::factory()->count(3)->create();
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '1',
+            'name' => 'Jurnal',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '1',
+            'name' => 'Conference',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '2',
+            'name' => '*',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '3',
+            'name' => '*',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '4',
+            'name' => '*',
+        ]);
+        //JenisOutput::factory()->count(3)->create();
 
-        DB::table('author')->insert([
-            'penelitian_id' => '1',
-            'user_id' => '2',
-        ]);
-        DB::table('author')->insert([
-            'penelitian_id' => '1',
-            'user_id' => '5',
-        ]);
-        DB::table('author')->insert([
-            'penelitian_id' => '2',
-            'user_id' => '6',
-        ]);
-        DB::table('author')->insert([
-            'penelitian_id' => '2',
-            'user_id' => '7',
-        ]);
-        DB::table('author')->insert([
-            'penelitian_id' => '3',
-            'user_id' => '8',
-        ]);
-        DB::table('author')->insert([
-            'penelitian_id' => '3',
-            'user_id' => '9',
-        ]);
-        DB::table('author')->insert([
-            'penelitian_id' => '4',
-            'user_id' => '10',
-        ]);
-        DB::table('author')->insert([
-            'penelitian_id' => '4',
-            'user_id' => '11',
-        ]);
-        DB::table('author')->insert([
-            'penelitian_id' => '5',
-            'user_id' => '12',
-        ]);
-        DB::table('author')->insert([
-            'penelitian_id' => '5',
-            'user_id' => '13',
-        ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '1',
+        //     'user_id' => '2',
+        // ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '1',
+        //     'user_id' => '5',
+        // ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '2',
+        //     'user_id' => '6',
+        // ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '2',
+        //     'user_id' => '7',
+        // ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '3',
+        //     'user_id' => '8',
+        // ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '3',
+        //     'user_id' => '9',
+        // ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '4',
+        //     'user_id' => '10',
+        // ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '4',
+        //     'user_id' => '11',
+        // ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '5',
+        //     'user_id' => '12',
+        // ]);
+        // DB::table('author')->insert([
+        //     'penelitian_id' => '5',
+        //     'user_id' => '13',
+        // ]);
 
-        DB::table('output')->insert([
-            'penelitian_id' => '1',
-        ]);
-        DB::table('output_detail')->insert([
-            'output_id' => '1',
-            'jenis_output_id' => '1',
-            'status_output_id' => '1',
-            'judul' => 'seeders',
-            'tautan' => 'seeders',
-            'file' => 'public',
-        ]);
-        DB::table('output_detail')->insert([
-            'output_id' => '1',
-            'jenis_output_id' => '2',
-            'status_output_id' => '1',
-            'judul' => 'seeders',
-            'tautan' => 'seeders',
-            'file' => 'public',
-        ]);
-        DB::table('output_detail')->insert([
-            'output_id' => '1',
-            'jenis_output_id' => '3',
-            'status_output_id' => '1',
-            'judul' => 'seeders',
-            'tautan' => 'seeders',
-            'file' => 'public',
-        ]);
+        // DB::table('output')->insert([
+        //     'penelitian_id' => '1',
+        // ]);
+        // DB::table('output_detail')->insert([
+        //     'output_id' => '1',
+        //     'jenis_output_id' => '1',
+        //     'status_output_id' => '1',
+        //     'judul' => 'seeders',
+        //     'tautan' => 'seeders',
+        //     'file' => 'public',
+        // ]);
+        // DB::table('output_detail')->insert([
+        //     'output_id' => '1',
+        //     'jenis_output_id' => '2',
+        //     'status_output_id' => '1',
+        //     'judul' => 'seeders',
+        //     'tautan' => 'seeders',
+        //     'file' => 'public',
+        // ]);
+        // DB::table('output_detail')->insert([
+        //     'output_id' => '1',
+        //     'jenis_output_id' => '3',
+        //     'status_output_id' => '1',
+        //     'judul' => 'seeders',
+        //     'tautan' => 'seeders',
+        //     'file' => 'public',
+        // ]);
         DB::table('register_keys')->insert([
             'key' => '123456789abcd',
         ]);

@@ -20,6 +20,9 @@
         <div class="card-style-3 mb-30" style="border-radius: 20px;border: 2px solid #000;">
             <div class="card-content">
                 <div class="row g-0 auth-row" style="color: black; font-weight: 400; line-height: 35px;">
+
+                    @include('alert')
+
                     <div class="col-12 row g-1">
                         <div style="text-align: left; width: 100%;">
                             <ul style="list-style: none; padding-left: 5%; text-align: left;">
@@ -208,7 +211,8 @@
                             {{ __('Laporkan Output') }}
                         </a>
                     </div>
-                    <table class="table striped-table" id="dataTables" style="width: 100%; border-collapse: collapse;">
+                    <table class="table striped-table table-responsive" id="dataTables"
+                        style="width: 100%; border-collapse: collapse;">
                         <thead>
                             <tr>
                                 <th
@@ -222,6 +226,10 @@
                                 <th
                                     style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                     <h6>Status Output</h6>
+                                </th>
+                                <th
+                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                    <h6>Tanggal Publish / Granted</h6>
                                 </th>
                                 <th
                                     style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
@@ -260,19 +268,33 @@
                                         </td>
                                         <td
                                             style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                            {{ $item->published_at ? $item->published_at : '' }}</td>
+                                        <td
+                                            style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                             <h6><a href="{{ $item->tautan }}" target="_blank" class="btn btn-md"><i
                                                         class="lni lni-link" style="color: gray; margin:2px;"></i></a>
                                             </h6>
                                         </td>
                                         <td
                                             style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
-                                            <h6><a href="{{ asset('storage/' . $item->file) }}" target="_blank"><i
-                                                        class="lni lni-download" style="color: gray; margin:2px;"></i></a>
+                                            <h6>
+                                                @if ($item->file)
+                                                    <a href="{{ asset('storage/' . $item->file) }}" target="_blank">
+                                                        <i class="lni lni-download" style="color: gray; margin: 2px;"></i>
+                                                    </a>
+                                                @endif
                                             </h6>
                                         </td>
                                         <td
                                             style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 28%;">
-                                            <h6>Action</h6>
+                                            <a type="button" data-bs-toggle="modal"
+                                                data-bs-target="#modalEdit{{ $item->jenisOutput->jenisOutputKey->name }}{{ $item->id }}">
+                                                <i class="lni lni-pencil" style="color: black;"></i>
+                                            </a>
+                                            <a type="button" data-bs-toggle="modal"
+                                                data-bs-target="#modalDelete{{ $item->id }}">
+                                                <i class="lni lni-trash-can" style="color: red;"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -283,6 +305,12 @@
             </div>
         </div>
     </div>
-    <!-- ========== modal end =========== -->
+
+    @include('penelitian.modal-edit-output.delete')
+    @include('penelitian.modal-edit-output.foto-poster')
+    @include('penelitian.modal-edit-output.hki')
+    @include('penelitian.modal-edit-output.publikasi')
+    @include('penelitian.modal-edit-output.video')
+
 @endsection
 

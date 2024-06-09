@@ -96,6 +96,8 @@ class PenelitianController extends Controller
 
         $penelitian->users()->sync($pivotData);
 
+        OutputController::store($penelitian->id);
+
         return redirect()
             ->route('penelitian.index')
             ->with('success', 'Penelitian berhasil ditambah!');
@@ -227,6 +229,14 @@ class PenelitianController extends Controller
     public function destroy($uuid)
     {
         $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
+
+        if ($penelitian->file) {
+            $filePath = storage_path('app/public/' . $penelitian->file);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
         $penelitian->users()->detach();
         $penelitian->delete();
 

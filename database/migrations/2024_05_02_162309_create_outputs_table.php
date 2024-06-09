@@ -65,9 +65,11 @@ return new class extends Migration {
                 ->onDelete('restrict');
             $table
                 ->enum('tipe', OutputType::getValues())
-                ->default(OutputType::NULL());
+                ->default(OutputType::NONE())
+                ->nullable();
             $table->string('judul');
             $table->string('tautan')->nullable();
+            $table->date('published_at')->nullable();
             $table->string('file')->nullable();
             $table->timestamps();
         });

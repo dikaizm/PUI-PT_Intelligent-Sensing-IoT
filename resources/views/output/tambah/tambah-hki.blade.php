@@ -1,6 +1,9 @@
-<form action="#">
+<form action="{{ route('output-detail.store-hki') }}" method="POST">
+    @csrf
+    @method('POST')
     <div class="input-style-1">
         <label for="judul_penelitian">{{ __('Judul Penelitian') }}</label>
+        <input type="hidden" name="uuid" value="{{ isset($penelitian) ? $penelitian->uuid : '' }}">
         <input @error('judul_penelitian') class="form-control is-invalid" @enderror type="text" name="judul_penelitian"
             id="judul_penelitian" placeholder="{{ __('Judul Penelitian') }}"
             value="{{ old('judul_penelitian', $penelitian->judul ?? '') }}"
@@ -69,12 +72,12 @@
     <div class="input-style-1">
         <label for="#">{{ __('Tanggal Granted') }} <span
                 style="color:gray;">{{ __('*Diisi jika memilih status Granted') }}</span></label>
-        @error('status_penelitian')
+        <input type="date" id="dateInput" name="published_at">
+        @error('published_at')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
-        <input type="date" id="dateInput" required>
     </div>
     <div class="input-style-1">
         <label for="tautan">{{ __('Link HKI') }} <span style="color:gray;">{{ __('*Apabila sudah publish') }}</span>

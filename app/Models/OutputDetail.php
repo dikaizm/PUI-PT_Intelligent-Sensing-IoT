@@ -27,6 +27,7 @@ class OutputDetail extends Model
         'status_output_id',
         'judul',
         'tautan',
+        'published_at',
         'file',
     ];
 
