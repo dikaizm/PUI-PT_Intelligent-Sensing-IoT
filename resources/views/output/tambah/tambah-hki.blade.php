@@ -17,11 +17,9 @@
     <div class="input-style-1">
         <label for="jenis_output_id">{{ __('Jenis') }}</label>
         <select id="jenis_output_id" name="jenis_output_id" class="form-control">
-            <option value="">{{ __('--Pilih Jenis--') }}</option>
+            <option value="">{{ __('Pilih Jenis') }}</option>
             @foreach ($jenis_output as $item)
-                @if($item->jenisOutputKey->name == 'HKI')
-                    <option value="HKI">{{ $item->name }}</option>
-                @endif
+                <option value="{{ $item->id }}">{{ $item->jenisOutputKey->name }} {{ $item->name }}</option>
             @endforeach
         </select>
     </div>

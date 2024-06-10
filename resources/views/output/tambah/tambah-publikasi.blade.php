@@ -17,7 +17,7 @@
     <div class="input-style-1">
         <label for="tipe">{{ __('Tipe') }}</label>
         <select id="tipe" name="tipe" class="form-control">
-            <option value="">{{ __('--Pilih Tipe--') }}</option>
+            <option value="">--Pilih Tipe--</option>
             @foreach ($tipe as $item)
                 <option value="{{ $item }}">{{ $item }}</option>
             @endforeach
@@ -31,11 +31,9 @@
     <div class="input-style-1">
         <label for="jenis_output_id">{{ __('Jenis') }}</label>
         <select id="jenis_output_id" name="jenis_output_id" class="form-control">
-            <option value="">{{ __('--Pilih Jenis--') }}</option>
+            <option value="">--Pilih Jenis Output--</option>
             @foreach ($jenis_output as $item)
-                @if($item->jenisOutputKey->name == 'Publikasi')
-                    <option value="Publikasi">{{ $item->name }}</option>
-                @endif
+                <option value="{{ $item->id }}">{{ $item->jenisOutputKey->name }} {{ $item->name }}</option>
             @endforeach
         </select>
     </div>

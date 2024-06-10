@@ -141,6 +141,12 @@ class DatabaseSeeder extends Seeder
         DB::table('jenis_output_key')->insert([
             'name' => 'HKI',
         ]);
+        DB::table('jenis_output_key')->insert([
+            'name' => 'Poster',
+        ]);
+        DB::table('jenis_output_key')->insert([
+            'name' => 'Video',
+        ]);
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '1',
             'name' => 'Jurnal',
@@ -180,6 +186,14 @@ class DatabaseSeeder extends Seeder
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '2',
             'name' => 'Indikasi Geografis',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '3',
+            'name' => '*',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '4',
+            'name' => '*',
         ]);
         //JenisOutput::factory()->count(3)->create();
 
