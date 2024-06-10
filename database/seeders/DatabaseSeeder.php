@@ -141,12 +141,6 @@ class DatabaseSeeder extends Seeder
         DB::table('jenis_output_key')->insert([
             'name' => 'HKI',
         ]);
-        DB::table('jenis_output_key')->insert([
-            'name' => 'Foto/Poster',
-        ]);
-        DB::table('jenis_output_key')->insert([
-            'name' => 'Video',
-        ]);
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '1',
             'name' => 'Jurnal',
@@ -157,15 +151,35 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '2',
-            'name' => '*',
+            'name' => 'Hak Cipta',
         ]);
         DB::table('jenis_output')->insert([
-            'jenis_output_key_id' => '3',
-            'name' => '*',
+            'jenis_output_key_id' => '2',
+            'name' => 'Paten',
         ]);
         DB::table('jenis_output')->insert([
-            'jenis_output_key_id' => '4',
-            'name' => '*',
+            'jenis_output_key_id' => '2',
+            'name' => 'Paten Sederhana',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '2',
+            'name' => 'Merek',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '2',
+            'name' => 'Desain Industri',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '2',
+            'name' => 'DSLT',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '2',
+            'name' => 'Rahasia Dagang',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '2',
+            'name' => 'Indikasi Geografis',
         ]);
         //JenisOutput::factory()->count(3)->create();
 

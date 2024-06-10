@@ -17,11 +17,13 @@
                             <select id="jenis_output_id" name="jenis_output_id" class="form-control" disabled>
                                 <option value="">--Pilih Jenis Output--</option>
                                 @foreach ($jenis_output as $item)
-                                    <option value="{{ $item->id }}"
-                                        {{ old('jenis_output_id', $detail->jenis_output_id) == $item->id ? 'selected' : '' }}>
-                                        {{ $item->jenisOutputKey->name }} {{ $item->name }}
-                                    </option>
+                                    @if($item->jenisOutputKey->name == 'Publikasi')
+                                        <option value="Publikasi" {{ old('jenis_output_id', $detail->jenis_output_id) == $item->id ? 'selected' : '' }}>
+                                            {{ $item->name }}
+                                        </option>
+                                    @endif
                                 @endforeach
+
                             </select>
                         </div>
 
