@@ -35,7 +35,6 @@
                                     <td>{{ $reg->key }}</td>
 
                                     <td>
-                                        <a type="button">salin</a>
                                         <a type="button" href="{{ route('register-key.new-key', ['id' => $reg->id]) }}">New
                                             Key</a>
                                     </td>

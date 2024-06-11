@@ -157,15 +157,19 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '2',
-            'name' => '*',
+            'name' => 'Hak Cipta',
         ]);
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '3',
-            'name' => '*',
+            'name' => 'Foto',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '3',
+            'name' => 'Poster',
         ]);
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '4',
-            'name' => '*',
+            'name' => 'Video',
         ]);
         //JenisOutput::factory()->count(3)->create();
 
