@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Output;
 use App\Models\Penelitian;
 use App\Models\OutputDetail;
+use App\Models\TargetPenelitian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -50,32 +51,33 @@ class LaporanKinerjaController extends Controller
         $statusCountsPenelitian = array_replace(array_fill_keys($statusNames, 0), $statusCountsPenelitian);
 
         // Hitung jumlah output berdasarkan jenis (1 sampai 5)
-        $statusCountsOutput = OutputDetail::select('jenis_output_id', DB::raw('count(*) as total'))
-        ->whereIn(DB::raw('YEAR(created_at)'), [$tahunAwal, $tahunAkhir])
-        ->whereIn('jenis_output_id', [1, 2, 3, 4])
-        ->groupBy('jenis_output_id')
-        ->pluck('total', 'jenis_output_id')
+        $statusCountsOutput = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
+        ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
+        ->whereYear('output_detail.created_at', $tahunAwal)
+        ->groupBy('jo.jenis_output_key_id')
+        ->pluck('total', 'jo.jenis_output_key_id')
         ->toArray();
 
         // Pastikan semua jenis dari 1 sampai 5 ada di array
         $statusCountsOutput = array_replace([1 => 0, 2 => 0, 3 => 0, 4 => 0], $statusCountsOutput);
 
-        // Output berdasarkan tahun
-        $statusCountsOutputAwal = OutputDetail::select('jenis_output_id', DB::raw('count(*) as total'))
-        ->whereYear('created_at', $tahunAwal)
-        ->groupBy('jenis_output_id')
-        ->pluck('total', 'jenis_output_id')
-        ->toArray();
+        $statusCountsOutputAwal = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
+            ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
+            ->whereYear('output_detail.created_at', $tahunAwal)
+            ->groupBy('jo.jenis_output_key_id')
+            ->pluck('total', 'jo.jenis_output_key_id')
+            ->toArray();
 
-        $statusCountsOutputAkhir = OutputDetail::select('jenis_output_id', DB::raw('count(*) as total'))
-        ->whereYear('created_at', $tahunAkhir)
-        ->groupBy('jenis_output_id')
-        ->pluck('total', 'jenis_output_id')
-        ->toArray();
+        // Output berdasarkan tahun akhir
+        $statusCountsOutputAkhir = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
+            ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
+            ->whereYear('output_detail.created_at', $tahunAkhir)
+            ->groupBy('jo.jenis_output_key_id')
+            ->pluck('total', 'jo.jenis_output_key_id')
+            ->toArray();
 
-        // Pastikan semua jenis dari 1 sampai 4 ada di array
-        $statusCountsOutputAwal = array_replace([1 => 0, 2 => 0, 3 => 0, 4 => 0], $statusCountsOutputAwal);
-        $statusCountsOutputAkhir = array_replace([1 => 0, 2 => 0, 3 => 0, 4 => 0], $statusCountsOutputAkhir);
+        // Ambil target penelitian dari tabel atau set default target
+        $targetPenelitian = TargetPenelitian::whereIn('tahun', [$tahunAwal, $tahunAkhir])->pluck('target', 'tahun')->toArray();
 
         // Data yang akan dikirim ke view
         return view('admin.laporan-kinerja', [
@@ -92,6 +94,7 @@ class LaporanKinerjaController extends Controller
             'penelitian_tahun_akhir' => $penelitianTahunAkhir,
             'status_counts_output_awal' => json_encode($statusCountsOutputAwal), // Encode data Status Output to JSON
             'status_counts_output_akhir' => json_encode($statusCountsOutputAkhir), // Encode data Status Output to JSON
+            'target_penelitian' => json_encode($targetPenelitian), // Encode data Status Output to JSON
         ]);
     }
 
@@ -110,21 +113,30 @@ class LaporanKinerjaController extends Controller
     {
         // Validasi dan proses data request di sini
         $request->validate([
-            'tahun' => 'required|integer|min:' . date('Y') . '|max:' . (date('Y') + 100),
+            'tahun' => 'nullable|integer|min:' . date('Y') . '|max:' . (date('Y') + 20),
+            'targetPenelitian' => 'nullable|integer|min:0',
         ]);
 
+        if ($request->input('tahun') && $request->input('targetPenelitian')) {
+            TargetPenelitian::updateOrCreate(
+                ['tahun' => $request->input('tahun')],
+                ['target' => $request->input('targetPenelitian')]
+            );
+        }
         // Redirect ke index dengan tahun yang dipilih
-        return redirect()->route('laporan-kinerja.index', ['tahun' => $request->input('tahun')])
-            ->with('success', 'Laporan Kinerja berhasil diperbarui.');
+        return redirect()->route('laporan-kinerja.index', [
+            'tahunAwal' => $request->input('tahunAwal'),
+            'tahunAkhir' => $request->input('tahunAkhir')
+        ])->with('success', 'Laporan Kinerja berhasil diperbarui.');
     }
 
+    public function getTargetPenelitian()
+    {
+        return response()->json(TargetPenelitian::all()->pluck('target', 'tahun'));
+    }
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

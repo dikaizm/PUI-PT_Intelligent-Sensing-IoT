@@ -58,11 +58,11 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="profile-info">
                                         <div class="info">
-                                            <h6 class="mr-5" style="//styleName: Body Text/Small/Body Medium (Bold);font-family: DM Sans;font-size: 16px;font-weight: 700;line-height: 24px;letter-spacing: -0.02em;text-align: left;color:white; letter-spacing: 1px;">
+                                            <h6 class="mr-5" style="font-family: DM Sans;font-size: 16px;font-weight: 700;line-height: 24px;letter-spacing: -0.02em;text-align: left;color:white; letter-spacing: 1px;">
                                                 {{ __('Hi  ') }}{{ Auth::user()->name }},</h6>
                                         </div>
                                         <div>
-                                            <h6 class="mr-5" style="//styleName: Display Text/Small/Display Small (Bold);font-family: DM Sans;font-size: 27px;font-weight: 700;line-height: 42px;letter-spacing: -0.02em;text-align: left; color: #DE0F0F;">
+                                            <h6 class="mr-5" style="font-family: DM Sans;font-size: 27px;font-weight: 700;line-height: 42px;letter-spacing: -0.02em;text-align: left; color: #DE0F0F;">
                                                 {{ __('Welcome Back!') }}
                                             </h6>
                                         </div>
@@ -70,16 +70,14 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('profile.show') }}"> <i
-                                                class="lni lni-user"></i>
-                                            {{ __('My profile') }}</a>
+                                        <a class="dropdown-item" href="{{ route('profile.show') }}"> <i class="lni lni-user"></i> {{ __('My profile') }}</a>
                                     </li>
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                onclick="event.preventDefault(); this.closest('form').submit();"> <i
-                                                    class="lni lni-exit"></i> {{ __('Logout') }}</a>
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                <i class="lni lni-exit"></i> {{ __('Logout') }}
+                                            </a>
                                         </form>
                                     </li>
                                 </ul>
@@ -97,7 +95,6 @@
             <div class="container-fluid">
                 @yield('content')
             </div>
-            <!-- end container -->
         </section>
         <!-- ========== section end ========== -->
 
@@ -108,15 +105,12 @@
                     <div class="col-md-6 order-last order-md-first">
                         <div class="copyright text-md-start">
                             <p class="text-sm">
-                                PUI-PT Sensing-Iot by Tino n David
+                                PUI-PT Sensing-Iot
                             </p>
                         </div>
                     </div>
-                    <!-- end col-->
                 </div>
-                <!-- end row -->
             </div>
-            <!-- end container -->
         </footer>
         <!-- ========== footer end =========== -->
     </main>
@@ -124,16 +118,14 @@
 
     <!-- ========= All Javascript files linkup ======== -->
     @vite('resources/js/app.js')
-    <script src="{{ asset('js/main.js') }}"></script>\
+    <script src="{{ asset('js/main.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/jquery.inputmask.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
-

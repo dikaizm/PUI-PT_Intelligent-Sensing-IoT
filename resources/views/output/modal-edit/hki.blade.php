@@ -87,11 +87,6 @@
                                 data-bs-dismiss="modal">
                                 {{ __('Simpan') }}
                             </button>
-                            <button type="button" class="main-btn btn-sm danger-btn btn-hover m-1"
-                                style="background: linear-gradient(180deg, #DE0F0F 0%, #780808 100%);"
-                                data-bs-dismiss="modal">
-                                {{ __('Batal') }}
-                            </button>
                         </div>
                     </form>
                 </div>

@@ -127,6 +127,7 @@
     window.statusCountsOutput = {!! $status_counts_output !!};
     window.statusCountsOutputAwal = {!! $status_counts_output_awal !!};
     window.statusCountsOutputAkhir = {!! $status_counts_output_akhir !!};
+    window.targetPenelitian = {!! $target_penelitian !!};
     var tahunAwal = '{{ $tahun_awal }}';
     var tahunAkhir = '{{ $tahun_akhir }}';
     var penelitianTahunAwal = {{ $penelitian_tahun_awal }};

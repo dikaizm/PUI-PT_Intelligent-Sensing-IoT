@@ -154,8 +154,7 @@
                         <!-- end col -->
                         <div class="input-style-1">
                             <label for="jangka_waktu">{{ __('Jangka Waktu Penelitian') }}</label>
-                            <div class="row">
-                                <div class="col-xl-2 col-lg-2 col-md-4 input-style-1">
+                                <div class="input-group">
                                     <input type="number" @error('jangka_waktu') class="form-control is-invalid" @enderror
                                         name="jangka_waktu" id="jangka_waktu" placeholder="{{ __('Jangka') }}"
                                         value="{{ old('jangka_waktu') }}">
@@ -164,12 +163,9 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
-                                <div class="col-xl-10 col-lg-10 col-md-8">
-                                    <ul style="padding-left:0%;">
-                                        <li style="font-weight: 400;font-size: 40px; text-align: left;color:gray;">
-                                            {{ __('Bulan') }}</li>
-                                    </ul>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Bulan</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

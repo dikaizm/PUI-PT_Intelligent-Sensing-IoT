@@ -19,10 +19,10 @@
                                     </div>
                                     <div class="col-xl-5 col-lg-5 col-sm-12">
                                         <div class="input-style-1">
-                                            <select id="tahunAwal" name="tahun1" style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; text-align: center; text-align-last: center;">
+                                            <select id="tahunAwal" name="tahunAwal" style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; text-align: center; text-align-last: center;">
                                                 <!-- JavaScript akan menambahkan opsi select di sini -->
                                             </select>
-                                            @error('tahunSelect')
+                                            @error('tahunAwal')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -34,10 +34,10 @@
                                     </div>
                                     <div class="col-xl-5 col-lg-5 col-sm-12">
                                         <div class="input-style-1">
-                                            <select id="tahunAkhir" name="tahun2" style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; text-align: center; text-align-last: center;">
+                                            <select id="tahunAkhir" name="tahunAkhir" style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; text-align: center; text-align-last: center;">
                                                 <!-- JavaScript akan menambahkan opsi select di sini -->
                                             </select>
-                                            @error('tahunSelect')
+                                            @error('tahunAkhir')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -45,38 +45,44 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-20">
-                                    <div class="col-xl-3 col-lg-3 col-sm-12">
+                                <div class="row mt-20 pb-20">
+                                    <div class="col-xl-12 col-lg-12 col-sm-12">
                                         <div class="input-style-1">
-                                            <label style="font-weight: 500;font-size: 25px; text-align: center;"
-                                            for="feedback">{{ __('Ubah Angka Target') }}</label>
+                                            <label style="font-weight: 500; font-size: 25px; text-align: center;" for="tahunSelect">{{ __('Edit Target') }}</label>
                                         </div>
                                     </div>
-                                    <div class="col-xl-9 col-lg-9 col-sm-12">
-                                        <div class="input-style-1">
-                                            <label style="font-weight: 500;font-size: 25px; text-align: center; color:black;"
-                                                for="#">{{ __('Penelitian') }}</label>
-                                            <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-sm-12">
-                                                    <select style="height: 34px; padding: 5px 10px;" name="tahun" id="tahun" class="form-control @error('tahun') is-invalid @enderror">
-                                                        <option value="">{{ __('Pilih Tahun') }}</option>
-                                                        @for ($year = date('Y'); $year <= date('Y') + 100; $year++)
-                                                            <option value="{{ $year }}" {{ old('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
-                                                        @endfor
-                                                    </select>
-                                                </div>
-                                                <div class="col-xl-6 col-lg-6 col-sm-12">
-                                                    <input style="height: 30px;" type="number" min="0" @error('feedback') class="form-control is-invalid" @enderror type="text"
-                                                        name="feedback" id="feedback" placeholder="{{ __('Ubah Angka Target Penelitian') }}"
-                                                        value="{{ old('feedback', auth()->user()->feedback) }}">
-                                                    @error('feedback')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-xl-6 col-lg-6 col-sm-12">
+                                        <select
+                                            name="tahun" id="tahun"
+                                            class="form-control @error('tahun') is-invalid @enderror"
+                                            style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; border-color:black; text-align: center; text-align-last: center;">
+                                            <option value="">{{ __('Pilih Tahun') }}</option>
+                                            @for ($year = date('Y'); $year <= date('Y') + 20; $year++)
+                                                <option value="{{ $year }}" {{ old('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                                            @endfor
+                                        </select>
+                                        @error('tahun')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-6 col-sm-12">
+                                        <input
+                                            style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; text-align: center;"
+                                            type="number" min="0"
+                                            @error('targetPenelitian')
+                                            class="form-control is-invalid"
+                                            @enderror
+                                            name="targetPenelitian" id="targetPenelitian"
+                                            placeholder="{{ __('Ubah Angka Target Penelitian') }}"
+                                            value="{{ old('targetPenelitian') }}">
+                                        @error('targetPenelitian')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- end row -->
