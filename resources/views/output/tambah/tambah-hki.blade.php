@@ -34,7 +34,7 @@
         @enderror
     </div>
     <div class="input-style-1">
-        <label>{{ __('Author') }}</label>
+        <label>{{ __('Inventor') }}</label>
         <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror"
             multiple="multiple" style="width: 100%; height: 58px;" required>
             @foreach ($users as $user)

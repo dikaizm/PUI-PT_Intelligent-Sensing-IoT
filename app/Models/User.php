@@ -60,4 +60,11 @@ class User extends Authenticatable
             'penelitian_id'
         )->withPivot('is_corresponding', 'is_ketua');
     }
+
+    // User.php
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
+
 }

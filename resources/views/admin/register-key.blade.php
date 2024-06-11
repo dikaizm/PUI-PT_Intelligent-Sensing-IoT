@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-30">
-                    <h2>{{ __('Jenis Dokumen') }}</h2>
+                    <h2>{{ __('Register Key') }}</h2>
                 </div>
             </div>
             <!-- end col -->
@@ -31,16 +31,35 @@
                         <tbody>
                             @foreach ($register_keys as $reg)
                                 <tr>
-                                    <th scope="row">{{ url('/register?key=' . $reg->key) }}</th>
-                                    <td>{{ $reg->key }}</td>
-
+                                    <th scope="row" id="link-{{ $reg->id }}">{{ url('/register?key=' . $reg->key) }}</th>
+                                    <td id="copyKey-{{ $reg->id }}">{{ $reg->key }}</td>
                                     <td>
-                                        <a type="button">salin</a>
-                                        <a type="button" href="{{ route('register-key.new-key', ['id' => $reg->id]) }}">New
-                                            Key</a>
+                                        <a type="button" href="#" onclick="copyToClipboard('link-{{ $reg->id }}')">Salin Link</a> <br>
+                                        <a type="button" href="#" onclick="copyToClipboard('copyKey-{{ $reg->id }}')">Salin Key</a> <br>
+                                        <a class="pb-20" type="button" href="{{ route('register-key.new-key', ['id' => $reg->id]) }}">New Key</a>
                                     </td>
-
                                 </tr>
+
+                                <script>
+                                function copyToClipboard(elementId) {
+                                    // Create a temporary input element
+                                    var tempInput = document.createElement('input');
+                                    // Get the text content of the specified element
+                                    var text = document.getElementById(elementId).textContent;
+                                    // Set the input value to the text content
+                                    tempInput.value = text;
+                                    // Append the input element to the body
+                                    document.body.appendChild(tempInput);
+                                    // Select the input element content
+                                    tempInput.select();
+                                    // Execute the copy command
+                                    document.execCommand('copy');
+                                    // Remove the temporary input element
+                                    document.body.removeChild(tempInput);
+                                    // Alert the user that the text has been copied
+                                    alert('Text copied to clipboard: ' + text);
+                                }
+                                </script>
                             @endforeach
                         </tbody>
                     </table>

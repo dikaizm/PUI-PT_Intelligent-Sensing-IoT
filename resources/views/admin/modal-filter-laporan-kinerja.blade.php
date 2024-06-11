@@ -45,46 +45,48 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-20 pb-20">
-                                    <div class="col-xl-12 col-lg-12 col-sm-12">
-                                        <div class="input-style-1">
-                                            <label style="font-weight: 500; font-size: 25px; text-align: center;" for="tahunSelect">{{ __('Edit Target') }}</label>
+                                @if(auth()->check() && auth()->user()->hasRole('admin'))
+                                    <div class="row mt-20 pb-20">
+                                        <div class="col-xl-12 col-lg-12 col-sm-12">
+                                            <div class="input-style-1">
+                                                <label style="font-weight: 500; font-size: 25px; text-align: center;" for="tahunSelect">{{ __('Edit Target') }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-sm-12">
+                                            <select
+                                                name="tahun" id="tahun"
+                                                class="form-control @error('tahun') is-invalid @enderror"
+                                                style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; border-color:black; text-align: center; text-align-last: center;">
+                                                <option value="">{{ __('Pilih Tahun') }}</option>
+                                                @for ($year = date('Y'); $year <= date('Y') + 20; $year++)
+                                                    <option value="{{ $year }}" {{ old('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                                                @endfor
+                                            </select>
+                                            @error('tahun')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-sm-12">
+                                            <input
+                                                style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; text-align: center;"
+                                                type="number" min="0"
+                                                @error('targetPenelitian')
+                                                class="form-control is-invalid"
+                                                @enderror
+                                                name="targetPenelitian" id="targetPenelitian"
+                                                placeholder="{{ __('Ubah Angka Target Penelitian') }}"
+                                                value="{{ old('targetPenelitian') }}">
+                                            @error('targetPenelitian')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="col-xl-6 col-lg-6 col-sm-12">
-                                        <select
-                                            name="tahun" id="tahun"
-                                            class="form-control @error('tahun') is-invalid @enderror"
-                                            style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; border-color:black; text-align: center; text-align-last: center;">
-                                            <option value="">{{ __('Pilih Tahun') }}</option>
-                                            @for ($year = date('Y'); $year <= date('Y') + 20; $year++)
-                                                <option value="{{ $year }}" {{ old('tahun') == $year ? 'selected' : '' }}>{{ $year }}</option>
-                                            @endfor
-                                        </select>
-                                        @error('tahun')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-xl-6 col-lg-6 col-sm-12">
-                                        <input
-                                            style="height: 40px; width: 100%; padding: 8px; font-size: 16px; border-radius: 5px; text-align: center;"
-                                            type="number" min="0"
-                                            @error('targetPenelitian')
-                                            class="form-control is-invalid"
-                                            @enderror
-                                            name="targetPenelitian" id="targetPenelitian"
-                                            placeholder="{{ __('Ubah Angka Target Penelitian') }}"
-                                            value="{{ old('targetPenelitian') }}">
-                                        @error('targetPenelitian')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                                @endif
                                 <!-- end row -->
                                 <div class="action d-flex flex-wrap justify-content-end">
                                     <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"

@@ -38,29 +38,38 @@
                         <thead>
                             <tr>
                                 <td
-                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
-                                    No</td>
+                                    style="border-left: none; border-top: none; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                    No
+                                </td>
                                 <td
-                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 30%;">
-                                    Penelitian</td>
+                                    style="border-left: none; border-top: none; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 30%;">
+                                    Penelitian
+                                </td>
                                 <td
-                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
-                                    Tgl Update</td>
+                                    style="border-left: none; border-top: none; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                    Tgl Update
+                                </td>
                                 <td
-                                    style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 60%;">
-                                    Feedback</td>
+                                    style="border-left: none; border-top: none; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 60%;">
+                                    Feedback
+                                </td>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($output as $item)
                                 <tr>
-                                    <td style="padding: 12px; text-align: center !important;"> {{ $parentCounter }}</td>
-                                    <td style="padding: 12px; text-align: center !important;">{{ $item->penelitian->judul }}
+                                    <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                        {{ $parentCounter }}
                                     </td>
-                                    <td style="padding: 12px; text-align: center !important;">
-                                        {{ \Carbon\Carbon::parse($item->penelitian->updated_at)->format('d/m/Y') }}</td>
-                                    <td style="padding: 12px; text-align: center !important;">
-                                        {{ $item->penelitian->feedback }}</td>
+                                    <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                        {{ $item->penelitian->judul }}
+                                    </td>
+                                    <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                        {{ \Carbon\Carbon::parse($item->penelitian->updated_at)->format('d/m/Y') }}
+                                    </td>
+                                    <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                        {{ $item->penelitian->feedback }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -68,29 +77,37 @@
                                             <thead>
                                                 <tr>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
-                                                        No</td>
+                                                        style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
+                                                        No
+                                                    </td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
-                                                        Output</td>
+                                                        style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
+                                                        Output
+                                                    </td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 45%;">
-                                                        Judul Luaran</td>
+                                                        style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 45%;">
+                                                        Judul Luaran
+                                                    </td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
-                                                        Status Output</td>
+                                                        style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
+                                                        Status Output
+                                                    </td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
-                                                        Tanggal Publish / Granted</td>
+                                                        style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
+                                                        Tanggal Publish / Granted
+                                                    </td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
-                                                        Tautan</td>
+                                                        style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
+                                                        Tautan
+                                                    </td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
-                                                        File</td>
+                                                        style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
+                                                        File
+                                                    </td>
                                                     <td
-                                                        style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
-                                                        Action</td>
+                                                        style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
+                                                        Action
+                                                    </td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -99,40 +116,41 @@
                                                 @endphp
 
                                                 @foreach ($item->outputDetails as $detail)
-                                                    <tr>
-                                                        <td style="padding: 12px; text-align: center !important;">
-                                                            {{ $parentCounter }}.{{ $childCounter }}</td>
-                                                        <td style="padding: 12px; text-align: center !important;">
-                                                            {{ $detail->jenisOutput->jenisOutputKey->name }}</td>
-                                                        <td style="padding: 12px; text-align: center !important;">
-                                                            {{ $detail->judul }}</td>
-                                                        <td style="padding: 12px; text-align: center !important;">
-                                                            {{ $detail->statusOutput->name }}</td>
-                                                        <td style="padding: 12px; text-align: center !important;">
-                                                            {{ $detail->published_at ? $detail->published_at : '' }}</td>
-                                                        <td style="padding: 12px; text-align: center !important;">
+                                                    <tr style="border-bottom: 1px solid black;">
+                                                        <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                                            {{ $parentCounter }}.{{ $childCounter }}
+                                                        </td>
+                                                        <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                                            {{ $detail->jenisOutput->jenisOutputKey->name }}
+                                                        </td>
+                                                        <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                                            {{ $detail->judul }}
+                                                        </td>
+                                                        <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                                            {{ $detail->statusOutput->name }}
+                                                        </td>
+                                                        <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                                            {{ $detail->published_at ? $detail->published_at : '' }}
+                                                        </td>
+                                                        <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
                                                             @if ($detail->tautan)
                                                                 <a href="{{ $detail->tautan }}" target="_blank">
-                                                                    <i class="lni lni-link"
-                                                                        style="color: gray; margin: 2px;"></i>
-                                                                </a>
-                                                            @endif
-                                                        <td style="padding: 12px; text-align: center !important;">
-                                                            @if ($detail->file)
-                                                                <a href="{{ asset('storage/' . $detail->file) }}"
-                                                                    target="_blank">
-                                                                    <i class="lni lni-download"
-                                                                        style="color: gray; margin: 2px;"></i>
+                                                                    <i class="lni lni-link" style="color: gray; margin: 2px;"></i>
                                                                 </a>
                                                             @endif
                                                         </td>
-                                                        <td style="padding: 12px; text-align: center !important;">
-                                                            <a type="button" data-bs-toggle="modal"
-                                                                data-bs-target="#modalEdit{{ $detail->jenisOutput->jenisOutputKey->name }}{{ $detail->id }}">
+                                                        <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                                            @if ($detail->file)
+                                                                <a href="{{ asset('storage/' . $detail->file) }}" target="_blank">
+                                                                    <i class="lni lni-download" style="color: gray; margin: 2px;"></i>
+                                                                </a>
+                                                            @endif
+                                                        </td>
+                                                        <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                                                            <a type="button" data-bs-toggle="modal" data-bs-target="#modalEdit{{ $detail->jenisOutput->jenisOutputKey->name }}{{ $detail->id }}">
                                                                 <i class="lni lni-pencil" style="color: black;"></i>
                                                             </a>
-                                                            <a type="button" data-bs-toggle="modal"
-                                                                data-bs-target="#modalDelete{{ $detail->id }}">
+                                                            <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $detail->id }}">
                                                                 <i class="lni lni-trash-can" style="color: red;"></i>
                                                             </a>
                                                         </td>
