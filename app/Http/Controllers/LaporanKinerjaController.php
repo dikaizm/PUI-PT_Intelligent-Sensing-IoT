@@ -51,32 +51,30 @@ class LaporanKinerjaController extends Controller
         $statusCountsPenelitian = array_replace(array_fill_keys($statusNames, 0), $statusCountsPenelitian);
 
         // Hitung jumlah output berdasarkan jenis (1 sampai 5)
-        $statusCountsOutput = OutputDetail::select('jenis_output_id', DB::raw('count(*) as total'))
-        ->whereIn(DB::raw('YEAR(created_at)'), [$tahunAwal, $tahunAkhir])
-        ->whereIn('jenis_output_id', [1, 2, 3, 4])
-        ->groupBy('jenis_output_id')
-        ->pluck('total', 'jenis_output_id')
+        $statusCountsOutput = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
+        ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
+        ->whereYear('output_detail.created_at', $tahunAwal)
+        ->groupBy('jo.jenis_output_key_id')
+        ->pluck('total', 'jo.jenis_output_key_id')
         ->toArray();
 
         // Pastikan semua jenis dari 1 sampai 5 ada di array
         $statusCountsOutput = array_replace([1 => 0, 2 => 0, 3 => 0, 4 => 0], $statusCountsOutput);
 
-        // Output berdasarkan tahun
-        $statusCountsOutputAwal = OutputDetail::select('jenis_output_id', DB::raw('count(*) as total'))
-        ->whereYear('created_at', $tahunAwal)
-        ->groupBy('jenis_output_id')
-        ->pluck('total', 'jenis_output_id')
-        ->toArray();
+        $statusCountsOutputAwal = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
+            ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
+            ->whereYear('output_detail.created_at', $tahunAwal)
+            ->groupBy('jo.jenis_output_key_id')
+            ->pluck('total', 'jo.jenis_output_key_id')
+            ->toArray();
 
-        $statusCountsOutputAkhir = OutputDetail::select('jenis_output_id', DB::raw('count(*) as total'))
-        ->whereYear('created_at', $tahunAkhir)
-        ->groupBy('jenis_output_id')
-        ->pluck('total', 'jenis_output_id')
-        ->toArray();
-
-        // Pastikan semua jenis dari 1 sampai 4 ada di array
-        $statusCountsOutputAwal = array_replace([1 => 0, 2 => 0, 3 => 0, 4 => 0], $statusCountsOutputAwal);
-        $statusCountsOutputAkhir = array_replace([1 => 0, 2 => 0, 3 => 0, 4 => 0], $statusCountsOutputAkhir);
+        // Output berdasarkan tahun akhir
+        $statusCountsOutputAkhir = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
+            ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
+            ->whereYear('output_detail.created_at', $tahunAkhir)
+            ->groupBy('jo.jenis_output_key_id')
+            ->pluck('total', 'jo.jenis_output_key_id')
+            ->toArray();
 
         // Ambil target penelitian dari tabel atau set default target
         $targetPenelitian = TargetPenelitian::whereIn('tahun', [$tahunAwal, $tahunAkhir])->pluck('target', 'tahun')->toArray();

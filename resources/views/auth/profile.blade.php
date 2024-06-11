@@ -158,13 +158,13 @@
                             @enderror
                         </div>
                         <div class="input-style-1">
-                            <label for="email_verified_at">{{ __('Akun Terbuat') }}</label>
+                            <label for="created_at">{{ __('Akun Terbuat') }}</label>
                             <input readonly type="text"
-                                   name="email_verified_at"
-                                   id="email_verified_at"
+                                   name="created_at"
+                                   id="created_at"
                                    placeholder="{{ __('Akun Terbuat') }}"
-                                   value="{{ old('email_verified_at', auth()->user()->email_verified_at) }}">
-                            @error('email_verified_at')
+                                   value="{{ old('created_at', auth()->user()->created_at) }}">
+                            @error('created_at')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

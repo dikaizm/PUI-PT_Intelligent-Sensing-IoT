@@ -2,6 +2,19 @@
     @csrf
     @method('POST')
     <div class="input-style-1">
+        <label for="judul_penelitian">{{ __('Judul Penelitian') }}</label>
+        <input type="hidden" name="uuid" value="{{ isset($penelitian) ? $penelitian->uuid : '' }}">
+        <input @error('judul_penelitian') class="form-control is-invalid" @enderror type="text" name="judul_penelitian"
+            id="judul_penelitian" placeholder="{{ __('Judul Penelitian') }}"
+            value="{{ old('judul_penelitian', $penelitian->judul ?? '') }}"
+            @if (isset($penelitian->judul)) readonly @endif>
+        @error('judul_penelitian')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="input-style-1">
         <label for="jenis_output_id">{{ __('Jenis') }}</label>
         <select id="jenis_output_id" name="jenis_output_id" class="form-control">
             <option value="">--Pilih Video*--</option>
@@ -54,9 +67,6 @@
         <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"
             style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);">
             {{ __('Simpan') }}
-        </button>
-        <button type="button" class="main-btn btn-sm danger-btn-outline btn-hover m-1" data-bs-dismiss="modal">
-            {{ __('Batal') }}
         </button>
     </div>
 </form>

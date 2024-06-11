@@ -121,9 +121,6 @@
             style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);">
             {{ __('Simpan') }}
         </button>
-        <button type="button" class="main-btn btn-sm danger-btn-outline btn-hover m-1" data-bs-dismiss="modal">
-            {{ __('Batal') }}
-        </button>
     </div>
 </form>
 

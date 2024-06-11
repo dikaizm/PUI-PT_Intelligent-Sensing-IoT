@@ -142,10 +142,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'HKI',
         ]);
         DB::table('jenis_output_key')->insert([
-            'name' => 'Poster',
+            'name' => 'Video',
         ]);
         DB::table('jenis_output_key')->insert([
-            'name' => 'Video',
+            'name' => 'Foto/Poster',
         ]);
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '1',

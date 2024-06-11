@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 //END JS Display Diagram Balok Status Penelitian
 
-//START JS ENTOTTT
+//START JS Submit
 document.addEventListener('DOMContentLoaded', function () {
     const startYear = new Date().getFullYear();
     const tahunAwalSelect = document.getElementById('tahunAwal');
@@ -350,4 +350,4 @@ document.addEventListener('DOMContentLoaded', function () {
     // Update tahunAkhir options whenever tahunAwal changes
     tahunAwalSelect.addEventListener('change', updateTahunAkhirOptions);
 });
-//END JS ENTOTTT
+//END JS Submit
