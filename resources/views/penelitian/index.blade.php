@@ -97,9 +97,12 @@
                                         <a type="button" href="{{ route('penelitian.show', ['uuid' => $item->uuid]) }}">
                                             <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
                                         </a>
-                                        <a type="button" href="{{ route('penelitian.edit', ['uuid' => $item->uuid]) }}">
-                                            <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
-                                        </a>
+                                        @if (request()->query('arsip') != 'true')
+                                            <a type="button"
+                                                href="{{ route('penelitian.edit', ['uuid' => $item->uuid]) }}">
+                                                <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
+                                            </a>
+                                        @endif
                                         <a type="button" data-bs-toggle="modal"
                                             data-bs-target="#modalDeletePenelitian{{ $item->id }}">
                                             <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>

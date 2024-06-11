@@ -189,11 +189,15 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '3',
-            'name' => '*',
+            'name' => 'Foto',
+        ]);
+        DB::table('jenis_output')->insert([
+            'jenis_output_key_id' => '3',
+            'name' => 'Poster',
         ]);
         DB::table('jenis_output')->insert([
             'jenis_output_key_id' => '4',
-            'name' => '*',
+            'name' => 'Video',
         ]);
         //JenisOutput::factory()->count(3)->create();
 
@@ -269,8 +273,6 @@ class DatabaseSeeder extends Seeder
             'key' => '123456789abcd',
         ]);
 
-        $this->call([
-            TargetPenelitianSeeder::class,
-        ]);
+        $this->call([TargetPenelitianSeeder::class]);
     }
 }
