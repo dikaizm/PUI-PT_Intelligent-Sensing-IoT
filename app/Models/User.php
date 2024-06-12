@@ -61,10 +61,4 @@ class User extends Authenticatable
         )->withPivot('is_corresponding', 'is_ketua');
     }
 
-    // User.php
-    public function hasRole($role)
-    {
-        return $this->roles()->where('name', $role)->exists();
-    }
-
 }
