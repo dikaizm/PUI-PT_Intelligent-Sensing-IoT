@@ -11,6 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('author', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('penelitian_id');
             $table
                 ->foreign('penelitian_id')
@@ -26,6 +27,22 @@ return new class extends Migration {
             $table->boolean('is_corresponding')->default(false);
             $table->boolean('is_ketua')->default(false);
         });
+
+        Schema::create('author_output', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('author_id');
+            $table
+                ->foreign('author_id')
+                ->references('id')
+                ->on('author')
+                ->onDelete('restrict');
+            $table->foreignId('output_id');
+            $table
+                ->foreign('output_id')
+                ->references('id')
+                ->on('output')
+                ->onDelete('restrict');
+        });
     }
 
     /**
@@ -34,5 +51,6 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('author');
+        Schema::dropIfExists('author_output');
     }
 };

@@ -80,10 +80,10 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('jenis_output_key');
+        Schema::dropIfExists('output_detail');
         Schema::dropIfExists('jenis_output');
+        Schema::dropIfExists('jenis_output_key');
         Schema::dropIfExists('status_output');
         Schema::dropIfExists('output');
-        Schema::dropIfExists('output_detail');
     }
 };

@@ -78,10 +78,10 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('status_penelitian_key');
+        Schema::dropIfExists('penelitian');
         Schema::dropIfExists('status_penelitian');
+        Schema::dropIfExists('status_penelitian_key');
         Schema::dropIfExists('jenis_penelitian');
         Schema::dropIfExists('skema');
-        Schema::dropIfExists('penelitian');
     }
 };
