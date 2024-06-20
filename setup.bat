@@ -3,11 +3,11 @@
 REM Change to the project directory
 cd /d %~dp0
 
-REM Install PHP dependencies
-composer install
+@REM REM Install PHP dependencies
+@REM composer install
 
 REM Install frontend dependencies
-npm install
+@REM npm install
 npm run dev
 
 REM Set up environment file
@@ -22,8 +22,7 @@ icacls storage\logs /grant Everyone:(OI)(CI)F
 REM Create storage link
 php artisan storage:link
 
-REM Run migrations and seed the database
-php artisan migrate --seed
+@REM REM Run migrations and seed the database
+@REM php artisan migrate --seed
 
 echo Setup completed successfully.
-pause
