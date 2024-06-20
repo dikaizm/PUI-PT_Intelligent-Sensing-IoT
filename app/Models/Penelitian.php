@@ -81,4 +81,9 @@ class Penelitian extends Model
     {
         return ['uuid'];
     }
+
+    public function authors()
+    {
+        return $this->hasMany(Author::class);
+    }
 }

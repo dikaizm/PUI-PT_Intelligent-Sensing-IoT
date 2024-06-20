@@ -23,58 +23,104 @@ class LaporanKinerjaController extends Controller
         $today = Carbon::today();
         $yesterday = Carbon::yesterday();
 
-        // Penelitian
-        $penelitianToday = Penelitian::whereDate('created_at', $today)->count();
-        $penelitianYesterday = Penelitian::whereDate('created_at', $yesterday)->count();
-        $penelitianTahunAwal = Penelitian::whereYear('created_at', $tahunAwal)->count();
-        $penelitianTahunAkhir = Penelitian::whereYear('created_at', $tahunAkhir)->count();
+        $user = auth()->user();
+        $isAdminOrKaur = $user->hasRole(['Admin', 'Kaur']);
 
+        // Penelitian query
+        $penelitianQuery = Penelitian::query();
+        if (!$isAdminOrKaur) {
+            $penelitianQuery->whereHas('authors', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            });
+        }
 
-        // Output
-        $outputToday = OutputDetail::whereDate('created_at', $today)->count();
-        $outputYesterday = OutputDetail::whereDate('created_at', $yesterday)->count();
-        $outputTahunAwal = OutputDetail::whereYear('created_at', $tahunAwal)->count();
-        $outputTahunAkhir = OutputDetail::whereYear('created_at', $tahunAkhir)->count();
+        $penelitianToday = $penelitianQuery->clone()->whereDate('created_at', $today)->count();
+        $penelitianYesterday = $penelitianQuery->clone()->whereDate('created_at', $yesterday)->count();
+        $penelitianTahunAwal = $penelitianQuery->clone()->whereYear('created_at', $tahunAwal)->count();
+        $penelitianTahunAkhir = $penelitianQuery->clone()->whereYear('created_at', $tahunAkhir)->count();
+
+        // Output query
+        $outputQuery = OutputDetail::query();
+        if (!$isAdminOrKaur) {
+            $outputQuery->whereHas('output.penelitian.authors', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            });
+        }
+
+        $outputToday = $outputQuery->clone()->whereDate('created_at', $today)->count();
+        $outputYesterday = $outputQuery->clone()->whereDate('created_at', $yesterday)->count();
+        $outputTahunAwal = $outputQuery->clone()->whereYear('created_at', $tahunAwal)->count();
+        $outputTahunAkhir = $outputQuery->clone()->whereYear('created_at', $tahunAkhir)->count();
+
+        $quarters = [
+            'Q1' => ['-01-01', '-03-31'],
+            'Q2' => ['-04-01', '-06-30'],
+            'Q3' => ['-07-01', '-09-30'],
+            'Q4' => ['-10-01', '-12-31'],
+        ];
+
+        // Quarterly counts for Penelitian
+        $penelitianThnAwal = $penelitianQuery->clone()->whereYear('created_at', $tahunAwal)->get();
+        $penelitianThnAkhir = $penelitianQuery->clone()->whereYear('created_at', $tahunAkhir)->get();
+
+        // Quarterly counts for Output
+        $outputThnAwal = $outputQuery->clone()->whereYear('created_at', $tahunAwal)->get();
+        $outputThnAkhir = $outputQuery->clone()->whereYear('created_at', $tahunAkhir)->get();
+
+        $penelitianAwalQrt = [];
+        $penelitianAkhirQrt = [];
+        $outputAwalQrt = [];
+        $outputAkhirQrt = [];
+
+        foreach ($quarters as $quarter => $dates) {
+            $penelitianAwalQrt[$quarter] = $penelitianThnAwal->whereBetween('created_at', [$tahunAwal . $dates[0], $tahunAwal . $dates[1]])->count();
+            $penelitianAkhirQrt[$quarter] = $penelitianThnAkhir->whereBetween('created_at', [$tahunAkhir . $dates[0], $tahunAkhir . $dates[1]])->count();
+
+            $outputAwalQrt[$quarter] = $outputThnAwal->whereBetween('created_at', [$tahunAwal . $dates[0], $tahunAwal . $dates[1]])->count();
+            $outputAkhirQrt[$quarter] = $outputThnAkhir->whereBetween('created_at', [$tahunAkhir . $dates[0], $tahunAkhir . $dates[1]])->count();
+        }
+
+        // dd($penelitianAwalQrt, $penelitianAkhirQrt, $outputAwalQrt, $outputAkhirQrt);
 
         // Hitung jumlah penelitian berdasarkan nama status (1 sampai 6)
         $statusNames = ['Submitted', 'Review', 'Accepted', 'Rejected', 'On Going', 'Finished'];
 
-        $statusCountsPenelitian = Penelitian::select('status_penelitian.name', DB::raw('count(*) as total'))
-        ->join('status_penelitian', 'penelitian.status_penelitian_id', '=', 'status_penelitian.id')
-        ->whereIn(DB::raw('YEAR(penelitian.created_at)'), [$tahunAwal, $tahunAkhir])
-        ->whereIn('status_penelitian.name', $statusNames)
-        ->groupBy('status_penelitian.name')
-        ->pluck('total', 'status_penelitian.name')
-        ->toArray();
+        $statusCountsPenelitianQuery = Penelitian::select('status_penelitian.name', DB::raw('count(*) as total'))
+            ->join('status_penelitian', 'penelitian.status_penelitian_id', '=', 'status_penelitian.id')
+            ->whereIn(DB::raw('YEAR(penelitian.created_at)'), [$tahunAwal, $tahunAkhir])
+            ->whereIn('status_penelitian.name', $statusNames)
+            ->groupBy('status_penelitian.name');
+
+        if (!$isAdminOrKaur) {
+            $statusCountsPenelitianQuery->whereHas('authors', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            });
+        }
+
+        $statusCountsPenelitian = $statusCountsPenelitianQuery->pluck('total', 'status_penelitian.name')->toArray();
 
         // Pastikan semua status dari 1 sampai 6 ada di array
         $statusCountsPenelitian = array_replace(array_fill_keys($statusNames, 0), $statusCountsPenelitian);
 
         // Hitung jumlah output berdasarkan jenis (1 sampai 5)
-        $statusCountsOutput = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
-        ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
-        ->whereYear('output_detail.created_at', $tahunAwal)
-        ->groupBy('jo.jenis_output_key_id')
-        ->pluck('total', 'jo.jenis_output_key_id')
-        ->toArray();
+        $statusCountsOutputQuery = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
+            ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
+            ->whereYear('output_detail.created_at', $tahunAwal)
+            ->groupBy('jo.jenis_output_key_id');
+
+        if (!$isAdminOrKaur) {
+            $statusCountsOutputQuery->whereHas('output.penelitian.authors', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            });
+        }
+
+        $statusCountsOutput = $statusCountsOutputQuery->pluck('total', 'jo.jenis_output_key_id')->toArray();
 
         // Pastikan semua jenis dari 1 sampai 5 ada di array
         $statusCountsOutput = array_replace([1 => 0, 2 => 0, 3 => 0, 4 => 0], $statusCountsOutput);
 
-        $statusCountsOutputAwal = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
-            ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
-            ->whereYear('output_detail.created_at', $tahunAwal)
-            ->groupBy('jo.jenis_output_key_id')
-            ->pluck('total', 'jo.jenis_output_key_id')
-            ->toArray();
-
-        // Output berdasarkan tahun akhir
-        $statusCountsOutputAkhir = OutputDetail::select('jo.jenis_output_key_id', DB::raw('count(*) as total'))
-            ->join('jenis_output as jo', 'output_detail.jenis_output_id', '=', 'jo.id')
-            ->whereYear('output_detail.created_at', $tahunAkhir)
-            ->groupBy('jo.jenis_output_key_id')
-            ->pluck('total', 'jo.jenis_output_key_id')
-            ->toArray();
+        $statusCountsOutputAwal = $statusCountsOutputQuery->clone()->whereYear('output_detail.created_at', $tahunAwal)->pluck('total', 'jo.jenis_output_key_id')->toArray();
+        $statusCountsOutputAkhir = $statusCountsOutputQuery->clone()->whereYear('output_detail.created_at', $tahunAkhir)->pluck('total', 'jo.jenis_output_key_id')->toArray();
 
         // Ambil target penelitian dari tabel atau set default target
         $targetPenelitian = TargetPenelitian::whereIn('tahun', [$tahunAwal, $tahunAkhir])->pluck('target', 'tahun')->toArray();
@@ -95,6 +141,10 @@ class LaporanKinerjaController extends Controller
             'status_counts_output_awal' => json_encode($statusCountsOutputAwal), // Encode data Status Output to JSON
             'status_counts_output_akhir' => json_encode($statusCountsOutputAkhir), // Encode data Status Output to JSON
             'target_penelitian' => json_encode($targetPenelitian), // Encode data Status Output to JSON
+            'penelitian_awal_qrt' => json_encode($penelitianAwalQrt),
+            'penelitian_akhir_qrt' => json_encode($penelitianAkhirQrt),
+            'output_awal_qrt' => json_encode($outputAwalQrt),
+            'output_akhir_qrt' => json_encode($outputAkhirQrt),
         ]);
     }
 

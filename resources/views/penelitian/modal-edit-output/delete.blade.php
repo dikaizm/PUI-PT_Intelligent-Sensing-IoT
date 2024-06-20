@@ -18,7 +18,7 @@
             </p>
           </div>
           <div class="action d-flex justify-content-end flex-wrap">
-            <form action=" {{ route('penelitian.destroy', ['id' => $item->id]) }} " method="POST">
+            <form action=" {{ route('output-detail.destroy', ['id' => $item->id]) }} " method="POST">
               @method('DELETE')
               @csrf
 

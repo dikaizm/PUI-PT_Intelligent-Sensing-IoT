@@ -22,4 +22,9 @@ class Author extends Model
         'is_corresponding',
         'is_ketua',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

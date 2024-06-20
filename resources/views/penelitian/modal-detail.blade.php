@@ -211,11 +211,14 @@
           </div> --}}
 
           <div class="menu-toggle-btn mr-20" style="text-align: right;">
+            @if (!$penelitian->arsip)
             <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
               href="{{ route('penelitian.edit', ['uuid' => $penelitian->uuid]) }}"
               style="background: linear-gradient(180deg, #DDCE49 0%, #776F27 100%);color:white;">
               {{ __('Edit Penelitian') }}
             </a>
+            @endif
+
             <a type="button" data-bs-toggle="modal" data-bs-target="#modalDeletePenelitian"
               class="main-btn btn-hover btn-md"style="background: linear-gradient(180deg, #DE210F 0%, #781208 100%); color:white;">
               {{ __('Hapus Penelitian') }}
@@ -254,11 +257,15 @@
                 </div>
               </div>
             </div>
-            <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
+
+            @if (!$penelitian->arsip)
+            <a type="button" id="menu-toggle" class="main-btn btn-hover btn-md"
               href="{{ route('output-detail.create-from-penelitian', ['uuid' => $penelitian->uuid, 'judul' => $penelitian->judul]) }}"
               style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
               {{ __('Laporkan Output') }}
             </a>
+            @endif
+
           </div>
 
           <h2 class="mt-5" style="color:gray;">{{ __('Output Penelitian') }}</h2>
@@ -319,7 +326,7 @@
                             style="color: gray; margin:2px;"></i></a>
                       </h6>
                     </td>
-                    <td
+                    {{-- <td
                       style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                       <h6>
                         @if ($item->file)
@@ -328,7 +335,7 @@
                           </a>
                         @endif
                       </h6>
-                    </td>
+                    </td> --}}
                     <td
                       style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 28%;">
                       <a type="button" data-bs-toggle="modal"

@@ -53,8 +53,13 @@
                   Tgl Update
                 </td>
                 <td
-                  style="border-left: none; border-top: none; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 60%;">
+                  style="border-left: none; border-top: none; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 40%;">
                   Feedback
+                </td>
+
+                <td
+                  style="border-left: none; border-top: none; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 20%;">
+                  Action
                 </td>
               </tr>
             </thead>
@@ -77,9 +82,17 @@
                     style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
                     {{ $item->penelitian->feedback }}
                   </td>
+
+                  <td
+                    style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                    <a type="button" id="menu-toggle" href="{{ route('output-detail.create-from-penelitian', ['uuid' => $item->penelitian->uuid, 'judul' => $item->penelitian->judul]) }}">
+                      <i class="fas fa-plus" style="color: black;"></i>
+                    </a>
+                  </td>
+
                 </tr>
                 <tr>
-                  <td colspan="4">
+                  <td colspan="5">
                     <table class="striped-table mb-0 table">
                       <thead>
                         <tr>

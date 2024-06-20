@@ -1,5 +1,8 @@
 //START JS Pilih Tahun
 document.addEventListener('DOMContentLoaded', function () {
+    const urlPath = window.location.pathname;
+    if (urlPath !== '/laporan-kinerja') return;
+
     // Mendapatkan elemen select untuk tahun awal dan tahun akhir
     const tahunAwalSelect = document.getElementById('tahunAwal');
     const tahunAkhirSelect = document.getElementById('tahunAkhir');
@@ -300,6 +303,80 @@ document.addEventListener('DOMContentLoaded', function () {
     new Chart(ctx2, config2);
 });
 //END JS Display Diagram Balok Status Penelitian
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const penelitianAwalQrt = window.penelitianAwalQrt;
+    const penelitianAkhirQrt = window.penelitianAkhirQrt;
+
+    const outputAwalQrt = window.outputAwalQrt;
+    const outputAkhirQrt = window.outputAkhirQrt;
+
+    const labelsY = ['Q1', 'Q2', 'Q3', 'Q4'];
+    const dataPltQ = {
+        labels: labelsY,
+        datasets: [
+            {
+                label: tahunAwal,
+                data: penelitianAwalQrt,
+                borderColor: 'rgba(233,113,52,255)',
+                backgroundColor: 'rgba(233,113,52,255)',
+            },
+            {
+                label: tahunAkhir,
+                data: penelitianAkhirQrt,
+                borderColor: 'rgba(21,95,131,255)',
+                backgroundColor: 'rgba(21,95,131,255)',
+            },
+        ],
+    };
+
+    const dataOtpQ = {
+        labels: labelsY,
+        datasets: [
+            {
+                label: tahunAwal,
+                data: outputAwalQrt,
+                borderColor: 'rgba(233,113,52,255)',
+                backgroundColor: 'rgba(233,113,52,255)',
+            },
+            {
+                label: tahunAkhir,
+                data: outputAkhirQrt,
+                borderColor: 'rgba(21,95,131,255)',
+                backgroundColor: 'rgba(21,95,131,255)',
+            },
+        ],
+    };
+
+    const baseConfig = {
+        type: 'bar',
+        options: {
+            indexAxis: 'y',
+            elements: {
+                bar: {
+                    borderWidth: 2,
+                },
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+            },
+        }
+    }
+
+    const configPlt = { ...baseConfig, data: dataPltQ };
+    const configOtp = { ...baseConfig, data: dataOtpQ };
+
+    const ctxPlt = document.getElementById('barchartPenelitianTriwulan').getContext('2d');
+    const ctxOtp = document.getElementById('barchartOutputTriwulan').getContext('2d');
+
+    new Chart(ctxPlt, configPlt);
+    new Chart(ctxOtp, configOtp);
+})
+
 
 //START JS Submit
 document.addEventListener('DOMContentLoaded', function () {
