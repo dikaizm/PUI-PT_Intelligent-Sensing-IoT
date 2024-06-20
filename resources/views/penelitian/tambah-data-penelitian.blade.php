@@ -31,16 +31,19 @@
                                 <label style="text-align: left;" for="skema">
                                     {{ __('Pilih Skema Penelitian') }}
                                 </label>
-                                <select class="form-control @error('skema') is-invalid @enderror" name="skema_id"
+                                <div id="skema-container" class="select-container">
+                                    <select class="form-control @error('skema') is-invalid @enderror" name="skema_id"
                                     id="skema" style="max-width: 100%; margin: 0 auto;">
-                                    <option value=""> --Pilih Skema--</option>
-                                    @foreach ($skema as $s)
-                                        <option value="{{ $s->id }}"
-                                            @if (old('skema') == $s->id) selected @endif>
-                                            {{ $s->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                        <option id="select-default-pos"> --Pilih Skema--</option>
+                                        @foreach ($skema as $s)
+                                            <option value="{{ $s->id }}"
+                                                @if (old('skema') == $s->id) selected @endif>
+                                                {{ $s->name }}
+                                            </option>
+                                        @endforeach
+                                        <option id="skema_other">Lainnya</option>
+                                    </select>
+                                </div>
                                 @error('skema')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -64,26 +67,30 @@
                         </div>
                         <!-- end col -->
                         <div class="col-12">
-                            <div class="input-style-1">
+                            <div class="input-style-4">
                                 <label for="user_id">{{ __('Anggota Tim') }}</label>
-                                <select name="user_id[]" class="form-control select2" multiple="multiple"
+                                <div id="input-anggota"></div>
+
+                                {{-- @error('user_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror --}}
+
+                                {{-- <select name="user_id[]" class="form-control select2" multiple="multiple"
                                     style="width: 100%; height: 58px;" required>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}"
                                             @if (old('user_id') && in_array($user->id, old('user_id'))) selected @endif>{{ $user->name }}</option>
                                     @endforeach
-                                </select>
-                                @error('user_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <div class="mt-2">
+                                </select> --}}
+
+                                {{-- <div class="mt-2">
                                     <a type="button" data-bs-toggle="modal" data-bs-target="#modalTambahAnggotaEksternal"
                                         style="font-size:20px; color: red !important;">
                                         {{ __('Tambah Anggota Eksternal') }}
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -123,8 +130,7 @@
                         <!-- end col -->
                         <div class="input-style-1">
                             <label for="mitra">{{ __('Mitra Penelitian') }}</label>
-                            <input type="text" @error('mitra') class="form-control is-invalid" @enderror name="mitra"
-                                id="mitra" placeholder="{{ __('Mitra Penelitian') }}" value="{{ old('mitra') }}">
+                            <input type="text" @error('mitra') class="form-control is-invalid" @enderror name="mitra" id="mitra" placeholder="{{ __('Mitra Penelitian') }}" value="{{ old('mitra') }}">
                             @error('mitra')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -136,7 +142,8 @@
                             <label for="jenisPenelitian">
                                 {{ __('Jenis Penelitian') }}
                             </label>
-                            <select class="form-control @error('jenis_penelitian_id') is-invalid @enderror"
+                            <div id="jenisPenelitian-container" class="select-container">
+                                <select class="form-control @error('jenis_penelitian_id') is-invalid @enderror"
                                 name="jenis_penelitian_id" id="jenisPenelitian" style="max-width: 100%; margin: 0 auto;">
                                 <option value="">--Pilih Jenis Penelitian--</option>
                                 @foreach ($jenis_penelitian as $jenis)
@@ -144,29 +151,45 @@
                                         {{ $jenis->name }}
                                     </option>
                                 @endforeach
+                                <option id="jenisPenelitian_other">Lainnya</option>
                             </select>
+                            </div>
                             @error('jenis_penelitian_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+
+                        <!-- waktu mulai & waktu akhir -->
+                        <div class="d-flex gap-4">
+                            <div class="form-group w-100">
+                                <label for="datepicker_mulai">Penelitian dimulai</label>
+                                <input type="date" id="datepicker_mulai" class="form-control" name="datepicker" required>
+                            </div>
+                            <div class="form-group w-100">
+                                <label for="datepicker_akhir">Penelitian selesai</label>
+                                <input type="date" id="datepicker_akhir" class="form-control" name="datepicker" required>
+                            </div>
+                        </div>
+
                         <!-- end col -->
                         <div class="input-style-1">
                             <label for="jangka_waktu">{{ __('Jangka Waktu Penelitian') }}</label>
-                                <div class="input-group">
-                                    <input type="number" @error('jangka_waktu') class="form-control is-invalid" @enderror
-                                        name="jangka_waktu" id="jangka_waktu" placeholder="{{ __('Jangka') }}"
-                                        value="{{ old('jangka_waktu') }}">
-                                    @error('jangka_waktu')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Bulan</span>
-                                    </div>
+
+                            <div class="input-group">
+
+                                <input type="number"  class="form-control @error('jangka_waktu') is-invalid @enderror" name="jangka_waktu" id="jangka_waktu" placeholder="{{ __('Jangka') }}"
+                                    value="{{ old('jangka_waktu') }}" min="0">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Bulan</span>
                                 </div>
+
+                                @error('jangka_waktu')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <!-- end col -->
@@ -176,7 +199,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp.</span>
                                 </div>
-                                <input type="number" name="pendanaan" id="" placeholder="{{ __('Nominal') }}"
+                                <input type="number" name="pendanaan" id="pendanaan" placeholder="{{ __('Nominal') }}"
                                     class="form-control" min="0" value="{{ old('pendanaan') }}">
                             </div>
                         </div>
@@ -196,11 +219,11 @@
                         </div>
                         <!-- end col -->
                         <div class="input-style-1">
-                            <label for="file">{{ __('File Penelitian') }}</label>
-                            <input type="file" name="file" accept=".pdf"
-                                class="form-control @error('file') is-invalid @enderror"
-                                placeholder="{{ __('File Penelitian') }}" value="{{ old('file') }}">
-                            @error('file')
+                            <label for="file">{{ __('Link Penelitian') }}</label>
+                            <input @error('link_penelitian') class="form-control is-invalid" @enderror type="text"
+                            name="link_penelitian" id="link_penelitian" placeholder="{{ __('Link Penelitian') }}"
+                            value="{{ old('link_penelitian') }}">
+                            @error('link_penelitian')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

@@ -51,8 +51,13 @@
             <select id="jenis_output_id" name="jenis_output_id" class="form-control">
                 <option value="">--Pilih Foto/Poster--</option>
                 @foreach ($jenis_output as $item)
-                    <option value="{{ $item->id }}">{{ $item->jenisOutputKey->name }} {{ $item->name }}
-                    </option>
+                    @php
+                        $jenisOutputKey = $item->jenisOutputKey->name;
+                        $outputName = $item->name;
+                    @endphp
+                    @if (in_array($jenisOutputKey, ['Foto/Poster']))
+                        <option value="{{ $item->id }}">{{ $jenisOutputKey }} {{ $outputName }}</option>
+                    @endif
                 @endforeach
             </select>
         </div>

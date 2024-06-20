@@ -9,6 +9,8 @@ use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 
@@ -23,6 +25,11 @@ class UserController extends Controller
         $roles = Role::all()->pluck('name');
 
         return view('users.index', compact('users', 'roles'));
+    }
+
+    public function apiIndex()
+    {
+        return User::all();
     }
 
     /**
@@ -51,24 +58,46 @@ class UserController extends Controller
         );
     }
 
-    public function externalStore(Request $request): RedirectResponse
+    public function externalStore(Request $request): JsonResponse
     {
-        $request->validate([
-            'name' => ['unique:users,name'],
+        // Validate the request to ensure 'name' is provided
+        $validator = Validator::make($request->all(), [
+            'name' => 'required'
         ]);
+
+        // If validation fails, return a JSON response with errors
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation errors',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        // Check if the user already exists
+        if (User::where('name', $request->input('name'))->exists()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'exist'
+            ], 200);
+        }
+
+        // Generate a UUID
         $uuid = Uuid::uuid4()->toString();
-        User::create([
+
+        // Create a new user
+        $user = User::create([
             'name' => $request->input('name'),
             'email' => $uuid . '@example.com',
             'password' => Hash::make($uuid),
         ]);
 
-        return redirect()
-            ->back()
-            ->with(
-                'success',
-                'User external berhasil ditambahkan, silahkan pilih anggota tim anda!'
-            );
+        // Return a JSON response with success message and user data
+        return response()->json([
+            'success' => true,
+            'message' => 'Anggota external berhasil ditambahkan, silahkan pilih anggota tim anda!',
+            'data' => $user
+        ], 201);
     }
 
     /**

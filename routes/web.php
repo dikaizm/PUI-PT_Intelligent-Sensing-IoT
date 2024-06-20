@@ -20,6 +20,11 @@ Route::get('/home', [
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
 
+    Route::get('/api/users', [
+        \App\Http\Controllers\UserController::class,
+        'apiIndex',
+    ])->name('api.users.index');
+
     Route::get('users', [
         \App\Http\Controllers\UserController::class,
         'index',

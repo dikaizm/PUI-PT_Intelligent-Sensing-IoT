@@ -43,8 +43,11 @@ return new class extends Migration {
             $table->string('judul');
             $table->tinyInteger('tingkatan_tkt')->unsigned()->nullable();
             $table->bigInteger('pendanaan')->unsigned()->nullable();
+            $table->date('waktu_mulai');
+            $table->date('waktu_akhir');
             $table->string('jangka_waktu', 32)->nullable();
             $table->string('file')->nullable();
+            $table->string('link_penelitian')->nullable();
             $table->text('feedback')->nullable();
             $table->string('mitra')->nullable();
             $table->smallInteger('status_penelitian_id')->unsigned();

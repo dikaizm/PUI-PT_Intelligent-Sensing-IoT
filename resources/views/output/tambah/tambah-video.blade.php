@@ -19,7 +19,13 @@
         <select id="jenis_output_id" name="jenis_output_id" class="form-control">
             <option value="">--Pilih Video*--</option>
             @foreach ($jenis_output as $item)
-                <option value="{{ $item->id }}">{{ $item->jenisOutputKey->name }} {{ $item->name }}</option>
+                @php
+                    $jenisOutputKey = $item->jenisOutputKey->name;
+                    $outputName = $item->name;
+                @endphp
+                @if (in_array($jenisOutputKey, ['Video']))
+                    <option value="{{ $item->id }}">{{ $jenisOutputKey }} {{ $outputName }}</option>
+                @endif
             @endforeach
         </select>
     </div>
@@ -38,7 +44,8 @@
 
     <div class="input-style-1">
         <label>{{ __('Author') }}</label>
-        <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror"
+        <div id="input-anggota"></div>
+        {{-- <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror"
             multiple="multiple" style="width: 100%; height: 58px;" required>
             @foreach ($users as $user)
                 <option value="{{ $user->id }}" @if (isset($penelitian) && $penelitian && in_array($user->id, $penelitian->users->pluck('id')->toArray())) selected @endif>
@@ -50,7 +57,7 @@
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
-        @enderror
+        @enderror --}}
     </div>
 
     <div class="input-style-1">

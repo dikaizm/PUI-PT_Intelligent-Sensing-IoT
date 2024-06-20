@@ -71,14 +71,19 @@ class PenelitianController extends Controller
      */
     public function store(StorePenelitianRequest $request)
     {
+        $jangkaWaktu = $request->waktu_mulai->diffInMonths($request->waktu_akhir);
+
         $penelitian = Penelitian::create([
             'judul' => $request->judul,
             'tingkatan_tkt' => $request->tingkatan_tkt,
             'pendanaan' => $request->pendanaan,
-            'jangka_waktu' => $request->jangka_waktu,
+            'waktu_mulai' => $request->waktu_mulai,
+            'waktu_akhir' => $request->waktu_akhir,
+            'jangka_waktu' => $jangkaWaktu,
             'file' => $request->hasFile('file')
                 ? $request->file('file')->store('penelitian', 'public')
                 : null,
+            'link_penelitian' => $request->link_penelitian,
             'feedback' => $request->feedback,
             'mitra' => $request->mitra,
             'status_penelitian_id' => $request->status_penelitian_id,

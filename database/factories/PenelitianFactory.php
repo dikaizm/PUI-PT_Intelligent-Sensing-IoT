@@ -21,6 +21,8 @@ class PenelitianFactory extends Factory
             'judul' => fake()->sentence(),
             'tingkatan_tkt' => fake()->randomDigitNotNull(),
             'pendanaan' => fake()->numerify('#####000'),
+            'waktu_mulai' => fake()->date(),
+            'waktu_akhir' => fake()->date(),
             'jangka_waktu' => fake()->numerify('##'),
             'feedback' => fake()->text(),
             'mitra' => fake()->company(),
@@ -28,6 +30,7 @@ class PenelitianFactory extends Factory
             'jenis_penelitian_id' => fake()->randomDigitNotNull(),
             'skema_id' => fake()->randomDigitNotNull(),
             'arsip' => fake()->boolean(),
+            'link_penelitian' => fake()->url(),
         ];
     }
 }

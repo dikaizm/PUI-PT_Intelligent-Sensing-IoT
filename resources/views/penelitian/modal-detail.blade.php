@@ -39,7 +39,7 @@
                         <div style="text-align: left; width: 100%;">
                             <ul style="list-style: none; padding-left:5%;">
                                 <li style="font-weight: 500;font-size: 25px; text-align: left;">
-                                    {{ __('Judul Keahlian') }}
+                                    {{ __('Judul Penelitian') }}
                                 </li>
                                 <li style="font-weight: 400;font-size: 18px; text-align: left;">
                                     {{ $penelitian->judul }}
