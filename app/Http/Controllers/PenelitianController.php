@@ -27,22 +27,25 @@ class PenelitianController extends Controller
             );
         }
 
-        $penelitian = auth()->user()->hasRole('Admin')
+        $user = auth()->user();
+        $isRole = $user->hasRole('Admin') || $user->hasRole('Kaur');
+
+        $penelitian = $isRole
             ? Penelitian::where('arsip', $arsip === 'true')
-                ->with([
-                    'statusPenelitian',
-                    'statusPenelitian.statusPenelitianKey',
-                ])
-                ->get()
+            ->with([
+                'statusPenelitian',
+                'statusPenelitian.statusPenelitianKey',
+            ])
+            ->get()
             : auth()
-                ->user()
-                ->penelitians()
-                ->where('arsip', $arsip === 'true')
-                ->with([
-                    'statusPenelitian',
-                    'statusPenelitian.statusPenelitianKey',
-                ])
-                ->get();
+            ->user()
+            ->penelitians()
+            ->where('arsip', $arsip === 'true')
+            ->with([
+                'statusPenelitian',
+                'statusPenelitian.statusPenelitianKey',
+            ])
+            ->get();
 
         return view('penelitian.index', [
             'penelitian' => $penelitian,
@@ -71,7 +74,10 @@ class PenelitianController extends Controller
      */
     public function store(StorePenelitianRequest $request)
     {
-        $jangkaWaktu = $request->waktu_mulai->diffInMonths($request->waktu_akhir);
+        // print
+        // dd($request->all());
+
+        $isArsip = $request->boolean('arsip', false);
 
         $penelitian = Penelitian::create([
             'judul' => $request->judul,
@@ -79,33 +85,50 @@ class PenelitianController extends Controller
             'pendanaan' => $request->pendanaan,
             'waktu_mulai' => $request->waktu_mulai,
             'waktu_akhir' => $request->waktu_akhir,
-            'jangka_waktu' => $jangkaWaktu,
-            'file' => $request->hasFile('file')
-                ? $request->file('file')->store('penelitian', 'public')
-                : null,
+            'jangka_waktu' => $request->jangka_waktu,
+            // 'file' => $request->hasFile('file')
+            //     ? $request->file('file')->store('penelitian', 'public')
+            //     : null,
             'link_penelitian' => $request->link_penelitian,
             'feedback' => $request->feedback,
             'mitra' => $request->mitra,
             'status_penelitian_id' => $request->status_penelitian_id,
             'jenis_penelitian_id' => $request->jenis_penelitian_id,
             'skema_id' => $request->skema_id,
-            'arsip' => $request->boolean('arsip', false),
+            'arsip' => $isArsip,
         ]);
 
+        $userData = [];
+        // Loop through all inputs that start with 'user_id_'
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'user_id_') === 0) {
+                $userId = substr($key, strlen('user_id_')); // Extract numeric part
+                $userData[$userId] = $value; // Store value in array
+            }
+        }
+
         $pivotData = [];
-        foreach ($request->user_id as $userId) {
+        foreach ($userData as $userId) {
             $pivotData[$userId] = [
                 'is_ketua' => $userId == $request->is_ketua ? true : false,
             ];
         }
 
-        $penelitian->users()->sync($pivotData);
+        foreach ($userData as $userId) {
+            if ($userId !== null && isset($pivotData[$userId])) {
+                $penelitian->users()->attach($userId, $pivotData[$userId]);
+            }
+        }
 
         OutputController::store($penelitian->id);
 
+        $msg = $isArsip
+            ? 'Penelitian berhasil ditambahkan dan diarsipkan!'
+            : 'Penelitian berhasil ditambahkan!';
+
         return redirect()
             ->route('penelitian.index')
-            ->with('success', 'Penelitian berhasil ditambah!');
+            ->with('success', $msg);
     }
 
     /**
@@ -146,6 +169,7 @@ class PenelitianController extends Controller
         $anggotaTim = $penelitian->users->pluck('id')->toArray();
         $ketuaTim = $penelitian->users->where('pivot.is_ketua', true)->first();
         $is_ketua = $ketuaTim ? $ketuaTim->id : null;
+        $users = User::select('id', 'name')->whereIn('id', $anggotaTim)->get();
 
         // Temukan model User berdasarkan ID ketua
         $userKetua = User::find($is_ketua);
@@ -154,10 +178,16 @@ class PenelitianController extends Controller
             'penelitian' => $penelitian,
             'skema' => Skema::select('id', 'name')->get(),
             'jenis_penelitian' => JenisPenelitian::select('id', 'name')->get(),
+            'waktu_mulai' => $penelitian->waktu_mulai,
+            'waktu_akhir' => $penelitian->waktu_akhir
+                ? $penelitian->waktu_akhir
+                : null,
+            'jangka_waktu' => $penelitian->jangka_waktu,
             'status_penelitian' => StatusPenelitian::with(
                 'statusPenelitianKey'
             )->get(),
-            'users' => User::select('id', 'name')->get(),
+            'link_penelitian' => $penelitian->link_penelitian,
+            'users' => $users,
             'anggotaTim' => $anggotaTim,
             'is_ketua' => $is_ketua,
             'userKetua' => $userKetua, // Kirim model User ketua ke view
@@ -168,19 +198,15 @@ class PenelitianController extends Controller
     {
         $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
 
-        if ($request->hasFile('file') && $penelitian->file) {
-            Storage::disk('public')->delete($penelitian->file);
-        }
-
         // Update penelitian
         $penelitian->update([
             'judul' => $request->judul,
             'tingkatan_tkt' => $request->tingkatan_tkt,
             'pendanaan' => $request->pendanaan,
+            'waktu_mulai' => $request->waktu_mulai,
+            'waktu_akhir' => $request->waktu_akhir,
             'jangka_waktu' => $request->jangka_waktu,
-            'file' => $request->hasFile('file')
-                ? $request->file('file')->store('penelitian', 'public')
-                : $penelitian->file,
+            'link_penelitian' => $request->link_penelitian,
             'mitra' => $request->mitra,
             'status_penelitian_id' => $request->status_penelitian_id,
             'jenis_penelitian_id' => $request->jenis_penelitian_id,
@@ -188,13 +214,25 @@ class PenelitianController extends Controller
             'arsip' => $request->boolean('arsip'),
         ]);
 
-        $pivotData = [];
-        foreach ($request->user_id as $userId) {
-            $pivotData[$userId] = [
-                'is_ketua' => $userId == $request->is_ketua ? true : false,
-            ];
+        $userData = [];
+        // Loop through all inputs that start with 'user_id_'
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'user_id_') === 0) {
+                $userId = substr($key, strlen('user_id_')); // Extract numeric part
+                $userData[$userId] = $value; // Store value in array
+            }
         }
 
+        $pivotData = [];
+        foreach ($userData as $userId => $value) {
+            if (is_numeric($userId) && $userId != '' && User::find($userId)) {
+                $pivotData[$userId] = [
+                    'is_ketua' => $userId == $request->is_ketua ? true : false,
+                ];
+            }
+        }
+
+        // Sync the pivot table data
         $penelitian->users()->sync($pivotData);
 
         return redirect()
@@ -243,6 +281,7 @@ class PenelitianController extends Controller
         }
 
         $penelitian->users()->detach();
+        $penelitian->output()->delete();
         $penelitian->delete();
 
         return redirect()

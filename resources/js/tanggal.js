@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let dateAkhirValue;
 
     // Get value from datepicker mulai & akhir
-    const datepickerMulai = document.getElementById('datepicker_mulai')
-    const datepickerAkhir = document.getElementById('datepicker_akhir')
+    const datepickerMulai = document.getElementById('waktu_mulai')
+    const datepickerAkhir = document.getElementById('waktu_akhir')
 
     datepickerMulai.addEventListener('change', function() {
         dateMulaiValue = this.value

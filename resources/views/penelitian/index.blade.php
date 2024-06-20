@@ -21,6 +21,9 @@
 
                 @include('alert')
 
+                @can('is-kaur')
+                {{-- Hide button --}}
+                @else
                 <div class="menu-toggle-btn mr-20" style="text-align: right;">
                     <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
                         href="{{ route('penelitian.create') }}"
@@ -28,6 +31,7 @@
                         {{ __('Tambahkan Data') }}
                     </a>
                 </div>
+                @endcan
 
                 <div class="table-wrapper table-responsive" style="font-family: DM Sans">
                     <table class="table striped-table" id="dataTables" style="width: 100%; border-collapse: collapse;">
@@ -97,6 +101,9 @@
                                         <a type="button" href="{{ route('penelitian.show', ['uuid' => $item->uuid]) }}">
                                             <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
                                         </a>
+                                        @can('is-kaur')
+                                        {{-- Hide button --}}
+                                        @else
                                         @if (request()->query('arsip') != 'true')
                                             <a type="button"
                                                 href="{{ route('penelitian.edit', ['uuid' => $item->uuid]) }}">
@@ -107,6 +114,7 @@
                                             data-bs-target="#modalDeletePenelitian{{ $item->id }}">
                                             <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>
                                         </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

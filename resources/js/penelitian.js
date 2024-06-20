@@ -78,12 +78,34 @@
 
 // "+" Tambah anggota
 document.addEventListener('DOMContentLoaded', function () {
+    // Get current url
+    // const urlPath = window.location.pathname;
+    // if (urlPath !== '/penelitian/create') return
+
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     let users = [];
     let selectedUsers = [];
 
-    // Initialize the first input field
-    InputAnggotaDiv(0);
+    const inputUsers = document.querySelectorAll('[id^="user_id_"]');
+    if (inputUsers.length > 0) {
+        // populate selected users
+        inputUsers.forEach(input => {
+            const num = input.id.split('_')[2];
+            const hiddenInput = document.getElementById(`hidden_user_id_${num}`);
+            selectedUsers[num] = {
+                name: input.value,
+                id: hiddenInput.value
+            };
+
+            const btnAction = document.getElementById(`btn-action-anggota-${num}`);
+            btnAction.onclick = () => removeInput(num);
+        })
+
+        InputAnggotaDiv(inputUsers.length);
+    } else {
+        // Initialize the first input field
+        InputAnggotaDiv(0);
+    }
     // Initialize users
     fetchUsers();
 
@@ -155,6 +177,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const input = document.getElementById(`user_id_${num}`);
         input.value = user.name;
+        const hiddenInput = document.getElementById(`hidden_user_id_${num}`);
+        hiddenInput.value = user.id;
 
         if (!selectedUsers[num]) {
             selectedUsers[num] = {};
@@ -204,14 +228,17 @@ document.addEventListener('DOMContentLoaded', function () {
             btnAction.classList.add('btn-danger');
             btnAction.onclick = () => removeInput(num);
 
+            if (data.message != "exist") {
+                fetchUsers();
+                selectedUsers[num].id = data.data.id;
+                const hiddenInput = document.getElementById(`hidden_user_id_${num}`);
+                hiddenInput.value = data.data.id;
+            }
+
             hideUserDropdown(num);
             InputAnggotaDiv(num + 1);
             populateKetuaTim();
             populateCorresponding();
-
-            if (data.message != "exist") {
-                fetchUsers();
-            }
 
             console.log('Anggota penelitian added:', data);
         }).catch(error => {
@@ -221,9 +248,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function removeInput(num) {
         const inputGroupDiv = document.getElementById(`input-group-${num}`);
+
         if (inputGroupDiv) {
             inputGroupDiv.remove();
             delete selectedUsers[num];
+            populateKetuaTim();
         }
     }
 
@@ -237,10 +266,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="position-relative d-flex gap-2">
                 <div class="position-relative" style="width: 360px">
                     <input type="text" class="form-control" id="user_id_${num}" placeholder="Cari atau masukkan anggota tim">
-                    <div id="user_dropdown_${num}" class="shadow position-absolute bg-white w-100 top-100 rounded d-none z-3"></div>
+                    <input type="hidden" id="hidden_user_id_${num}" name="user_id_${num}" value="">
+                    <div id="user_dropdown_${num}" class="shadow position-absolute bg-white w-100 top-100 rounded d-none z-3 dropdown-hr-scroll"></div>
                 </div>
                 <div class="d-flex gap-2">
-                    <button id="btn-action-anggota-${num}" class="d-flex align-items-center btn btn-primary" type="button"">
+                    <button id="btn-action-anggota-${num}" class="d-flex align-items-center btn btn-primary" type="button">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
@@ -280,6 +310,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fungsi untuk memfilter opsi ketua tim
     function populateKetuaTim() {
+        console.log(selectedUsers);
+
         const selectedKetua = $('#is_ketua').data('selected')
 
         // Kosongkan opsi ketua tim
@@ -295,21 +327,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Tambahkan opsi ketua tim dari anggota yang telah dipilih sebelumnya
         var addedOptions = {};
-        $.each(selectedUsers, function (index, user) {
-            const memberName = user.name;
-            const memberId = user.id;
+        if (selectedUsers.length > 0) {
+            $.each(selectedUsers, function (index, user) {
+                const memberName = user.name;
+                const memberId = user.id;
 
-            if (!addedOptions[memberId]) {
-                $('#is_ketua').append(
-                    $('<option>', {
-                        value: memberId,
-                        text: memberName,
-                        selected: memberId == selectedKetua
-                    })
-                );
-                addedOptions[memberId] = true;
-            }
-        });
+                if (!addedOptions[memberId]) {
+                    $('#is_ketua').append(
+                        $('<option>', {
+                            value: memberId,
+                            text: memberName,
+                            selected: memberId == selectedKetua
+                        })
+                    );
+                    addedOptions[memberId] = true;
+                }
+            });
+        }
 
         // Perbarui select2 untuk is_ketua
         $('#is_ketua').trigger('change.select2')

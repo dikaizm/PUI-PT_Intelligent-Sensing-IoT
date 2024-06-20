@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // const urlPath = window.location.pathname;
+    // if (urlPath !== '/penelitian/create' || urlPath !== '/output-detail/create') return
+
     function dropdownWithOther(field, placeholderOther) {
         // Get the container for the select element
         const selectContainer = document.getElementById(`${field}-container`);

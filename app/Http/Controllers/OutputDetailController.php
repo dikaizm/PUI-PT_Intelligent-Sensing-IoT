@@ -100,14 +100,26 @@ class OutputDetailController extends Controller
                 'skema_id' => 1,
             ]));
 
-        $pivotData = [];
-        foreach ($request->user_id as $userId) {
-            $pivotData[$userId] = [
-                'is_corresponding' =>
-                    $userId == $request->is_corresponding ? true : false,
-            ];
+        $userData = [];
+        // Loop through all inputs that start with 'user_id_'
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'user_id_') === 0) {
+                $userId = substr($key, strlen('user_id_')); // Extract numeric part
+                $userData[$userId] = $value; // Store value in array
+            }
         }
 
+        $pivotData = [];
+        foreach ($userData as $userId) {
+            if (is_numeric($userId) && $userId != '' && User::find($userId)) {
+                $pivotData[$userId] = [
+                    'is_corresponding' =>
+                    $userId == $request->is_corresponding ? true : false,
+                ];
+            };
+        }
+
+        // Sync the pivot table data
         $penelitian->users()->sync($pivotData);
 
         $output = OutputController::store($penelitian->id);
@@ -163,7 +175,7 @@ class OutputDetailController extends Controller
         foreach ($request->user_id as $userId) {
             $pivotData[$userId] = [
                 'is_corresponding' =>
-                    $userId == $request->is_corresponding ? true : false,
+                $userId == $request->is_corresponding ? true : false,
             ];
         }
 
@@ -223,7 +235,7 @@ class OutputDetailController extends Controller
         foreach ($request->user_id as $userId) {
             $pivotData[$userId] = [
                 'is_corresponding' =>
-                    $userId == $request->is_corresponding ? true : false,
+                $userId == $request->is_corresponding ? true : false,
             ];
         }
 
@@ -284,7 +296,7 @@ class OutputDetailController extends Controller
         foreach ($request->user_id as $userId) {
             $pivotData[$userId] = [
                 'is_corresponding' =>
-                    $userId == $request->is_corresponding ? true : false,
+                $userId == $request->is_corresponding ? true : false,
             ];
         }
 

@@ -44,6 +44,7 @@
             <span class="text" style="color: white;">{{ __('Data Pengguna') }}</span>
         </a>
     </li>
+
     @can('mengelola-pengaturan')
         <li class="nav-item nav-item-has-children">
             <a class="collapsed" href="#0" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_2"

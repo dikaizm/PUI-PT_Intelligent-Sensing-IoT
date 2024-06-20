@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::whereHas('roles', function ($query) {
-            $query->whereIn('name', ['Admin', 'Dosen']);
+            $query->whereIn('name', ['Admin', 'Dosen', 'Kaur']);
         })->get();
 
         $roles = Role::all()->pluck('name');

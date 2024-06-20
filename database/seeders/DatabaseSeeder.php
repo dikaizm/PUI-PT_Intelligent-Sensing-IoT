@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
         $role1->givePermissionTo('update-feedback');
 
         $role2 = Role::create(['name' => 'Dosen']);
+        $role3 = Role::create(['name' => 'Kaur']);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin',
@@ -57,13 +58,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'john@example.com',
             'password' => 'john',
         ]);
-        $user->assignRole($role2);
+        $user->assignRole($role3);
 
         DB::table('status_output')->insert([
             'name' => 'Tidak Ada',
         ]);
         DB::table('status_output')->insert([
-            'name' => 'Publsh',
+            'name' => 'Publish',
         ]);
 
         DB::table('status_penelitian_key')->insert([
