@@ -8,7 +8,6 @@ cd /d %~dp0
 
 REM Install frontend dependencies
 @REM npm install
-npm run dev
 
 REM Set up environment file
 copy .env.example .env
@@ -24,5 +23,7 @@ php artisan storage:link
 
 @REM REM Run migrations and seed the database
 @REM php artisan migrate --seed
+
+npm run dev
 
 echo Setup completed successfully.
