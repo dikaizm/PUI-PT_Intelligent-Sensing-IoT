@@ -24,6 +24,6 @@ php artisan storage:link
 @REM REM Run migrations and seed the database
 @REM php artisan migrate --seed
 
-npm run dev
+@REM npm run dev
 
 echo Setup completed successfully.
