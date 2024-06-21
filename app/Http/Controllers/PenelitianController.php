@@ -110,6 +110,7 @@ class PenelitianController extends Controller
             'jenis_penelitian_id' => $request->jenis_penelitian_id,
             'skema_id' => $request->skema_id,
             'arsip' => $isArsip,
+            'output_only' => false,
         ]);
 
         $userData = [];
