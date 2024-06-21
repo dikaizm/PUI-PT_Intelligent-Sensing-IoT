@@ -45,6 +45,11 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
     // Mengambil data jumlah penelitian berdasarkan status dari window
     const statusCountsPenelitian = window.statusCountsPenelitian;
+    const statusCountsArr = Object.values(statusCountsPenelitian);
+    const statusObjNum = statusCountsArr.reduce((acc, cur, index) => {
+        acc[index + 1] = cur;
+        return acc;
+    }, {});
 
     // Mendefinisikan labels dan data untuk chart
     const labels = [
@@ -53,18 +58,18 @@ document.addEventListener('DOMContentLoaded', function () {
         'Accepted',
         'Rejected',
         'On Going',
-        'Finished'
+        'Finished',
     ];
 
     // Mendapatkan elemen-elemen checkbox
-    const checkboxes = document.querySelectorAll('.form-check-input');
+    const checkboxes = document.querySelectorAll('.checkbox-status');
 
     // Fungsi untuk mengambil data terpilih berdasarkan status checkbox
     function getSelectedData() {
         const selectedData = [];
         checkboxes.forEach(function (checkbox, index) {
             if (checkbox.checked) {
-                selectedData.push(statusCountsPenelitian[index + 1] || 0);
+                selectedData.push(statusObjNum[index + 1] || 0);
             } else {
                 selectedData.push(0);
             }
@@ -81,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         data: {
             labels: labels,
             datasets: [{
-                data: Object.values(statusCountsPenelitian), // Gunakan data awal berdasarkan checkbox
+                data: Object.values(statusObjNum), // Gunakan data awal berdasarkan checkbox
                 backgroundColor: [
                     'rgba(20,92,133,255)',
                     'rgba(233,115,45,255)',
@@ -112,6 +117,9 @@ document.addEventListener('DOMContentLoaded', function () {
         checkbox.addEventListener('change', function () {
             // Perbarui data grafik donat penelitian
             config1.data.datasets[0].data = getSelectedData();
+
+            console.log(statusObjNum);
+            console.log(config1.data.datasets[0].data);
 
             // Perbarui grafik donat penelitian
             donatPenelitianChart.update();
@@ -187,6 +195,9 @@ document.addEventListener('DOMContentLoaded', function () {
         checkbox.addEventListener('change', function () {
             // Perbarui data grafik donat penelitian
             config2.data.datasets[0].data = getSelectedData();
+
+            console.log(statusCountsOutput);
+            console.log(config2.data.datasets[0].data);
 
             // Perbarui grafik donat penelitian
             donatOutputChart.update();

@@ -122,7 +122,7 @@
                   <ul style="list-style: none; padding: 0; margin: 0;">
                     <li>
                       <div class="form-check" style="text-align: left;">
-                        <input class="form-check-input" type="checkbox" checked value=""
+                        <input class="form-check-input checkbox-status" type="checkbox" checked value=""
                           id="checkbox-status-penelitian-1">
                         <label class="form-check-label" for="checkbox-status-penelitian-1"
                           style="margin-left: 0;">Submitted</label>
@@ -130,7 +130,7 @@
                     </li>
                     <li>
                       <div class="form-check" style="text-align: left;">
-                        <input class="form-check-input" type="checkbox" checked value=""
+                        <input class="form-check-input checkbox-status" type="checkbox" checked value=""
                           id="checkbox-status-penelitian-2">
                         <label class="form-check-label" for="checkbox-status-penelitian-2"
                           style="margin-left: 0;">Review</label>
@@ -138,7 +138,7 @@
                     </li>
                     <li>
                       <div class="form-check" style="text-align: left;">
-                        <input class="form-check-input" type="checkbox" checked value=""
+                        <input class="form-check-input checkbox-status" type="checkbox" checked value=""
                           id="checkbox-status-penelitian-3">
                         <label class="form-check-label" for="checkbox-status-penelitian-3"
                           style="margin-left: 0;">Accepted</label>
@@ -146,7 +146,7 @@
                     </li>
                     <li>
                       <div class="form-check" style="text-align: left;">
-                        <input class="form-check-input" type="checkbox" checked value=""
+                        <input class="form-check-input checkbox-status" type="checkbox" checked value=""
                           id="checkbox-status-penelitian-4">
                         <label class="form-check-label" for="checkbox-status-penelitian-4"
                           style="margin-left: 0;">Rejected</label>
@@ -154,7 +154,7 @@
                     </li>
                     <li>
                       <div class="form-check" style="text-align: left;">
-                        <input class="form-check-input" type="checkbox" checked value=""
+                        <input class="form-check-input checkbox-status" type="checkbox" checked value=""
                           id="checkbox-status-penelitian-5">
                         <label class="form-check-label" for="checkbox-status-penelitian-5" style="margin-left: 0;">On
                           Going</label>
@@ -162,7 +162,7 @@
                     </li>
                     <li>
                       <div class="form-check" style="text-align: left;">
-                        <input class="form-check-input" type="checkbox" checked value=""
+                        <input class="form-check-input checkbox-status" type="checkbox" checked value=""
                           id="checkbox-status-penelitian-6">
                         <label class="form-check-label" for="checkbox-status-penelitian-6"
                           style="margin-left: 0;">Finished</label>
