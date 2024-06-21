@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Skema;
 use Illuminate\Http\Request;
 use App\Http\Requests\SkemaRequest;
+use Illuminate\Support\Facades\DB;
 
 class SkemaController extends Controller
 {
@@ -73,7 +74,30 @@ class SkemaController extends Controller
      */
     public function destroy(string $id)
     {
-        Skema::findOrFail($id)->delete();
+        $skema = Skema::findOrFail($id);
+
+        // Start a transaction
+        DB::transaction(function () use ($skema) {
+            // Get all related Penelitian records
+            $penelitians = $skema->penelitians;
+
+            // Loop through each Penelitian and delete related Author records
+            foreach ($penelitians as $penelitian) {
+                $output = $penelitian->output;
+                if ($output) {
+                    $output->outputDetails()->delete();
+                    $output->delete();
+                }
+
+                $penelitian->authors()->delete();
+            }
+
+            // Delete related Penelitian records
+            $skema->penelitians()->delete();
+
+            // Delete the Skema record
+            $skema->delete();
+        });
 
         return redirect()
             ->route('skema.index')

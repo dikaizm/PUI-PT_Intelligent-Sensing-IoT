@@ -27,7 +27,7 @@ class LaporanKinerjaController extends Controller
         $isAdminOrKaur = $user->hasRole(['Admin', 'Kaur']);
 
         // Penelitian query
-        $penelitianQuery = Penelitian::query();
+        $penelitianQuery = Penelitian::query()->where('output_only', false);
         if (!$isAdminOrKaur) {
             $penelitianQuery->whereHas('authors', function ($query) use ($user) {
                 $query->where('user_id', $user->id);
@@ -89,6 +89,7 @@ class LaporanKinerjaController extends Controller
             ->join('status_penelitian', 'penelitian.status_penelitian_id', '=', 'status_penelitian.id')
             ->whereIn(DB::raw('YEAR(penelitian.created_at)'), [$tahunAwal, $tahunAkhir])
             ->whereIn('status_penelitian.name', $statusNames)
+            ->where('output_only', false) // Add this line to filter based on output_only = false
             ->groupBy('status_penelitian.name');
 
         if (!$isAdminOrKaur) {

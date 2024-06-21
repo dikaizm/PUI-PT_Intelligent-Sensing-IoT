@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Output;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class StatusOutput extends Model
 {
@@ -14,8 +14,8 @@ class StatusOutput extends Model
 
     protected $fillable = ['name'];
 
-    public function output(): HasMany
+    public function outputDetails(): HasMany
     {
-        return $this->hasMany(Output::class);
+        return $this->hasMany(OutputDetail::class);
     }
 }

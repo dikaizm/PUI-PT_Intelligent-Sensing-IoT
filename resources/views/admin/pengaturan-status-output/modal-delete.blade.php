@@ -13,7 +13,7 @@
                 <div class="modal-body px-0">
                     <div class="content mb-30">
                         <p class="text-sm">
-                            {{ __('Are you sure you want to delete ' . $item->name . '?') }}
+                            {{ __('Hapus status output akan menghapus output dengan status ini. Are you sure you want to delete ' . $item->name . '?') }}
                         </p>
                     </div>
                     <div class="action d-flex flex-wrap justify-content-end">

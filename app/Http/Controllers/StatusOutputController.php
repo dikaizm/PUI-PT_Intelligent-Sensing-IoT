@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StatusOutput;
 use Illuminate\Http\Request;
 use App\Http\Requests\StatusOutputRequest;
+use Illuminate\Support\Facades\DB;
 
 class StatusOutputController extends Controller
 {
@@ -71,7 +72,17 @@ class StatusOutputController extends Controller
      */
     public function destroy(string $id)
     {
-        StatusOutput::findOrFail($id)->delete();
+        $status = StatusOutput::findOrFail($id);
+
+        DB::transaction(function () use ($status) {
+            $statuses = $status->outputDetails;
+
+            foreach ($statuses as $st) {
+                $st->delete();
+            }
+
+            $status->delete();
+        });
 
         return redirect()
             ->route('status-output.index')

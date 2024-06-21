@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Set nilai default tahun awal ke 2024
-    const defaultTahunAwal = 2024;
+    const defaultTahunAwal = tahunSekarang;
     tahunAwalSelect.value = defaultTahunAwal;
 
     // Set nilai default tahun akhir ke tahun awal + 1
@@ -428,3 +428,14 @@ document.addEventListener('DOMContentLoaded', function () {
     tahunAwalSelect.addEventListener('change', updateTahunAkhirOptions);
 });
 //END JS Submit
+
+// Event listener edit target admin
+document.addEventListener('DOMContentLoaded', function () {
+    const selectTahunTarget = this.getElementById('tahun_target');
+    const inputTahunTarget = this.getElementById('targetPenelitian');
+
+    selectTahunTarget.addEventListener('change', function () {
+        const tahunTarget = selectTahunTarget.value;
+        console.log(tahunTarget);
+    });
+});

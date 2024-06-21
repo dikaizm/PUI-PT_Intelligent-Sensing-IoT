@@ -58,7 +58,7 @@
                         $outputName = $item->name;
                     @endphp
                     @if (in_array($jenisOutputKey, ['Foto/Poster']))
-                        <option value="{{ $item->id }}">{{ $jenisOutputKey }} {{ $outputName }}</option>
+                        <option value="{{ $item->id }}">{{ $outputName }}</option>
                     @endif
                 @endforeach
             </select>

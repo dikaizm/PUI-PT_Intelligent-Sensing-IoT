@@ -1,4 +1,4 @@
-const URL_CREATE_OUTPUT = '/output-detail/create';
+const URL_CREATE_OUTPUT = '/output-detail';
 
 // "+" Tambah anggota
 document.addEventListener('DOMContentLoaded', function () {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         activeTab: 'publikasi',
     }
 
-    if (urlPath === URL_CREATE_OUTPUT) {
+    if (urlPath.startsWith(URL_CREATE_OUTPUT)) {
         // Select all navigation links (buttons) in the vertical pill navigation
         const groupTabOutput = document.getElementById('v-pills-tab');
         const navLinksOutput = groupTabOutput.querySelectorAll('.nav-link');
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const urlPath = window.location.pathname;
         let inputAnggotaDiv;
 
-        if (urlPath === URL_CREATE_OUTPUT) {
+        if (urlPath.startsWith(URL_CREATE_OUTPUT)) {
             inputAnggotaDiv = createOutputCurrentTab();
         } else {
             inputAnggotaDiv = document.getElementById('input-anggota');
