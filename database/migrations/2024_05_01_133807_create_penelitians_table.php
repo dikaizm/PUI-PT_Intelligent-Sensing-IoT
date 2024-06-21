@@ -69,6 +69,7 @@ return new class extends Migration {
                 ->on('skema')
                 ->onDelete('restrict');
             $table->boolean('arsip');
+            $table->boolean('output_only')->default(false);
             $table->timestamps();
         });
     }

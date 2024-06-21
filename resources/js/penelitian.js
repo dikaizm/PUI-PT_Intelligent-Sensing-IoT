@@ -1,103 +1,55 @@
-// "+" Tambah anggota
-// document.addEventListener('DOMContentLoaded', function () {
-//     var addButton = document.querySelector('#addButton');
-//     var iconContainer = document.querySelector('#iconContainer');
-
-//     addButton.addEventListener('click', function () {
-//         var inputContainer = document.querySelector('#inputContainer');
-
-//         // Duplikat input pertama
-//         var clonedInput = inputContainer.firstElementChild.cloneNode(true);
-
-//         // Bersihkan nilai input duplikat
-//         clonedInput.querySelector('input').value = '';
-
-//         // Tambahkan input duplikat di bawah input yang sudah ada
-//         inputContainer.appendChild(clonedInput);
-
-//         // Tambahkan tombol "-" di dalam iconContainer
-//         var removeButton = document.createElement('button');
-//         removeButton.type = 'button';
-//         removeButton.classList.add('col-12'); // Tambahkan kelas col-12
-//         removeButton.innerHTML = '<i class="lni lni-minus" style="color: red; margin:2px; font-size: 30px;"></i>';
-//         removeButton.style = 'border: none; background: none; padding-top: 55px;'; // Tambahkan padding-top
-//         removeButton.addEventListener('click', function () {
-//             inputContainer.removeChild(clonedInput); // Hapus input saat tombol "-" diklik
-//             iconContainer.removeChild(removeButton); // Hapus tombol "-" saat input dihapus
-//         });
-
-//         iconContainer.appendChild(removeButton); // Tambahkan tombol "-" ke dalam iconContainer
-//     });
-// });
-
-// "+" Tambah file
-// document.addEventListener('DOMContentLoaded', function () {
-//     var addButton = document.querySelector('#addButton2');
-//     var iconContainer = document.querySelector('#iconContainer2');
-
-//     addButton.addEventListener('click', function () {
-//         var inputContainer = document.querySelector('#inputContainer2');
-
-//         // Duplikat input pertama
-//         var clonedInput = inputContainer.firstElementChild.cloneNode(true);
-
-//         // Bersihkan nilai input duplikat
-//         clonedInput.querySelector('input').value = '';
-
-//         // Tambahkan input duplikat di bawah input yang sudah ada
-//         inputContainer.appendChild(clonedInput);
-
-//         // Tambahkan tombol "-" di dalam iconContainer
-//         var removeButton = document.createElement('button');
-//         removeButton.type = 'button';
-//         removeButton.classList.add('col-12'); // Tambahkan kelas col-12
-//         removeButton.innerHTML = '<i class="lni lni-minus" style="color: red; margin:2px; font-size: 30px;"></i>';
-//         removeButton.style = 'border: none; background: none; padding-top: 59px;'; // Tambahkan padding-top
-//         removeButton.addEventListener('click', function () {
-//             inputContainer.removeChild(clonedInput); // Hapus input saat tombol "-" diklik
-//             iconContainer.removeChild(removeButton); // Hapus tombol "-" saat input dihapus
-//         });
-
-//         iconContainer.appendChild(removeButton); // Tambahkan tombol "-" ke dalam iconContainer
-//     });
-// });
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const datePickerStart = document.querySelector("#datetimepicker1");
-
-//     datePickerStart.datepicker({
-//         format: "mm/dd/yyyy",
-//         weekStart: 0,
-//         calendarWeeks: true,
-//         autoclose: true,
-//         todayHighlight: true,
-//         orientation: "auto"
-//     });
-// });
-
+const URL_CREATE_OUTPUT = '/output-detail/create';
 
 // "+" Tambah anggota
 document.addEventListener('DOMContentLoaded', function () {
-    // Get current url
-    // const urlPath = window.location.pathname;
-    // if (urlPath !== '/penelitian/create') return
-
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     let users = [];
     let selectedUsers = [];
 
-    const inputUsers = document.querySelectorAll('[id^="user_id_"]');
+    // Get current url
+    const urlPath = window.location.pathname;
+    // if (urlPath !== '/penelitian/create') return
+
+    // Create state variable for output tab
+    let outputTabState = {
+        activeTab: 'publikasi',
+    }
+
+    if (urlPath === URL_CREATE_OUTPUT) {
+        // Select all navigation links (buttons) in the vertical pill navigation
+        const groupTabOutput = document.getElementById('v-pills-tab');
+        const navLinksOutput = groupTabOutput.querySelectorAll('.nav-link');
+
+        // Loop through each link and add an event listener for 'shown.bs.tab' event
+        navLinksOutput.forEach(link => {
+            link.addEventListener('shown.bs.tab', function (event) {
+                const activeTabId = event.target.getAttribute('data-bs-target').substring(1); // Get the active tab id
+                const tabName = activeTabId.split('-')[2];
+                // Update tab state
+                outputTabState.activeTab = tabName;
+
+                const groupInput = document.getElementById(`input-anggota-${tabName}`)
+                const inputUsers = groupInput.querySelectorAll(`[id^="user_id_${outputTabState.activeTab}_"]`);
+
+                if (inputUsers.length < 1) {
+                    InputAnggotaDiv(0);
+                }
+            });
+        });
+    }
+
+    const inputUsers = document.querySelectorAll(`[id^="user_id_${outputTabState.activeTab}_"]`);
     if (inputUsers.length > 0) {
         // populate selected users
         inputUsers.forEach(input => {
             const num = input.id.split('_')[2];
-            const hiddenInput = document.getElementById(`hidden_user_id_${num}`);
+            const hiddenInput = document.getElementById(`hidden_user_id_${outputTabState.activeTab}_${num}`);
             selectedUsers[num] = {
                 name: input.value,
                 id: hiddenInput.value
             };
 
-            const btnAction = document.getElementById(`btn-action-anggota-${num}`);
+            const btnAction = document.getElementById(`btn-action-anggota-${outputTabState.activeTab}_${num}`);
             btnAction.onclick = () => removeInput(num);
         })
 
@@ -106,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Initialize the first input field
         InputAnggotaDiv(0);
     }
+
     // Initialize users
     fetchUsers();
 
@@ -128,22 +81,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showUserDropdown(num) {
-        const input = document.getElementById(`user_id_${num}`);
+        const input = document.getElementById(`user_id_${outputTabState.activeTab}_${num}`);
         if (input.readOnly) {
             return;
         }
-        const dropdown = document.getElementById(`user_dropdown_${num}`);
+        const dropdown = document.getElementById(`user_dropdown_${outputTabState.activeTab}_${num}`);
         dropdown.classList.remove('d-none');
         populateUserDropdown(users, num);
     }
 
     function hideUserDropdown(num) {
-        const dropdown = document.getElementById(`user_dropdown_${num}`);
+        const dropdown = document.getElementById(`user_dropdown_${outputTabState.activeTab}_${num}`);
         dropdown.classList.add('d-none');
     }
 
     function populateUserDropdown(users, num) {
-        const dropdown = document.getElementById(`user_dropdown_${num}`);
+        const dropdown = document.getElementById(`user_dropdown_${outputTabState.activeTab}_${num}`);
         dropdown.innerHTML = '';
         users.forEach(user => {
             // Filter out selected users
@@ -160,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function filterUserDropdown(num) {
-        const input = document.getElementById(`user_id_${num}`);
+        const input = document.getElementById(`user_id_${outputTabState.activeTab}_${num}`);
         const filter = input.value.toLowerCase();
         const filteredUsers = users.filter(user => user.name.toLowerCase().includes(filter));
         populateUserDropdown(filteredUsers, num);
@@ -172,12 +125,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function selectUser(user, num) {
-        const inputError = document.getElementById(`error_user_id_${num}`);
+        const inputError = document.getElementById(`error_user_id_${outputTabState.activeTab}_${num}`);
         inputError.textContent = '';
 
-        const input = document.getElementById(`user_id_${num}`);
+        const input = document.getElementById(`user_id_${outputTabState.activeTab}_${num}`);
         input.value = user.name;
-        const hiddenInput = document.getElementById(`hidden_user_id_${num}`);
+        const hiddenInput = document.getElementById(`hidden_user_id_${outputTabState.activeTab}_${num}`);
         hiddenInput.value = user.id;
 
         if (!selectedUsers[num]) {
@@ -191,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function tambahAnggotaPenelitian(num) {
-        const inputError = document.getElementById(`error_user_id_${num}`);
+        const inputError = document.getElementById(`error_user_id_${outputTabState.activeTab}_${num}`);
         inputError.textContent = '';
 
         if (!selectedUsers[num] || !selectedUsers[num].name) {
@@ -219,10 +172,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error('Failed to add anggota penelitian');
             }
 
-            const input = document.getElementById(`user_id_${num}`);
+            const input = document.getElementById(`user_id_${outputTabState.activeTab}_${num}`);
             input.readOnly = true;
 
-            const btnAction = document.getElementById(`btn-action-anggota-${num}`);
+            const btnAction = document.getElementById(`btn-action-anggota-${outputTabState.activeTab}_${num}`);
             btnAction.innerHTML = `<i class="fas fa-x"></i>`;
             btnAction.classList.remove('btn-primary');
             btnAction.classList.add('btn-danger');
@@ -231,23 +184,29 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.message != "exist") {
                 fetchUsers();
                 selectedUsers[num].id = data.data.id;
-                const hiddenInput = document.getElementById(`hidden_user_id_${num}`);
+                const hiddenInput = document.getElementById(`hidden_user_id_${outputTabState.activeTab}_${num}`);
                 hiddenInput.value = data.data.id;
             }
 
-            hideUserDropdown(num);
+            removeUserDropdown(num);
             InputAnggotaDiv(num + 1);
             populateKetuaTim();
             populateCorresponding();
-
-            console.log('Anggota penelitian added:', data);
         }).catch(error => {
             console.error(error.message);
         });
     }
 
+    function removeUserDropdown(num) {
+        const dropdown = document.getElementById(`user_dropdown_${outputTabState.activeTab}_${num}`);
+
+        if (dropdown) {
+            dropdown.remove();
+        }
+    }
+
     function removeInput(num) {
-        const inputGroupDiv = document.getElementById(`input-group-${num}`);
+        const inputGroupDiv = document.getElementById(`input-group-${outputTabState.activeTab}_${num}`);
 
         if (inputGroupDiv) {
             inputGroupDiv.remove();
@@ -256,43 +215,72 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function createOutputCurrentTab() {
+        const activeTab = outputTabState.activeTab;
+        let div;
+
+        if (activeTab === 'publikasi') {
+            div = document.getElementById('input-anggota-publikasi');
+        } else if (activeTab === 'hki') {
+            div = document.getElementById('input-anggota-hki');
+        } else if (activeTab === 'foto') {
+            div = document.getElementById('input-anggota-foto');
+        } else if (activeTab === 'video') {
+            div = document.getElementById('input-anggota-video');
+        }
+
+        return div;
+    }
+
     function InputAnggotaDiv(num) {
-        const inputAnggotaDiv = document.getElementById('input-anggota');
+        const urlPath = window.location.pathname;
+        let inputAnggotaDiv;
+
+        if (urlPath === URL_CREATE_OUTPUT) {
+            inputAnggotaDiv = createOutputCurrentTab();
+        } else {
+            inputAnggotaDiv = document.getElementById('input-anggota');
+        }
+
+        if (!inputAnggotaDiv) {
+            return;
+        }
 
         const inputGroupDiv = document.createElement('div');
-        inputGroupDiv.id = `input-group-${num}`;
+        inputGroupDiv.id = `input-group-${outputTabState.activeTab}_${num}`;
         inputGroupDiv.classList.add('input-group-col');
         inputGroupDiv.innerHTML = `
             <div class="position-relative d-flex gap-2">
                 <div class="position-relative" style="width: 360px">
-                    <input type="text" class="form-control" id="user_id_${num}" placeholder="Cari atau masukkan anggota tim">
-                    <input type="hidden" id="hidden_user_id_${num}" name="user_id_${num}" value="">
-                    <div id="user_dropdown_${num}" class="shadow position-absolute bg-white w-100 top-100 rounded d-none z-3 dropdown-hr-scroll"></div>
+                    <input type="text" class="form-control" id="user_id_${outputTabState.activeTab}_${num}" placeholder="Cari atau masukkan anggota tim">
+                    <input type="hidden" id="hidden_user_id_${outputTabState.activeTab}_${num}" name="user_id_${outputTabState.activeTab}_${num}" value="">
+                    <div id="user_dropdown_${outputTabState.activeTab}_${num}" class="shadow position-absolute bg-white w-100 top-100 rounded d-none z-3 dropdown-hr-scroll"></div>
                 </div>
                 <div class="d-flex gap-2">
-                    <button id="btn-action-anggota-${num}" class="d-flex align-items-center btn btn-primary" type="button">
+                    <button id="btn-action-anggota-${outputTabState.activeTab}_${num}" class="d-flex align-items-center btn btn-primary" type="button">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </div>
-            <span id="error_user_id_${num}" class="text-danger text-sm"></span>
+            <span id="error_user_id_${outputTabState.activeTab}_${num}" class="text-danger text-sm"></span>
         `;
         inputAnggotaDiv.appendChild(inputGroupDiv);
 
-        const input = document.getElementById(`user_id_${num}`);
+        const input = document.getElementById(`user_id_${outputTabState.activeTab}_${num}`);
         input.addEventListener('focus', () => showUserDropdown(num));
         input.addEventListener('input', () => filterUserDropdown(num));
 
-        const btnAction = document.getElementById(`btn-action-anggota-${num}`);
+        const btnAction = document.getElementById(`btn-action-anggota-${outputTabState.activeTab}_${num}`);
         btnAction.addEventListener('click', () => tambahAnggotaPenelitian(num));
     }
 
     document.addEventListener('click', function (event) {
-        const inputs = document.querySelectorAll('[id^="user_id_"]');
+        const inputs = document.querySelectorAll(`[id^="user_id_${outputTabState.activeTab}_"]`);
 
         inputs.forEach(input => {
-            const num = input.id.split('_')[2];
-            const dropdown = document.getElementById(`user_dropdown_${num}`);
+            const num = input.id.split('_')[3];
+            const dropdown = document.getElementById(`user_dropdown_${outputTabState.activeTab}_${num}`);
+
             if (!input.contains(event.target) && !dropdown.contains(event.target)) {
                 hideUserDropdown(num);
             }
@@ -310,7 +298,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fungsi untuk memfilter opsi ketua tim
     function populateKetuaTim() {
-        console.log(selectedUsers);
 
         const selectedKetua = $('#is_ketua').data('selected')
 

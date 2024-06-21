@@ -24,7 +24,7 @@ class StoreFotoPosterOutputRequest extends FormRequest
         return [
             'jenis_output_id' => ['required', 'exists:jenis_output,id'],
             'judul_output' => ['required', 'max:254'],
-            'file' => ['required', 'file', 'mimes:jpg,png,jpeg', 'max:512'],
+            // 'file' => ['required', 'file', 'mimes:jpg,png,jpeg', 'max:512'],
         ];
     }
 }

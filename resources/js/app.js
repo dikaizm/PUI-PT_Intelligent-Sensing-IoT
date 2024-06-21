@@ -1,7 +1,6 @@
-import './bootstrap'
-import './datatables'
-import './tanggal'
-import './tambah-anggota'
-import './laporan-kinerja'
-import './penelitian'
-import './dropdown'
+import './bootstrap';
+import './datatables';
+import './tanggal';
+import './laporan-kinerja';
+import './penelitian';
+import './dropdown';

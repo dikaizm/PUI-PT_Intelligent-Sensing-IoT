@@ -26,7 +26,7 @@ class EnsureAuthorPenelitian
 
         // Check if the user has the 'Admin' role or if the user is associated with the Penelitian
         if (
-            $user->hasRole('Admin') ||
+            $user->hasRole(['Admin', 'Kaur']) ||
             ($penelitian && $penelitian->users()->where('user_id', $user->id)->exists())
         ) {
             // If the conditions are met, proceed with the next middleware or request

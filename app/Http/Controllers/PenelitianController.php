@@ -28,24 +28,24 @@ class PenelitianController extends Controller
         }
 
         $user = auth()->user();
-        $isRole = $user->hasRole('Admin') || $user->hasRole('Kaur');
+        $isAdminOrKaur = $user->hasRole('Admin') || $user->hasRole('Kaur');
 
-        $penelitian = $isRole
+        $penelitian = $isAdminOrKaur
             ? Penelitian::where('arsip', $arsip === 'true')
+            ->where('output_only', false)
             ->with([
                 'statusPenelitian',
                 'statusPenelitian.statusPenelitianKey',
-            ])
-            ->get()
+            ])->get()
             : auth()
             ->user()
             ->penelitians()
             ->where('arsip', $arsip === 'true')
+            ->where('output_only', false)
             ->with([
                 'statusPenelitian',
                 'statusPenelitian.statusPenelitianKey',
-            ])
-            ->get();
+            ])->get();
 
         return view('penelitian.index', [
             'penelitian' => $penelitian,
@@ -78,6 +78,20 @@ class PenelitianController extends Controller
         // dd($request->all());
 
         $isArsip = $request->boolean('arsip', false);
+        $skema_other = $request->skema_lainnya;
+        $jenisPenelitian_other = $request->jenisPenelitian_lainnya;
+
+        if ($skema_other) {
+            $skema = Skema::create(['name' => $skema_other]);
+            $request->merge(['skema_id' => $skema->id]);
+        }
+
+        if ($jenisPenelitian_other) {
+            $jenisPenelitian = JenisPenelitian::create([
+                'name' => $jenisPenelitian_other,
+            ]);
+            $request->merge(['jenis_penelitian_id' => $jenisPenelitian->id]);
+        }
 
         $penelitian = Penelitian::create([
             'judul' => $request->judul,

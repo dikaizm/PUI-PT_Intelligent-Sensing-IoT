@@ -23,7 +23,7 @@ class UpdateFotoPosterOutputRequest extends FormRequest
     {
         return [
             'judul_output' => ['required', 'max:254'],
-            'file' => ['nullable', 'file', 'mimes:jpg,png,jpeg', 'max:512'],
+            // 'file' => ['nullable', 'file', 'mimes:jpg,png,jpeg', 'max:512'],
         ];
     }
 }

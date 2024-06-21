@@ -210,6 +210,9 @@
             </div>
           </div> --}}
 
+          @can('is-kaur')
+          {{-- No show --}}
+          @else
           <div class="menu-toggle-btn mr-20" style="text-align: right;">
             @if (!$penelitian->arsip)
             <a type="button "id="menu-toggle" class="main-btn btn-hover btn-md"
@@ -267,6 +270,7 @@
             @endif
 
           </div>
+          @endcan
 
           <h2 class="mt-5" style="color:gray;">{{ __('Output Penelitian') }}</h2>
 

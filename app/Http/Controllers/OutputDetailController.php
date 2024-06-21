@@ -98,13 +98,14 @@ class OutputDetailController extends Controller
                 'status_penelitian_id' => 1,
                 'jenis_penelitian_id' => 1,
                 'skema_id' => 1,
+                'output_only' => true,
             ]));
 
         $userData = [];
         // Loop through all inputs that start with 'user_id_'
         foreach ($request->all() as $key => $value) {
-            if (strpos($key, 'user_id_') === 0) {
-                $userId = substr($key, strlen('user_id_')); // Extract numeric part
+            if (strpos($key, 'user_id_publikasi_') === 0) {
+                $userId = substr($key, strlen('user_id_publikasi_')); // Extract numeric part
                 $userData[$userId] = $value; // Store value in array
             }
         }
@@ -169,14 +170,26 @@ class OutputDetailController extends Controller
                 'status_penelitian_id' => 1,
                 'jenis_penelitian_id' => 1,
                 'skema_id' => 1,
+                'output_only' => true,
             ]));
 
+        $userData = [];
+        // Loop through all inputs that start with 'user_id_'
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'user_id_hki_') === 0) {
+                $userId = substr($key, strlen('user_id_hki_')); // Extract numeric part
+                $userData[$userId] = $value; // Store value in array
+            }
+        }
+
         $pivotData = [];
-        foreach ($request->user_id as $userId) {
-            $pivotData[$userId] = [
-                'is_corresponding' =>
-                $userId == $request->is_corresponding ? true : false,
-            ];
+        foreach ($userData as $userId) {
+            if (is_numeric($userId) && $userId != '' && User::find($userId)) {
+                $pivotData[$userId] = [
+                    'is_corresponding' =>
+                    $userId == $request->is_corresponding ? true : false,
+                ];
+            };
         }
 
         $penelitian->users()->sync($pivotData);
@@ -227,16 +240,26 @@ class OutputDetailController extends Controller
                 'status_penelitian_id' => 1,
                 'jenis_penelitian_id' => 1,
                 'skema_id' => 1,
+                'output_only' => true,
             ]));
 
-        $userId = auth()->user()->id;
+        $userData = [];
+        // Loop through all inputs that start with 'user_id_'
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'user_id_foto_') === 0) {
+                $userId = substr($key, strlen('user_id_foto_')); // Extract numeric part
+                $userData[$userId] = $value; // Store value in array
+            }
+        }
 
         $pivotData = [];
-        foreach ($request->user_id as $userId) {
-            $pivotData[$userId] = [
-                'is_corresponding' =>
-                $userId == $request->is_corresponding ? true : false,
-            ];
+        foreach ($userData as $userId) {
+            if (is_numeric($userId) && $userId != '' && User::find($userId)) {
+                $pivotData[$userId] = [
+                    'is_corresponding' =>
+                    $userId == $request->is_corresponding ? true : false,
+                ];
+            };
         }
 
         $penelitian->users()->sync($pivotData);
@@ -288,16 +311,26 @@ class OutputDetailController extends Controller
                 'status_penelitian_id' => 1,
                 'jenis_penelitian_id' => 1,
                 'skema_id' => 1,
+                'output_only' => true,
             ]));
 
-        $userId = auth()->user()->id;
+        $userData = [];
+        // Loop through all inputs that start with 'user_id_'
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'user_id_video_') === 0) {
+                $userId = substr($key, strlen('user_id_video_')); // Extract numeric part
+                $userData[$userId] = $value; // Store value in array
+            }
+        }
 
         $pivotData = [];
-        foreach ($request->user_id as $userId) {
-            $pivotData[$userId] = [
-                'is_corresponding' =>
-                $userId == $request->is_corresponding ? true : false,
-            ];
+        foreach ($userData as $userId) {
+            if (is_numeric($userId) && $userId != '' && User::find($userId)) {
+                $pivotData[$userId] = [
+                    'is_corresponding' =>
+                    $userId == $request->is_corresponding ? true : false,
+                ];
+            };
         }
 
         $penelitian->users()->sync($pivotData);
@@ -387,13 +420,13 @@ class OutputDetailController extends Controller
         $fotoposter->jenis_output_id = $fotoposter->jenis_output_id;
         $fotoposter->judul = $request->judul_output;
 
-        if ($request->hasFile('file') && $fotoposter->file) {
-            Storage::disk('public')->delete($fotoposter->file);
-        }
+        // if ($request->hasFile('file') && $fotoposter->file) {
+        //     Storage::disk('public')->delete($fotoposter->file);
+        // }
 
-        $fotoposter->file = $request->hasFile('file')
-            ? $request->file('file')->store('output-foto-poster', 'public')
-            : $fotoposter->file;
+        // $fotoposter->file = $request->hasFile('file')
+        //     ? $request->file('file')->store('output-foto-poster', 'public')
+        //     : $fotoposter->file;
 
         $fotoposter->save();
 

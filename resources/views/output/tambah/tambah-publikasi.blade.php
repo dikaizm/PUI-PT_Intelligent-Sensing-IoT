@@ -54,8 +54,10 @@
         @enderror
     </div>
     <div class="input-style-1">
-        <label>{{ __('Author') }}</label>
-        <div id="input-anggota"></div>
+        <label>{{ __('Author') }}
+            <span style="color:gray;">{{ __('*Input Sesuai Urutan Author') }}</span>
+        </label>
+        <div id="input-anggota-publikasi"></div>
 
         {{-- <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror"
             multiple="multiple" style="width: 100%; height: 58px;" required>

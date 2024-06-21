@@ -7,6 +7,7 @@ export default defineConfig({
         laravel({
             input: ['resources/sass/app.scss', 'resources/js/app.js'],
             refresh: true,
+            detectTls: 'pui-pt_intelligent-sensing-iot.test',
         }),
     ],
     resolve: {

@@ -40,6 +40,7 @@ class Penelitian extends Model
         'jenis_penelitian_id',
         'skema_id',
         'arsip',
+        'output_only',
     ];
 
     public function users(): BelongsToMany

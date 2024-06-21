@@ -41,7 +41,9 @@
     </div>
     <div class="input-style-1">
         <label>{{ __('Inventor') }}</label>
-        <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror"
+        <div id="input-anggota-hki"></div>
+
+        {{-- <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror"
             multiple="multiple" style="width: 100%; height: 58px;" required>
             @foreach ($users as $user)
                 <option value="{{ $user->id }}" @if (isset($penelitian) && $penelitian && in_array($user->id, $penelitian->users->pluck('id')->toArray())) selected @endif>
@@ -59,7 +61,8 @@
                 style="font-size:20px; color: red !important;">
                 {{ __('Tambah Anggota Eksternal') }}
             </a>
-        </div>
+        </div> --}}
+
     </div>
     <div class="input-style-1">
         <label for="status_output_id">{{ __('Status Output') }}</label>
