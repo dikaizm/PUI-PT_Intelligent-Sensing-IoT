@@ -72,6 +72,7 @@ return new class extends Migration {
             $table->string('tautan')->nullable();
             $table->date('published_at')->nullable();
             $table->string('file')->nullable();
+            $table->boolean('arsip')->nullable()->default(false);
             $table->timestamps();
         });
     }

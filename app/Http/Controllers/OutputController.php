@@ -16,35 +16,53 @@ class OutputController extends Controller
      */
     public function index()
     {
-        return view('output.index', [
-            'output' => auth()->user()->hasRole('Admin')
-                ? Output::with(['penelitian', 'outputDetails'])
-                    ->whereHas('penelitian', function ($query) {
-                        $query->where('arsip', false);
-                    })
-                    ->whereHas('outputDetails')
-                    ->paginate(5)
-                : Output::with([
-                    'penelitian',
-                    'outputDetails',
-                    'penelitian.users',
-                ])
-                    ->whereHas('penelitian', function ($query) {
-                        $query->where('arsip', false);
-                    })
-                    ->whereHas('penelitian.users', function ($query) {
-                        $query->where('users.id', auth()->user()->id);
-                    })
-                    ->whereHas('outputDetails')
-                    ->paginate(5),
-            'jenis_output' => JenisOutput::with([
-                'jenisOutputKey' => function ($query) {
-                    $query->orderBy('name', 'asc');
-                },
-            ])->get(),
-            'status_output' => StatusOutput::all(),
-            'tipe' => OutputType::getValues(),
+        $ROWS_PER_PAGE = 5;
+
+        $user = auth()->user();
+        $isAdmin = $user->hasRole('Admin');
+
+        $query = Output::with([
+            'penelitian' => function ($query) {
+                $query->where('arsip', false);
+            },
+            'outputDetails' => function ($query) {
+                $query->where('arsip', false);
+            },
         ]);
+
+        if ($isAdmin) {
+            $query->whereHas('penelitian', function ($query) {
+                $query->where('arsip', false);
+            })->whereHas('outputDetails', function ($query) {
+                $query->where('arsip', false);
+            });
+        } else {
+            $query->with(['penelitian.users' => function ($query) use ($user) {
+                $query->where('users.id', $user->id);
+            }])->whereHas('penelitian', function ($query) {
+                $query->where('arsip', false);
+            })->whereHas('penelitian.users', function ($query) use ($user) {
+                $query->where('users.id', $user->id);
+            })->whereHas('outputDetails', function ($query) {
+                $query->where('arsip', false);
+            });
+        }
+
+        $output = $query->paginate($ROWS_PER_PAGE);
+
+        $currPage = $output->currentPage();
+        $startNumber = 1 + ($currPage - 1) * $ROWS_PER_PAGE;
+
+        $jenis_output = JenisOutput::with([
+            'jenisOutputKey' => function ($query) {
+                $query->orderBy('name', 'asc');
+            },
+        ])->get();
+
+        $status_output = StatusOutput::all();
+        $tipe = OutputType::getValues();
+
+        return view('output.index', compact('output', 'jenis_output', 'status_output', 'tipe', 'startNumber'));
     }
 
     /**

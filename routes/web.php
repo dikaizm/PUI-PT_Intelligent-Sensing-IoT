@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JenisOutputController;
 use App\Http\Middleware\EnsureAuthorPenelitian;
 use App\Http\Controllers\JenisOutputKeyController;
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -335,6 +336,12 @@ Route::middleware('auth')->group(function () {
         'destroy',
     ])->name('output-detail.destroy');
     //end output delete
+
+    // output archive
+    Route::put('output-detail/{id}/archive', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'archive',
+    ])->name('output-detail.archive');
 
     //end laporan output routes
 });

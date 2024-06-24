@@ -468,4 +468,16 @@ class OutputDetailController extends Controller
 
         return redirect()->back()->with('success', 'Output berhasil dihapus!');
     }
+
+    public function archive(string $id)
+    {
+        $output_detail = OutputDetail::findOrFail($id);
+
+        $output_detail->arsip = true;
+        $output_detail->save();
+
+        return redirect()
+            ->back()
+            ->with('success', 'Output berhasil diarsipkan!');
+    }
 }

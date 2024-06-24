@@ -29,6 +29,7 @@ class OutputDetail extends Model
         'tautan',
         'published_at',
         'file',
+        'arsip',
     ];
 
     public function output(): BelongsTo

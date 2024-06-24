@@ -64,11 +64,11 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($output as $item)
+              @foreach ($output as $index => $item)
                 <tr>
                   <td
                     style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                    {{ $parentCounter }}
+                    {{ $startNumber + $index }}
                   </td>
                   <td
                     style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: left !important;">
@@ -90,7 +90,7 @@
                     style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
                     <div class="d-flex justify-content-between gap-1 px-2">
                       {{-- Tombol tambah --}}
-                      <a class="btn btn-primary rounded-circle" type="button" id="menu-toggle"
+                      <a class="btn btn-success rounded-circle" type="button" id="menu-toggle"
                         href="{{ route('output-detail.create-from-penelitian', ['uuid' => $item->penelitian->uuid, 'judul' => $item->penelitian->judul]) }}">
                         <i class="fas fa-plus" style="color: white;"></i>
                       </a>
@@ -148,7 +148,7 @@
                           <tr style="border-bottom: 1px solid black;">
                             <td
                               style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                              {{ $parentCounter }}.{{ $childCounter }}
+                              {{ $startNumber + $index }}.{{ $childCounter }}
                             </td>
                             <td
                               style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
@@ -182,6 +182,8 @@
                                 </a>
                               @endif
                             </td> --}}
+
+                            {{-- Action button --}}
                             <td
                               style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
                               <a type="button" data-bs-toggle="modal"
@@ -191,13 +193,19 @@
                               <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $detail->id }}">
                                 <i class="lni lni-trash-can" style="color: red;"></i>
                               </a>
+                              <a type="button" data-bs-toggle="modal" data-bs-target="#modalArchive{{ $detail->id }}">
+                                <i class="lni lni-archive" style="color: gray;"></i>
+                              </a>
                             </td>
+
                           </tr>
+
                           @include('output.modal-edit.publikasi')
                           @include('output.modal-edit.hki')
                           @include('output.modal-edit.foto-poster')
                           @include('output.modal-edit.video')
                           @include('output.modal-delete')
+                          @include('output.modal-archive')
                           @php
                             $childCounter++;
                           @endphp
