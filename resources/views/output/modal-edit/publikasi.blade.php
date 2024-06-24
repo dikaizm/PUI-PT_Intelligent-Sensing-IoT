@@ -136,22 +136,7 @@
               @enderror
             </div>
 
-            <div class="action d-flex justify-content-between flex-wrap">
-              <div class="form-check">
-                <input class="form-check-input @error('arsip') is-invalid @enderror" type="checkbox" name="arsip"
-                  value="1" {{ $detail->arsip ? 'checked' : '' }} id="checkbox-jenis-output-1"
-                  style="margin-left: 0px;">
-                <label class="form-check-label" for="checkbox-jenis-output-1"
-                  style="font-size:16px; margin-left: 25px;">
-                  {{ __('Masukkan ke Arsip') }}
-                </label>
-                @error('arsip')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
-
+            <div class="action d-flex justify-content-end flex-wrap">
               <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"
                 style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);">
                 {{ __('Simpan') }}
