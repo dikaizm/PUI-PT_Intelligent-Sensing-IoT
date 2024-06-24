@@ -71,27 +71,40 @@
                     {{ $parentCounter }}
                   </td>
                   <td
-                    style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                    style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: left !important;">
                     {{ $item->penelitian->judul }}
                   </td>
                   <td
                     style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
                     {{ \Carbon\Carbon::parse($item->penelitian->updated_at)->format('d/m/Y') }}
                   </td>
+
+                  {{-- Tambah feedback admin only --}}
                   <td
                     style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
                     {{ $item->penelitian->feedback }}
                   </td>
 
+                  {{-- Tombol tambah output penelitian --}}
                   <td
                     style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                    <a type="button" id="menu-toggle" href="{{ route('output-detail.create-from-penelitian', ['uuid' => $item->penelitian->uuid, 'judul' => $item->penelitian->judul]) }}">
-                      <i class="fas fa-plus" style="color: black;"></i>
-                    </a>
-                  </td>
+                    <div class="d-flex justify-content-between gap-1 px-2">
+                      {{-- Tombol tambah --}}
+                      <a class="btn btn-primary rounded-circle" type="button" id="menu-toggle"
+                        href="{{ route('output-detail.create-from-penelitian', ['uuid' => $item->penelitian->uuid, 'judul' => $item->penelitian->judul]) }}">
+                        <i class="fas fa-plus" style="color: white;"></i>
+                      </a>
 
+                      {{-- Tombol slidedown output --}}
+                      <button type="button" id="btn_output_detail_{{ $item->penelitian->uuid }}"
+                        class="btn btn-secondary rounded-circle" data-penelitian-id={{ $item->penelitian->uuid }}>
+                        <i class="fas fa-caret-down icon-detail-caret" style="color: white;"></i>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
-                <tr>
+
+                <tr class="d-none" id="output_detail_rows_{{ $item->penelitian->uuid }}">
                   <td colspan="5">
                     <table class="striped-table mb-0 table">
                       <thead>
@@ -120,10 +133,6 @@
                             style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
                             Tautan
                           </td>
-                          {{-- <td
-                            style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
-                            File
-                          </td> --}}
                           <td
                             style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                             Action
