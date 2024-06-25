@@ -184,22 +184,25 @@
 
             <!-- waktu mulai & waktu akhir -->
             <div class="d-flex gap-4">
-                <div class="form-group w-100">
-                  <label for="waktu_mulai">Penelitian dimulai</label>
-                  <input type="date" id="waktu_mulai" class="form-control" name="waktu_mulai" required value="{{ old('waktu_mulai', $penelitian->waktu_mulai) }}">
-                </div>
-                <div class="form-group w-100">
-                  <label for="waktu_akhir">Penelitian selesai</label>
-                  <input type="date" id="waktu_akhir" class="form-control" name="waktu_akhir" value="{{ old('waktu_akhir', $penelitian->waktu_akhir) }}">
-                </div>
+              <div class="form-group w-100">
+                <label for="waktu_mulai">Penelitian dimulai</label>
+                <input type="date" id="waktu_mulai" class="form-control" name="waktu_mulai" required
+                  value="{{ old('waktu_mulai', $penelitian->waktu_mulai) }}">
               </div>
+              <div class="form-group w-100">
+                <label for="waktu_akhir">Penelitian selesai</label>
+                <input type="date" id="waktu_akhir" class="form-control" name="waktu_akhir"
+                  value="{{ old('waktu_akhir', $penelitian->waktu_akhir) }}">
+              </div>
+            </div>
 
             <div class="input-style-1">
               <label for="jangka_waktu">{{ __('Jangka Waktu Penelitian') }}</label>
               <div class="input-group">
 
-                <input type="number" class="form-control @error('jangka_waktu') is-invalid @enderror" name="jangka_waktu"
-                  id="jangka_waktu" placeholder="{{ __('Jangka Waktu') }}" value="{{ old('jangka_waktu', $penelitian->jangka_waktu) }}">
+                <input type="number" class="form-control @error('jangka_waktu') is-invalid @enderror"
+                  name="jangka_waktu" id="jangka_waktu" placeholder="{{ __('Jangka Waktu') }}"
+                  value="{{ old('jangka_waktu', $penelitian->jangka_waktu) }}">
                 <div class="input-group-prepend">
                   <span class="input-group-text">Bulan</span>
                 </div>
@@ -268,7 +271,8 @@
               </div>
             </div>
             <div> --}}
-            <label for="arsip"
+
+            {{-- <label for="arsip"
               style="font-size: 20px;font-weight: 500;color: $dark;display: block;margin-bottom: 10px;margin-left:20px;">{{ __('Arsip') }}</label>
             <div class="form-check" style="width: 100%;">
               <input class="form-check-input @error('arsip') is-invalid @enderror" type="checkbox" name="arsip"
@@ -282,7 +286,8 @@
                   <strong>{{ $message }}</strong>
                 </span>
               @enderror
-            </div>
+            </div> --}}
+
           </div>
           <!-- end col -->
           <div class="col-12">

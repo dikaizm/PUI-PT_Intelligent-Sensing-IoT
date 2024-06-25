@@ -271,6 +271,17 @@ Route::middleware('auth')->group(function () {
         \App\Http\Controllers\PenelitianController::class,
         'destroy',
     ])->name('penelitian.destroy');
+
+    Route::put('penelitian/{uuid}/archive', [
+        \App\Http\Controllers\PenelitianController::class,
+        'archive',
+    ])->name('penelitian.archive');
+
+    Route::put('penelitian/{uuid}/unarchive', [
+        \App\Http\Controllers\PenelitianController::class,
+        'unarchive',
+    ])->name('penelitian.unarchive');
+
     //end penelitian route
 
     //laporan output routes

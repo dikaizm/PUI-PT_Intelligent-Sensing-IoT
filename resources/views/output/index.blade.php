@@ -37,7 +37,7 @@
             $parentCounter = 1;
           @endphp
 
-          <table class="table-striped table-bordered table">
+          <table id="dataTables_outpu" class="table-striped table-bordered table">
             <thead>
               <tr>
                 <td

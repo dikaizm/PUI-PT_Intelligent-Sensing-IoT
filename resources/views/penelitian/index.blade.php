@@ -80,8 +80,8 @@
                   </td>
                   <td style="padding: 12px; text-align: center !important;">
                     @can('update-feedback')
-                      <a type="button" data-bs-toggle="modal" data-bs-target="#modalFeedbackPenelitian{{ $item->id }}"
-                        style="color: gray !important;">
+                      <a type="button" {{-- class="badge badge-info"  --}} data-bs-toggle="modal"
+                        data-bs-target="#modalFeedbackPenelitian{{ $item->id }}" style="color: gray !important;">
                       @endcan
                       {{ $item->feedback ? $item->feedback : 'Isi feedback' }}
                       @can('update-feedback')
@@ -100,6 +100,11 @@
                           <i class="lni lni-pencil" style="color: black; margin:2px;"></i>
                         </a>
                       @endif
+
+                      <a type="button" data-bs-toggle="modal" data-bs-target="#modalArchivePenelitian{{ $item->id }}">
+                        <i class="lni lni-archive" style="color: black; margin:2px;"></i>
+                      </a>
+
                       <a type="button" data-bs-toggle="modal" data-bs-target="#modalDeletePenelitian{{ $item->id }}">
                         <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>
                       </a>
@@ -128,4 +133,6 @@
   <!-- ========== modal delete =========== -->
   @include('penelitian.modal-delete')
   <!-- ========== modal end =========== -->
+
+  @include('penelitian.modal-archive')
 @endsection

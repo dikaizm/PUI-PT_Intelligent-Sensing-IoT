@@ -149,13 +149,22 @@ class PenelitianController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($uuid)
+    public function show(Request $request, $uuid)
     {
+        $arsip = $request->query('arsip', 'false') === 'true';
+
         $penelitian = Penelitian::where('uuid', $uuid)->first();
-        $output = $penelitian->output
-            ? $penelitian->output->outputDetails
-            : null;
-        $anggotaTim = $penelitian->users->pluck('id')->toArray();
+
+        // Check if penelitian and penelitian's output exist
+        if ($penelitian && $penelitian->output) {
+            // Fetch outputDetails based on the arsip status
+            $output = $penelitian->output->outputDetails()->where('arsip', $arsip)->get();
+        } else {
+            $output = null;
+        }
+
+        // $anggotaTim = $penelitian->users->pluck('id')->toArray();
+
         $ketuaTim = $penelitian->users->where('pivot.is_ketua', true)->first();
         $is_ketua = $ketuaTim ? $ketuaTim->id : null;
 
@@ -302,5 +311,24 @@ class PenelitianController extends Controller
         return redirect()
             ->route('penelitian.index')
             ->with('success', 'Penelitian berhasil dihapus!');
+    }
+
+
+    public function archive($uuid)
+    {
+        $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
+        $penelitian->update(['arsip' => true]);
+        return redirect()
+            ->route('penelitian.index')
+            ->with('success', 'Penelitian berhasil diarsipkan!');
+    }
+
+    public function unarchive($uuid)
+    {
+        $penelitian = Penelitian::where('uuid', $uuid)->firstOrFail();
+        $penelitian->update(['arsip' => false]);
+        return redirect()
+            ->route('penelitian.index', ['arsip' => 'true'])
+            ->with('success', 'Penelitian berhasil di-unarchive!');
     }
 }
