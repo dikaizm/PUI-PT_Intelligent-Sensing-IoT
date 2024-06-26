@@ -11,6 +11,7 @@ use App\Models\StatusPenelitian;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
+use App\Models\OutputDetail;
 
 class PenelitianController extends Controller
 {
@@ -30,22 +31,41 @@ class PenelitianController extends Controller
         $user = auth()->user();
         $isAdminOrKaur = $user->hasRole('Admin') || $user->hasRole('Kaur');
 
+        $outputDetails = OutputDetail::where('arsip', $arsip === 'true')->get();
+
+        // Get output id
+        $outputIds = $outputDetails->pluck('output_id')->toArray();
+
+        // Get penelitian id based on output and arsip status
+        $penelitianIds = Penelitian::whereIn('id', $outputIds)->pluck('id')->toArray();
+
+        // If user is an admin or Kaur, adjust penelitianIds
+        if ($isAdminOrKaur) {
+            $penelitianIds2 = Penelitian::where('arsip', $arsip === 'true')->pluck('id')->toArray();
+        } else {
+            $penelitianIds2 = $user->penelitians()->where('arsip', $arsip === 'true')->pluck('id')->toArray();
+        }
+
+        $penelitianIds = array_merge($penelitianIds, $penelitianIds2);
+
+        // dd($penelitianIds);
+
         $penelitian = $isAdminOrKaur
-            ? Penelitian::where('arsip', $arsip === 'true')
-            ->where('output_only', false)
+            ? Penelitian::whereIn('id', $penelitianIds)
             ->with([
                 'statusPenelitian',
                 'statusPenelitian.statusPenelitianKey',
             ])->get()
-            : auth()
-            ->user()
+
+            : $user
             ->penelitians()
-            ->where('arsip', $arsip === 'true')
-            ->where('output_only', false)
+            ->whereIn('id', $penelitianIds)
             ->with([
                 'statusPenelitian',
                 'statusPenelitian.statusPenelitianKey',
             ])->get();
+
+        // dd($penelitian);
 
         return view('penelitian.index', [
             'penelitian' => $penelitian,
@@ -151,14 +171,17 @@ class PenelitianController extends Controller
      */
     public function show(Request $request, $uuid)
     {
-        $arsip = $request->query('arsip', 'false') === 'true';
+        $arsip = $request->query('arsip', 'false') == 'true';
 
         $penelitian = Penelitian::where('uuid', $uuid)->first();
 
+        $output = $penelitian->output()->first();
+
         // Check if penelitian and penelitian's output exist
         if ($penelitian && $penelitian->output) {
-            // Fetch outputDetails based on the arsip status
-            $output = $penelitian->output->outputDetails()->where('arsip', $arsip)->get();
+            $output = OutputDetail::where('output_id', $output->id)
+                ->where('arsip', $arsip)
+                ->get();
         } else {
             $output = null;
         }
@@ -167,6 +190,12 @@ class PenelitianController extends Controller
 
         $ketuaTim = $penelitian->users->where('pivot.is_ketua', true)->first();
         $is_ketua = $ketuaTim ? $ketuaTim->id : null;
+
+        if ($arsip) {
+            if (!$penelitian->arsip) {
+                $penelitian = null;
+            }
+        }
 
         return view('penelitian.modal-detail', [
             'penelitian' => $penelitian,

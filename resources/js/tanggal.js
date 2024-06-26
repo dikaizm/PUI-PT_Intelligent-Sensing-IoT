@@ -1,19 +1,33 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let dateMulaiValue;
-    let dateAkhirValue;
-
     // Get value from datepicker mulai & akhir
     const datepickerMulai = document.getElementById('waktu_mulai')
     const datepickerAkhir = document.getElementById('waktu_akhir')
 
+    const waktuAwal = localStorage.getItem('waktu_mulai');
+    const waktuAkhir = localStorage.getItem('waktu_akhir');
+
+    if (waktuAwal) {
+        datepickerMulai.value = waktuAwal;
+    }
+
+    if (waktuAkhir) {
+        datepickerAkhir.value = waktuAkhir;
+    }
+
     datepickerMulai.addEventListener('change', function() {
-        dateMulaiValue = this.value
-        countPeriodMonth(dateMulaiValue, dateAkhirValue)
+        const dateMulaiValue = datepickerMulai.value;
+        const dateAkhirValue = datepickerAkhir.value;
+
+        countPeriodMonth(dateMulaiValue, dateAkhirValue);
+        localStorage.setItem('waktu_mulai', datepickerMulai.value);
     })
 
     datepickerAkhir.addEventListener('change', function() {
-        dateAkhirValue = this.value
-        countPeriodMonth(dateMulaiValue, dateAkhirValue)
+        const dateMulaiValue = datepickerMulai.value;
+        const dateAkhirValue = datepickerAkhir.value;
+
+        countPeriodMonth(dateMulaiValue, dateAkhirValue);
+        localStorage.setItem('waktu_akhir', dateAkhirValue);
     })
 
     // Count period in month

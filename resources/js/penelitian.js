@@ -6,13 +6,37 @@ document.addEventListener('DOMContentLoaded', function () {
     let users = [];
     let selectedUsers = [];
 
+    const selectedUsersData = localStorage.getItem('selectedUsers');
+    if (selectedUsersData) {
+        selectedUsers = JSON.parse(selectedUsersData);
+    }
+
     // Get current url
     const urlPath = window.location.pathname;
-    // if (urlPath !== '/penelitian/create') return
 
     // Create state variable for output tab
     let outputTabState = {
         activeTab: 'publikasi',
+    }
+
+    if (selectedUsers.length > 0) {
+        const urlPath = window.location.pathname;
+        let inputAnggotaDiv;
+
+        if (urlPath.startsWith(URL_CREATE_OUTPUT)) {
+            inputAnggotaDiv = createOutputCurrentTab();
+        } else {
+            inputAnggotaDiv = document.getElementById('input-anggota');
+        }
+
+        if (!inputAnggotaDiv) return;
+
+        // populate selected users
+        selectedUsers.forEach((user, index) => {
+            const num = index;
+            const inputGroupDiv = renderSelectedUser(num, user, true);
+            inputAnggotaDiv.appendChild(inputGroupDiv);
+        });
     }
 
     if (urlPath.startsWith(URL_CREATE_OUTPUT)) {
@@ -42,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (inputUsers.length > 0) {
         // populate selected users
         inputUsers.forEach(input => {
-            const num = input.id.split('_')[2];
+            const num = input.id.split('_')[3];
             const hiddenInput = document.getElementById(`hidden_user_id_${outputTabState.activeTab}_${num}`);
             selectedUsers[num] = {
                 name: input.value,
@@ -210,7 +234,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (inputGroupDiv) {
             inputGroupDiv.remove();
-            delete selectedUsers[num];
+
+            if (num > -1 && num < selectedUsers.length) {
+                selectedUsers.splice(num, 1);
+            }
+
+            saveUsers(selectedUsers);
             populateKetuaTim();
         }
     }
@@ -232,6 +261,38 @@ document.addEventListener('DOMContentLoaded', function () {
         return div;
     }
 
+
+    function renderSelectedUser(num, user = null, destroy = false) {
+        if (!user) {
+            user = {
+                name: '',
+                id: ''
+            };
+        }
+
+        const inputGroupDiv = document.createElement('div');
+        inputGroupDiv.id = `input-group-${outputTabState.activeTab}_${num}`;
+        inputGroupDiv.classList.add('input-group-col');
+        inputGroupDiv.innerHTML = `
+            <div class="position-relative d-flex gap-2">
+                <div class="position-relative" style="width: 360px">
+                    <input type="text" class="form-control" id="user_id_${outputTabState.activeTab}_${num}" placeholder="Cari atau masukkan anggota tim" value="${user.name}" ${destroy ? 'readonly' : ''}>
+                    <input type="hidden" id="hidden_user_id_${outputTabState.activeTab}_${num}" name="user_id_${outputTabState.activeTab}_${num}" value=${user.id}>
+                    <div id="user_dropdown_${outputTabState.activeTab}_${num}" class="shadow position-absolute bg-white w-100 top-100 rounded d-none z-3 dropdown-hr-scroll"></div>
+                </div>
+                <div class="d-flex gap-2">
+                    <button id="btn-action-anggota-${outputTabState.activeTab}_${num}" class="d-flex align-items-center btn ${!destroy ? 'btn-primary' : 'btn-danger'}" type="button">
+                        ${!destroy ? '<i class="fas fa-plus"></i>' : '<i class="fas fa-x"></i>'}
+                    </button>
+                </div>
+            </div>
+            <span id="error_user_id_${outputTabState.activeTab}_${num}" class="text-danger text-sm"></span>
+        `;
+
+        return inputGroupDiv;
+    }
+
+
     function InputAnggotaDiv(num) {
         const urlPath = window.location.pathname;
         let inputAnggotaDiv;
@@ -246,24 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const inputGroupDiv = document.createElement('div');
-        inputGroupDiv.id = `input-group-${outputTabState.activeTab}_${num}`;
-        inputGroupDiv.classList.add('input-group-col');
-        inputGroupDiv.innerHTML = `
-            <div class="position-relative d-flex gap-2">
-                <div class="position-relative" style="width: 360px">
-                    <input type="text" class="form-control" id="user_id_${outputTabState.activeTab}_${num}" placeholder="Cari atau masukkan anggota tim">
-                    <input type="hidden" id="hidden_user_id_${outputTabState.activeTab}_${num}" name="user_id_${outputTabState.activeTab}_${num}" value="">
-                    <div id="user_dropdown_${outputTabState.activeTab}_${num}" class="shadow position-absolute bg-white w-100 top-100 rounded d-none z-3 dropdown-hr-scroll"></div>
-                </div>
-                <div class="d-flex gap-2">
-                    <button id="btn-action-anggota-${outputTabState.activeTab}_${num}" class="d-flex align-items-center btn btn-primary" type="button">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <span id="error_user_id_${outputTabState.activeTab}_${num}" class="text-danger text-sm"></span>
-        `;
+        const inputGroupDiv = renderSelectedUser(num);
         inputAnggotaDiv.appendChild(inputGroupDiv);
 
         const input = document.getElementById(`user_id_${outputTabState.activeTab}_${num}`);
@@ -272,6 +316,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const btnAction = document.getElementById(`btn-action-anggota-${outputTabState.activeTab}_${num}`);
         btnAction.addEventListener('click', () => tambahAnggotaPenelitian(num));
+
+        // Save selected users to local storage
+        saveUsers(selectedUsers);
     }
 
     document.addEventListener('click', function (event) {
@@ -385,3 +432,8 @@ document.addEventListener('DOMContentLoaded', function () {
     populateKetuaTim()
     populateCorresponding()
 });
+
+function saveUsers(users) {
+    // Save selected users to local storage
+    localStorage.setItem('selectedUsers', JSON.stringify(users));
+}

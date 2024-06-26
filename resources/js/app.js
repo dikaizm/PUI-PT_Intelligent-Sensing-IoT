@@ -5,3 +5,4 @@ import './laporan-kinerja';
 import './penelitian';
 import './dropdown';
 import './output';
+import './form-save-temp';

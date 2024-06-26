@@ -89,9 +89,15 @@
                     @endcan
                   </td>
                   <td style="padding: 8px; text-align: center !important;">
-                    <a type="button" href="{{ route('penelitian.show', ['uuid' => $item->uuid]) }}">
+                    @php
+                      $is_arsip = request()->query('arsip') == 'true' ? 'true' : 'false';
+                    @endphp
+
+                    <a type="button"
+                      href="{{ route('penelitian.show', ['uuid' => $item->uuid, 'arsip' => $is_arsip]) }}">
                       <i class="lni lni-magnifier" style="color: gray; margin:2px;"></i>
                     </a>
+
                     @can('is-kaur')
                       {{-- Hide button --}}
                     @else
@@ -101,9 +107,12 @@
                         </a>
                       @endif
 
-                      <a type="button" data-bs-toggle="modal" data-bs-target="#modalArchivePenelitian{{ $item->id }}">
-                        <i class="lni lni-archive" style="color: black; margin:2px;"></i>
-                      </a>
+                      @if (request()->query('arsip') != 'true' || $item->arsip)
+                        <a type="button" data-bs-toggle="modal"
+                          data-bs-target="#modalArchivePenelitian{{ $item->id }}">
+                          <i class="lni lni-archive" style="color: black; margin:2px;"></i>
+                        </a>
+                      @endif
 
                       <a type="button" data-bs-toggle="modal" data-bs-target="#modalDeletePenelitian{{ $item->id }}">
                         <i class="lni lni-trash-can" style="color: red; margin:2px;"></i>
