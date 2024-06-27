@@ -340,12 +340,15 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
                         data-bs-target="#modalEdit${s.jenis_output_key.name}${i.id}">
                         <i class="lni lni-pencil" style="color: black;"></i>
                         </a>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete${i.id}">
-                        <i class="lni lni-trash-can" style="color: red;"></i>
-                        </a>
+
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalArchive${i.id}">
                         <i class="lni lni-archive" style="color: gray;"></i>
                         </a>
+
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete${i.id}">
+                        <i class="lni lni-trash-can" style="color: red;"></i>
+                        </a>
+
                     </td>
                 </tr>
             `}).join(" ")}

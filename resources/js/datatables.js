@@ -156,12 +156,15 @@ console.log(outputDetails);
                         data-bs-target="#modalEdit${status.jenis_output_key.name}${item.id}">
                         <i class="lni lni-pencil" style="color: black;"></i>
                         </a>
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete${item.id}">
-                        <i class="lni lni-trash-can" style="color: red;"></i>
-                        </a>
+
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modalArchive${item.id}">
                         <i class="lni lni-archive" style="color: gray;"></i>
                         </a>
+
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete${item.id}">
+                        <i class="lni lni-trash-can" style="color: red;"></i>
+                        </a>
+
                     </td>
                 </tr>
             `;
