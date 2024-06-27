@@ -43,7 +43,7 @@ class PenelitianController extends Controller
         if ($isAdminOrKaur) {
             $penelitianIds2 = Penelitian::where('arsip', $arsip === 'true')->pluck('id')->toArray();
         } else {
-            $penelitianIds2 = $user->penelitians()->where('arsip', $arsip === 'true')->pluck('id')->toArray();
+            $penelitianIds2 = $user->penelitians()->where('arsip', $arsip === 'true')->pluck('penelitian.id')->toArray();
         }
 
         $penelitianIds = array_merge($penelitianIds, $penelitianIds2);
@@ -59,7 +59,7 @@ class PenelitianController extends Controller
 
             : $user
             ->penelitians()
-            ->whereIn('id', $penelitianIds)
+            ->whereIn('penelitian.id', $penelitianIds)
             ->with([
                 'statusPenelitian',
                 'statusPenelitian.statusPenelitianKey',
