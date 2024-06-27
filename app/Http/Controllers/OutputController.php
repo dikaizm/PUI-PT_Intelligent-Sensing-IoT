@@ -69,7 +69,7 @@ class OutputController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $isAdmin = $user->hasRole('Admin');
+        $isAdminOrKaur = $user->hasRole('Admin') || $user->hasRole('Kaur');
 
         $query = Output::with([
             'penelitian' => function ($query) {
@@ -80,7 +80,7 @@ class OutputController extends Controller
             },
         ]);
 
-        if ($isAdmin) {
+        if ($isAdminOrKaur) {
             $query->whereHas('penelitian', function ($query) {
                 $query->where('arsip', false);
             })->whereHas('outputDetails', function ($query) {
