@@ -6,7 +6,11 @@
     <div class="row align-items-center">
       <div class="col-md-6">
         <div class="title mb-4">
-          <h2>{{ __('Penelitian') }}</h2>
+          @if (request()->query('arsip'))
+            <h2>{{ __('Penelitian') }}</h2>
+          @else
+            <h2>{{ __('Arsip Kegiatan') }}</h2>
+          @endif
         </div>
       </div>
       <!-- end col -->
