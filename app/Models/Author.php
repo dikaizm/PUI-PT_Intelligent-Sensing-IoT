@@ -27,4 +27,9 @@ class Author extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function authorOutputs()
+    {
+        return $this->hasMany(AuthorOutput::class);
+    }
 }

@@ -3,12 +3,22 @@ const URL_CREATE_OUTPUT = '/output-detail';
 // "+" Tambah anggota
 document.addEventListener('DOMContentLoaded', function () {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
     let users = [];
     let selectedUsers = [];
 
-    const selectedUsersData = localStorage.getItem('selectedUsers');
-    if (selectedUsersData) {
-        selectedUsers = JSON.parse(selectedUsersData);
+    const selectedUsersGlobal = window.selectedUsers;
+    if (selectedUsersGlobal) {
+        selectedUsers = selectedUsersGlobal;
+
+        // Save selected users to local storage
+        saveUsers(selectedUsers);
+    } else {
+        let selectedUsersData = JSON.parse(localStorage.getItem('selectedUsers'));
+
+        if (selectedUsersData.length > 0) {
+            selectedUsers = selectedUsersData;
+        }
     }
 
     // Get current url
@@ -19,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         activeTab: 'publikasi',
     }
 
+    // Initialize selected users if there are any
     if (selectedUsers.length > 0) {
         const urlPath = window.location.pathname;
         let inputAnggotaDiv;
@@ -63,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const inputUsers = document.querySelectorAll(`[id^="user_id_${outputTabState.activeTab}_"]`);
+
     if (inputUsers.length > 0) {
         // populate selected users
         inputUsers.forEach(input => {
@@ -381,6 +393,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Perbarui select2 untuk is_ketua
         $('#is_ketua').trigger('change.select2')
+
+        // Save selected ketua to localStorage on change
+        $('#is_ketua').on('change', function () {
+            const selectedValue = $(this).val();
+            localStorage.setItem('selectedKetua', selectedValue);
+        });
+
+        // Set the select value to the one saved in localStorage, if available
+        const savedKetua = localStorage.getItem('selectedKetua');
+        if (savedKetua) {
+            $('#is_ketua').val(savedKetua).trigger('change.select2');
+        }
     }
 
     // Fungsi untuk memfilter opsi corresponding author
@@ -418,6 +442,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Perbarui select2 untuk is_corresponding
         $('#is_corresponding').trigger('change.select2')
+
+        // Save selected corresponding to localStorage on change
+        $('#is_corresponding').on('change', function () {
+            const selectedValue = $(this).val();
+            localStorage.setItem('selectedCorresponding', selectedValue);
+        });
+
+        // Set the select value to the one saved in localStorage, if available
+        const savedCorresponding = localStorage.getItem('selectedCorresponding');
+        if (savedCorresponding) {
+            $('#is_corresponding').val(savedCorresponding).trigger('change.select2');
+        }
     }
 
     // Get semua button dengan class nav-link untuk reload populate ketika pindah tab

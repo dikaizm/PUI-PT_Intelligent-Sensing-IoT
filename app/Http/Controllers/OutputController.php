@@ -76,7 +76,9 @@ class OutputController extends Controller
                 $query->where('arsip', false);
             },
             'outputDetails' => function ($query) {
-                $query->where('arsip', false);
+                $query
+                    ->where('arsip', false)
+                    ->with('authorOutputs.author.user');
             },
         ]);
 
@@ -99,6 +101,15 @@ class OutputController extends Controller
         }
 
         $output = $query->get();
+
+        // Get authors for each output_detail
+        // $output->each(function ($output) {
+        //     $output->outputDetails->each(function ($outputDetail) {
+        //         $outputDetail->load('authorOutputs.author.user');
+        //     });
+        // });
+
+        // dd($output);
 
         $jenis_output = JenisOutput::with([
             'jenisOutputKey' => function ($query) {

@@ -44,4 +44,9 @@ class OutputDetail extends Model
     {
         return $this->belongsTo(StatusOutput::class);
     }
+
+    public function authorOutputs()
+    {
+        return $this->hasMany(AuthorOutput::class);
+    }
 }

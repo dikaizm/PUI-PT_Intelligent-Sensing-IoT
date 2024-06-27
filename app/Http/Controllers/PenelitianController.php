@@ -11,6 +11,7 @@ use App\Models\StatusPenelitian;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
+use App\Models\AuthorOutput;
 use App\Models\OutputDetail;
 
 class PenelitianController extends Controller
@@ -27,23 +28,27 @@ class PenelitianController extends Controller
                 'Invalid value for arsip parameter. It should be either true or false.'
             );
         }
+        $arsip = $arsip == 'true';
 
         $user = auth()->user();
         $isAdminOrKaur = $user->hasRole('Admin') || $user->hasRole('Kaur');
 
-        $outputDetails = OutputDetail::where('arsip', $arsip === 'true')->get();
+        $outputIds = [];
+        $penelitianIds = [];
 
-        // Get output id
-        $outputIds = $outputDetails->pluck('output_id')->toArray();
+        if ($arsip) {
+            // Get output ids based on arsip status
+            $outputIds = OutputDetail::where('arsip', $arsip)->pluck('output_id')->toArray();
 
-        // Get penelitian id based on output and arsip status
-        $penelitianIds = Penelitian::whereIn('id', $outputIds)->pluck('id')->toArray();
+            // Get penelitian id based on output and arsip status
+            $penelitianIds = Penelitian::whereIn('id', $outputIds)->pluck('id')->toArray();
+        }
 
         // If user is an admin or Kaur, adjust penelitianIds
         if ($isAdminOrKaur) {
-            $penelitianIds2 = Penelitian::where('arsip', $arsip === 'true')->pluck('id')->toArray();
+            $penelitianIds2 = Penelitian::where('arsip', $arsip)->pluck('id')->toArray();
         } else {
-            $penelitianIds2 = $user->penelitians()->where('arsip', $arsip === 'true')->pluck('penelitian.id')->toArray();
+            $penelitianIds2 = $user->penelitians()->where('arsip', $arsip)->pluck('penelitian.id')->toArray();
         }
 
         $penelitianIds = array_merge($penelitianIds, $penelitianIds2);
@@ -277,16 +282,34 @@ class PenelitianController extends Controller
         }
 
         $pivotData = [];
-        foreach ($userData as $userId => $value) {
-            if (is_numeric($userId) && $userId != '' && User::find($userId)) {
-                $pivotData[$userId] = [
-                    'is_ketua' => $userId == $request->is_ketua ? true : false,
-                ];
+        foreach ($userData as $userId) {
+            $pivotData[$userId] = [
+                'is_ketua' => $userId == $request->is_ketua ? true : false,
+            ];
+        }
+
+        // Get current user IDs attached to the penelitian
+        $currentUserIds = $penelitian->users()->pluck('user_id')->toArray();
+
+        // Detach users that are not in the new list
+        foreach ($currentUserIds as $currentUserId) {
+            if (!in_array($currentUserId, $userData)) {
+                $penelitian->users()->detach($currentUserId);
             }
         }
 
-        // Sync the pivot table data
-        $penelitian->users()->sync($pivotData);
+        // Attach or update users
+        foreach ($userData as $userId) {
+            if ($userId !== null && isset($pivotData[$userId])) {
+                // Check if the user is already attached
+                if (!$penelitian->users()->where('user_id', $userId)->exists()) {
+                    $penelitian->users()->attach($userId, $pivotData[$userId]);
+                } else {
+                    // Update the existing pivot data
+                    $penelitian->users()->updateExistingPivot($userId, $pivotData[$userId]);
+                }
+            }
+        }
 
         return redirect()
             ->route('penelitian.index')
@@ -333,8 +356,16 @@ class PenelitianController extends Controller
             }
         }
 
+        // Delete all of relations
+        $output = $penelitian->output()->first();
+
+        if ($output) {
+            AuthorOutput::whereIn('output_detail_id', $output->outputDetails->pluck('id'))->delete();
+            $output->outputDetails()->delete();
+            $output->delete();
+        }
+
         $penelitian->users()->detach();
-        $penelitian->output()->delete();
         $penelitian->delete();
 
         return redirect()

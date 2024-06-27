@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const outputs = window.outputs;
     const jenisOutput = window.jenisOutput;
 
+    console.log(outputs);
+
     // DataTable initialization
     var table = new DataTable('#dataTables_output', {
         responsive: false,

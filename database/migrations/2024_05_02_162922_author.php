@@ -38,9 +38,9 @@ return new class extends Migration {
                 ->onDelete('restrict');
             $table->foreignId('output_id');
             $table
-                ->foreign('output_id')
+                ->foreign('output_detail_id')
                 ->references('id')
-                ->on('output')
+                ->on('output_detail')
                 ->onDelete('restrict');
         });
     }

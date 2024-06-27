@@ -8,6 +8,7 @@ use App\Models\Penelitian;
 use App\Models\JenisOutput;
 use App\Models\OutputDetail;
 use App\Models\StatusOutput;
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\OutputController;
@@ -120,12 +121,15 @@ class OutputDetailController extends Controller
             };
         }
 
-        // Sync the pivot table data
-        $penelitian->users()->sync($pivotData);
+        foreach ($userData as $userId) {
+            if ($userId !== null && isset($pivotData[$userId])) {
+                $penelitian->users()->attach($userId, $pivotData[$userId]);
+            }
+        }
 
         $output = OutputController::store($penelitian->id);
 
-        OutputDetail::create([
+        $outputDetail = OutputDetail::create([
             'output_id' => $output->id,
             'jenis_output_id' => $request->jenis_output_id,
             'status_output_id' => $request->status_output_id,
@@ -134,6 +138,17 @@ class OutputDetailController extends Controller
             'tautan' => $request->tautan,
             'published_at' => $request->published_at,
         ]);
+
+        // Get all authors from the penelitian
+        $authors = Author::where('penelitian_id', $penelitian->id)->get();
+
+        // Create authorOutputs for each author
+        foreach ($authors as $author) {
+            $outputDetail->authorOutputs()->insert([
+                'author_id' => $author->id,
+                'output_detail_id' => $outputDetail->id,
+            ]);
+        }
 
         return redirect()
             ->route('laporan-output.index')
@@ -464,6 +479,7 @@ class OutputDetailController extends Controller
             }
         }
 
+        $output_detail->authorOutputs()->delete();
         $output_detail->delete();
 
         return redirect()->back()->with('success', 'Output berhasil dihapus!');

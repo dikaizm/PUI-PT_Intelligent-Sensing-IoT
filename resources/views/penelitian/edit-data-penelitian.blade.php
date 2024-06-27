@@ -31,13 +31,16 @@
                 <label for="skema_id">
                   {{ __('Skema Penelitian') }}
                 </label>
-                <select name="skema_id" id="skema_id" class="form-control @error('skema_id') is-invalid @enderror">
-                  @foreach ($skema as $item)
-                    <option value="{{ $item->id }}" {{ $penelitian->skema_id == $item->id ? 'selected' : '' }}>
-                      {{ $item->name }}
-                    </option>
-                  @endforeach
-                </select>
+                <div id="skema-container" class="select-container">
+                  <select name="skema_id" id="skema" class="form-control @error('skema_id') is-invalid @enderror">
+                    @foreach ($skema as $item)
+                      <option value="{{ $item->id }}" {{ $penelitian->skema_id == $item->id ? 'selected' : '' }}>
+                        {{ $item->name }}
+                      </option>
+                    @endforeach
+                    <option id="skema_other">Lainnya</option>
+                  </select>
+                </div>
                 @error('skema_id')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -63,48 +66,13 @@
               <div class="input-style-1">
                 <label for="user_id">{{ __('Anggota Tim') }}</label>
                 <div id="input-anggota">
-                  @foreach ($users as $index => $user)
-                    <div class="input-group-col" id="input-group-{{ $index }}">
-                      <div class="position-relative d-flex gap-2">
-                        <div class="position-relative" style="width: 360px">
-                          <input type="text" class="form-control" id="user_id_{{ $index }}"
-                            placeholder="Cari atau masukkan anggota tim" value={{ $user['name'] }} readonly>
-                          <input type="hidden" id="hidden_user_id_{{ $index }}"
-                            name="user_id_{{ $index }}" value={{ $user['id'] }}>
-                          <div id="user_dropdown_{{ $index }}"
-                            class="position-absolute w-100 top-100 d-none z-3 rounded bg-white shadow"></div>
-                        </div>
-                        <div class="d-flex gap-2">
-                          <button id="btn-action-anggota-{{ $index }}"
-                            class="d-flex align-items-center btn btn-danger" type="button">
-                            <i class="fas fa-x"></i>
-                          </button>
-                        </div>
-                      </div>
-                      <span id="error_user_id_{{ $index }}" class="text-danger text-sm"></span>
-                    </div>
-                  @endforeach
+
+                  <script>
+                    window.selectedUsers = {!! $users !!}
+                  </script>
+
                 </div>
 
-                {{-- <select name="user_id[]"
-                                    class="form-control select2 @error('user_id[]') is-invalid @enderror"
-                                    multiple="multiple" style="width: 100%; height: 58px;" required>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}"
-                                            @if (in_array($user->id, $anggotaTim)) selected @endif>{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('user_id[]')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
-                {{-- <div class="mt-2">
-                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalTambahAnggotaEksternal"
-                                        style="font-size:20px; color: red !important;">
-                                        {{ __('Tambah Anggota Eksternal') }}
-                                    </a>
-                                </div> --}}
               </div>
             </div>
             <!-- end col -->
@@ -121,12 +89,15 @@
                 <select name="is_ketua" id="is_ketua"
                   class="form-control select2 @error('is_ketua') is-invalid @enderror" style="width: 100%; height: 58px;"
                   data-selected="{{ $is_ketua }}">
-                  {{-- <option value="">Ketua Tim</option>
-                                    @foreach ($users as $user)
-                                        <option
-                                            value="{{ $user->id }}"{{ $user->id == $userKetua->id ? 'selected' : '' }}>
-                                            {{ $user->name }}</option>
-                                    @endforeach --}}
+                  <option value="">Ketua Tim</option>
+
+                  @foreach ($users as $user)
+                    <option
+                      value="{{ $user->id }}"{{ isset($userKetua) && $user->id == $userKetua->id ? 'selected' : '' }}>
+                      {{ $user->name }}
+                    </option>
+                  @endforeach
+
                 </select>
                 @error('is_ketua')
                   <span class="invalid-feedback" role="alert">
@@ -166,15 +137,18 @@
             </div>
             <div class="input-style-1">
               <label for="jenis_penelitian_id">{{ __('Jenis Penelitian') }}</label>
-              <select id="jenis_penelitian_id" name="jenis_penelitian_id"
-                class="form-control @error('jenis_penelitian_id') is-invalid @enderror">
-                @foreach ($jenis_penelitian as $item)
-                  <option value="{{ $item->id }}"
-                    {{ $penelitian->jenis_penelitian_id == $item->id ? 'selected' : '' }}>
-                    {{ $item->name }}
-                  </option>
-                @endforeach
-              </select>
+              <div id="jenisPenelitian-container" class="select-container">
+                <select id="jenisPenelitian" name="jenis_penelitian_id"
+                  class="form-control @error('jenis_penelitian_id') is-invalid @enderror" style="max-width: 100%; margin: 0 auto;">
+                  @foreach ($jenis_penelitian as $item)
+                    <option value="{{ $item->id }}"
+                      {{ $penelitian->jenis_penelitian_id == $item->id ? 'selected' : '' }}>
+                      {{ $item->name }}
+                    </option>
+                  @endforeach
+                  <option id="jenisPenelitian_other">Lainnya</option>
+                </select>
+              </div>
               @error('jenis_penelitian_id')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>

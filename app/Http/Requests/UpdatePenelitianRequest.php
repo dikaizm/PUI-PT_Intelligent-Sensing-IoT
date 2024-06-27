@@ -22,7 +22,7 @@ class UpdatePenelitianRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'skema_id' => ['required', 'exists:skema,id'],
+            // 'skema_id' => ['required', 'exists:skema,id'],
             'judul' => ['required', 'string', 'max:255'],
             'tingkatan_tkt' => ['required', 'integer', 'between:1,9'],
             'pendanaan' => ['required', 'integer', 'min:0'],
@@ -35,7 +35,7 @@ class UpdatePenelitianRequest extends FormRequest
                 'required',
                 'exists:status_penelitian,id',
             ],
-            'jenis_penelitian_id' => ['required', 'exists:jenis_penelitian,id'],
+            // 'jenis_penelitian_id' => ['required', 'exists:jenis_penelitian,id'],
             'mitra' => ['nullable', 'string', 'max:64'],
             'user_id_*' => ['required', 'integer', 'exists:users,id'],
             'is_ketua' => ['nullable', 'exists:users,id'],

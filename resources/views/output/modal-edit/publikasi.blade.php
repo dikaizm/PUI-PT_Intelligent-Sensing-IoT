@@ -55,42 +55,51 @@
             </div>
 
             {{-- <div class="input-style-1">
-                            <label>{{ __('Author') }}</label>
-                            <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror" multiple="multiple" style="width: 100%; height: 58px;" required>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" {{ (in_array($user->id, old('user_id', $detail->users->pluck('id')->toArray())) ? 'selected' : '') }}>
-                                        {{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('user_id[]')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            <div class="mt-2">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#modalTambahAnggotaEksternal" style="font-size:20px; color: red !important;">
-                                    {{ __('Tambah Anggota Eksternal') }}
-                                </a>
-                            </div>
-                        </div>
+              <label>{{ __('Author') }}</label>
+              <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror"
+                multiple="multiple" style="width: 100%; height: 58px;" required>
+                @foreach ($users as $user)
+                  <option value="{{ $user->id }}"
+                    {{ in_array($user->id, old('user_id', $detail->users->pluck('id')->toArray())) ? 'selected' : '' }}>
+                    {{ $user->name }}
+                  </option>
+                @endforeach
+              </select>
+              @error('user_id[]')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+              <div class="mt-2">
+                <a type="button" data-bs-toggle="modal" data-bs-target="#modalTambahAnggotaEksternal"
+                  style="font-size:20px; color: red !important;">
+                  {{ __('Tambah Anggota Eksternal') }}
+                </a>
+              </div>
+            </div> --}}
 
-                        <div class="input-style-1">
-                            <label for="is_corresponding">{{ __('Corresponding') }}</label>
-                            <select name="is_corresponding" id="is_corresponding" class="form-control select2" style="width: 100%; height: 58px;" required>
-                                <option value="">Pilih Corresponding</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" {{ old('is_corresponding', $detail->is_corresponding) == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('is_corresponding')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div> --}}
+            <div class="input-style-1">
+              <label for="is_corresponding">{{ __('Corresponding') }}</label>
+              <select name="is_corresponding" id="is_corresponding" class="form-control select2"
+                style="width: 100%; height: 58px;" required>
+                <option value="">Pilih Corresponding</option>
+                @if (is_array($detail->author_outputs))
+
+                  @foreach ($detail->author_outputs as $user)
+                    <option value="{{ $user->author->id }}"
+                      {{ old('is_corresponding') == $user->author->id ? 'selected' : '' }}>
+                      {{ $user->author->user->name }}
+                    </option>
+                  @endforeach
+
+                @endif
+              </select>
+              @error('is_corresponding')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
+            </div>
 
             <div class="input-style-1">
               <label for="status_output_id">{{ __('Status Output') }}</label>
