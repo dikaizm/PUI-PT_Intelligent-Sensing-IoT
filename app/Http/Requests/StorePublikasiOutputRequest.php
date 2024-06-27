@@ -27,7 +27,7 @@ class StorePublikasiOutputRequest extends FormRequest
             'status_output_id' => ['required', 'exists:status_output,id'],
             'judul_penelitian' => ['required', 'max:254'],
             'judul_output' => ['required', 'max:254'],
-            'tipe' => [
+            'tipe_publikasi' => [
                 'required',
                 'in:' . implode(',', OutputType::getValues()),
             ],

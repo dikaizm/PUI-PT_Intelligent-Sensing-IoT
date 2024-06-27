@@ -14,10 +14,60 @@ class OutputController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index()
+    // {
+    //     $ROWS_PER_PAGE = 5;
+
+    //     $user = auth()->user();
+    //     $isAdmin = $user->hasRole('Admin');
+
+    //     $query = Output::with([
+    //         'penelitian' => function ($query) {
+    //             $query->where('arsip', false);
+    //         },
+    //         'outputDetails' => function ($query) {
+    //             $query->where('arsip', false);
+    //         },
+    //     ]);
+
+    //     if ($isAdmin) {
+    //         $query->whereHas('penelitian', function ($query) {
+    //             $query->where('arsip', false);
+    //         })->whereHas('outputDetails', function ($query) {
+    //             $query->where('arsip', false);
+    //         });
+    //     } else {
+    //         $query->with(['penelitian.users' => function ($query) use ($user) {
+    //             $query->where('users.id', $user->id);
+    //         }])->whereHas('penelitian', function ($query) {
+    //             $query->where('arsip', false);
+    //         })->whereHas('penelitian.users', function ($query) use ($user) {
+    //             $query->where('users.id', $user->id);
+    //         })->whereHas('outputDetails', function ($query) {
+    //             $query->where('arsip', false);
+    //         });
+    //     }
+
+    //     $output = $query->paginate($ROWS_PER_PAGE);
+
+    //     $currPage = $output->currentPage();
+    //     $startNumber = 1 + ($currPage - 1) * $ROWS_PER_PAGE;
+
+    //     $jenis_output = JenisOutput::with([
+    //         'jenisOutputKey' => function ($query) {
+    //             $query->orderBy('name', 'asc');
+    //         },
+    //     ])->get();
+
+    //     $status_output = StatusOutput::all();
+    //     $tipe = OutputType::getValues();
+
+    //     return view('output.index', compact('output', 'jenis_output', 'status_output', 'tipe', 'startNumber'));
+    // }
+
+
     public function index()
     {
-        $ROWS_PER_PAGE = 5;
-
         $user = auth()->user();
         $isAdmin = $user->hasRole('Admin');
 
@@ -48,10 +98,8 @@ class OutputController extends Controller
             });
         }
 
-        $output = $query->paginate($ROWS_PER_PAGE);
-
-        $currPage = $output->currentPage();
-        $startNumber = 1 + ($currPage - 1) * $ROWS_PER_PAGE;
+        $output = $query->get();
+        $startNumber = 1;
 
         $jenis_output = JenisOutput::with([
             'jenisOutputKey' => function ($query) {
@@ -64,6 +112,7 @@ class OutputController extends Controller
 
         return view('output.index', compact('output', 'jenis_output', 'status_output', 'tipe', 'startNumber'));
     }
+
 
     /**
      * Show the form for creating a new resource.

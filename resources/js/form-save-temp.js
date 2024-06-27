@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('endpoint', currentEndpoint);
     }
 
+    if (!currentEndpoint.startsWith('/penelitian')) return;
+
     function saveTempSelectDropdown(field) {
         const skemaContainer = document.getElementById(`${field}-container`);
         const skemaSelect = document.getElementById(field);

@@ -15,11 +15,11 @@
         @enderror
     </div>
     <div class="input-style-1">
-        <label for="tipe">{{ __('Tipe') }}</label>
-        <select id="tipe" name="tipe" class="form-control">
+        <label for="tipe_publikasi">{{ __('Tipe') }}</label>
+        <select id="tipe_publikasi" name="tipe_publikasi" class="form-control">
             <option value="">--Pilih Tipe--</option>
             @foreach ($tipe as $item)
-                <option value="{{ $item }}">{{ $item }}</option>
+                <option value="{{ $item }}" @if (old('tipe_publikasi')) @endif>{{ $item }}</option>
             @endforeach
         </select>
         @error('tipe')

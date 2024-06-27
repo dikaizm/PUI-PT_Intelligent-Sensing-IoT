@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const endpoint = window.location.pathname;
+    if (!endpoint.startsWith('/penelitian')) return;
+
     // Get value from datepicker mulai & akhir
     const datepickerMulai = document.getElementById('waktu_mulai')
     const datepickerAkhir = document.getElementById('waktu_akhir')

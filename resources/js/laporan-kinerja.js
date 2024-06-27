@@ -1,7 +1,6 @@
 //START JS Pilih Tahun
 document.addEventListener('DOMContentLoaded', function () {
-    const urlPath = window.location.pathname;
-    if (urlPath !== '/laporan-kinerja') return;
+    if (!isLaporanKinerjaPage()) return;
 
     // Mendapatkan elemen select untuk tahun awal dan tahun akhir
     const tahunAwalSelect = document.getElementById('tahunAwal');
@@ -43,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //START JS Display Donat Status Penelitian
 document.addEventListener('DOMContentLoaded', function () {
+    if (!isLaporanKinerjaPage()) return;
+
     // Mengambil data jumlah penelitian berdasarkan status dari window
     const statusCountsPenelitian = window.statusCountsPenelitian;
     const statusCountsArr = Object.values(statusCountsPenelitian);
@@ -131,6 +132,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //START JS Display Donat Jenis Output
 document.addEventListener('DOMContentLoaded', function () {
+    if (!isLaporanKinerjaPage()) return;
+
     // Mengambil data jumlah penelitian berdasarkan status dari window
     const statusCountsOutput = window.statusCountsOutput;
 
@@ -209,6 +212,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //START JS Display Diagram Balok Jenis Output
 document.addEventListener('DOMContentLoaded', function () {
+    if (!isLaporanKinerjaPage()) return;
+
     // Mengakses data dari objek window
     const statusCountsOutputAwal = window.statusCountsOutputAwal;
     const statusCountsOutputAkhir = window.statusCountsOutputAkhir;
@@ -270,6 +275,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //START JS Display Diagram Balok Status Penelitian
 document.addEventListener('DOMContentLoaded', function () {
+    if (!isLaporanKinerjaPage()) return;
+
     const targetPenelitian = window.targetPenelitian;
 
     const labels2 = ['Tahun ' + tahunAwal, 'Tahun ' + tahunAkhir];
@@ -317,6 +324,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    if (!isLaporanKinerjaPage()) return;
+
     const penelitianAwalQrt = window.penelitianAwalQrt;
     const penelitianAkhirQrt = window.penelitianAkhirQrt;
 
@@ -391,6 +400,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //START JS Submit
 document.addEventListener('DOMContentLoaded', function () {
+    if (!isLaporanKinerjaPage()) return;
+
     const startYear = new Date().getFullYear();
     const tahunAwalSelect = document.getElementById('tahunAwal');
     const tahunAkhirSelect = document.getElementById('tahunAkhir');
@@ -442,6 +453,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Event listener edit target admin
 document.addEventListener('DOMContentLoaded', function () {
+    if (!isLaporanKinerjaPage()) return;
+
     const selectTahunTarget = this.getElementById('tahun_target');
     const inputTahunTarget = this.getElementById('targetPenelitian');
 
@@ -450,3 +463,9 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(tahunTarget);
     });
 });
+
+
+function isLaporanKinerjaPage() {
+    const endpoint = window.location.pathname;
+    return endpoint.startsWith('/laporan-kinerja');
+}

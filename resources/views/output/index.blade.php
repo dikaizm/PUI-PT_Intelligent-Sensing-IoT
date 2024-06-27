@@ -63,12 +63,13 @@
                 </td>
               </tr>
             </thead>
+
             <tbody>
               @foreach ($output as $index => $item)
                 <tr>
                   <td
                     style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                    {{ $startNumber + $index }}
+                    {{ $index + 1 }}
                   </td>
                   <td
                     style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: left !important;">
@@ -80,9 +81,15 @@
                   </td>
 
                   {{-- Tambah feedback admin only --}}
-                  <td
-                    style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                    {{ $item->penelitian->feedback }}
+                  <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                    @can('update-feedback')
+                      <a type="button" {{-- class="badge badge-info"  --}} data-bs-toggle="modal"
+                        data-bs-target="#modalFeedbackPenelitian{{ $item->penelitian->id }}" style="color: gray !important;">
+                      @endcan
+                      {{ $item->penelitian->feedback ? $item->penelitian->feedback : 'Isi feedback' }}
+                      @can('update-feedback')
+                      </a>
+                    @endcan
                   </td>
 
                   {{-- Tombol tambah output penelitian --}}
@@ -104,125 +111,16 @@
                   </td>
                 </tr>
 
-                <tr class="d-none" id="output_detail_rows_{{ $item->penelitian->uuid }}">
-                  <td colspan="5">
-                    <table class="striped-table mb-0 table">
-                      <thead>
-                        <tr>
-                          <td
-                            style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
-                            No
-                          </td>
-                          <td
-                            style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
-                            Output
-                          </td>
-                          <td
-                            style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 45%;">
-                            Judul Luaran
-                          </td>
-                          <td
-                            style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
-                            Status Output
-                          </td>
-                          <td
-                            style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 15%;">
-                            Tanggal Publish / Granted
-                          </td>
-                          <td
-                            style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 5%;">
-                            Tautan
-                          </td>
-                          <td
-                            style="border-left: none; border-top: 1px solid black; border-right: none; border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
-                            Action
-                          </td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @php
-                          $childCounter = 1;
-                        @endphp
-
-                        @foreach ($item->outputDetails as $detail)
-                          <tr style="border-bottom: 1px solid black;">
-                            <td
-                              style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                              {{ $startNumber + $index }}.{{ $childCounter }}
-                            </td>
-                            <td
-                              style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                              {{ $detail->jenisOutput->jenisOutputKey->name }}
-                            </td>
-                            <td
-                              style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                              {{ $detail->judul }}
-                            </td>
-                            <td
-                              style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                              {{ $detail->statusOutput->name }}
-                            </td>
-                            <td
-                              style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                              {{ $detail->published_at ? $detail->published_at : '' }}
-                            </td>
-                            <td
-                              style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                              @if ($detail->tautan)
-                                <a href="{{ $detail->tautan }}" target="_blank">
-                                  <i class="lni lni-link" style="color: gray; margin: 2px;"></i>
-                                </a>
-                              @endif
-                            </td>
-                            {{-- <td
-                              style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                              @if ($detail->file)
-                                <a href="{{ asset('storage/' . $detail->file) }}" target="_blank">
-                                  <i class="lni lni-download" style="color: gray; margin: 2px;"></i>
-                                </a>
-                              @endif
-                            </td> --}}
-
-                            {{-- Action button --}}
-                            <td
-                              style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                              <a type="button" data-bs-toggle="modal"
-                                data-bs-target="#modalEdit{{ $detail->jenisOutput->jenisOutputKey->name }}{{ $detail->id }}">
-                                <i class="lni lni-pencil" style="color: black;"></i>
-                              </a>
-                              <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete{{ $detail->id }}">
-                                <i class="lni lni-trash-can" style="color: red;"></i>
-                              </a>
-                              <a type="button" data-bs-toggle="modal" data-bs-target="#modalArchive{{ $detail->id }}">
-                                <i class="lni lni-archive" style="color: gray;"></i>
-                              </a>
-                            </td>
-
-                          </tr>
-
-                          @include('output.modal-edit.publikasi')
-                          @include('output.modal-edit.hki')
-                          @include('output.modal-edit.foto-poster')
-                          @include('output.modal-edit.video')
-                          @include('output.modal-delete')
-                          @include('output.modal-archive')
-                          @php
-                            $childCounter++;
-                          @endphp
-                        @endforeach
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-                @php
+                {{-- @php
                   $parentCounter++;
-                @endphp
+                @endphp --}}
               @endforeach
             </tbody>
           </table>
-          {{ $output->links() }}
+          {{-- {{ $output->links() }} --}}
         </div>
       </div>
     </div>
   </div>
+  @include('output.modal-feedback')
 @endsection

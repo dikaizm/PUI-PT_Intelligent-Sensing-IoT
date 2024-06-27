@@ -7,21 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const outputDetailRows = document.querySelectorAll('[id^="output_detail_rows_"]');
     if (!outputDetailRows) return;
 
-    btnOutputDetails.forEach(btn => {
-        btn.addEventListener('click', function() {
-            console.log('clicked')
+    // btnOutputDetails.forEach(btn => {
+    //     btn.addEventListener('click', function() {
+    //         console.log('clicked')
 
-            const penelitianId = this.getAttribute('data-penelitian-id');
-            const outputDetailRow = document.getElementById(`output_detail_rows_${penelitianId}`);
+    //         const penelitianId = this.getAttribute('data-penelitian-id');
+    //         const outputDetailRow = document.getElementById(`output_detail_rows_${penelitianId}`);
 
-            if (outputDetailRow) {
-                outputDetailRow.classList.toggle('d-none');
+    //         if (outputDetailRow) {
+    //             outputDetailRow.classList.toggle('d-none');
 
-                const icon = this.querySelector('.icon-detail-caret');
-                if (icon) {
-                    icon.style.transform = outputDetailRow.classList.contains('d-none') ? 'rotate(0deg)' : 'rotate(180deg)';
-                }
-            }
-        });
-    })
+    //             const icon = this.querySelector('.icon-detail-caret');
+    //             if (icon) {
+    //                 icon.style.transform = outputDetailRow.classList.contains('d-none') ? 'rotate(0deg)' : 'rotate(180deg)';
+    //             }
+    //         }
+    //     });
+    // })
 });
