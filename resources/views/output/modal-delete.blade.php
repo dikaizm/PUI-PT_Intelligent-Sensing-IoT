@@ -22,7 +22,7 @@
                         @method('DELETE')
                         @csrf
 
-                        <button type="submit" class="main-btn btn-sm danger-btn btn-hover m-1" style="color: red;">
+                        <button type="submit" class="main-btn btn-sm danger-btn btn-hover m-1" style="color: white;">
                             Delete
                         </button>
                     </form>

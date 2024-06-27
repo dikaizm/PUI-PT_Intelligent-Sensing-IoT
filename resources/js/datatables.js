@@ -102,6 +102,10 @@ new DataTable('#selectAuthorTables', {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Load outputs data
+    const outputs = window.outputs;
+    const jenisOutput = window.jenisOutput;
+
     // DataTable initialization
     var table = new DataTable('#dataTables_output', {
         responsive: false,
@@ -113,29 +117,71 @@ document.addEventListener('DOMContentLoaded', function () {
         language: {
             info: '_START_ - _END_ dari _TOTAL_ data',
         },
-        order: [[0, 'asc']] // Initial sorting column (change as needed)
+        order: [[0, 'asc']], // Initial sorting column (change as needed)
     });
 
     // Function to format row details
-    function format(d) {
+    function format(d, id) {
         // `d` is the original data object for the row
+        const output = outputs.find(output => output.id == id);
+        if (!output) return '';
+
+        const outputDetails = output.output_details;
+        if (!outputDetails) return '';
+
+console.log(outputDetails);
+
+        const rows = outputDetails.map((item, index) => {
+            const status = jenisOutput.find(jenis => jenis.id == item.jenis_output_id);
+
+            const publishDate = item.published_at ? item.published_at : '-';
+
+            return `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${item.tipe}</td>
+                    <td>${item.judul}</td>
+                    <td>${status.name}</td>
+                    <td>${publishDate}</td>
+                    <td>
+    ${item.tautan ?
+                    `<a href="${item.tautan}" target="_blank">
+            <i class="lni lni-link"></i>
+        </a>` :
+                    `<i class="lni lni-link"></i>`}
+</td>
+
+                    <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                        <a type="button" data-bs-toggle="modal"
+                        data-bs-target="#modalEdit${status.jenis_output_key.name}${item.id}">
+                        <i class="lni lni-pencil" style="color: black;"></i>
+                        </a>
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalDelete${item.id}">
+                        <i class="lni lni-trash-can" style="color: red;"></i>
+                        </a>
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#modalArchive${item.id}">
+                        <i class="lni lni-archive" style="color: gray;"></i>
+                        </a>
+                    </td>
+                </tr>
+            `;
+        }).join(' ');
+
         return `
             <table cellpadding="5" cellspacing="0" border="0"  class="table-striped table-bordered table">
                 <thead>
                     <tr>
-                        <td>Company</td>
-                        <td>Contact</td>
+                        <td>No</td>
+                        <td>Output</td>
+                        <td>Judul Luaran</td>
+                        <td>Status Output</td>
+                        <td>Tanggal Publish / Granted</td>
+                        <td>Tautan</td>
+                        <td>Action</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Subtable Header 1:</td>
-                        <td>Subtable Data 1</td>
-                    </tr>
-                    <tr>
-                        <td>Subtable Header 2:</td>
-                        <td>Subtable Data 2</td>
-                    </tr>
+                    ${rows}
                 </tbody>
             </table>`;
     }
@@ -158,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 icon.style.transform = 'rotate(0deg)';
             } else {
                 // Open this row
-                row.child(format(row.data())).show();
+                row.child(format(row.data(), id)).show();
                 tr.addClass('shown');
                 icon.style.transform = 'rotate(180deg)';
             }

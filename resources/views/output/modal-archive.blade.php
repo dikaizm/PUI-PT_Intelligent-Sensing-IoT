@@ -22,7 +22,7 @@
                         @method('PUT')
                         @csrf
 
-                        <button type="submit" class="main-btn btn-sm danger-btn btn-hover m-1" style="color: green;">
+                        <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1" style="color: white;">
                             Archive
                         </button>
                     </form>

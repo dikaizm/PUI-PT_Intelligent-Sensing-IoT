@@ -81,10 +81,12 @@
                   </td>
 
                   {{-- Tambah feedback admin only --}}
-                  <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
+                  <td
+                    style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
                     @can('update-feedback')
                       <a type="button" {{-- class="badge badge-info"  --}} data-bs-toggle="modal"
-                        data-bs-target="#modalFeedbackPenelitian{{ $item->penelitian->id }}" style="color: gray !important;">
+                        data-bs-target="#modalFeedbackPenelitian{{ $item->penelitian->id }}"
+                        style="color: gray !important;">
                       @endcan
                       {{ $item->penelitian->feedback ? $item->penelitian->feedback : 'Isi feedback' }}
                       @can('update-feedback')
@@ -103,14 +105,22 @@
                       </a>
 
                       {{-- Tombol slidedown output --}}
-                      <button type="button" id="btn_output_detail_{{ $item->penelitian->uuid }}"
-                        class="btn btn-secondary rounded-circle" data-penelitian-id={{ $item->penelitian->uuid }}>
+                      <button type="button" id="btn_output_detail_{{ $item->id }}"
+                        class="btn btn-secondary rounded-circle">
                         <i class="fas fa-caret-down icon-detail-caret" style="color: white;"></i>
                       </button>
                     </div>
                   </td>
                 </tr>
 
+                @foreach ($item->outputDetails as $detail)
+                  @include('output.modal-edit.publikasi')
+                  @include('output.modal-edit.hki')
+                  @include('output.modal-edit.foto-poster')
+                  @include('output.modal-edit.video')
+                  @include('output.modal-delete')
+                  @include('output.modal-archive')
+                @endforeach
                 {{-- @php
                   $parentCounter++;
                 @endphp --}}
@@ -123,4 +133,9 @@
     </div>
   </div>
   @include('output.modal-feedback')
+
+  <script>
+    window.outputs = {!! $output !!}
+    window.jenisOutput = {!! $jenis_output !!}
+  </script>
 @endsection

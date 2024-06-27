@@ -99,7 +99,6 @@ class OutputController extends Controller
         }
 
         $output = $query->get();
-        $startNumber = 1;
 
         $jenis_output = JenisOutput::with([
             'jenisOutputKey' => function ($query) {
@@ -110,7 +109,7 @@ class OutputController extends Controller
         $status_output = StatusOutput::all();
         $tipe = OutputType::getValues();
 
-        return view('output.index', compact('output', 'jenis_output', 'status_output', 'tipe', 'startNumber'));
+        return view('output.index', compact('output', 'jenis_output', 'status_output', 'tipe'));
     }
 
 

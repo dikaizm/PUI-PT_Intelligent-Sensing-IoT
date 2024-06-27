@@ -29,9 +29,9 @@
               <label for="tipe">{{ __('Tipe') }}</label>
               <select id="tipe" name="tipe" class="form-control">
                 <option value="">--Pilih Tipe--</option>
-                @foreach ($tipe as $item)
-                  <option value="{{ $item }}" {{ old('tipe', $detail->tipe) == $item ? 'selected' : '' }}>
-                    {{ $item }}
+                @foreach ($tipe as $tipeItem)
+                  <option value="{{ $tipeItem }}" {{ old('tipe', $detail->tipe) == $tipeItem ? 'selected' : '' }}>
+                    {{ $tipeItem }}
                   </option>
                 @endforeach
               </select>
