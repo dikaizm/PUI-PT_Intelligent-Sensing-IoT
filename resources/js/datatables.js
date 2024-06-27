@@ -129,8 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const outputDetails = output.output_details;
         if (!outputDetails) return '';
 
-console.log(outputDetails);
-
         const rows = outputDetails.map((item, index) => {
             const status = jenisOutput.find(jenis => jenis.id == item.jenis_output_id);
 
@@ -189,6 +187,18 @@ console.log(outputDetails);
             </table>`;
     }
 
+
+    const btnPagination = document.querySelector('.dt-paging');
+    btnPagination.addEventListener('click', function () {
+        btnAccordionListener(table, format);
+    });
+
+    // Event listener for clicking on detail buttons
+    btnAccordionListener(table, format);
+});
+
+
+function btnAccordionListener(table, format) {
     // Event listener for clicking on detail buttons
     const btnDetails = document.querySelectorAll('[id^="btn_output_detail_"]');
 
@@ -213,4 +223,4 @@ console.log(outputDetails);
             }
         });
     });
-});
+}
