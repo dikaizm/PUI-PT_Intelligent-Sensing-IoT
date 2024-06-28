@@ -26,9 +26,9 @@
           @method('PUT')
 
           <div class="input-style-1">
-            <label for="judul_output">{{ __('Judul Foto/Poster') }}</label>
+            <label for="judul_output">{{ __('Judul Video') }}</label>
             <input @error('judul_output') class="form-control is-invalid" @enderror type="text" name="judul_output"
-              id="judul_output" placeholder="{{ __('Judul Foto/Poster') }}"
+              id="judul_output" placeholder="{{ __('Judul Video') }}"
               value="{{ old('judul_output', $output->judul) }}">
             @error('judul_output')
               <span class="invalid-feedback" role="alert">
@@ -66,11 +66,11 @@
           </div>
 
           <div class="input-style-1">
-            <label for="tautan">{{ __('Link Foto/Poster') }} <span
+            <label for="tautan">{{ __('Link Video') }} <span
                 style="color:gray;">{{ __('*Apabila sudah publish') }}</span>
             </label>
             <input @error('tautan') class="form-control is-invalid" @enderror type="text" name="tautan" id="tautan"
-              placeholder="{{ __('Link Foto/Poster') }}" value="{{ old('tautan', $output->tautan) }}">
+              placeholder="{{ __('Link Video') }}" value="{{ old('tautan', $output->tautan) }}">
             @error('tautan')
               <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
