@@ -8,6 +8,8 @@ use App\Models\Penelitian;
 use Illuminate\Http\Request;
 use App\Models\JenisPenelitian;
 use App\Models\StatusPenelitian;
+use App\Models\JenisOutput;
+use App\Models\JenisOutputKey;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePenelitianRequest;
 use App\Http\Requests\UpdatePenelitianRequest;
@@ -205,6 +207,8 @@ class PenelitianController extends Controller
         return view('penelitian.modal-detail', [
             'penelitian' => $penelitian,
             'output' => $output,
+            'jenis_output' => JenisOutput::all(),
+            'jenis_output_key' => JenisOutputKey::all(),
             'is_ketua' => $is_ketua, // Kirimkan $is_ketua ke dalam view
         ]);
     }

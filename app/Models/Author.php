@@ -12,14 +12,12 @@ class Author extends Model
     protected $table = 'author';
 
     protected $attributes = [
-        'is_corresponding' => false,
         'is_ketua' => false,
     ];
 
     protected $fillable = [
         'penelitian_id',
         'user_id',
-        'is_corresponding',
         'is_ketua',
     ];
 

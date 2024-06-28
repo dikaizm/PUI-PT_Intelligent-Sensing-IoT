@@ -6,65 +6,12 @@ use App\Models\User;
 use App\Models\Output;
 use App\Enums\OutputType;
 use App\Models\JenisOutput;
+use App\Models\JenisOutputKey;
 use App\Models\StatusOutput;
 use Illuminate\Http\Request;
 
 class OutputController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-    //     $ROWS_PER_PAGE = 5;
-
-    //     $user = auth()->user();
-    //     $isAdmin = $user->hasRole('Admin');
-
-    //     $query = Output::with([
-    //         'penelitian' => function ($query) {
-    //             $query->where('arsip', false);
-    //         },
-    //         'outputDetails' => function ($query) {
-    //             $query->where('arsip', false);
-    //         },
-    //     ]);
-
-    //     if ($isAdmin) {
-    //         $query->whereHas('penelitian', function ($query) {
-    //             $query->where('arsip', false);
-    //         })->whereHas('outputDetails', function ($query) {
-    //             $query->where('arsip', false);
-    //         });
-    //     } else {
-    //         $query->with(['penelitian.users' => function ($query) use ($user) {
-    //             $query->where('users.id', $user->id);
-    //         }])->whereHas('penelitian', function ($query) {
-    //             $query->where('arsip', false);
-    //         })->whereHas('penelitian.users', function ($query) use ($user) {
-    //             $query->where('users.id', $user->id);
-    //         })->whereHas('outputDetails', function ($query) {
-    //             $query->where('arsip', false);
-    //         });
-    //     }
-
-    //     $output = $query->paginate($ROWS_PER_PAGE);
-
-    //     $currPage = $output->currentPage();
-    //     $startNumber = 1 + ($currPage - 1) * $ROWS_PER_PAGE;
-
-    //     $jenis_output = JenisOutput::with([
-    //         'jenisOutputKey' => function ($query) {
-    //             $query->orderBy('name', 'asc');
-    //         },
-    //     ])->get();
-
-    //     $status_output = StatusOutput::all();
-    //     $tipe = OutputType::getValues();
-
-    //     return view('output.index', compact('output', 'jenis_output', 'status_output', 'tipe', 'startNumber'));
-    // }
-
 
     public function index()
     {
@@ -102,25 +49,18 @@ class OutputController extends Controller
 
         $output = $query->get();
 
-        // Get authors for each output_detail
-        // $output->each(function ($output) {
-        //     $output->outputDetails->each(function ($outputDetail) {
-        //         $outputDetail->load('authorOutputs.author.user');
-        //     });
-        // });
-
-        // dd($output);
-
         $jenis_output = JenisOutput::with([
             'jenisOutputKey' => function ($query) {
                 $query->orderBy('name', 'asc');
             },
         ])->get();
 
+        $jenis_output_key = JenisOutputKey::all();
+
         $status_output = StatusOutput::all();
         $tipe = OutputType::getValues();
 
-        return view('output.index', compact('output', 'jenis_output', 'status_output', 'tipe'));
+        return view('output.index', compact('output', 'jenis_output', 'jenis_output_key', 'status_output', 'tipe'));
     }
 
 

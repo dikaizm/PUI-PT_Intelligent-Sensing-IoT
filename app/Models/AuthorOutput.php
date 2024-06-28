@@ -9,11 +9,18 @@ class AuthorOutput extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $table = 'author_output';
+
+    protected $attributes = [
+        'is_corresponding' => false,
+    ];
 
     protected $fillable = [
         'author_id',
         'output_detail_id',
+        'is_corresponding',
     ];
 
     public function author()

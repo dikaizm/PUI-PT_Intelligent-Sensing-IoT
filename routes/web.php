@@ -322,6 +322,12 @@ Route::middleware('auth')->group(function () {
     ])->name('output-detail.store-video');
     //end output store
 
+    // output edit
+    Route::get('output-detail/{id}/edit/{output_type}', [
+        \App\Http\Controllers\OutputDetailController::class,
+        'edit',
+    ])->name('output-detail.edit');
+
     //output update
     Route::put('output-detail/{id}/update-publikasi', [
         \App\Http\Controllers\OutputDetailController::class,

@@ -104,9 +104,8 @@ new DataTable('#selectAuthorTables', {
 document.addEventListener('DOMContentLoaded', function () {
     // Load outputs data
     const outputs = window.outputs;
-    const jenisOutput = window.jenisOutput;
-
-    console.log(outputs);
+    const statusOutput = window.statusOutput;
+    const editOutputUrls = window.editOutputUrls;
 
     // DataTable initialization
     var table = new DataTable('#dataTables_output', {
@@ -132,9 +131,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!outputDetails) return '';
 
         const rows = outputDetails.map((item, index) => {
-            const status = jenisOutput.find(jenis => jenis.id == item.jenis_output_id);
+            const status = statusOutput.find(status => status.id == item.status_output_id);
 
             const publishDate = item.published_at ? item.published_at : '-';
+
+            const editUrl = editOutputUrls.find(url => url.id == item.id);
 
             return `
                 <tr>
@@ -152,8 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </td>
 
                     <td style="border-left: none; border-top: none; border-right: none; padding: 12px; text-align: center !important;">
-                        <a type="button" data-bs-toggle="modal"
-                        data-bs-target="#modalEdit${status.jenis_output_key.name}${item.id}">
+                        <a type="button" href=${editUrl.route}>
                         <i class="lni lni-pencil" style="color: black;"></i>
                         </a>
 
@@ -191,9 +191,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     const btnPagination = document.querySelector('.dt-paging');
-    btnPagination.addEventListener('click', function () {
-        btnAccordionListener(table, format);
-    });
+    if (btnPagination) {
+        btnPagination.addEventListener('click', function () {
+            btnAccordionListener(table, format);
+        });
+    }
 
     // Event listener for clicking on detail buttons
     btnAccordionListener(table, format);

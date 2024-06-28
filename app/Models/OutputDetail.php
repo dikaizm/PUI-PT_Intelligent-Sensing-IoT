@@ -25,6 +25,7 @@ class OutputDetail extends Model
         'output_id',
         'jenis_output_id',
         'status_output_id',
+        'tipe',
         'judul',
         'tautan',
         'published_at',

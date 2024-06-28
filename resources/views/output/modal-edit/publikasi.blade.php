@@ -54,29 +54,10 @@
               @enderror
             </div>
 
-            {{-- <div class="input-style-1">
+            <div class="input-style-1">
               <label>{{ __('Author') }}</label>
-              <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror"
-                multiple="multiple" style="width: 100%; height: 58px;" required>
-                @foreach ($users as $user)
-                  <option value="{{ $user->id }}"
-                    {{ in_array($user->id, old('user_id', $detail->users->pluck('id')->toArray())) ? 'selected' : '' }}>
-                    {{ $user->name }}
-                  </option>
-                @endforeach
-              </select>
-              @error('user_id[]')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
-              <div class="mt-2">
-                <a type="button" data-bs-toggle="modal" data-bs-target="#modalTambahAnggotaEksternal"
-                  style="font-size:20px; color: red !important;">
-                  {{ __('Tambah Anggota Eksternal') }}
-                </a>
-              </div>
-            </div> --}}
+              <div id="input-anggota-publikasi"></div>
+            </div>
 
             <div class="input-style-1">
               <label for="is_corresponding">{{ __('Corresponding') }}</label>

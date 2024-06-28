@@ -348,8 +348,25 @@
                       style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 28%;">
 
                       @if (request()->query('arsip') != 'true')
-                        <a type="button" data-bs-toggle="modal"
-                          data-bs-target="#modalEdit{{ $item->jenisOutput->jenisOutputKey->name }}{{ $item->id }}">
+                      @php
+                      // Find the related jenis output
+                      $jenisOutput = $jenis_output->firstWhere('id', $item->jenis_output_id);
+                      // Initialize the output key name
+                      $jenisOutputKeyName = null;
+
+                      if ($jenisOutput) {
+                          // Find the related jenis output key
+                          $jenisOutputKey = $jenis_output_key->firstWhere('id', $jenisOutput->jenis_output_key_id);
+
+                          if ($jenisOutputKey && $jenisOutputKey->name === 'Foto/Poster') {
+                              $jenisOutputKeyName = 'foto-poster';
+                          } elseif ($jenisOutputKey) {
+                              $jenisOutputKeyName = strtolower($jenisOutputKey->name);
+                          }
+                      }
+                    @endphp
+
+                        <a type="button" href="{{ route('output-detail.edit', ['id' => $item->id, 'output_type' => $jenisOutputKeyName]) }}">
                           <i class="lni lni-pencil" style="color: black;"></i>
                         </a>
                       @endif
@@ -369,9 +386,9 @@
   </div>
 
   @include('penelitian.modal-edit-output.delete')
-  @include('penelitian.modal-edit-output.foto-poster')
+  {{-- @include('penelitian.modal-edit-output.foto-poster')
   @include('penelitian.modal-edit-output.hki')
   @include('penelitian.modal-edit-output.publikasi')
-  @include('penelitian.modal-edit-output.video')
+  @include('penelitian.modal-edit-output.video') --}}
 
 @endsection

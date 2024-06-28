@@ -37,6 +37,10 @@
             $parentCounter = 1;
           @endphp
 
+          <script>
+            window.editOutputUrls = [];
+          </script>
+
           <table id="dataTables_output" class="table-striped table-bordered table">
             <thead>
               <tr>
@@ -113,11 +117,36 @@
                   </td>
                 </tr>
 
+                <script>
+                  @foreach ($item->outputDetails as $detail)
+                    @php
+                      // Find the related jenis output
+                      $jenisOutput = $jenis_output->firstWhere('id', $detail->jenis_output_id);
+                      // Initialize the output key name
+                      $jenisOutputKeyName = null;
+
+                      if ($jenisOutput) {
+                          // Find the related jenis output key
+                          $jenisOutputKey = $jenis_output_key->firstWhere('id', $jenisOutput->jenis_output_key_id);
+
+                          if ($jenisOutputKey && $jenisOutputKey->name === 'Foto/Poster') {
+                              $jenisOutputKeyName = 'foto-poster';
+                          } elseif ($jenisOutputKey) {
+                              $jenisOutputKeyName = strtolower($jenisOutputKey->name);
+                          }
+                      }
+                    @endphp
+
+                    @if ($jenisOutputKeyName)
+                      window.editOutputUrls.push({
+                        id: "{{ $detail->id }}",
+                        route: "{{ route('output-detail.edit', ['id' => $detail->id, 'output_type' => $jenisOutputKeyName]) }}"
+                      });
+                    @endif
+                  @endforeach
+                </script>
+
                 @foreach ($item->outputDetails as $detail)
-                  @include('output.modal-edit.publikasi')
-                  @include('output.modal-edit.hki')
-                  @include('output.modal-edit.foto-poster')
-                  @include('output.modal-edit.video')
                   @include('output.modal-delete')
                   @include('output.modal-archive')
                 @endforeach
@@ -136,6 +165,6 @@
 
   <script>
     window.outputs = {!! $output !!}
-    window.jenisOutput = {!! $jenis_output !!}
+    window.statusOutput = {!! $status_output !!}
   </script>
 @endsection

@@ -35,6 +35,8 @@ class UpdatePublikasiOutputRequest extends FormRequest
                 'regex:/^https?:\/\/[^\s$.?#].[^\s]*$/i',
                 'max:255',
             ],
+            'user_id_*' => ['required', 'integer', 'exists:users,id'],
+            'is_corresponding' => ['nullable', 'exists:users,id'],
         ];
     }
 }

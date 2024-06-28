@@ -50,7 +50,7 @@ class Penelitian extends Model
             'author',
             'penelitian_id',
             'user_id'
-        )->withPivot('is_corresponding', 'is_ketua');
+        )->withPivot('is_ketua');
     }
 
     public function output(): HasOne

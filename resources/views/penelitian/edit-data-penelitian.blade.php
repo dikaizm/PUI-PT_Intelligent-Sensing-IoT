@@ -298,7 +298,7 @@
   </div>
 
   <!-- ========== modal status =========== -->
-  @include('penelitian.modal-tambah-anggota-eksternal')
+  {{-- @include('penelitian.modal-tambah-anggota-eksternal') --}}
   <!-- ========== modal end =========== -->
 
   <!-- ========== modal status =========== -->

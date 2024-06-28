@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         let selectedUsersData = JSON.parse(localStorage.getItem('selectedUsers'));
 
-        if (selectedUsersData.length > 0) {
+        if (selectedUsersData && selectedUsersData.length > 0) {
             selectedUsers = selectedUsersData;
         }
     }
@@ -53,24 +53,26 @@ document.addEventListener('DOMContentLoaded', function () {
     if (urlPath.startsWith(URL_CREATE_OUTPUT)) {
         // Select all navigation links (buttons) in the vertical pill navigation
         const groupTabOutput = document.getElementById('v-pills-tab');
-        const navLinksOutput = groupTabOutput.querySelectorAll('.nav-link');
+        if (groupTabOutput) {
+            const navLinksOutput = groupTabOutput.querySelectorAll('.nav-link');
 
-        // Loop through each link and add an event listener for 'shown.bs.tab' event
-        navLinksOutput.forEach(link => {
-            link.addEventListener('shown.bs.tab', function (event) {
-                const activeTabId = event.target.getAttribute('data-bs-target').substring(1); // Get the active tab id
-                const tabName = activeTabId.split('-')[2];
-                // Update tab state
-                outputTabState.activeTab = tabName;
+            // Loop through each link and add an event listener for 'shown.bs.tab' event
+            navLinksOutput.forEach(link => {
+                link.addEventListener('shown.bs.tab', function (event) {
+                    const activeTabId = event.target.getAttribute('data-bs-target').substring(1); // Get the active tab id
+                    const tabName = activeTabId.split('-')[2];
+                    // Update tab state
+                    outputTabState.activeTab = tabName;
 
-                const groupInput = document.getElementById(`input-anggota-${tabName}`)
-                const inputUsers = groupInput.querySelectorAll(`[id^="user_id_${outputTabState.activeTab}_"]`);
+                    const groupInput = document.getElementById(`input-anggota-${tabName}`)
+                    const inputUsers = groupInput.querySelectorAll(`[id^="user_id_${outputTabState.activeTab}_"]`);
 
-                if (inputUsers.length < 1) {
-                    InputAnggotaDiv(0);
-                }
+                    if (inputUsers.length < 1) {
+                        InputAnggotaDiv(0);
+                    }
+                });
             });
-        });
+        }
     }
 
     const inputUsers = document.querySelectorAll(`[id^="user_id_${outputTabState.activeTab}_"]`);
