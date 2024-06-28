@@ -23,7 +23,7 @@ class StorePublikasiOutputRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'uuid' => ['exists:penelitian,uuid'],
+            // 'uuid' => ['exists:penelitian,uuid'],
             'jenis_output_id' => ['required', 'exists:jenis_output,id'],
             'status_output_id' => ['required', 'exists:status_output,id'],
             'judul_penelitian' => ['required', 'max:254'],

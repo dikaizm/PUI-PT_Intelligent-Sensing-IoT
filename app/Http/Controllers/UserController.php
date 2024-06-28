@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function apiIndex()
     {
-        return User::all();
+        return User::orderBy('name')->get();
     }
 
     /**

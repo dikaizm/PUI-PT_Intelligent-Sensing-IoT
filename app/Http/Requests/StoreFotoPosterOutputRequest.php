@@ -22,7 +22,7 @@ class StoreFotoPosterOutputRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'uuid' => ['exists:penelitian,uuid'],
+            // 'uuid' => ['exists:penelitian,uuid'],
             'jenis_output_id' => ['required', 'exists:jenis_output,id'],
             'judul_output' => ['required', 'max:254'],
             'tautan' => ['nullable', 'regex:/^https?:\/\/.*/i'],

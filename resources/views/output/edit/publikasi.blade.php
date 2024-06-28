@@ -28,7 +28,7 @@
 
           <div class="input-style-1">
             <label for="jenis_output_id">{{ __('Jenis') }}</label>
-            <select id="jenis_output_id" name="jenis_output_id" class="form-control" disabled>
+            <select id="jenis_output_id" name="jenis_output_id" class="form-control">
               <option value="">--Pilih Jenis Output--</option>
               @foreach ($jenis_output as $item)
                 @php
@@ -36,7 +36,7 @@
                   $outputName = $item->name;
                 @endphp
                 @if (in_array($jenisOutputKey, ['Publikasi']))
-                  <option value="{{ $item->id }}" {{ old('jenis_output_id') == $item->id ? 'selected' : '' }}>
+                  <option value="{{ $item->id }}" {{ old('jenis_output_id', $output->jenis_output_id) == $item->id ? 'selected' : '' }}>
                     {{ $jenisOutputKey }} {{ $outputName }}
                   </option>
                 @endif

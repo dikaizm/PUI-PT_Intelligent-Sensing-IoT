@@ -28,18 +28,20 @@ class OutputDetailController extends Controller
     {
         $userData = [];
 
-        // Loop through all inputs that start with 'user_id_publikasi_'
+        // Loop through all inputs that start with 'user_id_'
         foreach ($request->all() as $key => $value) {
-            if (strpos($key, 'user_id_publikasi_') === 0) {
-                $userId = substr($key, strlen('user_id_publikasi_')); // Extract numeric part
+            if (strpos($key, 'user_id_') === 0) {
+                $userId = substr($key, strlen('user_id_')); // Extract numeric part
                 $userData[$userId] = $value; // Store value in array
             }
         }
 
+        // dd($userData);
+
         foreach ($userData as $userId => $value) {
             // Attach user to penelitian if not already attached
-            if (!$penelitian->users()->where('user_id', $userId)->exists()) {
-                $penelitian->users()->attach($userId);
+            if (!$penelitian->users()->where('user_id', $value)->exists()) {
+                $penelitian->users()->attach($value);
             }
         }
 
@@ -325,9 +327,7 @@ class OutputDetailController extends Controller
             'jenis_output_id' => $request->jenis_output_id,
             'status_output_id' => 1,
             'judul' => $request->judul_output,
-            'file' => $request->hasFile('file')
-                ? $request->file('file')->store('output-foto-poster', 'public')
-                : null,
+            'tautan' => $request->tautan,
         ]);
 
         $this->processAuthorOutputs($penelitian, $outputDetail, $request, $userData);
