@@ -22,9 +22,11 @@ class StoreFotoPosterOutputRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'uuid' => ['exists:penelitian,uuid'],
             'jenis_output_id' => ['required', 'exists:jenis_output,id'],
             'judul_output' => ['required', 'max:254'],
-            // 'file' => ['required', 'file', 'mimes:jpg,png,jpeg', 'max:512'],
+            'tautan' => ['nullable', 'regex:/^https?:\/\/.*/i'],
+            'user_id_foto_*' => ['required', 'integer', 'exists:users,id'],
         ];
     }
 }

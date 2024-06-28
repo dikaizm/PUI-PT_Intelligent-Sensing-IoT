@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return `
                 <tr>
                     <td>${index + 1}</td>
-                    <td>${item.tipe}</td>
+                    <td>${item.jenis_output_key}</td>
                     <td>${item.judul}</td>
                     <td>${status.name}</td>
                     <td>${publishDate}</td>

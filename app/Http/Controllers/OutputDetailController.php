@@ -24,6 +24,111 @@ use App\Http\Requests\UpdateFotoPosterOutputRequest;
 
 class OutputDetailController extends Controller
 {
+    private function attachUsersToPenelitian($request, $penelitian)
+    {
+        $userData = [];
+
+        // Loop through all inputs that start with 'user_id_publikasi_'
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'user_id_publikasi_') === 0) {
+                $userId = substr($key, strlen('user_id_publikasi_')); // Extract numeric part
+                $userData[$userId] = $value; // Store value in array
+            }
+        }
+
+        foreach ($userData as $userId => $value) {
+            // Attach user to penelitian if not already attached
+            if (!$penelitian->users()->where('user_id', $userId)->exists()) {
+                $penelitian->users()->attach($userId);
+            }
+        }
+
+        return $userData;
+    }
+
+    private function processAuthorOutputs($penelitian, $outputDetail, $request, $userData)
+    {
+        // Get authors with user_id from penelitian
+        $authors = Author::whereIn('user_id', $userData)
+            ->where('penelitian_id', $penelitian->id)
+            ->get();
+
+        // Create pivot data for authorOutputs corresponding
+        $pivotDataAuthor = [];
+        foreach ($authors as $author) {
+            $pivotDataAuthor[$author->id] = [
+                'is_corresponding' => $author->user_id == $request->is_corresponding ? true : false,
+            ];
+        }
+
+        // Create authorOutputs for each author
+        foreach ($authors as $author) {
+            $outputDetail->authorOutputs()->insert([
+                'author_id' => $author->id,
+                'output_detail_id' => $outputDetail->id,
+                'is_corresponding' => $pivotDataAuthor[$author->id]['is_corresponding'],
+            ]);
+        }
+    }
+
+
+    private function processAuthorOutputsUpdate($request, $outputDetail, $useCorresponding = false)
+    {
+        $penelitian = $outputDetail->output->penelitian;
+
+        // Extract user IDs from the request
+        $userData = [];
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'user_id_') === 0) {
+                $userId = substr($key, strlen('user_id_')); // Extract numeric part
+                $userData[$userId] = $value; // Store value in array
+            }
+        }
+
+        // Get current user IDs attached to the penelitian
+        $currentUserIds = $penelitian->users()->pluck('user_id')->toArray();
+
+        // Attach users to penelitian if not already attached
+        foreach ($userData as $userId) {
+            if (!in_array($userId, $currentUserIds)) {
+                $penelitian->users()->attach($userId);
+            }
+        }
+
+        // Get authors with user_id from penelitian
+        $authors = Author::whereIn('user_id', $userData)
+            ->where('penelitian_id', $penelitian->id)
+            ->get();
+
+        // Create or update authorOutputs for each author
+        foreach ($authors as $author) {
+            if ($useCorresponding) {
+                $isCorresponding = $author->user_id == $request->is_corresponding;
+            } else {
+                $isCorresponding = false;
+            }
+
+            $outputDetail->authorOutputs()->updateOrCreate(
+                ['author_id' => $author->id],
+                ['is_corresponding' => $isCorresponding]
+            );
+        }
+
+        // Delete authors not associated with any authorOutputs
+        $outputDetailIds = OutputDetail::where('output_id', $outputDetail->output_id)
+            ->pluck('id')
+            ->toArray();
+
+        $authorOutputs = AuthorOutput::whereIn('output_detail_id', $outputDetailIds)
+            ->pluck('author_id')
+            ->toArray();
+
+        Author::where('penelitian_id', $penelitian->id)
+            ->whereNotIn('id', $authorOutputs)
+            ->delete();
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -104,21 +209,7 @@ class OutputDetailController extends Controller
             ]));
 
 
-        $userData = [];
-        // Loop through all inputs that start with 'user_id_'
-        foreach ($request->all() as $key => $value) {
-            if (strpos($key, 'user_id_publikasi_') === 0) {
-                $userId = substr($key, strlen('user_id_publikasi_')); // Extract numeric part
-                $userData[$userId] = $value; // Store value in array
-            }
-        }
-
-        foreach ($userData as $userId) {
-            // Attach user to penelitian if not already attached
-            if (!$penelitian->users()->where('user_id', $userId)->exists()) {
-                $penelitian->users()->attach($userId);
-            }
-        }
+        $userData = $this->attachUsersToPenelitian($request, $penelitian);
 
         $output = OutputController::store($penelitian->id);
 
@@ -132,28 +223,7 @@ class OutputDetailController extends Controller
             'published_at' => $request->published_at,
         ]);
 
-        // Get authors with user_id from penelitian
-        $authors = Author::whereIn('user_id', $userData)
-            ->where('penelitian_id', $penelitian->id)
-            ->get();
-
-        // Create pivot data for authorOutputs corresponding
-        $pivotDataAuthor = [];
-        foreach ($authors as $author) {
-            $pivotDataAuthor[$author->id] = [
-                'is_corresponding' =>
-                $author->user_id == $request->is_corresponding ? true : false,
-            ];
-        }
-
-        // Create authorOutputs for each author
-        foreach ($authors as $author) {
-            $outputDetail->authorOutputs()->insert([
-                'author_id' => $author->id,
-                'output_detail_id' => $outputDetail->id,
-                'is_corresponding' => $pivotDataAuthor[$author->id]['is_corresponding'],
-            ]);
-        }
+        $this->processAuthorOutputs($penelitian, $outputDetail, $request, $userData);
 
         return redirect()
             ->route('laporan-output.index')
@@ -193,24 +263,11 @@ class OutputDetailController extends Controller
                 'output_only' => true,
             ]));
 
-        $userData = [];
-        // Loop through all inputs that start with 'user_id_'
-        foreach ($request->all() as $key => $value) {
-            if (strpos($key, 'user_id_publikasi_') === 0) {
-                $userId = substr($key, strlen('user_id_publikasi_')); // Extract numeric part
-                $userData[] = $value; // Store value in array
-            }
-        }
-
-        foreach ($userData as $userId) {
-            if (is_numeric($userId) && $userId != '' && User::find($userId)) {
-                $penelitian->users()->attach($userId);
-            }
-        }
+        $userData = $this->attachUsersToPenelitian($request, $penelitian);
 
         $output = OutputController::store($penelitian->id);
 
-        OutputDetail::create([
+        $outputDetail = OutputDetail::create([
             'output_id' => $output->id,
             'jenis_output_id' => $request->jenis_output_id,
             'status_output_id' => $request->status_output_id,
@@ -219,9 +276,11 @@ class OutputDetailController extends Controller
             'published_at' => $request->published_at,
         ]);
 
+        $this->processAuthorOutputs($penelitian, $outputDetail, $request, $userData);
+
         return redirect()
             ->route('laporan-output.index')
-            ->with('success', 'Output publikasi berhasil disimpan!');
+            ->with('success', 'Output HKI berhasil disimpan!');
     }
 
     public function storeFotoPoster(StoreFotoPosterOutputRequest $request)
@@ -257,30 +316,11 @@ class OutputDetailController extends Controller
                 'output_only' => true,
             ]));
 
-        $userData = [];
-        // Loop through all inputs that start with 'user_id_'
-        foreach ($request->all() as $key => $value) {
-            if (strpos($key, 'user_id_foto_') === 0) {
-                $userId = substr($key, strlen('user_id_foto_')); // Extract numeric part
-                $userData[$userId] = $value; // Store value in array
-            }
-        }
-
-        $pivotData = [];
-        foreach ($userData as $userId) {
-            if (is_numeric($userId) && $userId != '' && User::find($userId)) {
-                $pivotData[$userId] = [
-                    'is_corresponding' =>
-                    $userId == $request->is_corresponding ? true : false,
-                ];
-            };
-        }
-
-        $penelitian->users()->sync($pivotData);
+        $userData = $this->attachUsersToPenelitian($request, $penelitian);
 
         $output = OutputController::store($penelitian->id);
 
-        OutputDetail::create([
+        $outputDetail = OutputDetail::create([
             'output_id' => $output->id,
             'jenis_output_id' => $request->jenis_output_id,
             'status_output_id' => 1,
@@ -289,6 +329,8 @@ class OutputDetailController extends Controller
                 ? $request->file('file')->store('output-foto-poster', 'public')
                 : null,
         ]);
+
+        $this->processAuthorOutputs($penelitian, $outputDetail, $request, $userData);
 
         return redirect()
             ->route('laporan-output.index')
@@ -328,30 +370,11 @@ class OutputDetailController extends Controller
                 'output_only' => true,
             ]));
 
-        $userData = [];
-        // Loop through all inputs that start with 'user_id_'
-        foreach ($request->all() as $key => $value) {
-            if (strpos($key, 'user_id_video_') === 0) {
-                $userId = substr($key, strlen('user_id_video_')); // Extract numeric part
-                $userData[$userId] = $value; // Store value in array
-            }
-        }
-
-        $pivotData = [];
-        foreach ($userData as $userId) {
-            if (is_numeric($userId) && $userId != '' && User::find($userId)) {
-                $pivotData[$userId] = [
-                    'is_corresponding' =>
-                    $userId == $request->is_corresponding ? true : false,
-                ];
-            };
-        }
-
-        $penelitian->users()->sync($pivotData);
+        $userData = $this->attachUsersToPenelitian($request, $penelitian);
 
         $output = OutputController::store($penelitian->id);
 
-        OutputDetail::create([
+        $outputDetail = OutputDetail::create([
             'output_id' => $output->id,
             'jenis_output_id' => $request->jenis_output_id,
             'status_output_id' => 1,
@@ -359,9 +382,11 @@ class OutputDetailController extends Controller
             'tautan' => $request->tautan,
         ]);
 
+        $this->processAuthorOutputs($penelitian, $outputDetail, $request, $userData);
+
         return redirect()
             ->route('laporan-output.index')
-            ->with('success', 'Output publikasi berhasil disimpan!');
+            ->with('success', 'Output video berhasil disimpan!');
     }
 
     /**
@@ -379,6 +404,12 @@ class OutputDetailController extends Controller
     {
         if ($output_type === 'publikasi') {
             return $this->editPublikasi($id);
+        } else if ($output_type === 'hki') {
+            return $this->editHKI($id);
+        } else if ($output_type === 'foto-poster') {
+            return $this->editFotoPoster($id);
+        } else if ($output_type === 'video') {
+            return $this->editVideo($id);
         }
     }
 
@@ -429,6 +460,120 @@ class OutputDetailController extends Controller
         ]);
     }
 
+    private function editHKI(string $id)
+    {
+        $outputDetail = OutputDetail::findOrFail($id);
+        // Check if found
+        if (!$outputDetail) {
+            return redirect()
+                ->back()
+                ->with('danger', 'Output tidak ditemukan');
+        }
+
+        // Check if the output is of type 'HKI'
+        if ($outputDetail->jenisOutput->jenisOutputKey->name !== 'HKI') {
+            return redirect()
+                ->back()
+                ->with('danger', 'Output bukan merupakan HKI');
+        }
+
+        $penelitian = $outputDetail->output->penelitian;
+        $authorOutputs = $outputDetail->authorOutputs;
+
+        // Get the IDs of the authors in authorOutputs
+        $authorOutputUserIds = $authorOutputs->pluck('author_id')->toArray();
+
+        // Get the users of penelitian who are also in authorOutputs
+        $authors = $penelitian->users()->whereIn('author.id', $authorOutputUserIds)->get();
+
+        return view('output.edit.hki', [
+            'output' => $outputDetail,
+            'jenis_output' => JenisOutput::with([
+                'jenisOutputKey' => function ($query) {
+                    $query->orderBy('name', 'asc');
+                },
+            ])->get(),
+            'status_output' => StatusOutput::all(),
+            'authors' => $authors,
+        ]);
+    }
+
+    private function editFotoPoster(string $id)
+    {
+        $outputDetail = OutputDetail::findOrFail($id);
+        // Check if found
+        if (!$outputDetail) {
+            return redirect()
+                ->back()
+                ->with('danger', 'Output tidak ditemukan');
+        }
+
+        // Check if the output is of type 'Foto/Poster'
+        if ($outputDetail->jenisOutput->jenisOutputKey->name !== 'Foto/Poster') {
+            return redirect()
+                ->back()
+                ->with('danger', 'Output bukan merupakan Foto/Poster');
+        }
+
+        $penelitian = $outputDetail->output->penelitian;
+        $authorOutputs = $outputDetail->authorOutputs;
+
+        // Get the IDs of the authors in authorOutputs
+        $authorOutputUserIds = $authorOutputs->pluck('author_id')->toArray();
+
+        // Get the users of penelitian who are also in authorOutputs
+        $authors = $penelitian->users()->whereIn('author.id', $authorOutputUserIds)->get();
+
+        return view('output.edit.foto-poster', [
+            'output' => $outputDetail,
+            'jenis_output' => JenisOutput::with([
+                'jenisOutputKey' => function ($query) {
+                    $query->orderBy('name', 'asc');
+                },
+            ])->get(),
+            'status_output' => StatusOutput::all(),
+            'authors' => $authors,
+        ]);
+    }
+
+    private function editVideo(string $id)
+    {
+        $outputDetail = OutputDetail::findOrFail($id);
+        // Check if found
+        if (!$outputDetail) {
+            return redirect()
+                ->back()
+                ->with('danger', 'Output tidak ditemukan');
+        }
+
+        // Check if the output is of type 'Video'
+        if ($outputDetail->jenisOutput->jenisOutputKey->name !== 'Video') {
+            return redirect()
+                ->back()
+                ->with('danger', 'Output bukan merupakan Video');
+        }
+
+        $penelitian = $outputDetail->output->penelitian;
+        $authorOutputs = $outputDetail->authorOutputs;
+
+        // Get the IDs of the authors in authorOutputs
+        $authorOutputUserIds = $authorOutputs->pluck('author_id')->toArray();
+
+        // Get the users of penelitian who are also in authorOutputs
+        $authors = $penelitian->users()->whereIn('author.id', $authorOutputUserIds)->get();
+
+        return view('output.edit.video', [
+            'output' => $outputDetail,
+            'jenis_output' => JenisOutput::with([
+                'jenisOutputKey' => function ($query) {
+                    $query->orderBy('name', 'asc');
+                },
+            ])->get(),
+            'status_output' => StatusOutput::all(),
+            'authors' => $authors,
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      */
@@ -452,90 +597,7 @@ class OutputDetailController extends Controller
 
         $outputDetail->save();
 
-        $penelitian = $outputDetail->output->penelitian;
-
-        $userData = [];
-        // Loop through all inputs that start with 'user_id_'
-        foreach ($request->all() as $key => $value) {
-            if (strpos($key, 'user_id_') === 0) {
-                $userId = substr($key, strlen('user_id_')); // Extract numeric part
-                $userData[$userId] = $value; // Store value in array
-            }
-        }
-
-        // Get current user IDs attached to the penelitian
-        $currentUserIds = $penelitian->users()->pluck('user_id')->toArray();
-
-        foreach ($userData as $userId) {
-            // If the user is not in the current user IDs, attach the user
-            if (!in_array($userId, $currentUserIds)) {
-                $penelitian->users()->attach($userId);
-            }
-        }
-
-        // Get authors with user_id from penelitian
-        $authors = Author::whereIn('user_id', $userData)
-            ->where('penelitian_id', $penelitian->id)
-            ->get();
-
-        // Create pivot data for authorOutputs corresponding
-        $pivotDataAuthor = [];
-        foreach ($authors as $author) {
-            $pivotDataAuthor[$author->id] = [
-                'is_corresponding' =>
-                $author->user_id == $request->is_corresponding ? true : false,
-            ];
-        }
-
-        foreach ($authors as $author) {
-            // If the author is not in the authorOutputs, create a new authorOutputs
-            if (
-                !$outputDetail->authorOutputs()
-                    ->where('author_id', $author->id)
-                    ->exists()
-            ) {
-                $outputDetail->authorOutputs()->insert([
-                    'author_id' => $author->id,
-                    'output_detail_id' => $outputDetail->id,
-                    'is_corresponding' => $pivotDataAuthor[$author->id]['is_corresponding'],
-                ]);
-            } else {
-                // If the author is in the authorOutputs, update the pivot data
-                $outputDetail->authorOutputs()
-                    ->where('author_id', $author->id)
-                    ->update([
-                        'is_corresponding' => $pivotDataAuthor[$author->id]['is_corresponding'],
-                    ]);
-            }
-
-            // If found authorOutputs that are not in the authors, delete the authorOutputs
-            $outputDetail->authorOutputs()
-                ->whereNotIn('author_id', $authors->pluck('id'))
-                ->delete();
-        }
-
-        // Get output id from outputDetail
-        $outputId = $outputDetail->output_id;
-        // Get all outputDetailIds with output_id from outputDetail
-        $outputDetailIds = OutputDetail::where('output_id', $outputId)
-            ->pluck('id')
-            ->toArray();
-        // Get all authorOutputs with output_id from outputDetail
-        $authorOutputs = AuthorOutput::whereIn('output_detail_id', $outputDetailIds)
-            ->get();
-        $authors = $penelitian->users()->where('penelitian_id', $penelitian->id)->get();
-        // Delete author that is not in the authorOutputs
-        foreach ($authors as $author) {
-            // Check if the author exists in the authorOutputs collection with the specified conditions
-            $exists = $authorOutputs->contains(function ($output) use ($author) {
-                return $output->author_id == $author->id;
-            });
-
-            // Delete the author if they don't exist in the authorOutputs collection with the specified conditions
-            if (!$exists) {
-                Author::where('id', $author->id)->delete();
-            }
-        }
+        $this->processAuthorOutputsUpdate($request, $outputDetail, true);
 
         return redirect()
             ->route('laporan-output.index')
@@ -554,9 +616,11 @@ class OutputDetailController extends Controller
 
         $hki->save();
 
+        $this->processAuthorOutputsUpdate($request, $hki);
+
         return redirect()
-            ->back()
-            ->with('success', 'Output Publikasi anda berhasil diperbarui');
+            ->route('laporan-output.index')
+            ->with('success', 'Output HKI anda berhasil diperbarui');
     }
 
     public function updateFotoPoster(
@@ -565,21 +629,16 @@ class OutputDetailController extends Controller
     ) {
         $fotoposter = OutputDetail::findOrFail($id);
 
-        $fotoposter->jenis_output_id;
+        $fotoposter->jenis_output_id = $request->jenis_output_id;
         $fotoposter->judul = $request->judul_output;
-
-        // if ($request->hasFile('file') && $fotoposter->file) {
-        //     Storage::disk('public')->delete($fotoposter->file);
-        // }
-
-        // $fotoposter->file = $request->hasFile('file')
-        //     ? $request->file('file')->store('output-foto-poster', 'public')
-        //     : $fotoposter->file;
+        $fotoposter->tautan = $request->tautan;
 
         $fotoposter->save();
 
+        $this->processAuthorOutputsUpdate($request, $fotoposter);
+
         return redirect()
-            ->back()
+            ->route('laporan-output.index')
             ->with('success', 'Output Foto poster anda berhasil diperbarui');
     }
 
@@ -593,8 +652,10 @@ class OutputDetailController extends Controller
 
         $video->save();
 
+        $this->processAuthorOutputsUpdate($request, $video);
+
         return redirect()
-            ->back()
+            ->route('laporan-output.index')
             ->with('success', 'Output video anda berhasil diperbarui');
     }
 

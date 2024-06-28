@@ -57,6 +57,14 @@ class OutputController extends Controller
 
         $jenis_output_key = JenisOutputKey::all();
 
+        foreach ($output as $o) {
+            $o->outputDetails->each->load('jenisOutput.jenisOutputKey');
+
+            $o->outputDetails->each(function ($od) {
+                $od->jenis_output_key = optional($od->jenisOutput)->jenisOutputKey->name;
+            });
+        }
+
         $status_output = StatusOutput::all();
         $tipe = OutputType::getValues();
 

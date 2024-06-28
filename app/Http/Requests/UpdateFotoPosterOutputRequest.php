@@ -23,6 +23,7 @@ class UpdateFotoPosterOutputRequest extends FormRequest
     {
         return [
             'judul_output' => ['required', 'max:254'],
+            'user_id_*' => ['required', 'integer', 'exists:users,id'],
             // 'file' => ['nullable', 'file', 'mimes:jpg,png,jpeg', 'max:512'],
         ];
     }

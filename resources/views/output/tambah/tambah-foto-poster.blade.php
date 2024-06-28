@@ -32,20 +32,6 @@
         <div class="input-style-1">
             <label>{{ __('Author') }}</label>
             <div id="input-anggota-foto"></div>
-
-            {{-- <select name="user_id[]" class="form-control select2 @error('user_id[]') is-invalid @enderror"
-                multiple="multiple" style="width: 100%; height: 58px;" required>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}" @if (isset($penelitian) && $penelitian && in_array($user->id, $penelitian->users->pluck('id')->toArray())) selected @endif>
-                        {{ $user->name }}
-                    </option>
-                @endforeach
-            </select>
-            @error('user_id[]')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror --}}
         </div>
 
         <div class="input-style-1">
@@ -75,18 +61,6 @@
                 </span>
             @enderror
         </div>
-
-        {{-- <div class="input-style-1">
-            <label for="file">{{ __('File Foto') }}</label>
-            <input type="file" name="file" accept=".jpeg, .png, .jpg"
-                class="form-control @error('file') is-invalid @enderror" placeholder="{{ __('File Foto') }}"
-                value="{{ old('file') }}">
-            @error('file')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div> --}}
     </div>
     <div class="action d-flex flex-wrap justify-content-end">
         <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"

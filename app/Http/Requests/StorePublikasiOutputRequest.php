@@ -32,7 +32,7 @@ class StorePublikasiOutputRequest extends FormRequest
                 'required',
                 'in:' . implode(',', OutputType::getValues()),
             ],
-            'tautan' => ['nullable', 'regex:/^https?:\/\/.*/i', 'max:255'],
+            'tautan' => ['nullable', 'regex:/^https?:\/\/.*/i'],
             'user_id_publikasi_*' => ['required', 'integer', 'exists:users,id'],
             'is_corresponding' => ['required', 'exists:users,id'],
         ];

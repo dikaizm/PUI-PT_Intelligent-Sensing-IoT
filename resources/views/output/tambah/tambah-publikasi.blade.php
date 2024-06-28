@@ -19,7 +19,8 @@
     <select id="tipe" name="tipe" class="form-control">
       <option value="">--Pilih Tipe--</option>
       @foreach ($tipe as $item)
-        <option value="{{ $item }}" {{ $item != '' && old('tipe') == $item ? 'selected' : '' }}>{{ $item }}
+        <option value="{{ $item }}" {{ $item != '' && old('tipe') == $item ? 'selected' : '' }}>
+          {{ $item }}
         </option>
       @endforeach
     </select>
@@ -101,7 +102,9 @@
       id="status_output_id" style="max-width: 100%; margin: 0 auto;">
       <option value="">Pilih Status</option>
       @foreach ($status_output as $item)
-        <option value="{{ $item->id }}">{{ $item->name }}</option>
+        <option value="{{ $item->id }}" {{ old('status_output_id') == $item->id ? 'selected' : '' }}>
+          {{ $item->name }}
+        </option>
       @endforeach
     </select>
     @error('status_output_id')

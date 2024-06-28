@@ -22,13 +22,14 @@ class StoreVideoOutputRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'uuid' => ['exists:penelitian,uuid'],
             'jenis_output_id' => ['required', 'exists:jenis_output,id'],
             'judul_output' => ['required', 'string', 'max:255'],
             'tautan' => [
                 'nullable',
                 'regex:/^https?:\/\/[^\s$.?#].[^\s]*$/i',
-                'max:255',
             ],
+            'user_id_video_*' => ['required', 'integer', 'exists:users,id'],
         ];
     }
 }
