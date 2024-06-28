@@ -24,7 +24,6 @@ return new class extends Migration {
                 ->references('id')
                 ->on('users')
                 ->onDelete('restrict');
-            $table->boolean('is_corresponding')->default(false);
             $table->boolean('is_ketua')->default(false);
         });
 
@@ -42,6 +41,7 @@ return new class extends Migration {
                 ->references('id')
                 ->on('output_detail')
                 ->onDelete('restrict');
+            $table->boolean('is_corresponding')->default(false);
         });
     }
 
