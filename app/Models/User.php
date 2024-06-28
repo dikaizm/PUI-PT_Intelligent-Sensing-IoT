@@ -58,7 +58,7 @@ class User extends Authenticatable
             'author',
             'user_id',
             'penelitian_id'
-        )->withPivot('is_corresponding', 'is_ketua');
+        )->withPivot('is_ketua');
     }
 
 }
