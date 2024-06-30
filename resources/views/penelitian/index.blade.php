@@ -54,9 +54,13 @@
                 <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                   <h6>Tgl Update</h6>
                 </th>
-                <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 28%;">
-                  <h6>Feedback</h6>
-                </th>
+
+                @if (!request()->query('arsip'))
+                  <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 28%;">
+                    <h6>Feedback</h6>
+                  </th>
+                @endif
+
                 <th style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 7%;">
                   <h6>Action</h6>
                 </th>
@@ -84,16 +88,20 @@
                   <td style="padding: 12px; text-align: center !important;">
                     <p>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y') }}</p>
                   </td>
-                  <td style="padding: 12px; text-align: center !important;">
-                    @can('update-feedback')
-                      <a type="button" {{-- class="badge badge-info"  --}} data-bs-toggle="modal"
-                        data-bs-target="#modalFeedbackPenelitian{{ $item->id }}" style="color: gray !important;">
-                      @endcan
-                      {{ $item->feedback ? $item->feedback : 'Isi feedback' }}
+
+                  @if (!request()->query('arsip'))
+                    <td style="padding: 12px; text-align: center !important;">
                       @can('update-feedback')
-                      </a>
-                    @endcan
-                  </td>
+                        <a type="button" {{-- class="badge badge-info"  --}} data-bs-toggle="modal"
+                          data-bs-target="#modalFeedbackPenelitian{{ $item->id }}" style="color: gray !important;">
+                        @endcan
+                        {{ $item->feedback ? $item->feedback : 'Isi feedback' }}
+                        @can('update-feedback')
+                        </a>
+                      @endcan
+                    </td>
+                  @endif
+
                   <td style="padding: 8px; text-align: center !important;">
                     @php
                       $is_arsip = request()->query('arsip') == 'true' ? 'true' : 'false';
