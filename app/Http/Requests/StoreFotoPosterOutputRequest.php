@@ -25,6 +25,7 @@ class StoreFotoPosterOutputRequest extends FormRequest
             // 'uuid' => ['exists:penelitian,uuid'],
             'jenis_output_id' => ['required', 'exists:jenis_output,id'],
             'judul_output' => ['required', 'max:254'],
+            'status_output_id' => ['required', 'exists:status_output,id'],
             'tautan' => ['nullable', 'regex:/^https?:\/\/.*/i'],
             'user_id_foto_*' => ['required', 'integer', 'exists:users,id'],
         ];

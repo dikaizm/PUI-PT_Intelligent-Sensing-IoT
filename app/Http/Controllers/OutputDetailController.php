@@ -325,7 +325,7 @@ class OutputDetailController extends Controller
         $outputDetail = OutputDetail::create([
             'output_id' => $output->id,
             'jenis_output_id' => $request->jenis_output_id,
-            'status_output_id' => 1,
+            'status_output_id' => $request->status_output_id,
             'judul' => $request->judul_output,
             'tautan' => $request->tautan,
         ]);
@@ -377,7 +377,7 @@ class OutputDetailController extends Controller
         $outputDetail = OutputDetail::create([
             'output_id' => $output->id,
             'jenis_output_id' => $request->jenis_output_id,
-            'status_output_id' => 1,
+            'status_output_id' => $request->status_output_id,
             'judul' => $request->judul_output,
             'tautan' => $request->tautan,
         ]);
@@ -631,6 +631,7 @@ class OutputDetailController extends Controller
 
         $fotoposter->jenis_output_id = $request->jenis_output_id;
         $fotoposter->judul = $request->judul_output;
+        $fotoposter->status_output_id = $request->status_output_id;
         $fotoposter->tautan = $request->tautan;
 
         $fotoposter->save();
@@ -646,8 +647,9 @@ class OutputDetailController extends Controller
     {
         $video = OutputDetail::findOrFail($id);
 
-        $video->jenis_output_id;
+        $video->jenis_output_id = $request->jenis_output_id;
         $video->judul = $request->judul_output;
+        $video->status_output_id = $request->status_output_id;
         $video->tautan = $request->tautan;
 
         $video->save();
@@ -673,8 +675,23 @@ class OutputDetailController extends Controller
             }
         }
 
+        $output = $output_detail->output;
+
         $output_detail->authorOutputs()->delete();
         $output_detail->delete();
+
+        // If the output has no more outputDetails, delete the output and penelitian
+        if ($output->outputDetails->count() === 0) {
+            $penelitian = $output->penelitian;
+            $output->delete();
+
+            if ($penelitian->output_only) {
+                $penelitian->authors()->delete();
+                $penelitian->delete();
+
+                return redirect()->route('laporan-output.index')->with('success', 'Output berhasil dihapus!');
+            }
+        }
 
         return redirect()->back()->with('success', 'Output berhasil dihapus!');
     }

@@ -38,15 +38,6 @@
           </div>
 
           <div class="input-style-1">
-            <label>{{ __('Author') }}</label>
-            <div id="input-anggota-publikasi">
-              <script>
-                window.selectedUsers = {!! $authors !!}
-              </script>
-            </div>
-          </div>
-
-          <div class="input-style-1">
             <label for="jenis_output_id">{{ __('Jenis') }}</label>
             <select id="jenis_output_id" name="jenis_output_id" class="form-control">
               <option value="">--Pilih Foto/Poster--</option>
@@ -63,6 +54,34 @@
                 @endif
               @endforeach
             </select>
+          </div>
+
+          <div class="input-style-1">
+            <label>{{ __('Author') }}</label>
+            <div id="input-anggota-publikasi">
+              <script>
+                window.selectedUsers = {!! $authors !!}
+              </script>
+            </div>
+          </div>
+
+          <div class="input-style-1">
+            <label for="status_output_id">{{ __('Status Output') }}</label>
+            <select class="form-control @error('status_output_id') is-invalid @enderror" name="status_output_id"
+              id="status_output_id" style="max-width: 100%; margin: 0 auto;">
+              <option value="">Pilih Status</option>
+              @foreach ($status_output as $item)
+                <option value="{{ $item->id }}"
+                  {{ old('status_output_id', $output->status_output_id) == $item->id ? 'selected' : '' }}>
+                  {{ $item->name }}
+                </option>
+              @endforeach
+            </select>
+            @error('status_output_id')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+            @enderror
           </div>
 
           <div class="input-style-1">
