@@ -16,15 +16,15 @@
                     <div class="card-style-3 mb-30" style="border-radius: 20px;border: 2px solid #000;">
                         <div class="card-content">
 
-                            <div class="menu-toggle-btn mr-20 mb-3" style="text-align: right;">
+                            {{-- <div class="menu-toggle-btn mr-20 mb-3" style="text-align: right;">
                                 <button id="menu-toggle" class="main-btn btn-hover btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#modalTambahJenisOutputKey"
                                     style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%); color:white;">
                                     {{ __('Tambahkan Data') }}
                                 </button>
-                            </div>
+                            </div> --}}
 
-                            <div class="alert-box">
+                            {{-- <div class="alert-box">
                                 <div class="alert alert-info">
                                     <h4 class="alert-heading"><i class="lni lni-warning"></i> info</h4>
                                     <p class="text-medium">
@@ -32,7 +32,8 @@
                                         menggunakan key tersebut.
                                     </p>
                                 </div>
-                            </div>
+                            </div> --}}
+
                             <div class="table-wrapper table-responsive">
                                 <table class="table striped-table" id="dataTables2"
                                     style="width: 100%; border-collapse: collapse;">
@@ -46,10 +47,10 @@
                                                 style="border-bottom: 1px solid black; padding: 16px; text-align: left !important; width: 87%;">
                                                 <h6>Key</h6>
                                             </th>
-                                            <th
+                                            {{-- <th
                                                 style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 10%;">
                                                 <h6>Action</h6>
-                                            </th>
+                                            </th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,7 +62,7 @@
                                                 <td style="padding: 12px; text-align: left !important;">
                                                     <p>{{ $item->name }}</p>
                                                 </td>
-                                                <td style="padding: 12px; text-align: center !important;">
+                                                {{-- <td style="padding: 12px; text-align: center !important;">
                                                     <a type="button" data-bs-toggle="modal"
                                                         data-bs-target="#modalEditJenisOutputKey{{ $item->id }}">
                                                         <i class="lni lni-pencil" style="color: black;"></i>
@@ -70,7 +71,7 @@
                                                         data-bs-target="#modalDeleteJenisOutputKey{{ $item->id }}">
                                                         <i class="lni lni-trash-can" style="color: red;"></i>
                                                     </a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                         <!-- end table row -->
@@ -101,6 +102,7 @@
                                     {{ __('Tambahkan Data') }}
                                 </button>
                             </div>
+
                             <div class="table-wrapper table-responsive">
                                 <table class="table striped-table" id="dataTables"
                                     style="width: 100%; border-collapse: collapse;">
