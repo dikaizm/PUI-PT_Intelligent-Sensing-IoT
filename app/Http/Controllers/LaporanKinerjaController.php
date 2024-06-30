@@ -53,10 +53,10 @@ class LaporanKinerjaController extends Controller
         $outputTahunAkhir = $outputQuery->clone()->whereYear('created_at', $tahunAkhir)->count();
 
         $quarters = [
-            'Q1' => ['-01-01', '-03-31'],
-            'Q2' => ['-04-01', '-06-30'],
-            'Q3' => ['-07-01', '-09-30'],
-            'Q4' => ['-10-01', '-12-31'],
+            'Q1' => ['-01-01 00:00:00', '-03-31 23:59:59'],
+            'Q2' => ['-04-01 00:00:00', '-06-30 23:59:59'],
+            'Q3' => ['-07-01 00:00:00', '-09-30 23:59:59'],
+            'Q4' => ['-10-01 00:00:00', '-12-31 23:59:59'],
         ];
 
         // Quarterly counts for Penelitian
