@@ -44,6 +44,9 @@ class PenelitianController extends Controller
 
             // Get penelitian id based on output and arsip status
             $penelitianIds = Penelitian::whereIn('id', $outputIds)->pluck('id')->toArray();
+        } else {
+            // If arsip is false, get penelitian where output_only is false
+            $penelitianIds = Penelitian::where('output_only', false)->pluck('id')->toArray();
         }
 
         // If user is an admin or Kaur, adjust penelitianIds
@@ -53,26 +56,28 @@ class PenelitianController extends Controller
             $penelitianIds2 = $user->penelitians()->where('arsip', $arsip)->pluck('penelitian.id')->toArray();
         }
 
-        $penelitianIds = array_merge($penelitianIds, $penelitianIds2);
+        if ($arsip) {
+            $penelitianIds = array_merge($penelitianIds, $penelitianIds2);
+        } else {
+            $penelitianIds = array_intersect($penelitianIds, $penelitianIds2);
+        }
 
         // dd($penelitianIds);
 
-        $penelitian = $isAdminOrKaur
-            ? Penelitian::whereIn('id', $penelitianIds)
-            ->with([
-                'statusPenelitian',
-                'statusPenelitian.statusPenelitianKey',
-            ])->get()
-
-            : $user
-            ->penelitians()
-            ->whereIn('penelitian.id', $penelitianIds)
-            ->with([
-                'statusPenelitian',
-                'statusPenelitian.statusPenelitianKey',
-            ])->get();
-
-        // dd($penelitian);
+        if ($isAdminOrKaur) {
+            $penelitian = Penelitian::whereIn('id', $penelitianIds)
+                ->with([
+                    'statusPenelitian',
+                    'statusPenelitian.statusPenelitianKey',
+                ])->get();
+        } else {
+            $penelitian = $user->penelitians()
+                ->whereIn('penelitian.id', $penelitianIds)
+                ->with([
+                    'statusPenelitian',
+                    'statusPenelitian.statusPenelitianKey',
+                ])->get();
+        }
 
         return view('penelitian.index', [
             'penelitian' => $penelitian,
