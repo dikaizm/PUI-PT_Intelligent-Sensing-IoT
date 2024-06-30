@@ -182,6 +182,10 @@ class PenelitianController extends Controller
 
         $penelitian = Penelitian::where('uuid', $uuid)->first();
 
+        if (!$penelitian) {
+            abort(404);
+        }
+
         $output = $penelitian->output()->first();
 
         // Check if penelitian and penelitian's output exist
