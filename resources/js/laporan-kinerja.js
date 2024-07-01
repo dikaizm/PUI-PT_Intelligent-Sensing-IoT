@@ -141,8 +141,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const labels = [
         'Publikasi',
         'HKI',
+        'Foto/Poster',
         'Video',
-        'Poster'
     ];
 
     // Mendapatkan elemen-elemen checkbox
