@@ -213,12 +213,21 @@ class PenelitianController extends Controller
             }
         }
 
+        // Extract the names and timestamps of the last editors
+        $editors = $penelitian->lastEditors->map(function ($editor) {
+            return (object) [
+                'name' => $editor->user->name,
+                'timestamp' => $editor->created_at->toDateTimeString(),
+            ];
+        });
+
         return view('penelitian.modal-detail', [
             'penelitian' => $penelitian,
             'output' => $output,
             'jenis_output' => JenisOutput::all(),
             'jenis_output_key' => JenisOutputKey::all(),
             'is_ketua' => $is_ketua, // Kirimkan $is_ketua ke dalam view
+            'editors' => $editors,
         ]);
     }
 
@@ -245,6 +254,14 @@ class PenelitianController extends Controller
         // Temukan model User berdasarkan ID ketua
         $userKetua = User::find($is_ketua);
 
+        // Extract the names and timestamps of the last editors
+        $editors = $penelitian->lastEditors->map(function ($editor) {
+            return (object) [
+                'name' => $editor->user->name,
+                'timestamp' => $editor->created_at->toDateTimeString(),
+            ];
+        });
+
         return view('penelitian.edit-data-penelitian', [
             'penelitian' => $penelitian,
             'skema' => Skema::select('id', 'name')->get(),
@@ -262,6 +279,7 @@ class PenelitianController extends Controller
             'anggotaTim' => $anggotaTim,
             'is_ketua' => $is_ketua,
             'userKetua' => $userKetua, // Kirim model User ketua ke view
+            'editors' => $editors,
         ]);
     }
 
@@ -323,6 +341,11 @@ class PenelitianController extends Controller
                 }
             }
         }
+
+        // Save the last editor
+        $penelitian->lastEditors()->create([
+            'user_id' => auth()->id(),
+        ]);
 
         return redirect()
             ->route('penelitian.index')

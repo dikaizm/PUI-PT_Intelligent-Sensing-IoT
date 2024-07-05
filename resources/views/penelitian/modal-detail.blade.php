@@ -204,6 +204,26 @@
               </div>
             </div>
 
+            <div class="col-12 row g-1">
+              <div style="text-align: left; width: 100%;">
+                <ul style="list-style: none; padding-left:5%;">
+                  <li style="font-weight: 500;font-size: 25px; text-align: left;">
+                    {{ __('Last Edited by') }}
+                  </li>
+                  @if ($editors->isEmpty())
+                    <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                      {{ __('Belum ada yang mengedit') }}
+                    </li>
+                  @endif
+                  @foreach ($editors as $editor)
+                    <li style="font-weight: 400;font-size: 18px; text-align: left;">
+                      {{ $editor->name }} ({{ $editor->timestamp }})
+                    </li>
+                  @endforeach
+                </ul>
+              </div>
+            </div>
+
             {{-- <div class="col-12 row g-1">
             <div style="text-align: left; width: 100%;">
               <ul style="list-style: none; padding-left:5%;">

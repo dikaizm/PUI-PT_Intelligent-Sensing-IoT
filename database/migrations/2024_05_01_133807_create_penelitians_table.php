@@ -72,6 +72,23 @@ return new class extends Migration {
             $table->boolean('output_only')->default(false);
             $table->timestamps();
         });
+
+        Schema::create('penelitian_last_editor', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('penelitian_id');
+            $table
+                ->foreign('penelitian_id')
+                ->references('id')
+                ->on('penelitian')
+                ->onDelete('restrict');
+            $table->foreignId('user_id');
+            $table
+                ->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('restrict');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -84,5 +101,7 @@ return new class extends Migration {
         Schema::dropIfExists('status_penelitian_key');
         Schema::dropIfExists('jenis_penelitian');
         Schema::dropIfExists('skema');
+
+        Schema::dropIfExists('penelitian_last_editor');
     }
 };

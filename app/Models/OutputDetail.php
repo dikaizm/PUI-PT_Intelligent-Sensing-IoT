@@ -50,4 +50,9 @@ class OutputDetail extends Model
     {
         return $this->hasMany(AuthorOutput::class);
     }
+
+    public function lastEditors()
+    {
+        return $this->hasMany(OutputLastEditor::class);
+    }
 }

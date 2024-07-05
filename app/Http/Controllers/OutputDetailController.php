@@ -128,6 +128,11 @@ class OutputDetailController extends Controller
         Author::where('penelitian_id', $penelitian->id)
             ->whereNotIn('id', $authorOutputs)
             ->delete();
+
+        // Save the last editor
+        $outputDetail->lastEditors()->create([
+            'user_id' => auth()->id(),
+        ]);
     }
 
 
@@ -446,6 +451,14 @@ class OutputDetailController extends Controller
             ? User::find($authorCorresponding->author->user_id)
             : null;
 
+        // Extract the names and timestamps of the last editors
+        $editors = $outputDetail->lastEditors->map(function ($editor) {
+            return (object) [
+                'name' => $editor->user->name,
+                'timestamp' => $editor->created_at->toDateTimeString(),
+            ];
+        });
+
         return view('output.edit.publikasi', [
             'output' => $outputDetail,
             'jenis_output' => JenisOutput::with([
@@ -457,6 +470,7 @@ class OutputDetailController extends Controller
             'tipe' => OutputType::getValues(),
             'authors' => $authors,
             'userCorresponding' => $userCorresponding,
+            'editors' => $editors,
         ]);
     }
 
@@ -486,6 +500,14 @@ class OutputDetailController extends Controller
         // Get the users of penelitian who are also in authorOutputs
         $authors = $penelitian->users()->whereIn('author.id', $authorOutputUserIds)->get();
 
+        // Extract the names and timestamps of the last editors
+        $editors = $outputDetail->lastEditors->map(function ($editor) {
+            return (object) [
+                'name' => $editor->user->name,
+                'timestamp' => $editor->created_at->toDateTimeString(),
+            ];
+        });
+
         return view('output.edit.hki', [
             'output' => $outputDetail,
             'jenis_output' => JenisOutput::with([
@@ -495,6 +517,7 @@ class OutputDetailController extends Controller
             ])->get(),
             'status_output' => StatusOutput::all(),
             'authors' => $authors,
+            'editors' => $editors,
         ]);
     }
 
@@ -524,6 +547,14 @@ class OutputDetailController extends Controller
         // Get the users of penelitian who are also in authorOutputs
         $authors = $penelitian->users()->whereIn('author.id', $authorOutputUserIds)->get();
 
+        // Extract the names and timestamps of the last editors
+        $editors = $outputDetail->lastEditors->map(function ($editor) {
+            return (object) [
+                'name' => $editor->user->name,
+                'timestamp' => $editor->created_at->toDateTimeString(),
+            ];
+        });
+
         return view('output.edit.foto-poster', [
             'output' => $outputDetail,
             'jenis_output' => JenisOutput::with([
@@ -533,6 +564,7 @@ class OutputDetailController extends Controller
             ])->get(),
             'status_output' => StatusOutput::all(),
             'authors' => $authors,
+            'editors' => $editors,
         ]);
     }
 
@@ -562,6 +594,14 @@ class OutputDetailController extends Controller
         // Get the users of penelitian who are also in authorOutputs
         $authors = $penelitian->users()->whereIn('author.id', $authorOutputUserIds)->get();
 
+        // Extract the names and timestamps of the last editors
+        $editors = $outputDetail->lastEditors->map(function ($editor) {
+            return (object) [
+                'name' => $editor->user->name,
+                'timestamp' => $editor->created_at->toDateTimeString(),
+            ];
+        });
+
         return view('output.edit.video', [
             'output' => $outputDetail,
             'jenis_output' => JenisOutput::with([
@@ -571,6 +611,7 @@ class OutputDetailController extends Controller
             ])->get(),
             'status_output' => StatusOutput::all(),
             'authors' => $authors,
+            'editors' => $editors,
         ]);
     }
 

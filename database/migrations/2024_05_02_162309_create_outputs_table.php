@@ -75,6 +75,23 @@ return new class extends Migration {
             $table->boolean('arsip')->nullable()->default(false);
             $table->timestamps();
         });
+
+        Schema::create('output_last_editor', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('output_detail_id');
+            $table
+                ->foreign('output_detail_id')
+                ->references('id')
+                ->on('output_detail')
+                ->onDelete('restrict');
+            $table->foreignId('user_id');
+            $table
+                ->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('restrict');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -87,5 +104,7 @@ return new class extends Migration {
         Schema::dropIfExists('jenis_output_key');
         Schema::dropIfExists('status_output');
         Schema::dropIfExists('output');
+
+        Schema::dropIfExists('output_last_editor');
     }
 };

@@ -87,4 +87,9 @@ class Penelitian extends Model
     {
         return $this->hasMany(Author::class);
     }
+
+    public function lastEditors()
+    {
+        return $this->hasMany(PenelitianLastEditor::class);
+    }
 }

@@ -155,6 +155,22 @@
             @enderror
           </div>
 
+          <div class="input-style-1">
+            <div style="text-align: left; width: 100%;">
+              <label for="file">{{ __('Last Edited by') }}</label>
+              @if ($editors->isEmpty())
+                <li>
+                  {{ __('Belum ada yang mengedit') }}
+                </li>
+              @endif
+              @foreach ($editors as $editor)
+                <li>
+                  {{ $editor->name }} ({{ $editor->timestamp }})
+                </li>
+              @endforeach
+            </div>
+          </div>
+
           <div class="action d-flex justify-content-end flex-wrap">
             <button type="submit" class="main-btn btn-sm primary-btn btn-hover m-1"
               style="background: linear-gradient(180deg, #0A4714 0%, #1BB834 100%);">

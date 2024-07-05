@@ -139,7 +139,8 @@
               <label for="jenis_penelitian_id">{{ __('Jenis Penelitian') }}</label>
               <div id="jenisPenelitian-container" class="select-container">
                 <select id="jenisPenelitian" name="jenis_penelitian_id"
-                  class="form-control @error('jenis_penelitian_id') is-invalid @enderror" style="max-width: 100%; margin: 0 auto;">
+                  class="form-control @error('jenis_penelitian_id') is-invalid @enderror"
+                  style="max-width: 100%; margin: 0 auto;">
                   @foreach ($jenis_penelitian as $item)
                     <option value="{{ $item->id }}"
                       {{ $penelitian->jenis_penelitian_id == $item->id ? 'selected' : '' }}>
@@ -228,6 +229,22 @@
                   <strong>{{ $message }}</strong>
                 </span>
               @enderror
+            </div>
+
+            <div class="input-style-1">
+              <div style="text-align: left; width: 100%;">
+                <label for="file">{{ __('Last Edited by') }}</label>
+                @if ($editors->isEmpty())
+                  <li>
+                    {{ __('Belum ada yang mengedit') }}
+                  </li>
+                @endif
+                @foreach ($editors as $editor)
+                  <li>
+                    {{ $editor->name }} ({{ $editor->timestamp }})
+                  </li>
+                @endforeach
+              </div>
             </div>
 
             {{-- <div class="input-style-1">
