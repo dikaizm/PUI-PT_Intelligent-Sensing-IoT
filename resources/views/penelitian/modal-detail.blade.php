@@ -49,6 +49,9 @@
                 </ul>
               </div>
             </div>
+            @php
+              $ketua = App\Models\User::find($is_ketua);
+            @endphp
             <div class="col-12 row g-1">
               <div style="text-align: left; width: 100%;">
                 <ul style="list-style: none; padding-left:5%;">
@@ -56,7 +59,7 @@
                     {{ __('Ketua Tim') }}
                   </li>
                   <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                    {{ $is_ketua ? App\Models\User::find($is_ketua)->name : 'Belum ada ketua' }}
+                    {{ $is_ketua ? $ketua->name : 'Belum ada ketua' }}
                   </li>
                 </ul>
               </div>
@@ -69,7 +72,9 @@
                   </li>
                   @foreach ($penelitian->users as $anggota)
                     <li style="font-weight: 400;font-size: 18px; text-align: left;">
-                      {{ $anggota->name }}
+                      @if ($anggota->id != $ketua->id)
+                        {{ $anggota->name }}
+                      @endif
                     </li>
                   @endforeach
                 </ul>
@@ -348,25 +353,26 @@
                       style="border-bottom: 1px solid black; padding: 16px; text-align: center !important; width: 28%;">
 
                       @if (request()->query('arsip') != 'true')
-                      @php
-                      // Find the related jenis output
-                      $jenisOutput = $jenis_output->firstWhere('id', $item->jenis_output_id);
-                      // Initialize the output key name
-                      $jenisOutputKeyName = null;
+                        @php
+                          // Find the related jenis output
+                          $jenisOutput = $jenis_output->firstWhere('id', $item->jenis_output_id);
+                          // Initialize the output key name
+                          $jenisOutputKeyName = null;
 
-                      if ($jenisOutput) {
-                          // Find the related jenis output key
-                          $jenisOutputKey = $jenis_output_key->firstWhere('id', $jenisOutput->jenis_output_key_id);
+                          if ($jenisOutput) {
+                              // Find the related jenis output key
+                              $jenisOutputKey = $jenis_output_key->firstWhere('id', $jenisOutput->jenis_output_key_id);
 
-                          if ($jenisOutputKey && $jenisOutputKey->name === 'Foto/Poster') {
-                              $jenisOutputKeyName = 'foto-poster';
-                          } elseif ($jenisOutputKey) {
-                              $jenisOutputKeyName = strtolower($jenisOutputKey->name);
+                              if ($jenisOutputKey && $jenisOutputKey->name === 'Foto/Poster') {
+                                  $jenisOutputKeyName = 'foto-poster';
+                              } elseif ($jenisOutputKey) {
+                                  $jenisOutputKeyName = strtolower($jenisOutputKey->name);
+                              }
                           }
-                      }
-                    @endphp
+                        @endphp
 
-                        <a type="button" href="{{ route('output-detail.edit', ['id' => $item->id, 'output_type' => $jenisOutputKeyName]) }}">
+                        <a type="button"
+                          href="{{ route('output-detail.edit', ['id' => $item->id, 'output_type' => $jenisOutputKeyName]) }}">
                           <i class="lni lni-pencil" style="color: black;"></i>
                         </a>
                       @endif

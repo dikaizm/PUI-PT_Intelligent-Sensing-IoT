@@ -110,7 +110,7 @@
                     <div class="col-md-6 order-last order-md-first">
                         <div class="copyright text-md-start">
                             <p class="text-sm">
-                                PUI-PT Sensing-Iot
+                                PUI-PT Intelligent Sensing-Iot
                             </p>
                         </div>
                     </div>

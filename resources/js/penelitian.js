@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let users = [];
     let selectedUsers = [];
+    let selectedLead;
 
+    // Get selected users
     const selectedUsersGlobal = window.selectedUsers;
     if (selectedUsersGlobal) {
         selectedUsers = selectedUsersGlobal;
@@ -20,6 +22,21 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedUsers = selectedUsersData;
         }
     }
+
+    // Panggil fungsi populateKetuaTim dan populateCorresponding saat halaman pertama kali dimuat
+    populateKetuaTim()
+    populateCorresponding()
+
+    // Function to get selected lead value
+    function getSelectedLead(dataAttr, localStorageKey) {
+        return $(dataAttr).data('selected') || localStorage.getItem(localStorageKey);
+    }
+
+    // Get selected leads
+    const selectedLeadKetuaVal = getSelectedLead('#is_ketua', 'selectedKetua');
+    const selectedLeadCorrespondingVal = getSelectedLead('#is_corresponding', 'selectedCorresponding');
+
+    selectedLead = selectedLeadKetuaVal ? selectedLeadKetuaVal : selectedLeadCorrespondingVal
 
     // Get current url
     const urlPath = window.location.pathname;
@@ -44,8 +61,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // populate selected users
         selectedUsers.forEach((user, index) => {
+            if (!user) return;
             const num = index;
             const inputGroupDiv = renderSelectedUser(num, user, true);
+            // If the user is the ketua tim, hide the input field
+            if (selectedLead) {
+                if (user.id == selectedLead) {
+                    inputGroupDiv.classList.add('d-none');
+                }
+            }
+
             inputAnggotaDiv.appendChild(inputGroupDiv);
         });
     }
@@ -258,6 +283,29 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /**
+     *
+     * @param {string} toggleType "show", "hide"
+     * @param {int} val
+     */
+    function toggleUserToBeLeader(toggleType, val) {
+        // const selectedLead = document.getElementById(type);
+        // find the num of the user to be hidden
+        const num = selectedUsers.findIndex(user => {
+            if (user) return user.id == val
+        });
+
+        const inputGroupDiv = document.getElementById(`input-group-${outputTabState.activeTab}_${num}`);
+
+        if (inputGroupDiv) {
+            if (toggleType === "hide") {
+                inputGroupDiv.classList.add('d-none');
+            } else if (toggleType === "show") {
+                inputGroupDiv.classList.remove('d-none');
+            }
+        }
+    }
+
     function createOutputCurrentTab() {
         const activeTab = outputTabState.activeTab;
         let div;
@@ -377,18 +425,20 @@ document.addEventListener('DOMContentLoaded', function () {
         var addedOptions = {};
         if (selectedUsers.length > 0) {
             $.each(selectedUsers, function (index, user) {
-                const memberName = user.name;
-                const memberId = user.id;
+                if (user) {
+                    const memberName = user.name;
+                    const memberId = user.id;
 
-                if (!addedOptions[memberId]) {
-                    $('#is_ketua').append(
-                        $('<option>', {
-                            value: memberId,
-                            text: memberName,
-                            selected: memberId == selectedKetua
-                        })
-                    );
-                    addedOptions[memberId] = true;
+                    if (!addedOptions[memberId]) {
+                        $('#is_ketua').append(
+                            $('<option>', {
+                                value: memberId,
+                                text: memberName,
+                                selected: memberId == selectedKetua
+                            })
+                        );
+                        addedOptions[memberId] = true;
+                    }
                 }
             });
         }
@@ -400,6 +450,13 @@ document.addEventListener('DOMContentLoaded', function () {
         $('#is_ketua').on('change', function () {
             const selectedValue = $(this).val();
             localStorage.setItem('selectedKetua', selectedValue);
+            if (!selectedValue) {
+                toggleUserToBeLeader("show", selectedLead)
+            }
+
+            selectedLead = selectedValue;
+
+            toggleUserToBeLeader("hide", selectedValue);
         });
 
         // Set the select value to the one saved in localStorage, if available
@@ -427,18 +484,20 @@ document.addEventListener('DOMContentLoaded', function () {
         // Tambahkan opsi corresponding author dari anggota yang telah dipilih sebelumnya
         var addedOptions = {};
         $.each(selectedUsers, function (index, user) {
-            const memberName = user.name;
-            const memberId = user.id;
+            if (user) {
+                const memberName = user.name;
+                const memberId = user.id;
 
-            if (!addedOptions[memberId]) {
-                $('#is_corresponding').append(
-                    $('<option>', {
-                        value: memberId,
-                        text: memberName,
-                        selected: memberId == selectedCorresponding
-                    })
-                );
-                addedOptions[memberId] = true;
+                if (!addedOptions[memberId]) {
+                    $('#is_corresponding').append(
+                        $('<option>', {
+                            value: memberId,
+                            text: memberName,
+                            selected: memberId == selectedCorresponding
+                        })
+                    );
+                    addedOptions[memberId] = true;
+                }
             }
         });
 
@@ -449,6 +508,13 @@ document.addEventListener('DOMContentLoaded', function () {
         $('#is_corresponding').on('change', function () {
             const selectedValue = $(this).val();
             localStorage.setItem('selectedCorresponding', selectedValue);
+            if (!selectedValue) {
+                toggleUserToBeLeader("show", selectedLead)
+            }
+
+            selectedLead = selectedValue;
+
+            toggleUserToBeLeader("hide", selectedValue);
         });
 
         // Set the select value to the one saved in localStorage, if available
@@ -465,10 +531,6 @@ document.addEventListener('DOMContentLoaded', function () {
             populateUserDropdown(users, 0);
         });
     });
-
-    // Panggil fungsi populateKetuaTim dan populateCorresponding saat halaman pertama kali dimuat
-    populateKetuaTim()
-    populateCorresponding()
 });
 
 function saveUsers(users) {

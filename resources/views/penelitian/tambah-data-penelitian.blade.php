@@ -68,28 +68,6 @@
               <div class="input-style-4">
                 <label for="user_id">{{ __('Anggota Tim') }}</label>
                 <div id="input-anggota"></div>
-
-                {{-- @error('user_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
-
-                {{-- <select name="user_id[]" class="form-control select2" multiple="multiple"
-                                    style="width: 100%; height: 58px;" required>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}"
-                                            @if (old('user_id') && in_array($user->id, old('user_id'))) selected @endif>{{ $user->name }}</option>
-                                    @endforeach
-                                </select> --}}
-
-                {{-- <div class="mt-2">
-                                    <a type="button" data-bs-toggle="modal" data-bs-target="#modalTambahAnggotaEksternal"
-                                        style="font-size:20px; color: red !important;">
-                                        {{ __('Tambah Anggota Eksternal') }}
-                                    </a>
-                                </div> --}}
-
               </div>
             </div>
 
