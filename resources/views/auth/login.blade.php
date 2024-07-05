@@ -5,7 +5,7 @@
         <div style="height: 100vh; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/auth/bg-login.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed; position: relative;">
             <svg class="shape-image" width="60%" height="100%" viewBox="90 60 100 100" style="position: absolute; top: 0; left: 0;">
                 <circle cx="100" cy="100" r="90" fill="url(#gradient)" />
-                <image xlink:href="images/logo/login.png" x="110" y="75" width="70%" height="70%" />
+                <image xlink:href="images/logo/login.png" x="100" y="65" width="75%" height="75%" />
                 <defs>
                     <linearGradient id="gradient" x1="0%" y1="90%" x2="0%" y2="10%">
                         <stop offset="10%" stop-color="#620707" />
