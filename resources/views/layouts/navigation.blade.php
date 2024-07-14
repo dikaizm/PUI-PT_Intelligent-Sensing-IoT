@@ -46,6 +46,17 @@
     </li>
 
     @can('mengelola-pengaturan')
+    <li class="nav-item">
+        <a href="{{ route('broadcast-message.index') }}">
+            <span class="icon" style="color: white;">
+                <i class="fa-solid fa-envelope"></i>
+            </span>
+            <span class="text" style="color: white;">{{ __('Broadcast Message') }}</span>
+        </a>
+    </li>
+    @endcan
+
+    @can('mengelola-pengaturan')
         <li class="nav-item nav-item-has-children">
             <a class="collapsed" href="#0" class="" data-bs-toggle="collapse" data-bs-target="#ddmenu_2"
                 aria-controls="ddmenu_2" aria-expanded="true" aria-label="Toggle navigation">

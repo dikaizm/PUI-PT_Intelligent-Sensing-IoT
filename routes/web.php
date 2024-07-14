@@ -58,7 +58,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/get-target-penelitian', [
         \App\Http\Controllers\TargetPenelitianController::class,
-        'getTargetPenelitian']);
+        'getTargetPenelitian'
+    ]);
 
 
     Route::middleware('can:mengelola-pengguna')->group(function () {
@@ -90,6 +91,17 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('can:mengelola-pengaturan')->group(function () {
         // Rute-rute yang memerlukan kedua middleware 'auth' dan 'can:mengelola-pengaturan' ditempatkan di sini
+
+        //broadcast message
+        Route::get('broadcast-message', [
+            \App\Http\Controllers\BroadcastMessageController::class,
+            'index',
+        ])->name('broadcast-message.index');
+
+        Route::post('broadcast-message/send', [
+            \App\Http\Controllers\BroadcastMessageController::class,
+            'send',
+        ])->name('broadcast-message.send');
 
         //master-data jenis penelitian
         Route::get('master-data/jenis-penelitian', [
